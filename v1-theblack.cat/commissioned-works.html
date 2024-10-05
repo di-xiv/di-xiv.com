@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- ~~~~ Meta ~~~~ -->
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light, dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta property="og:title" content="Commissioned Works - the Black Cat" />
+    <meta property="og:description" content="Commissioned Works Gallery for the Black Cat" />
+    <meta property="og:image" content="https://cdn.theblack.cat/resources/background/horizontal/chaosringen-color-horizontal.png" />
+    <meta property="og:url" content="https://theblack.cat/commissioned-works" />
+    <!-- ~~~~ Favicon ~~~~ -->
+    <link rel="icon" type="image/png" href="https://cdn.theblack.cat/resources/thank-you-flaticons/favicon.png" title="Thank you Flaticons!">
+    <!-- ~~~~ Root CSS ~~~~ -->
+    <link rel="stylesheet" type="text/css" href="resources/styles/fonts.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/text.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/spacing.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/border-radius.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/cursor.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/positions.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/text-content.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/sizing.css"> 
+    <!-- ~~~~ Embellishment CSS ~~~~ -->
+    <link rel="stylesheet" type="text/css" href="resources/styles/polkadot-background.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/glassbox.css">
+    <!-- ~~~~ Specific CSS ~~~~ -->
+    <link rel="stylesheet" type="text/css" href="resources/styles/sticky-header.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/sticky-bubbles.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/linktree.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/back-button.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/section-title.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/tbc-buttons.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/author-buttons.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/gallery-buttons.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/sticky-footer.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/comm-works.css">
+    <!-- ~~~~ Styles ~~~~ -->
+    <!-- ~~~~ Specific CSS ~~~~ -->
+    <link rel="stylesheet" type="text/css" href="resources/styles/specific/floating-gototop-button.css">
+    <link rel="stylesheet" type="text/css" href="resources/styles/specific/new-index-menu.css">
+    <!-- ~~~~ Title ~~~~ -->
+  <title>Commissioned Works - "the Black Cat"</title>
+</head>
+<body class="loading-animation">
+  <!-- ~~~~ Header ~~~~ -->
+    <!-- ~~~~ Comm Works Title ~~~~ -->
+    <div class="section-title-two glassbox-25 border-radius-5px cursor-default user-select-none">
+      <img src="https://cdn.theblack.cat/resources/thank-you-flaticons/art-gallery.png" width="28" height="28" class="vertical-align-0dot4vh marginright-1percent img-inverter" title="Thank you Flaticons!">
+      <span class="latex-regular two-em description-text-black cursor-pointer" id="commworks-topBar">"the Black Cat"</span><span class="productsans-bold two-em description-text-black"> Commissioned Works Gallery</span></div>
+    <div>
+  <!-- ~~~~ Captcha Widget ~~~~ -->
+  <div class="captcha-widget section-title glassbox-50 border-radius-16px margin-right-22-5vw margin-left-22-5vw padding-threevw description-text-black special-margin-top-2">
+    <span class="three-em productsans-bold">Verifying your browser, please hold...</span>
+    <br><br>
+    <div id="turnstile-widget" class="turnstile-widget"></div>
+    <br>
+  </div>
+  <!-- ~~~~ Commissioned Works Gallery ~~~~ -->
+      <div class="gallery-container captcha-box" style="display: none;">
+        <div class="tag-container-parent">
+          <div class="tag-container" id="tagContainer">
+          </div>
+      </div>
+        <div class="gallery" id="gallery"></div>  
+      </div>
+      <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomedImage">
+      </div>
+  <!-- ~~~~ GoToTop Button ~~~~ -->
+    <div class="cursor-pointer margin-bottom-2vh margin-top-2vh display-inlineblock textalign-center" onclick="goToTop()" id="goTopBtn" style="display: none;">
+      <img class="img-inverter display-inlineblock vertical-align-1dot3vh" src="https://cdn.theblack.cat/resources/thank-you-flaticons/go-up.png" title="Thank you Flaticons!" width="32px" height="32px">
+      <span class="description-text-black productsans-bold display-inlineblock">Go to Top</span>
+      <img class="img-inverter display-inlineblock vertical-align-1dot3vh" src="https://cdn.theblack.cat/resources/thank-you-flaticons/go-up.png" title="Thank you Flaticons!" width="32px" height="32px">
+    </div>
+      <!-- ~~~~ Floating ^ Button ~~~~ -->
+      <div class="floating-gototop-button glassbox-25" onclick="goToTop()" id="goTopBtn-footer" style="display: none;">
+        <div class="cursor-pointer">
+          <img class="floating-gototop-icon img-inverter" src="https://cdn.theblack.cat/resources/thank-you-flaticons/go-up.png" title="Thank you Flaticons!">
+        </div>
+      </div>
+    <!-- ~~~~ Index Menu ~~~~
+    <div class="index-menu-trigger textalign-center cursor-pointer padding-fivepx" id="index-menu-button">
+      <img src="https://cdn.theblack.cat/resources/thank-you-flaticons/dots.png" class="cursor-pointer index-menu-trigger-icon img-inverter">
+    </div> -->
+    <div class="index-menu-container" id="index-menu">
+      <div class="index-menu-item cursor-pointer border-radius-16px" id="back-menu-button">
+          <div class=""><img class="index-menu-icon img-inverter" src="https://cdn.theblack.cat/resources/thank-you-flaticons/back-button.png"></div>
+      </div>
+      <div class="index-menu-item cursor-pointer border-radius-16px" id="sitemap-menu-button">
+        <div class=""><img class="index-menu-icon img-inverter" src="https://cdn.theblack.cat/resources/thank-you-flaticons/site-map.png"></div>
+      </div>
+      <div class="index-menu-item cursor-pointer border-radius-16px" id="home-menu-button">
+        <div class=""><img class="index-menu-icon img-inverter" src="https://cdn.theblack.cat/resources/thank-you-flaticons/hogar.png"></div>
+      </div>
+  </div>
+        <!-- ~~~~ -->
+        <div class="bubble-trigger-gallery cursor-help user-select-none">
+          <img src="https://cdn.theblack.cat/resources/thank-you-flaticons/tip.png" width="28" height="28">
+        </div>
+        <div class="bubble-gallery user-select-none cursor-help description-text-black">
+          ●&nbsp;<span class="productsans-regular">Click on any <span class="productsans-bold">tag</span> to browse the gallery. Tags are exclusive from each other.</span>
+          <br>●&nbsp;<span class="productsans-regular">Click on the image on the card to zoom it. Click on the X or away to dismiss.</span>
+          <br>●&nbsp;<span class="productsans-bold">Portraiture</span> <span class="productsans-regular"> tags are always SFW.</span>
+          <br>●&nbsp;<span class="productsans-regular">The <span class="productsans-bold">Degen</span> tag is a standalone tag that includes all NSFW works that are not exclusively vanilla.</span>&nbsp;<span class="latex-regular">Content Warning Beware!</span>
+        </div>
+      <!-- ~~~~ -->    
+        <script src="resources/scripts/new-polkadot.js"></script>
+        <script src="resources/scripts/totop.js"></script>
+        <script src="resources/scripts/bubble-gallery-begone.js"></script>
+        <script src="resources/scripts/commissioned-works.js"></script>
+        <script src="resources/scripts/hideGoToTopBTN.js"></script>
+        <script src="resources/scripts/turnstile-commworks.js"></script>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
+        <script src="resources/scripts/index-menu.js"></script>
+        <script src="resources/scripts/index-button-animation.js"></script>
+        <script src="resources/scripts/pages/pages-menu-buttons.js"></script>   
+        <script>
+          document.getElementById('commworks-topBar').onclick = function() {    window.location.href = 'https://theblack.cat';};
+        </script>
+      <!-- ~~~~ --> 
+</body>
+</html>

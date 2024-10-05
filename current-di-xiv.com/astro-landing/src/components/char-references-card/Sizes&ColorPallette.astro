@@ -1,0 +1,65 @@
+---
+import BasicHorizontalGalleryEngine from "@/components/gallery-engines/BasicHorizontalGalleryEngine.astro";
+interface Props {
+  lang: string;
+  localizedSizesColorPallete: string;
+  localizedAttireArtworks: string;
+  localizedCharacterSheetArtworks: string;
+}
+
+const {
+  lang,
+  localizedSizesColorPallete,
+  localizedAttireArtworks,
+  localizedCharacterSheetArtworks,
+} = Astro.props as Props;
+
+let LocalizedMDX;
+try {
+  LocalizedMDX = await import(`./${lang}/SizesNdColorPallete.mdx`);
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<details
+  id="sizes-and-color-pallete"
+  class="glassbox p-3 mobile-only:p-2 rounded-md"
+>
+  <summary class="regular text-2xl mb-[1%] mt-[1%]">
+    {localizedSizesColorPallete}
+  </summary>
+  <div
+    class="grid grid-cols-1 justify-center
+        w-[85%] ml-[7.5%]
+        mobile-only:w-[90%] mobile-only:ml-[5%]"
+  >
+    <div class="mdx-container glassbox p-2 mb-[1%] rounded-lg mt-[1%]">
+      {
+        LocalizedMDX ? (
+          <LocalizedMDX.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </div>
+    <article class="grid grid-cols-1 gap-2 mt-[3%] mb-[2%]">
+      <details id="character-sheet-artworks" class="glassbox p-2 rounded-md">
+        <summary class="ultralight text-lg">
+          ❈ {localizedCharacterSheetArtworks} 🔞
+        </summary>
+        <BasicHorizontalGalleryEngine
+          apiURL="https://api.theblack.cat/gallery?include_tag_id=25"
+        />
+      </details>
+      <details id="character-attire-artworks" class="glassbox p-2 rounded-md">
+        <summary class="ultralight text-lg">
+          ❈ {localizedAttireArtworks} 🔞
+        </summary>
+        <BasicHorizontalGalleryEngine
+          apiURL="https://api.theblack.cat/gallery?include_tag_id=24"
+        />
+      </details>
+    </article>
+  </div>
+</details>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  localizedText: string;
+  urlRoute: string;
+}
+const { localizedText, urlRoute } = Astro.props as Props;
+---
+
+<style>
+  span,
+  svg {
+    transition: color 0.2s ease-in-out;
+  }
+</style>
+<a
+  data-astro-prefetch="hover"
+  id="tou"
+  href={urlRoute}
+  title={localizedText}
+  aria-label={localizedText}
+>
+  <div
+    class="flex items-center p-2 select-none border-b-2 border-transparent border-solid hover:border-[#1e7cff] hover:text-[#1e7cff]"
+  >
+    <div class="inline-block dark:invert">
+      <img
+        slot="inline-svg"
+        src="/icons/index/contract-agree-svgrepo-com.svg"
+        class="h-8 w1366:h-6 mobile-only:h-8 w-auto select-none"
+      />
+    </div>
+    <div>
+      <span
+        class="regular select-none text-2xl mobile-only:hidden w905:text-sm w1366:text-lg ml-2"
+      >
+        {localizedText}
+      </span>
+    </div>
+  </div>
+</a>

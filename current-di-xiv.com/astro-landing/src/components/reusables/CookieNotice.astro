@@ -1,0 +1,143 @@
+---
+
+---
+
+<div id="cookie-notice-container" class="relative hidden z-20">
+  <div
+    class="fixed bottom-[5%] right-[5%] mobile-only:right-0 mobile-only:w-[70%] mobile-only:mr-[15%] toast-glassbox p-3 rounded-[3px]"
+  >
+    <span class="regular">🍪 Cookies:</span>
+    <div
+      id="localized-cookie-text"
+      class="ultralight text-lg mobile-only:text-sm grid grid-cols gap-2 p-1"
+    >
+      <div id="en-cookie-notice" class="hidden grid grid-cols">
+        <span class="text-base mobile-only:text-sm">
+          You can accept or reject them by clicking the buttons below.
+        </span>
+      </div>
+      <div id="es-cookie-notice" class="hidden grid grid-cols">
+        <span class="text-base mobile-only:text-sm">
+          Puedes aceptarlas o rechazarlas pulsando los botones de abajo.
+        </span>
+      </div>
+      <div id="jp-cookie-notice" class="hidden grid grid-cols">
+        <span class="text-base mobile-only:text-sm">
+          以下のボタンをクリックして、承認または拒否できます。
+        </span>
+      </div>
+      <div id="pt-cookie-notice" class="hidden grid grid-cols">
+        <span class="text-base mobile-only:text-sm">
+          Você pode aceitá-las ou rejeitá-las clicando nos botões abaixo.
+        </span>
+      </div>
+    </div>
+    <div id="cookie-buttons" class="flex items-center justify-center gap-3">
+      <button
+        id="accept-cookies"
+        class="px-1 border-2 border-transparent hover:dark:border-white hover:border-black border-solid rounded-lg"
+      >
+        <span class="font-mono text-lg">✓</span>
+      </button>
+      <button
+        id="reject-cookies"
+        class="px-1 border-2 border-transparent hover:dark:border-white hover:border-black border-solid rounded-lg"
+      >
+        <span class="font-mono text-lg">✗</span>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname;
+    const enNotice = document.getElementById("en-cookie-notice");
+    const esNotice = document.getElementById("es-cookie-notice");
+    const jpNotice = document.getElementById("jp-cookie-notice");
+    const ptNotice = document.getElementById("pt-cookie-notice");
+    const cookieContainer = document.getElementById("cookie-notice-container");
+    const acceptButton = document.getElementById("accept-cookies");
+    const rejectButton = document.getElementById("reject-cookies");
+
+    if (
+      !enNotice ||
+      !esNotice ||
+      !jpNotice ||
+      !ptNotice ||
+      !cookieContainer ||
+      !acceptButton ||
+      !rejectButton
+    ) {
+      console.error("One or more elements are not found in the DOM");
+      return;
+    }
+
+    const setCookie = (name, value, days) => {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    };
+
+    const getCookie = (name) => {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    };
+
+    const deleteAllCookiesAndStorage = () => {
+      document.cookie.split(";").forEach((c) => {
+        const cookieName = c.trim().split("=")[0];
+        if (cookieName !== "cookie-rejected") {
+          document.cookie =
+            cookieName + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        }
+      });
+      localStorage.clear();
+      sessionStorage.clear();
+      console.log("Deleted all cookies and storage");
+    };
+
+    const cookieConsent = localStorage.getItem("cookie-consent");
+    const cookieRejection = getCookie("cookie-rejected");
+
+    if (cookieRejection) {
+      console.log("Cookie rejected exists, clearing data");
+      deleteAllCookiesAndStorage();
+    }
+
+    if (!cookieConsent && !cookieRejection) {
+      cookieContainer.classList.remove("hidden");
+
+      if (path.includes("/es/")) {
+        esNotice.classList.remove("hidden");
+      } else if (path.includes("/jp/")) {
+        jpNotice.classList.remove("hidden");
+      } else if (path.includes("/pt/")) {
+        ptNotice.classList.remove("hidden");
+      } else {
+        enNotice.classList.remove("hidden");
+      }
+    }
+
+    acceptButton.addEventListener("click", () => {
+      localStorage.setItem("cookie-consent", "accepted");
+      hideCookieNotice();
+    });
+
+    rejectButton.addEventListener("click", () => {
+      setCookie("cookie-rejected", "true", 365);
+      deleteAllCookiesAndStorage();
+      hideCookieNotice();
+    });
+
+    const hideCookieNotice = () => {
+      cookieContainer.classList.add("hidden");
+    };
+  });
+</script>

@@ -1,0 +1,85 @@
+#header-contact, #header-info{
+    border:1px solid transparent; 
+    border-radius: 8px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    cursor: pointer;
+    font-size: 2.5em;
+}
+@media (max-width: 1482px) {
+    #header-contact, #header-info{
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 910px) {
+    #header-contact, #header-info{
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 436px) {
+    #header-contact, #header-info{
+        font-size: 1em;
+    }
+    #contact-button-icon, #info-button-icon{
+        vertical-align: -5px;
+    }
+}
+
+#contact-button-icon, #info-button-icon{
+    vertical-align: -7px;
+    height: 40px;
+    width: 40px;
+}
+
+@media (max-width: 1482px) {
+    #contact-button-icon, #info-button-icon{
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 910px) {
+    #contact-button-icon, #info-button-icon{
+        height: 25px;
+        width: 25px;
+    }
+}
+
+
+#header-contact:hover{
+    border:1px solid rgb(24, 124, 255);
+    color:white;
+    background-color: rgb(24, 124, 255);
+    padding: 5px;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+
+#header-contact:not(hover){
+    transition: 0.5s ease;
+}
+
+#header-info:hover{
+    border:1px solid rgb(24, 124, 255);
+    color:white;
+    background-color: rgb(24, 124, 255);
+    padding: 5px;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+
+#header-info:not(hover){
+    transition: 0.5s ease;
+}
+
+.glassbox-25 #info-button-info,
+.glassbox-25 #contact-button-text {
+    opacity: 0;
+    display: none;
+    transition: opacity 0s ease; 
+}

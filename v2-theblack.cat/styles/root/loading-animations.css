@@ -1,0 +1,17 @@
+.loading-animation * {
+    animation: fade-in 0.4s ease-in-out;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.loading-animation-longer * {
+    animation: fade-in-longer 0.6s ease-in-out;
+}
+
+@keyframes fade-in-longer {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

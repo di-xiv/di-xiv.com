@@ -1,0 +1,62 @@
+  .bubble {
+    position: fixed;
+    top: 1.2vh;
+    right: 1.2vw;
+    display: none;
+    padding: 10px;
+    z-index: 4;
+    border-radius: 15px;
+    font-family: 'productsanslight', 'sans-serif';
+    border: 1px solid rgb(255, 255, 255);
+    user-select: none;
+  }
+
+  .bubble-trigger {
+    position: fixed;
+    top: 0.4vh;
+    right: 0.6vw;
+    padding: 10px;
+    z-index: 3;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 16px;
+    user-select: none;
+  }
+
+    .bubble-trigger:hover + .bubble,
+  .bubble:hover {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .bubble-trigger {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(3.1px);
+      -webkit-backdrop-filter: blur(3.1px);
+    }
+
+    .bubble {
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(3.1px);
+      -webkit-backdrop-filter: blur(3.1px);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .bubble-trigger {
+      background: rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4.9px);
+      -webkit-backdrop-filter: blur(4.9px);
+      border: 1px solid rgba(255, 255, 255, 0.5)
+    }
+
+    .bubble {
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgb(255, 255, 255);
+    }
+  }

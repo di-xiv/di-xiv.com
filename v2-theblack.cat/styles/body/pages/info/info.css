@@ -1,0 +1,108 @@
+#info-page-wrapper{
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    inset: 0;
+    overflow-x: auto;
+}
+#info-card-wrapper{
+    border-radius: 8px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 50%;
+    margin-left: 22.5%;
+    padding: 40px;
+}
+@media (max-width: 436px) {
+    #info-card-wrapper{
+        width: 85%;
+        margin-left: 5%;
+        padding: 10px;
+        margin-top: 7%;
+    }
+    #info-click-desktop{
+        display: none;
+    }
+}
+@media (min-width: 436px) {
+    #info-click-mobile{
+        display: none;
+    }
+} 
+.info-close{
+    user-select: none;
+    position: relative;
+    top: 1%;
+    left: 80%;
+    padding: 13px;
+    width: 30px;
+    border-radius: 8px;
+    transition: transform ease 0.3s;
+    cursor: pointer;
+    z-index: 2;
+}
+.info-close:hover{
+    transform: scale(1.03);
+}
+
+#info-card-wrapper li{
+    margin-top: 2px;
+}
+.info-icon{
+    width: 40px;
+    height: 40px;
+    vertical-align: -12px;
+}
+
+.github-icon{
+    width: 40px;
+    height: 40px;
+    vertical-align: -5px;
+}
+
+
+@media (prefers-color-scheme: light) {
+    #info-page-wrapper{
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+    }
+    #info-card-wrapper{
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .info-close{
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+    } 
+}
+@media (prefers-color-scheme: dark) {
+    #info-page-wrapper{
+        background: rgba(0, 0, 0, 0.09);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+    }
+    #info-card-wrapper{
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .info-close{
+        background: rgba(0, 0, 0, 0.09);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);  
+    }
+}
+
+#info-earring{
+    height: 100px;
+    width: 112px;
+}

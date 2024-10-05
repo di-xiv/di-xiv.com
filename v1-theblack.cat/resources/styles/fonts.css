@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'sanfrancisco';
+    src: url('../fonts/sanfrancisco.otf') format('opentype'),
+    url('https://cdn.theblack.cat/resources/fonts/sanfrancisco.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'productsans-light';
+    src: url('../fonts/productsanslight.ttf') format('truetype'),
+    url('https://cdn.theblack.cat/resources/fonts/productsanslight.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'productsans-regular';
+    src: url('../fonts/product-sans-regular.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/product-sans-regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'productsans-bold';
+    src: url('../fonts/product-sans-bold.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/product-sans-bold.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'productsans-italic';
+    src: url('../fonts/product-sans-italic.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/product-sans-italic.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'productsans-italic-bold';
+    src: url('../fonts/product-sans-bold-italic.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/product-sans-bold-italic.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'chirp';
+    src: url('../fonts/chirp.woff') format('woff'),
+    url('https://cdn.theblack.cat/resources/fonts/chirp.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'latex-italic-bold';
+    src: url('../fonts/latex-italic-bold.ttf') format('truetype'),
+    url('https://cdn.theblack.cat/resources/fonts/latex-italic-bold.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'latex-italic-slim';
+    src: url('../fonts/latex-italic-slim.ttf') format('truetype'),
+    url('https://cdn.theblack.cat/resources/fonts/latex-italic-slim.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'latex-italic';
+    src: url('../fonts/latex-italic.ttf') format('truetype'),
+    url('https://cdn.theblack.cat/resources/fonts/latex-italic.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'latex-regular';
+    src: url('../fonts/latex-regular.ttf') format('truetype'),
+    url('https://cdn.theblack.cat/resources/fonts/latex-regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'cascadia';
+    src: url('../fonts/cascadia.otf') format('opentype'),
+    url('https://cdn.theblack.cat/resources/fonts/cascadia.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'unisans-heavy';
+    src: url('../fonts/unisans-heavy.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/unisans.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'hiragino-maru-gothic-pro';
+    src: url('../fonts/hiragino-maru-gothic-pro.otf') format('opentype'),
+         url('https://cdn.theblack.cat/resources/fonts/hiragino-maru-gothic-pro.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'gilroy-bold';
+    src: url('../fonts/gilroy-bold.otf') format('opentype'),
+         url('https://cdn.theblack.cat/resources/fonts/gilroy-bold.otf') format('opentype');
+  }
+
+
+  @font-face {
+    font-family: 'FFXIV';
+    src: url('../fonts/finalf.ttf') format('truetype'),
+         url('https://cdn.theblack.cat/resources/fonts/finalf.ttf') format('truetype');
+    unicode-range: U+E020-E0DB;
+  }

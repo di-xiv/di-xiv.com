@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+interface Props {
+  localizedToast: string;
+  toastID: string;
+  iconURL: string;
+}
+
+const { localizedToast, toastID, iconURL } = Astro.props as Props;
+---
+
+<div
+  id={toastID}
+  class="select-none fixed top-[5%] right-[5%] w-auto h-auto rounded-lg p-3 mobile-only:p-1 flex items-center toast-glassbox toast z-20 text-nowrap"
+  style="display: none;"
+>
+  <Image
+    src={iconURL}
+    class="svg-invert inline-block align-[1px] mobile-only:align-[-1.5px]"
+    alt=`${localizedToast} toast icon`
+    height="28"
+    width="28"
+    decoding="auto"
+    loading="eager"
+  />
+  <p
+    class="ultralight text-lg inline-block mobile-only:text-sm text-nowrap overflow-scroll"
+  >
+    {localizedToast}
+  </p>
+</div>

@@ -1,0 +1,105 @@
+---
+interface Props {
+  localizedPerRating: string;
+  localizedPerTags: string;
+  localizedRoute: string;
+}
+
+const { localizedPerRating, localizedPerTags, localizedRoute } =
+  Astro.props as Props;
+
+function getLocalizedPath(page: string) {
+  if (localizedRoute) {
+    return `/${localizedRoute}/commissioned-works?page=${page}`;
+  } else {
+    return `/commissioned-works?page=${page}`;
+  }
+}
+---
+
+<div id="char-refs-button-container" class="mt-[2.5%] flex justify-center">
+  <div class="grid grid-cols-2 gap-3 select-none">
+    <a
+      data-astro-prefetch="hover"
+      id="rating-directlink"
+      href={getLocalizedPath("ratings")}
+    >
+      <div class="flex items-center button-glassbox p-2 rounded-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+          viewBox="0 0 48 48"
+        >
+          <circle
+            cx="24"
+            cy="24"
+            r="21.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"></circle><circle
+            cx="17.52"
+            cy="21.62"
+            r="4.76"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"></circle><path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.28 29.38a4.35 4.35 0 0 0 3.88 1.76h.36a4.75 4.75 0 0 0 4.76-4.76v-4.76"
+          ></path><circle
+            cx="30.48"
+            cy="21.62"
+            r="4.76"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"></circle><path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M26.25 29.38a4.35 4.35 0 0 0 3.88 1.76h.35a4.74 4.74 0 0 0 4.76-4.76v-4.76"
+          ></path>
+        </svg>
+        <span class="ultralight cursor-pointer underline-offset-2 text-xl">
+          {localizedPerRating}
+        </span>
+      </div>
+    </a>
+    <a
+      data-astro-prefetch="hover"
+      id="tags-directlink"
+      href={getLocalizedPath("tags")}
+    >
+      <div class="flex items-center button-glassbox p-2 rounded-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+          viewBox="0 0 48 48"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m18.573 34.358l3.653-20.716m3.576 20.716l3.653-20.716M16.693 28.38h13.069m-11.524-8.76h13.069"
+          ></path><circle
+            cx="24"
+            cy="24"
+            r="21.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"></circle>
+        </svg>
+        <span class="ultralight cursor-pointer underline-offset-2 text-xl">
+          {localizedPerTags}
+        </span>
+      </div>
+    </a>
+  </div>
+</div>

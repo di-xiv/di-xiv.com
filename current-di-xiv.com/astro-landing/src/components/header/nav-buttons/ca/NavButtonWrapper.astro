@@ -1,0 +1,40 @@
+---
+import ContactButton from "@/components/header/nav-buttons/ContactButton.astro";
+import CommWorksButton from "@/components/header/nav-buttons/CommWorks-Button.astro";
+import CharRefsButton from "@/components/header/nav-buttons/CharRefs-Button.astro";
+import ToUButton from "@/components/header/nav-buttons/ToU-Button.astro";
+interface Props {
+  currentPage: string;
+}
+const { currentPage } = Astro.props as Props;
+---
+
+{
+  currentPage !== "index" && (
+    <div id="nav-buttons-container" class="inline-block">
+      <nav id="nav-buttons-wrapper" class="flex items-center justify-center">
+        {currentPage !== "contact" && (
+          <ContactButton
+            localizedText="Mètodes de contacte"
+            urlRoute="/ca/contact"
+          />
+        )}
+        {currentPage !== "commissioned-works" && (
+          <CommWorksButton
+            localizedText="Art Encarregat"
+            urlRoute="/ca/commissioned-works"
+          />
+        )}
+        {currentPage !== "character-references" && (
+          <CharRefsButton
+            localizedText="Referències"
+            urlRoute="/ca/character-references"
+          />
+        )}
+        {currentPage !== "tou" && (
+          <ToUButton localizedText="Termes d'ús" urlRoute="/ca/tou" />
+        )}
+      </nav>
+    </div>
+  )
+}

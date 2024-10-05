@@ -1,0 +1,83 @@
+.tbc-container {
+    top: 18vh;
+    width: 100%;
+    height: 68vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .tbc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3vh;
+    width: 100%;
+  }
+  
+  .tbc-button {
+    overflow: hidden;
+    width: 45%;
+    transition: transform 0.3s;
+  }
+
+  .tbc-button-left{
+    margin-left: 12.5vw;
+    margin-right: 3vw;
+  }
+
+  #random-commwork-image{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #galleries{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .tbc-button-right{
+    margin-right: 12.5vw;
+    margin-left: 3vw;
+  }
+  
+  .tbc-button:hover {
+    transform: scale(1.06);
+    z-index: 1;
+  }
+  
+  .tbc-button:not(:hover) {
+    transform: scale(1);
+  }
+
+  #tou {
+    background-image: url('https://cdn.theblack.cat/resources/thank-you-flaticons/woman.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  #wcif {
+    background-image: url('https://cdn.theblack.cat/resources/thank-you-flaticons/wcif.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 1500px) {
+    .tbc-container {
+      top: 18vh;
+      width: 75%;
+      margin-left: 12.5%;
+      height: 68vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    #tou {
+      width: 50%;
+      transition: transform 0.3s;
+    }
+}

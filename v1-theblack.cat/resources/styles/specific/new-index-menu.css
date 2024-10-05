@@ -1,0 +1,80 @@
+.index-menu-container {
+    position: fixed;
+    height: auto;
+    bottom: 0;
+    right: 0;
+    padding: 0.5%;
+    margin-right: 3vw;
+    margin-bottom: 3vh;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    border-radius: 13px;
+}
+
+.index-menu-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.index-menu-item:hover{
+    background-color: rgb(24, 124, 255);
+}
+
+.index-menu-icon {
+    width: 36px;
+    height: 36px;
+    transition: brightness 0.3s ease;
+}
+
+
+.index-menu-trigger {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1%;
+    margin-right: 3vw;
+    margin-bottom: 3vh;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.4px);
+    -webkit-backdrop-filter: blur(9px);
+    transition: transform 0.3s; 
+}
+
+.index-menu-trigger-icon{
+    width: 64px;
+    height: 64px;
+    transition: filter 0.3s ease;
+}
+
+  .index-menu-trigger:hover {
+    transform: scale(1.06);
+    z-index: 1;
+  }
+  
+  .index-menu-trigger:not(:hover) {
+    transform: scale(1);
+  }
+
+@media (max-width: 800px) {
+    .index-menu-trigger {
+        padding: 3%;
+    }
+    .index-menu-item {
+        text-align: center;
+        padding:12px;
+    }
+    .index-menu-trigger-icon{
+        width: 32px; /* Set a fixed width */
+        height: 32px; /* Set a fixed height */
+        transition: filter 0.3s ease; /* Add transition for filter change */
+    }
+    .index-menu-icon {
+        width: 22px; /* Set a fixed width */
+        height: 22px; /* Set a fixed height */
+        transition: filter 0.3s ease; /* Add transition for filter change */
+    }
+}

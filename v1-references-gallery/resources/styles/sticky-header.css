@@ -1,0 +1,23 @@
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 5vh;
+  margin-bottom: 7vh;
+  z-index: 1;
+  padding-left: 1vw;
+  padding-top: 0.3vh;
+  padding-bottom: 1.3vh;
+  transition: 0.3s ease;
+}
+
+header span {
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+header span:hover, header span.hovered {
+  color: rgb(24, 124, 255);
+  text-decoration: none !important;
+}
+

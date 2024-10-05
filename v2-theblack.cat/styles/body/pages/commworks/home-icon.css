@@ -1,0 +1,31 @@
+#home-button{
+    position: fixed;
+    top: 85%;
+    right: 5%;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform ease 0.3s;
+}
+
+#home-button:hover{
+    transform: scale(1.2);
+}
+
+#home-icon{
+    width: 60px;
+    height: 60px;
+}
+
+@media (max-width: 436px) {
+    #home-button{
+        width: 30px;
+        height: 30px;
+    }
+    #home-icon{
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -1,0 +1,40 @@
+  @media (prefers-color-scheme: light) {
+    .description-background-black{
+        background-color: rgba(0,0,0,0.25);
+        padding: 1%;
+    }
+    
+    .description-text-white{
+        color: white;
+    }
+    
+    .description-text-black{
+        color: rgb(0, 0, 0);
+    }
+
+    .img-inverter{
+        filter: invert(0%)
+    }
+    
+  }
+
+  
+@media (prefers-color-scheme: dark) {
+    .description-background-black{
+        background-color: rgba(0,0,0,0.25);
+        padding: 1%;
+    }
+        
+    .description-text-white{
+        color: rgb(255, 255, 255);
+    }
+    
+    .description-text-black{
+        color: rgb(255, 255, 255);
+    }
+
+    .img-inverter{
+        filter: invert(100%)
+    }
+    
+  }

@@ -1,0 +1,181 @@
+.zindex-1{
+    z-index: 1;
+}
+
+.zindex-2{
+    z-index: 2;
+}
+.padding-onevw{
+    padding: 1vw;
+}
+
+.padding-left-onevw{
+    padding-left: 1vw;
+}
+
+.padding-left-point25percent{
+    padding-left: 0.25%;
+}
+
+.padding-left-point5percent{
+    padding-left: 0.5%;
+}
+
+.padding-left-1percent{
+    padding-left: 1%;
+}
+
+.padding-left-point25vw{
+    padding-left: 0.25vw;
+}
+
+.padding-left-point5vw{
+    padding-left: 0.5vw;
+}
+
+.padding-right-point5percent{
+    padding-right: 0.5%;
+}
+
+.padding-right-onevw{
+    padding-right: 1vw;
+}
+
+.padding-twovw{
+    padding:2w;
+}
+
+.padding-threevw{
+    padding: 3vw;
+}
+
+.padding-fourvw{
+    padding: 4vw;
+}
+
+.padding-fivevw{
+    padding: 5vw;
+}
+
+.padding-onepx{
+    padding: 1px;
+}
+
+.padding-twopx{
+    padding: 2px;
+}
+
+.padding-threepx{
+    padding: 3px;
+}
+
+.padding-fourpx{
+    padding: 4px;
+}
+
+.padding-fivepx{
+    padding: 5px;
+}
+
+.padding-left-1vw{
+    padding-left: 1vw;
+}
+
+.margin-left-3vw{
+    margin-left: 3vw;
+}
+
+.margin-left-25vw{
+    margin-left: 25vw;
+}
+
+.margin-left-12-5vw{
+    margin-left: 12.5vw;
+}
+
+.margin-left-22-5vw{
+    margin-left: 22.5vw;
+}
+
+@media (max-width: 600px) {
+    .margin-left-22-5vw{
+        margin-left: 5%;
+    }
+}
+
+.margin-right-22-5vw{
+    margin-right: 22.5vw;
+}
+
+@media (max-width: 600px) {
+    .margin-right-22-5vw{
+        margin-right: 5%;
+    }
+}
+
+.margin-right-dot8vw{
+    margin-right: 0.8vw;
+}
+
+.margin-right-1vw{
+    margin-right: 1vw;
+}
+
+.margin-right-25vw{
+    margin-right: 25vw;
+}
+
+.margin-right-50vw{
+    margin-right: 50vw;
+}
+
+.margin-left-1vw{
+    margin-left: 1vw;
+}
+
+.margin-left-1percent{
+    margin-left: 1%;
+}
+
+.margin-left-33vw{
+    margin-left: 33vw;
+}
+
+.margin-left-50vw{
+    margin-left: 50vw;
+}
+
+
+.margin-top-10vh{
+    margin-top: 10vh;
+}
+.margin-top-20vh{
+    margin-top: 20vh;
+}
+
+.margin-top-2vh{
+    margin-top: 2vh;
+}
+
+.margin-bottom-dot8vh{
+    margin-bottom: 0.8vh;
+}
+
+.margin-bottom-1vh{
+    margin-bottom: 1vh;
+}
+
+.margin-bottom-1vh{
+    margin-bottom: 1vh;
+}
+
+.margin-bottom-2vh{
+    margin-bottom: 2vh;
+}
+
+.margin-bottom-5vh{
+    margin-bottom: 5vh;
+}
+.margin-bottom-10vh{
+    margin-bottom: 10vh;
+}
