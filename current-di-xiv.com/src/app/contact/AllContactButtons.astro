@@ -1,0 +1,89 @@
+---
+import CopyButton from "@/app/contact/contact-buttons/CopyButton.astro";
+import LinkButton from "@/app/contact/contact-buttons/LinkButton.astro";
+interface Props {
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+}
+
+const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
+---
+
+<div id="buttons-container" class="flex justify-center mt-[2%]">
+  <div class="grid grid-cols-3 mobile-only:grid-cols-2 gap-2">
+    <CopyButton
+      copyButtonContent="hello@di-xiv.com"
+      copyButtonID="email-button"
+      copyButtonText="Email"
+      copyButtonToastID="email-toast"
+      localizedTitleCopy={localizedClickToCopy}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/email-mail-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </CopyButton>
+    <LinkButton
+      linkButtonHref="https://x.com/xiv_di"
+      linkButtonID="twitter-button"
+      linkButtonText="Twitter"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/twitter-color-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </LinkButton>
+    <CopyButton
+      copyButtonContent="di_xiv"
+      copyButtonID="discord-button"
+      copyButtonText="Discord"
+      copyButtonToastID="discord-toast"
+      localizedTitleCopy={localizedClickToCopy}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/discord-icon-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </CopyButton>
+    <LinkButton
+      linkButtonHref="https://tellonym.me/di_xiv"
+      linkButtonID="tellonym-button"
+      linkButtonText="Tellonym"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/icons8-tellonym.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </LinkButton>
+    <LinkButton
+      linkButtonHref="https://www.pixiv.net/en/users/98072277"
+      linkButtonID="pixiv-button"
+      linkButtonText="pixiv"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/fa6-brands--pixiv.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </LinkButton>
+    <LinkButton
+      linkButtonHref="https://aethy.com/@di_xiv"
+      linkButtonID="aethy-button"
+      linkButtonText="Aethy"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/content/contact/mastodon-icon-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+      />
+    </LinkButton>
+  </div>
+</div>

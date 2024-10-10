@@ -1,0 +1,30 @@
+---
+interface Props {
+  buttonText: string;
+  buttonID: string;
+  buttonHref?: string;
+}
+
+const { buttonText, buttonID, buttonHref } = Astro.props as Props;
+---
+
+<a
+  id={buttonID}
+  role="button"
+  aria-label={buttonText}
+  href={buttonHref}
+  target="_blank"
+  class="select-none p-2 button-glassbox rounded-md text-nowrap whitespace-nowrap flex-shrink-0"
+  title={buttonText}
+>
+  <div class="flex items-center">
+    <div class="inline-block flex-shrink-0">
+      <slot name="inline-svg" />
+    </div>
+    <div class="inline-block ml-2">
+      <h3 class="regular text-lg w1366:text-base w1112:hidden">
+        {buttonText}
+      </h3>
+    </div>
+  </div>
+</a>

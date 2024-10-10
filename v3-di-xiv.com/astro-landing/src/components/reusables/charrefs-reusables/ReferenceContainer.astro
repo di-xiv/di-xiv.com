@@ -1,0 +1,11 @@
+---
+interface Props {
+  containerID: string;
+}
+
+const { containerID } = Astro.props as Props;
+---
+
+<article id={containerID} class="hidden grid-cols-1">
+  <slot />
+</article>

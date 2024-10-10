@@ -1,0 +1,19 @@
+{
+  "name": "div-xiv-monorepo",
+  "version": "3.4.2",
+  "private": true,
+  "workspaces": [
+    "api",
+    "astro-landing",
+    "db"
+  ],
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1"
+  },
+  "scripts": {
+    "deploy:api": "npm run deploy --workspace=api",
+    "dev:astro": "npm run dev --workspace=astro-landing",
+    "build:astro": "npm run build --workspace=astro-landing"
+  }
+}

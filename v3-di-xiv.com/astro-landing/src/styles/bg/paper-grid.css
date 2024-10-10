@@ -1,0 +1,21 @@
+@media (prefers-color-scheme: light) {
+  . {
+    background-size: 16px 16px;
+    background-image: linear-gradient(to right, #efefef 1px, transparent 1px),
+      linear-gradient(to bottom, #efefef 1px, transparent 1px);
+    background-position: -3px -3px;
+    margin: 2rem -10px -10px -10px; /* Added top margin */
+    padding: 10px 10px 10px 10px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  . {
+    background-size: 16px 16px;
+    background-image: linear-gradient(to right, #313131 1px, transparent 1px),
+      linear-gradient(to bottom, #313131 1px, transparent 1px);
+    background-position: -3px -3px;
+    margin: 2rem -10px -10px -10px; /* Added top margin */
+    padding: 10px 10px 10px 10px;
+  }
+}

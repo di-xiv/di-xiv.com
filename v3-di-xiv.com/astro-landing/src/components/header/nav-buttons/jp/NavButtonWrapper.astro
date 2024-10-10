@@ -1,0 +1,37 @@
+---
+import ContactButton from "@/components/header/nav-buttons/ContactButton.astro";
+import CommWorksButton from "@/components/header/nav-buttons/CommWorks-Button.astro";
+import CharRefsButton from "@/components/header/nav-buttons/CharRefs-Button.astro";
+import ToUButton from "@/components/header/nav-buttons/ToU-Button.astro";
+interface Props {
+  currentPage: string;
+}
+const { currentPage } = Astro.props as Props;
+---
+
+{
+  currentPage !== "index" && (
+    <div id="nav-buttons-container" class="inline-block">
+      <nav id="nav-buttons-wrapper" class="flex items-center justify-center">
+        {currentPage !== "contact" && (
+          <ContactButton localizedText="連絡方法" urlRoute="/jp/contact" />
+        )}
+        {currentPage !== "commissioned-works" && (
+          <CommWorksButton
+            localizedText="依頼美術"
+            urlRoute="/jp/commissioned-works"
+          />
+        )}
+        {currentPage !== "character-references" && (
+          <CharRefsButton
+            localizedText="文字参照"
+            urlRoute="/jp/character-references"
+          />
+        )}
+        {currentPage !== "tou" && (
+          <ToUButton localizedText="利用規約" urlRoute="/jp/tou" />
+        )}
+      </nav>
+    </div>
+  )
+}

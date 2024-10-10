@@ -1,0 +1,62 @@
+---
+import Master from "@/layouts/Master.astro";
+interface Props {
+  // From Master
+  locale: string;
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedAcknowledgements: string;
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedFAQ: string;
+  localizedInquiries: string;
+  localizedToU: string;
+}
+const {
+  locale,
+  localizedAcknowledgements,
+  localizedToU,
+  localizedInquiries,
+  localizedFAQ,
+  localizedContact,
+  localizedCommWorks,
+  localizedCharRefs,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+} = Astro.props as Props;
+---
+
+<Master
+  locale={locale}
+  localizedAcknowledgements={localizedAcknowledgements}
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedFAQ={localizedFAQ}
+  localizedInquiries={localizedInquiries}
+  localizedToU={localizedToU}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerContent="Di-XIV"
+>
+
+</Master>

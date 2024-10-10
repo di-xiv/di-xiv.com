@@ -1,0 +1,45 @@
+---
+interface Props {
+  localizedText: string;
+  homeURL: string;
+}
+const { localizedText, homeURL } = Astro.props as Props;
+---
+
+<style>
+  span,
+  svg {
+    transition: color 0.2s ease-in-out;
+  }
+</style>
+<div
+  id="home-button-wrapper"
+  class="flex flex-grow items-center justify-center mt-[3%] mb-[5%]"
+>
+  <div class="mb-[1%] rounded-lg">
+    <a
+      data-astro-prefetch="hover"
+      aria-label={localizedText}
+      id="character-references"
+      href={homeURL}
+      title={localizedText}
+    >
+      <div
+        class="flex items-center p-2 select-none border-b-2 border-transparent border-solid hover:border-[#1e7cff] hover:text-[#1e7cff]"
+      >
+        <div class="inline-block">
+          <img
+            slot="inline-svg"
+            src="/icons/header/fluent-color--home-16.svg"
+            class="h-8 w1366:h-6 mobile-only:h-8 w-auto select-none"
+          />
+        </div>
+        <span
+          class="regular select-none text-2xl mobile-only:hidden w905:text-sm w1366:text-lg ml-2"
+        >
+          {localizedText}
+        </span>
+      </div>
+    </a>
+  </div>
+</div>

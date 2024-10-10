@@ -1,0 +1,14 @@
+---
+interface Props {
+  wrapperID: string;
+}
+
+const { wrapperID } = Astro.props as Props;
+---
+
+<article
+  id={wrapperID}
+  class="hidden glassbox p-3 mobile-only:p-2 rounded-md mt-[1%] mb-[1%]"
+>
+  <slot />
+</article>

@@ -1,0 +1,58 @@
+---
+import RandomMainBG from "@/components/logic/RandomBG.tsx";
+---
+
+<style>
+  @keyframes slowPan {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+
+  #main,
+  #main-overlay {
+    background-size: cover;
+    background-position: center;
+  }
+
+  #main-overlay {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .panning {
+    animation: slowPan 60s linear infinite alternate;
+  }
+</style>
+
+<main
+  id="main"
+  class="grid h-full overflow-hidden relative
+  ultrawide-only:grid-cols-[1fr_55vw_1fr]
+  grid-cols-[1fr_70vw_1fr]
+  w-1150:grid-cols-[1fr_80vw_1fr]
+  mobile-only:grid-cols-[1fr_90vw_1fr]
+  pb-1 pt-1
+  bg-cover panning"
+>
+  <div id="main-overlay" class="panning"></div>
+  <div id="main-left"></div>
+  <div
+    id="main-center"
+    class="overflow-auto pt-[2.5%] pb-[2.5%] bg-cover"
+  >
+    <div class="glassbox rounded-lg pt-[2.5%] pb-[2.5%]">
+      <slot />
+    </div>
+  </div>
+  <div id="main-right"></div>
+</main>
+<RandomMainBG client:load bgTargetID="main" />

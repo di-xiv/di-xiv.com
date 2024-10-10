@@ -1,0 +1,14 @@
+---
+interface Props {
+  wrapperID: string;
+}
+
+const { wrapperID } = Astro.props as Props;
+---
+
+<nav
+  id={wrapperID}
+  class="flex flex-nowrap justify-start gap-5 mt-[1%] glassbox p-3 mobile-only:p-1 rounded-md overflow-x-auto whitespace-nowrap scroll-smooth scroll-pl-4 scroll-pr-4 snap-x snap-mandatory"
+>
+  <slot />
+</nav>
