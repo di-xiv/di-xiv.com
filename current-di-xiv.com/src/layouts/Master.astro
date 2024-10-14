@@ -27,6 +27,7 @@ import "@/styles/animations/transitions.css";
 interface Props {
   // Base
   locale: string;
+  currentPage: string;
   // Meta
   metaDescription: string;
   metaKeywords: string;
@@ -47,6 +48,9 @@ interface Props {
   localizedInquiries: string;
   localizedToU: string;
   // Main
+  /// > Toasts
+  localizedCopiedCustomizeString: string;
+  localizedCopiedGlamourerString: string;
   /// Embeds
 }
 
@@ -67,6 +71,9 @@ const {
   metaImageHeight,
   metaImageWidth,
   metaImageAlt,
+  localizedCopiedCustomizeString,
+  localizedCopiedGlamourerString,
+  currentPage,
 } = Astro.props as Props;
 ---
 
@@ -152,7 +159,11 @@ const {
     <div class="flex flex-col flex-grow overflow-hidden z-[1]">
       <Header locale={locale} headerContent={headerContent} />
       <div class="flex-grow overflow-hidden">
-        <Main>
+        <Main
+          currentPage={currentPage}
+          localizedCopiedCustomizeString={localizedCopiedCustomizeString}
+          localizedCopiedGlamourerString={localizedCopiedGlamourerString}
+        >
           <slot />
         </Main>
       </div>

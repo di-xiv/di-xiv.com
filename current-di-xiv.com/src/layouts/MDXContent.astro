@@ -1,8 +1,11 @@
 ---
 import Master from "@/layouts/Master.astro";
+//
+import DivisorLine from "@/components/navigation/DivisorLine.astro";
 // Contact
 import AllContactButtons from "@/app/contact/AllContactButtons.astro";
 import SimpleTopRightToast from "@/app/contact/contact-buttons/SimpleTopRightToast.astro";
+//
 interface Props {
   // From Master
   locale: string;
@@ -91,6 +94,7 @@ try {
 </style>
 <Master
   locale={locale}
+  currentPage="mdx-content"
   localizedAcknowledgements={localizedAcknowledgements}
   localizedCharRefs={localizedCharRefs}
   localizedCommWorks={localizedCommWorks}
@@ -106,6 +110,8 @@ try {
   metaImageWidth={metaImageWidth}
   metaImageHeight={metaImageHeight}
   metaImageAlt={metaImageAlt}
+  localizedCopiedCustomizeString=""
+  localizedCopiedGlamourerString=""
 >
   <div
     id="toasts-container"
@@ -119,6 +125,7 @@ try {
         slot="inline-svg"
         src="/icons/content/contact/discord-icon-svgrepo-com.svg"
         class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        alt=`${localizedDiscordToast} icon`
       />
     </SimpleTopRightToast>
     <SimpleTopRightToast
@@ -129,30 +136,36 @@ try {
         slot="inline-svg"
         src="/icons/content/contact/email-mail-svgrepo-com.svg"
         class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        alt=`${localizedEmailToast} icon`
       />
     </SimpleTopRightToast>
   </div>
   {
     currentMDXPage === "Contact" && (
-      <div class="light">
-        <AllContactButtons
-          localizedClickToCopy={localizedClickToCopy}
-          localizedLinkTo={localizedLinkTo}
-        />
-      </div>
+      <>
+        <div class="light mb-2">
+          <AllContactButtons
+            localizedClickToCopy={localizedClickToCopy}
+            localizedLinkTo={localizedLinkTo}
+          />
+        </div>
+        <DivisorLine />
+      </>
     )
   }
-  <div class="w-[75%] ml-[12.5%]">
-    {
-      LocalizedMDXContent ? (
-        <div class="flex justify-center flex-grow">
-          <div class="flex-1 mdx p-[2%]">
-            <LocalizedMDXContent.default />
+  <div class="flex justify-center items-center">
+    <div class="w-[75%] mobile-only:w-[95%] mobile-only:my-[5%]">
+      {
+        LocalizedMDXContent ? (
+          <div class="flex justify-center flex-grow">
+            <div class="flex-1 mdx p-[2%]">
+              <LocalizedMDXContent.default />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div>{localizedErrorMessage}</div>
-      )
-    }
+        ) : (
+          <div>{localizedErrorMessage}</div>
+        )
+      }
+    </div>
   </div>
 </Master>

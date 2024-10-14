@@ -1,7 +1,11 @@
 ---
 import Master from "@/layouts/Master.astro";
 // Commissioned Works
-import CWGalleryEngine from "@/app/commworks/CWGalleryEngine.astro";
+import CWGalleryEngine from "@/app/commworks/CWGalleryEngine.tsx";
+// English-only notice
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
 //
 interface Props {
   // From Master
@@ -69,6 +73,7 @@ const {
 
 <Master
   locale={locale}
+  currentPage="commissioned-works"
   localizedAcknowledgements={localizedAcknowledgements}
   localizedCharRefs={localizedCharRefs}
   localizedCommWorks={localizedCommWorks}
@@ -84,19 +89,30 @@ const {
   metaImageWidth={metaImageWidth}
   metaImageHeight={metaImageHeight}
   metaImageAlt={metaImageAlt}
+  localizedCopiedCustomizeString=""
+  localizedCopiedGlamourerString=""
 >
-  <div id="commworks-container" class="mobile-only:mt-[5%]">
+  {
+    locale !== "en" && (
+      <div class="flex items-center justify-start">
+        <StyledBlockquote blockquoteType={BlockquoteType.Language}>
+          <p class="text-base mobile-only:text-sm regular">
+            {locale === "es" && <>Sólo disponible en 🇬🇧</>}
+            {locale === "pt" && <>Disponível apenas em 🇬🇧</>}
+            {locale === "ja" && <>🇬🇧でのみ利用可能</>}
+          </p>
+        </StyledBlockquote>
+      </div>
+    )
+  }
+  <div id="commworks-container" class="">
     <CWGalleryEngine
-      localizedAllGalleries={localizedAllGalleriesToast}
-      localizedGalleryRating={localizedGalleryRating}
+      locale={locale}
+      localizedDismiss=""
+      localizedZoom=""
+      client:only="react"
       localizedLoading={localizedLoading}
-      localizedNowViewing={localizedNowViewing}
-      localizedPerRating={localizedRatingSelector}
-      localizedPerTag={localizedTagSelector}
-      localizedTagRating={localizedTagRating}
       localizedLoadingError={localizedLoadingError}
-      localizedZoom={localizedZoom}
-      localizedDismiss={localizedDismissZoom}
     />
   </div>
 </Master>

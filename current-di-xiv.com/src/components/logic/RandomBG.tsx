@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 const imageUrlsBodyRefBG = [
-  "/backgrounds/1.jpg",
-  "/backgrounds/2.jpg",
-  "/backgrounds/3.jpg",
-  "/backgrounds/4.jpg",
-  "/backgrounds/5.jpg",
-  "/backgrounds/6.jpg",
-  "/backgrounds/7.jpg",
-  "/backgrounds/8.jpg",
+  "/backgrounds/1.webp",
+  "/backgrounds/2.webp",
+  "/backgrounds/3.webp",
+  "/backgrounds/4.webp",
+  "/backgrounds/5.webp",
+  "/backgrounds/6.webp",
+  "/backgrounds/7.webp",
+  "/backgrounds/8.webp",
+  "/backgrounds/9.webp",
+  "/backgrounds/10.webp",
+  "/backgrounds/11.webp",
 ];
 
 interface RandomMainBGProps {

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 interface Props {
-  lang?: string;
   c?: string;
 }
 
-const GetCurrentSmallDate: React.FC<Props> = ({ lang, c }) => {
+const GetCurrentSmallDate: React.FC<Props> = ({ c }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
@@ -29,12 +28,7 @@ const GetCurrentSmallDate: React.FC<Props> = ({ lang, c }) => {
   return (
     <p
       data-timestamp={currentDate.getTime()}
-      title={currentDate.toLocaleDateString(lang, {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })}
+      title={`Version: ${formattedDate}`}
       className={`${c} select-none cursor-help contents`}
     >
       {formattedDate}

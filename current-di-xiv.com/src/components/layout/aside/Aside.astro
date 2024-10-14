@@ -93,7 +93,7 @@ const navItems = [
   w-[23%]
   w-1560:w-[30%]
   w-1150:w-[43%]
-  mobile-only:w-[90%]
+  mobile-only:w-[70%]
   bg-[rgba(255,255,255,1)] glassbox text-[#181a1b] dark:text-[#efefef] z-[9999] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)]
   rounded-tr-lg rounded-br-lg select-none"
 >
@@ -125,45 +125,61 @@ const navItems = [
             >
               <img
                 src={item.icon}
-                class="w-7 h-auto dark:invert relative -top-1 mr-[30px]"
+                class="w-7 mobile-only:w-5 h-auto dark:invert not-mobile:relative not-mobile:-top-1 not-mobile:mr-[25px] mobile-only:mr-[15px]"
+                alt={`${item.label} icon`}
               />
-              <p class="text-large regular">{item.label}</p>
+              <p class="text-large mobile-only:text-base regular">
+                {item.label}
+              </p>
             </a>
           ))
         }
       </nav>
     </div>
     <div id="drawer-footer" class="mt-auto mobile-only:pb-[25%]">
-      <div class="flex justify-center"><SocialsIcons/></div>
-      <div class="flex justify-center">
+      <div class="flex justify-center mt-[10%] mb-[10%]">
         <LanguageSelector client:load />
       </div>
-      <div id="drawer-version" class="mb-[10%] flex justify-center light">
-        <p>v.</p><GetCurrentSmallDate />
+      <div class="flex justify-center">
+        <SocialsIcons />
+      </div>
+      <DivisorLine />
+      <div
+        id="drawer-version"
+        class="mb-[10%] flex justify-center light mt-2 regular"
+      >
+        <div class="flex">
+          <img
+            src="/favicon.ico"
+            class="w-9 h-auto relative -top-[6px]"
+            alt="Di-XIV Brand Icon"
+          />
+        </div>
+        <p>Di-XIV&nbsp;❈</p>&nbsp;<p>v.</p><GetCurrentSmallDate />
       </div>
     </div>
   </div>
 </aside>
-<div
-  id="drawer-shade"
-  class="fixed top-0 left-0 w-full h-full z-[9998]"
->
-</div>
+<div id="drawer-shade" class="fixed top-0 left-0 w-full h-full z-[9998]"></div>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     let drawerVisible = false;
 
     const elements = {
-      drawerButton: document.getElementById("drawer-close-button") as HTMLElement,
+      drawerButton: document.getElementById(
+        "drawer-close-button",
+      ) as HTMLElement,
       drawerMenu: document.getElementById("drawer-menu-wrapper") as HTMLElement,
-      headerButton: document.getElementById("header-aside-toggle") as HTMLElement,
+      headerButton: document.getElementById(
+        "header-aside-toggle",
+      ) as HTMLElement,
       drawerShade: document.getElementById("drawer-shade") as HTMLElement,
     };
 
-
     const updateShadeVisibility = () => {
       const isMobile = window.innerWidth < 725;
-      elements.drawerShade.style.display = isMobile && drawerVisible ? "block" : "none";
+      elements.drawerShade.style.display =
+        isMobile && drawerVisible ? "block" : "none";
     };
 
     const toggleDrawer = (show: boolean) => {

@@ -1,28 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const ScrollToTopButton: React.FC = () => {
+interface ScrollToTopButtonProps {
+  targetScrollableElementID: string;
+}
+
+const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
+  targetScrollableElementID,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    scrollContainerRef.current = document.getElementById(
+      targetScrollableElementID,
+    );
+
     const handleScroll = () => {
-      const shouldShowButton = window.scrollY > 200;
-      if (shouldShowButton !== isVisible) {
-        setIsVisible(shouldShowButton);
+      if (scrollContainerRef.current) {
+        const shouldShowButton = scrollContainerRef.current.scrollTop > 200;
+        if (shouldShowButton !== isVisible) {
+          setIsVisible(shouldShowButton);
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const currentScrollContainer = scrollContainerRef.current;
+    if (currentScrollContainer) {
+      currentScrollContainer.addEventListener("scroll", handleScroll);
+    }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (currentScrollContainer) {
+        currentScrollContainer.removeEventListener("scroll", handleScroll);
+      }
     };
-  }, [isVisible]);
+  }, [isVisible, targetScrollableElementID]);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (

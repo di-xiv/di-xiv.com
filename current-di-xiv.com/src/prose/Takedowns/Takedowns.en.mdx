@@ -2,6 +2,7 @@ import StyledBlockquote, { BlockquoteType } from "@/components/text/StyledBlockq
 import A from "@/components/text/SimpleInlineAnchor.tsx"
 import TitleWithLeadingIcon from "@/components/text/TitleWithLeadingIcon.tsx";
 import SubtitleWithLeadingIcon from "@/components/text/SubtitleWithLeadingIcon.tsx";
+import DivisorLine from "@/components/navigation/DivisorLine.astro";
 
 <TitleWithLeadingIcon
   imageURL="/icons/content/inquiries/ph--copyright-bold.svg"
@@ -54,6 +55,8 @@ To help us process your request efficiently, please provide the following inform
 <StyledBlockquote blockquoteType={BlockquoteType.Info}>
 Please send the request to <a href="mailto:inquiries@di-xiv.com" title="Inquiries email">inquiries@di-xiv.com</a>.
 </StyledBlockquote>
+
+<DivisorLine/>
 
 <TitleWithLeadingIcon
   imageURL="/icons/content/inquiries/ph--copyright-bold.svg"
