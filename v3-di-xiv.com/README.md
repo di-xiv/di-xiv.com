@@ -1,1 +1,1 @@
-# di-xiv.com
+# "Di-XIV Project" Monorepo

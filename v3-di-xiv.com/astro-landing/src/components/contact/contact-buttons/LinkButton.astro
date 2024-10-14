@@ -1,0 +1,33 @@
+---
+interface Props {
+  linkButtonID: string;
+  linkButtonHref: string;
+  linkButtonText: string;
+  localizedTitleLink: string;
+}
+
+const { linkButtonID, linkButtonHref, linkButtonText, localizedTitleLink } =
+  Astro.props as Props;
+---
+
+<a
+  id={linkButtonID}
+  href={linkButtonHref}
+  data-astro-prefetch="hover"
+  rel="noopener noreferer me"
+  class="border-transparent border-b p-2 w-auto h-auto select-none
+  hover:border-b hover:border-solid button-glassbox rounded-md text-nowrap
+  mobile-only:w-[95%]"
+  title=`${localizedTitleLink}: ${linkButtonText}`
+>
+  <div class="flex items-center">
+    <div class="inline-block">
+      <slot name="inline-svg" />
+    </div>
+    <div class="inline-block">
+      <span class="ultralight ml-1 text-xl mobile-only:text-lg">
+        {linkButtonText}
+      </span>
+    </div>
+  </div>
+</a>

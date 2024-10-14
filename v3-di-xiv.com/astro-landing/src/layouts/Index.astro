@@ -1,0 +1,268 @@
+---
+//
+import Master from "@/layouts/Master.astro";
+// Main
+import LinkedTitle from "@/components/reusables/LinkedTitle.astro";
+// Contact
+import AllContactButtons from "@/components/contact/AllContactButtons.astro";
+// Toasts
+import CopyIndexLinksToast from "@/components/index/CopyIndexLinksToast.astro";
+import SimpleTopRightToast from "@/components/contact/contact-buttons/SimpleTopRightToast.astro";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedRoute: string;
+  localizedCardButtonsRoute: string;
+  localizedDiscordToast: string;
+  localizedEmailToast: string;
+  localizedToUToast: string;
+  localizedToUTitle: string;
+  localizedContactToast: string;
+  localizedContactTitle: string;
+  localizedCommWorksToast: string;
+  localizedCommWorksTitle: string;
+  localizedCharRefsToast: string;
+  localizedCharRefsTitle: string;
+  localizedCharSheet: string;
+  localizedWCIF: string;
+  localizedSizesPallete: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+  localizedCheckingYourBrowser: string | { __html: string };
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedRoute,
+  localizedCardButtonsRoute,
+  localizedDiscordToast,
+  localizedEmailToast,
+  localizedToUToast,
+  localizedToUTitle,
+  localizedContactToast,
+  localizedContactTitle,
+  localizedCommWorksToast,
+  localizedCommWorksTitle,
+  localizedCharRefsToast,
+  localizedCharRefsTitle,
+  localizedCharSheet,
+  localizedWCIF,
+  localizedSizesPallete,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedClickToCopy,
+  localizedLinkTo,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+  localizedCheckingYourBrowser,
+} = Astro.props as Props;
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+>
+  <div
+    id="toasts-container"
+    class="fixed top-[5%] mobile-only:top-[2%] right-[5%] mobile-only:right-[2%] z-20 flex flex-col items-end gap-2"
+  >
+    <SimpleTopRightToast
+      localizedToast={localizedDiscordToast}
+      toastID="discord-toast"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/contact/discord-icon-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </SimpleTopRightToast>
+    <SimpleTopRightToast
+      localizedToast={localizedEmailToast}
+      toastID="email-toast"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/contact/email-mail-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </SimpleTopRightToast>
+    <CopyIndexLinksToast
+      localizedToast={localizedToUToast}
+      toastID="tou-toast"
+      targetURLID="tou-link"
+      triggerButtonID="tou-copy-button"
+    >
+      <div class="dark:invert" slot="inline-svg">
+        <img
+          src="/icons/index/contract-agree-svgrepo-com.svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+        />
+      </div>
+    </CopyIndexLinksToast>
+    <CopyIndexLinksToast
+      localizedToast={localizedContactToast}
+      toastID="contact-toast"
+      targetURLID="contact-options-link"
+      triggerButtonID="contact-options-copy-button"
+    >
+      <div class="" slot="inline-svg">
+        <img
+          slot="inline-svg"
+          src="/icons/index/fluent-color--chat-bubbles-question-24.svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+        />
+      </div>
+    </CopyIndexLinksToast>
+    <CopyIndexLinksToast
+      localizedToast={localizedCommWorksToast}
+      toastID="commworks-toast"
+      targetURLID="commworks-link"
+      triggerButtonID="commworks-copy-button"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/index/canvas-easel-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </CopyIndexLinksToast>
+    <CopyIndexLinksToast
+      localizedToast={localizedCharRefsToast}
+      toastID="charrefs-toast"
+      targetURLID="character-references-link"
+      triggerButtonID="character-references-copy-button"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/index/design-tool-pencil-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </CopyIndexLinksToast>
+  </div>
+  <article id="references-card" class="mt-[5%] mb-[5%] rounded-lg">
+    <LinkedTitle
+      title={localizedCharRefsTitle}
+      copyTargetID="character-references-link"
+      copyButtonID="character-references-copy-button"
+      link=`${localizedRoute}character-references`
+      localizedClicktoCopy={localizedClickToCopy}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/index/design-tool-pencil-svgrepo-com.svg"
+        class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+      />
+    </LinkedTitle>
+  </article>
+  <article id="contact" class="mt-[5%] mb-[5%] rounded-lg">
+    <LinkedTitle
+      title={localizedContactTitle}
+      copyTargetID="contact-options-link"
+      copyButtonID="contact-options-copy-button"
+      link=`${localizedRoute}contact`
+      localizedClicktoCopy={localizedClickToCopy}
+    >
+      <div class="" slot="inline-svg">
+        <img
+          src="/icons/index/fluent-color--chat-bubbles-question-24.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </div>
+    </LinkedTitle>
+    <div id="contact-buttons-wrapper">
+      <AllContactButtons
+        localizedClickToCopy={localizedClickToCopy}
+        localizedLinkTo={localizedLinkTo}
+      />
+    </div>
+  </article>
+  <article id="commworks" class="mt-[5%] mb-[5%] rounded-lg">
+    <LinkedTitle
+      title={localizedCommWorksTitle}
+      copyTargetID="commworks-link"
+      copyButtonID="commworks-copy-button"
+      link=`${localizedRoute}commissioned-works`
+      localizedClicktoCopy={localizedClickToCopy}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/index/canvas-easel-svgrepo-com.svg"
+        class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+      />
+    </LinkedTitle>
+  </article>
+  <article id="tou-card" class="mt-[5%] mb-[5%] rounded-lg">
+    <LinkedTitle
+      title={localizedToUTitle}
+      copyTargetID="tou-link"
+      copyButtonID="tou-copy-button"
+      link=`${localizedRoute}tou`
+      localizedClicktoCopy={localizedClickToCopy}
+    >
+      <div class="dark:invert" slot="inline-svg">
+        <img
+          src="/icons/index/contract-agree-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </div>
+    </LinkedTitle>
+  </article>
+</Master>
