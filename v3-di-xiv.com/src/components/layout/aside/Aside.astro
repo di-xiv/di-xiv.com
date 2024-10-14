@@ -1,0 +1,224 @@
+---
+import DrawerCloseButton from "@/components/layout/aside/components/DrawerCloseButton.astro";
+import GetCurrentSmallDate from "@/components/layout/aside/components/GetCurrentSmallDate.tsx";
+import DivisorLine from "@/components/navigation/DivisorLine.astro";
+import LanguageSelector from "@/components/logic/LanguageSelector.tsx";
+import SocialsIcons from "@/components/navigation/SocialsIcons.astro";
+//
+interface Props {
+  locale: string;
+  localizedCharRefs: string;
+  localizedContact: string;
+  localizedCommWorks: string;
+  localizedToU: string;
+  localizedFAQ: string;
+  localizedInquiries: string;
+  localizedAcknowledgements: string;
+}
+const {
+  locale,
+  localizedCharRefs,
+  localizedContact,
+  localizedCommWorks,
+  localizedToU,
+  localizedFAQ,
+  localizedInquiries,
+  localizedAcknowledgements,
+} = Astro.props as Props;
+function getLocalizedRoute() {
+  if (locale && locale !== "en") {
+    return `/${locale}`;
+  } else {
+    return ``;
+  }
+}
+
+function localizedHome() {
+  if (locale !== "en") {
+    return `/${locale}`;
+  } else {
+    return `/`;
+  }
+}
+const navItems = [
+  {
+    href: "/character-references",
+    icon: "/icons/aside/clarity--design-line.svg",
+    key: "charrefs",
+    label: localizedCharRefs,
+  },
+  {
+    href: "/commissioned-works",
+    icon: "/icons/aside/material-symbols--wall-art-outline.svg",
+    key: "commworks",
+    label: localizedCommWorks,
+  },
+  {
+    href: "/contact",
+    icon: "/icons/aside/hugeicons--contact-01.svg",
+    key: "contact",
+    label: localizedContact,
+  },
+  {
+    href: "/tou",
+    icon: "/icons/aside/teenyicons--contract-outline.svg",
+    key: "tou",
+    label: localizedToU,
+  },
+  {
+    href: "/faq",
+    icon: "/icons/aside/octicon--question-16.svg",
+    key: "faq",
+    label: localizedFAQ,
+  },
+  {
+    href: "/inquiries",
+    icon: "/icons/aside/mdi--faq.svg",
+    key: "inquiries",
+    label: localizedInquiries,
+  },
+  {
+    href: "/acknowledgements",
+    icon: "/icons/aside/simple-line-icons--badge.svg",
+    key: "acknowledgements",
+    label: localizedAcknowledgements,
+  },
+];
+---
+
+<aside
+  id="drawer-menu-wrapper"
+  class="fixed top-0 left-0 flex flex-col h-screen
+  ultrawide-only:w-[18%]
+  w-[23%]
+  w-1560:w-[30%]
+  w-1150:w-[43%]
+  mobile-only:w-[70%]
+  bg-[rgba(255,255,255,1)] glassbox text-[#181a1b] dark:text-[#efefef] z-[9999] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)]
+  rounded-tr-lg rounded-br-lg select-none"
+>
+  <DrawerCloseButton />
+  <div id="drawer-menu-container" class="flex flex-col h-full">
+    <div id="drawer-header" class="mt-[5%]">
+      <a
+        href={localizedHome()}
+        id="wingspan-wrapper"
+        class="flex justify-center"
+      >
+        <img
+          src="/favicon.ico"
+          class="ultrawide-only:w-32 w-28 w-1560:w-24 w-1150:w-20 mobile-only:w-16 h-auto"
+          alt="Di-XIV Brand Icon"
+        />
+      </a>
+    </div>
+    <DivisorLine />
+    <div id="drawer-nav" class="flex-grow overflow-y-auto mt-[10%]">
+      <nav class="ml-[10%] grid grid-cols-1 gap-y-3">
+        {
+          navItems.map((item) => (
+            <a
+              id={`nav-${item.key}`}
+              aria-label={item.label}
+              href={`${getLocalizedRoute()}${item.href}`}
+              class="flex items-center"
+            >
+              <img
+                src={item.icon}
+                class="w-7 mobile-only:w-5 h-auto dark:invert not-mobile:relative not-mobile:-top-1 not-mobile:mr-[25px] mobile-only:mr-[15px]"
+                alt={`${item.label} icon`}
+              />
+              <p class="text-large mobile-only:text-base regular">
+                {item.label}
+              </p>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <div id="drawer-footer" class="mt-auto mobile-only:pb-[25%]">
+      <div class="flex justify-center mt-[10%] mb-[10%]">
+        <LanguageSelector client:load />
+      </div>
+      <div class="flex justify-center">
+        <SocialsIcons />
+      </div>
+      <DivisorLine />
+      <div
+        id="drawer-version"
+        class="mb-[10%] flex justify-center light mt-2 regular"
+      >
+        <div class="flex">
+          <img
+            src="/favicon.ico"
+            class="w-9 h-auto relative -top-[6px]"
+            alt="Di-XIV Brand Icon"
+          />
+        </div>
+        <p>Di-XIV&nbsp;❈</p>&nbsp;<p>v.</p><GetCurrentSmallDate />
+      </div>
+    </div>
+  </div>
+</aside>
+<div id="drawer-shade" class="fixed top-0 left-0 w-full h-full z-[9998]"></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let drawerVisible = false;
+
+    const elements = {
+      drawerButton: document.getElementById(
+        "drawer-close-button",
+      ) as HTMLElement,
+      drawerMenu: document.getElementById("drawer-menu-wrapper") as HTMLElement,
+      headerButton: document.getElementById(
+        "header-aside-toggle",
+      ) as HTMLElement,
+      drawerShade: document.getElementById("drawer-shade") as HTMLElement,
+    };
+
+    const updateShadeVisibility = () => {
+      const isMobile = window.innerWidth < 725;
+      elements.drawerShade.style.display =
+        isMobile && drawerVisible ? "block" : "none";
+    };
+
+    const toggleDrawer = (show: boolean) => {
+      elements.headerButton.classList.toggle("hidden", show);
+      elements.headerButton.classList.toggle("block", !show);
+      elements.drawerMenu.classList.toggle("slide-in-left", show);
+      elements.drawerMenu.classList.toggle("slide-out-left", !show);
+      drawerVisible = show;
+      updateShadeVisibility();
+    };
+
+    const showDrawer = () => toggleDrawer(true);
+    const hideDrawer = () => toggleDrawer(false);
+
+    const checkViewportWidth = () => {
+      if (window.innerWidth <= 1920) {
+        hideDrawer();
+      } else {
+        showDrawer();
+      }
+      updateShadeVisibility();
+    };
+
+    elements.drawerButton.addEventListener("click", hideDrawer);
+    elements.drawerShade.addEventListener("click", () => {
+      hideDrawer();
+    });
+
+    elements.headerButton.addEventListener("click", () => {
+      drawerVisible ? hideDrawer() : showDrawer();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && drawerVisible) {
+        hideDrawer();
+      }
+    });
+
+    checkViewportWidth();
+    window.addEventListener("resize", checkViewportWidth);
+  });
+</script>
