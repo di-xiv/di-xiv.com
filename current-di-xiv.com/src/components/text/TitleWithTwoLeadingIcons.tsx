@@ -38,9 +38,13 @@ const TitleWithTwoLeadingIcons: React.FC<Props> = ({
           />
         </div>
       </div>
-      <h2 title={`${title1}, ${title2}`} className="ml-2">
+      <h3
+        title={`${title1}, ${title2}`}
+        aria-label={`${title1}, ${title2}`}
+        className="ml-2"
+      >
         {title1}, {title2}
-      </h2>
+      </h3>
     </div>
   );
 };

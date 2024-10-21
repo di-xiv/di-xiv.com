@@ -1,17 +1,16 @@
 ---
 import Master from "@/layouts/Master.astro";
 //
-import ArtworksForArtists from "@/app/charrefs/ArtworksForArtists.astro";
+import ArtworksForArtists from "@/app/charrefs/artist-notice/ArtworksForArtists";
 //
-import WCIF from "@/app/charrefs/WCIF.astro";
-import SizesColorPallette from "@/app/charrefs/Sizes&ColorPallette.astro";
-import DesignReferences from "@/app/charrefs/DesignReferences.astro";
-//
-import CopyStringToast from "@/app/charrefs/CopyStringToast.astro";
+import DesignReferences from "@/app/charrefs/design-references/DesignReferences.astro";
+import ColorPallette from "@/app/charrefs/color-pallette/ColorPallette.astro";
+import WCIF from "@/app/charrefs/wcif/WCIF.astro";
+import InGameReferences from "@/app/charrefs/ingame-references/InGameReferences.astro";
 //
 interface Props {
   // From Master
-  locale: string;
+  locale: "en" | "ja" | "pt" | "es";
   /// Meta
   metaDescription: string;
   metaKeywords: string;
@@ -33,22 +32,18 @@ interface Props {
   // Character References
   localizedDesignReferences: string;
   localizedAttireArtworks: string;
-  localizedAttireShots: string;
-  localizedBodyReferences: string;
+  localizedAttires: string;
+  localizedGPoseShots: string;
+  localizedInGameShots: string;
   localizedHairstyles: string;
-  localizedFullbodyFreckles: string;
-  localizedGenitalia: string;
   localizedCharacterSheetArtworks: string;
-  localizedSizesColorPallete: string;
+  localizedColorPallete: string;
   localizedWCIF: string;
   localizedCopiedCustomizeString: string;
   localizedCopiedGlamourerString: string;
-  localizedDownloadAttires: string;
   localizedDownloadBodyRefs: string;
-  localizedDownloadHairstyles: string;
   localizedLoading: string;
   localizedSpecialReferenceSummary: string;
-  localizedDownloadThis: string;
   localizedDismiss: string;
   localizedClickToZoom: string;
   localizedDownload: string;
@@ -72,27 +67,22 @@ const {
   metaImageWidth,
   metaImageAlt,
   localizedDesignReferences,
-  localizedBodyReferences,
-  localizedAttireShots,
+  localizedAttires,
+  localizedGPoseShots,
+  localizedInGameShots,
   localizedHairstyles,
-  localizedFullbodyFreckles,
-  localizedGenitalia,
   localizedAttireArtworks,
-  localizedCharacterSheetArtworks,
-  localizedSizesColorPallete,
+  localizedColorPallete,
   localizedWCIF,
   localizedCopiedCustomizeString,
   localizedCopiedGlamourerString,
-  localizedDownloadAttires,
   localizedDownloadBodyRefs,
-  localizedDownloadHairstyles,
   localizedLoading,
   localizedSpecialReferenceSummary,
-  localizedDownloadThis,
   localizedClickToZoom,
   localizedDismiss,
   localizedDownload,
-} = Astro.props as Props;
+} = Astro.props;
 ---
 
 <Master
@@ -116,65 +106,65 @@ const {
   localizedCopiedCustomizeString={localizedCopiedCustomizeString}
   localizedCopiedGlamourerString={localizedCopiedGlamourerString}
 >
-  <div
-    id="toasts-container"
-    class="fixed top-[5%] right-[5%] z-20 grid grid-cols-1 gap-2"
-  >
-    <CopyStringToast
-      localizedToast={localizedCopiedCustomizeString}
-      toastID="customize-toast"
-      stringToCopy="H4sIAAAAAAAACs2YTY+bMBCGL/0lvjYg24ATOO72sodWVbv9vFgGzMZLAlrjSFut8t9rYydipWzaCza5MFZm8MM79vjj3Qv4xPYcFIA/P5VUlRVYge9cDqLvQJGuwK3kTOnGB6aMF4Y4jSCJML6HqECkgOsYYUKy9xAXEOrgj30tGsHriwE4KWASozXaTCK+deLpwO9qA9HUJMsbFqWckyitcRaVFSujJktSWDe8SepcR9wNP6RQ/LPsFa8U15EN2w1c/9FV/UMnVD95l/a/6Ts+gOIFPNK2H4Sx7iXrht34aab5ExQwhivwyz1/j8/jCnzp1b+dvlZsJ7qHs09uf87z3NL+KEZ5dtQhj3TgZU9ZUBaILAobBGV0NzMLcj4oTlz/eJ1OAWQ4gP2h47MLAON15pwyS2CMCYAMCGBSUHuQwA5Akp4GpHPNpxQyMMWh5h7mw/9RyAVkxMfUcBTXILxJ8XY+ytBKWIigSnR02zLlc72AEKIEnxYt00CbKYlfOQwCxht0XkVty+ZH+Zsr2eURoglkWIKt3oB5rJ8puYohA2O0S9CiXYQSh+GwBC0sRmg1OtayBajhMEKr0f9ZghiWQi6hcPnbaaRXKbyJ8WbhCq5EuwQdTNEKr4SlCKzFWLKCU5haETwhFiKwEvyZbiFChLbmbFLOfizQXbmN+GjZazVE3BBle0EbL3k5l29jWUFyckmSuW/59Odn+CSJsawkGX4lyfzXa2TjIIwxMpDxnKYvO5kuor7u93QeTv3DSfe+zquvuz8e/wLfJ2rwZBcAAA=="
-      triggerButtonID="customize-string"
-    >
-      <div>
-        <img
-          src="/icons/content/wcif/customize-svgrepo-com.svg"
-          class="h-11 mobile-only:h-6 w-auto mr-1"
-          alt=`${localizedCopiedCustomizeString} icon`
-        />
-      </div>
-    </CopyStringToast>
-    <CopyStringToast
-      localizedToast={localizedCopiedGlamourerString}
-      toastID="glamourer-toast"
-      stringToCopy="Bh+LCAAAAAAAAAq8V11z6jYQ/S9+bchI8rff8sVNOpCmQHMfOn1Q7DVoImzXlm+Gm8l/78oG4w9gmCktT0Y+Ont2VzqSP42xkPAKeSHSxAjolfEUQaJELCA3AuMtJtabR/yRH0b2yOJeNPKoE44ck1EvfotCO7aNK+MuB66Q4J4rwFmMMGtEnBFjC0ICmwTUv7b1lF8ICwjBCRNeqIdIqC6Y0sA2A+JcO4RR5u3hz3ytedXtHf65hyLMRabj4RgOjNM8hGgGUc4/jCDmsgCUlMo0r9//XorwHWeJJU5QeYlvF3xZGMGff10Z33Oh4CVPFYQKot37h79Lka2xEEbwaUy5SB55gi8/jScF6yd8oqbr2lfGXOE7IyBVCQrVRL/JMrnZkVV/tsjWSHvG15XxWxz/d0H0CMZ4BN4NQIjJmgC+9e8j3KbRph/BvGgKWKOiHwGFb+cxeoFWTGA5CHHZZo8BVD+Cc9kkHnjeScJn/mUasQvwDOF7LwC7aADcmoXq5OA5F85hNhbJUjtdJ43L9nryP8R45NVymq/Sjw6s2TavokhrCcUiXS6ltrphOF104Jk21uNkCLorC5WuxU+o7DGNQOqsMJEZD6uxVy5LfLCamTuh3yCJ6lpsIbQvQDvIYpPBKcwjiOVKtRA26UPuJE9aAK//fnxMaeMzIi/URnZ0UHsAQyFSiylauIGY+btItgfSnsxx+7CHDVSoWS87bT5DdX1C87i2PtQ9UA3B5RhP8TIHeiqVDpKdjTTPRlpnI+2zkc7ZSPcUEs8FHm4WXKk0PYWrEYOGu9aBhr/l6Ud77bBji2IC8ek1gcD5inc2zgAzX3Mpn9BX27rYYHM8pwWcSvBXfdE6vj2naalWp1bmRGSFwkvZaRWIGtZwUJ9pWYQSprzo5EQONEXIfn2G5oPGNt/62nEq7R0v6MjtfjDnKGoGP/B+rR335CKswf2MB7TfQSXQSbbr47XTIvCF53htVhhaY5sAf/yYllKJTFY3/H2a13tNzS1lPwdvp0V9ZdllcABft2KRJlX9XgCv5YniyyPs2hTvRRyX9VrD+7tmdaofGtS3HECfjteOTXyP4N653QZ2LJfYnmcdZJxnEJaS5y1KZrfY9J8dkX7uUWhjPSCKUhejtmhs5luUensu07NMvK+bBxkPiHIZtR3PsdqJ7lLfcdousy2fHFbZuPuFdGp/QQtpS/Qd4npWR6LnMNdqldDaReyxVUfY5ei27txsji0lxUx0idr91YS4YPactKlBP2ORDVttViVHl2kYiZ7tOi2V+5Ebma14vZS2i7QX4x5CLgeyiWc5NsMeNEH2Q43sZqQJ4mlp1O+XR+88/PDO8RTTW70yYP2NpD9vJyJ5r/b/LcRpjsR68CZGtH78+voHAAD//w=="
-      triggerButtonID="glamourer-string"
-    >
-      <img
-        src="/icons/content/wcif/elegante-makeup-svgrepo-com.svg"
-        class="h-11 mobile-only:h-6 w-auto mr-1"
-        alt=`${localizedCopiedGlamourerString} icon`
-      />
-    </CopyStringToast>
-  </div>
-  <div class="grid grid-cols-1 gap-4 mobile-only:my-[5%] px-2">
+  <div class="grid grid-cols-1 gap-y-4 mobile-only:my-[5%] px-1">
     <ArtworksForArtists
+      client:load
       localizedLoading={localizedLoading}
       localizedSpecialReferenceSummary={localizedSpecialReferenceSummary}
     />
     <DesignReferences
+      locale={locale}
       localizedDesignReferences={localizedDesignReferences}
-      localizedAttireShots={localizedAttireShots}
-      localizedBodyReferences={localizedBodyReferences}
-      localizedFullbodyFreckles={localizedFullbodyFreckles}
-      localizedHairstyles={localizedHairstyles}
-      localizedGenitalia={localizedGenitalia}
-      localizedDownloadAttires={localizedDownloadAttires}
       localizedDownloadBodyRefs={localizedDownloadBodyRefs}
-      localizedDownloadHairstyles={localizedDownloadHairstyles}
-      localizedDownloadThis={localizedDownloadThis}
       localizedClickToZoom={localizedClickToZoom}
       localizedDismiss={localizedDismiss}
     />
-    <SizesColorPallette
+    <ColorPallette
       locale={locale}
-      localizedSizesColorPallete={localizedSizesColorPallete}
+      localizedColorPallete={localizedColorPallete}
+    />
+    <InGameReferences
+      locale={locale}
+      localizedAttires={localizedAttires}
+      localizedGPoseShots={localizedGPoseShots}
+      localizedInGameShots={localizedInGameShots}
       localizedAttireArtworks={localizedAttireArtworks}
-      localizedCharacterSheetArtworks={localizedCharacterSheetArtworks}
       localizedClickToZoom={localizedClickToZoom}
       localizedDismiss={localizedDismiss}
       localizedDownload={localizedDownload}
+      localizedHairstyles={localizedHairstyles}
     />
-    <WCIF locale={locale} trueLocale={locale} localizedWCIF={localizedWCIF} />
+    <WCIF locale={locale} localizedWCIF={localizedWCIF} />
   </div>
 </Master>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const openSections = urlParams.get("page")?.split("&") || [];
+
+    openSections.forEach((sectionId) => {
+      const detailsElement = document.getElementById(sectionId);
+      if (detailsElement instanceof HTMLDetailsElement) {
+        detailsElement.open = true;
+      }
+    });
+
+    if (openSections.length > 0) {
+      const firstSection = document.getElementById(openSections[0]);
+      if (firstSection) {
+        firstSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    const artworksContainer = document.getElementById(
+      "artworks-for-reference-container",
+    );
+    if (artworksContainer instanceof HTMLDetailsElement) {
+      const reference = urlParams.get("reference");
+      if (reference && reference.length > 0) {
+        artworksContainer.open = true;
+        artworksContainer.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+</script>

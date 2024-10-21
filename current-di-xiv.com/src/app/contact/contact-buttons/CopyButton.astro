@@ -13,7 +13,7 @@ const {
   copyButtonText,
   copyButtonToastID,
   localizedTitleCopy,
-} = Astro.props as Props;
+} = Astro.props;
 ---
 
 <a
@@ -27,10 +27,14 @@ const {
 >
   <div class="flex items-center">
     <div class="inline-block">
-      <slot name="inline-svg" />
+      <slot />
     </div>
     <div class="inline-block">
-      <p class="light ml-1 text-xl mobile-only:text-lg">
+      <p
+        class="light ml-1 text-xl mobile-only:text-lg"
+        aria-label={copyButtonText}
+        title={copyButtonText}
+      >
         {copyButtonText} ⎘
       </p>
     </div>

@@ -22,9 +22,14 @@ const ArtistInfo: React.FC<Props> = ({ artistName, artistWebsite }) => {
                 <img
                   src="/icons/content/commworks/typcn--brush.svg"
                   className="h-8 w-auto"
+                  alt="Artist name and website"
                 />
               </div>
-              <h3 className="regular text-large mobile-only:text-base">
+              <h3
+                className="regular text-large mobile-only:text-base"
+                aria-label={artistName}
+                title={artistName}
+              >
                 {artistName}↗
               </h3>
             </div>

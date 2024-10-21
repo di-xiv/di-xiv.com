@@ -4,7 +4,7 @@ interface Props {
   toastID: string;
 }
 
-const { localizedToast, toastID } = Astro.props as Props;
+const { localizedToast, toastID } = Astro.props;
 ---
 
 <div
@@ -13,7 +13,7 @@ const { localizedToast, toastID } = Astro.props as Props;
 >
   <div class="flex items-center">
     <div class="inline-block glassbox p-2 rounded-md mobile-only:p-1">
-      <slot name="inline-svg" />
+      <slot />
     </div>
     <p
       class="regular text-lg mobile-only:text-sm inline-block text-wrap ml-2 mobile-only:mr-2"

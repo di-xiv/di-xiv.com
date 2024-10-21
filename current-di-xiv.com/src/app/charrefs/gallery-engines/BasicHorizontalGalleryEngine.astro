@@ -21,7 +21,7 @@ interface Gallery {
 }
 
 const { apiURL, localizedClickToZoom, localizedDismiss, localizedDownload } =
-  Astro.props as Props;
+  Astro.props;
 
 let basicGalleryEngine: Gallery[] = [];
 let loading = true;
@@ -149,7 +149,7 @@ await fetchGalleries();
                     <div
                       id={modalId}
                       title={localizedDismiss}
-                      class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                      class="hidden fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-50"
                       onclick="this.classList.add('hidden')"
                     >
                       <img

@@ -1,0 +1,131 @@
+---
+import { Image } from "astro:assets";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote.tsx";
+import A from "@/components/text/SimpleInlineAnchor";
+import Attires from "@/app/charrefs/ingame-references/attires/Attires.astro";
+import GPoseShots from "@/app/charrefs/ingame-references/gpose-shots/GPoseShots.astro";
+import Hairstyles from "@/app/charrefs/ingame-references/hairstyles/Hairstyles.astro";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedInGameShots: string;
+  localizedAttires: string;
+  localizedGPoseShots: string;
+  localizedHairstyles: string;
+  localizedAttireArtworks: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  localizedInGameShots,
+  localizedGPoseShots,
+  localizedAttires,
+  localizedAttireArtworks,
+  localizedHairstyles,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+
+const localeStrings = {
+  en: {
+    downloadReferences: "Download the ingame references",
+    lastUpdated: "Last updated: September 2023",
+  },
+  ja: {
+    downloadReferences: "ゲーム内のリファレンスをダウンロードしてください",
+    lastUpdated: "最終更新日: 2023 年 9 月",
+  },
+  pt: {
+    downloadReferences: "Faça o download das referências no jogo",
+    lastUpdated: "Última atualização: setembro de 2023",
+  },
+  es: {
+    downloadReferences: "Descarga las referencias del juego",
+    lastUpdated: "Última actualizacion: septiembre de 2023",
+  },
+};
+
+const strings = localeStrings[locale];
+---
+
+<details
+  id="ingame-references"
+  class="mobile-only:p-2 rounded-lg shadowless-glassbox p-3"
+  title={localizedInGameShots}
+>
+  <summary class="flex items-center">
+    <div class="">
+      <Image
+        loading="eager"
+        width={48}
+        height={48}
+        src="/icons/content/charrefs/game-icons--floating-crystal.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-4"
+        alt=`${localizedInGameShots} icon`
+      />
+    </div>
+    <h2
+      class="text-extra w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedInGameShots}
+      title={localizedInGameShots}
+    >
+      {localizedInGameShots}
+    </h2>
+  </summary>
+  <div class="flex items-center">
+    <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+      <A id="download-all-references" className="flex items-center" h="">
+        <h3
+          class="light inline-block w-1150:text-sm mobile-only:text-xs"
+          aria-label={strings.downloadReferences}
+          title={strings.downloadReferences}
+        >
+          {strings.downloadReferences}
+        </h3>
+      </A>
+    </StyledBlockquote>
+  </div>
+  <div class="grid grid-cols-1 gap-y-2 mt-[2%]">
+    <div
+      class="flex not-mobile:absolute not-mobile:top-2 not-mobile:right-2 justify-end"
+    >
+      <StyledBlockquote blockquoteType={BlockquoteType.Warning}>
+        <p
+          class="light mobile-only:text-sm"
+          aria-label={strings.lastUpdated}
+          title={strings.lastUpdated}
+        >
+          {strings.lastUpdated}
+        </p>
+      </StyledBlockquote>
+    </div>
+    <GPoseShots
+      locale={locale}
+      localizedGPoseShots={localizedGPoseShots}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+    <Hairstyles
+      locale={locale}
+      localizedHairstyles={localizedHairstyles}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+    <Attires
+      locale={locale}
+      localizedAttires={localizedAttires}
+      localizedAttireArtworks={localizedAttireArtworks}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+  </div>
+</details>

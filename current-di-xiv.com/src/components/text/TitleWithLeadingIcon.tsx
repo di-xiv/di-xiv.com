@@ -21,9 +21,9 @@ const TitleWithLeadingIcon: React.FC<Props> = ({ imageURL, title }) => {
           />
         </div>
       </div>
-      <h2 title={title} className="ml-2">
+      <h3 title={title} aria-label={title} className="ml-2">
         {title}
-      </h2>
+      </h3>
     </div>
   );
 };

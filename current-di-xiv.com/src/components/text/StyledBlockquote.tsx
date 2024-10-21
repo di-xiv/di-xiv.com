@@ -8,6 +8,9 @@ export enum BlockquoteType {
   Important = "important",
   Updated = "updated",
   Language = "lang",
+  Quote = "quote",
+  Artist = "artist",
+  Download = "download",
 }
 
 interface Props {
@@ -18,7 +21,7 @@ interface Props {
 const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
   return (
     <blockquote
-      className={`mt-[1%] mb-[1%] ml-[7%] border-l-2 ${
+      className={`my-[1%] not-mobile:ml-[7%] border-l-2 ${
         blockquoteType === BlockquoteType.Info
           ? "border-blue-500"
           : blockquoteType === BlockquoteType.Tip
@@ -31,14 +34,20 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
                   ? "border-indigo-500"
                   : blockquoteType === BlockquoteType.Updated
                     ? "border-teal-400"
-                    : "border-[#181a1b]"
+                    : blockquoteType === BlockquoteType.Quote
+                      ? "border-orange-400"
+                      : blockquoteType === BlockquoteType.Artist
+                        ? "border-cyan-500"
+                        : blockquoteType === BlockquoteType.Download
+                          ? "border-indigo-400"
+                          : "border-[#181a1b]"
       } p-2 mobile-only:p-1 flex flex-wrap items-center`}
     >
       {blockquoteType === BlockquoteType.Info && (
         <div className="text-blue-500 inline-block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-auto"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
             viewBox="0 0 48 48"
           >
             <g fill="none">
@@ -69,7 +78,7 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
         <div className="text-green-500 inline-block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-auto"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
             viewBox="0 0 24 24"
           >
             <g
@@ -89,7 +98,7 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
         <div className="text-yellow-500 inline-block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-auto"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
             viewBox="0 0 24 24"
           >
             <path
@@ -103,7 +112,7 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
         <div className="text-red-500 inline-block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-auto"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
             viewBox="0 0 24 24"
           >
             <g fill="none">
@@ -129,7 +138,7 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
         <div className="text-purple-500 inline-block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-auto"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
             viewBox="0 0 16 16"
             version="1.1"
             aria-hidden="true"
@@ -170,7 +179,54 @@ const StyledBlockquote: React.FC<Props> = ({ blockquoteType, children }) => {
           </svg>
         </div>
       )}
-      <div className="flex-1 ml-2">{children}</div>
+      {blockquoteType === BlockquoteType.Quote && (
+        <div className="text-orange-400 inline-block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill="currentColor"
+              d="M13 4a2 2 0 1 0-1.137 1.805a7.7 7.7 0 0 1-.51 1.779c-.408.955-.995 1.757-1.727 2.585a.5.5 0 0 0 .749.662c.767-.868 1.43-1.761 1.897-2.855C12.74 6.88 13 5.611 13 4m5 4.79v3.486c0 1.418-1.164 2.566-2.6 2.566h-4.59l-4.011 2.961a1.01 1.01 0 0 1-1.4-.199a.98.98 0 0 1-.199-.59v-2.172h-.6c-1.436 0-2.6-1.149-2.6-2.566v-6.71C2 4.149 3.164 3 4.6 3h3.57c-.11.313-.17.65-.17 1H4.6C3.704 4 3 4.713 3 5.566v6.71c0 .853.704 1.566 1.6 1.566h1.6V17h.003l.002-.001l4.276-3.157H15.4c.896 0 1.6-.713 1.6-1.566V10.42c.37-.5.71-1.037 1-1.63M16 2a2 2 0 0 1 2 2c0 1.61-.26 2.88-.728 3.976c-.467 1.094-1.13 1.987-1.897 2.855a.5.5 0 0 1-.75-.662c.733-.828 1.32-1.63 1.728-2.585c.225-.528.4-1.11.51-1.78A2 2 0 1 1 16 2"
+            />
+          </svg>
+        </div>
+      )}
+      {blockquoteType === BlockquoteType.Artist && (
+        <div className="text-cyan-500 inline-block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M20.177 3.823a2 2 0 0 0-2.159-.442c-4.449 1.787-7.792 4.76-10.517 9.357a2 2 0 0 0-.209.542c-1.38.215-2.6.903-3.442 1.993c-.916 1.185-1.295 2.695-1.066 4.254L3 21l1.473.217q.441.064.88.064c2.743 0 4.949-1.909 5.367-4.564a2 2 0 0 0 .544-.218c4.598-2.728 7.571-6.069 9.355-10.517a2 2 0 0 0-.442-2.159M5.353 19.281q-.288-.001-.59-.044c-.309-2.104 1.055-3.81 3-4.021l1.021 1.021c-.192 1.76-1.605 3.044-3.431 3.044m4.89-4.502l-1.021-1.021c.38-.641.774-1.233 1.178-1.804c.027.041 1.639 1.653 1.639 1.653c-.568.401-1.158.794-1.796 1.172m2.608-1.773s-1.821-1.801-1.879-1.824c2.147-2.784 4.651-4.685 7.791-5.943c-1.255 3.127-3.144 5.623-5.912 7.767"
+            />
+          </svg>
+        </div>
+      )}
+      {blockquoteType === BlockquoteType.Download && (
+        <div className="text-indigo-400 inline-block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-7 ultrawide-only:h-12 mobile-only:h- w-auto"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="M7.001 6.504h9.753c2.107 0 3.16 0 3.917.507c.328.219.61.5.828.828c.506.758.501 2.063.501 4.172m-9.997-5.507l-.634-1.268c-.525-1.05-1.005-2.108-2.168-2.545C8.691 2.5 8.11 2.5 6.946 2.5c-1.817 0-2.726 0-3.408.38A3 3 0 0 0 2.38 4.04C2 4.722 2 5.63 2 7.45v3.059c0 4.72 0 7.079 1.465 8.545c1.114 1.115 2.745 1.382 5.537 1.446M12 18.833c0 1.473 1.12 2.667 2.5 2.667h5.25c1.243 0 2.25-1.075 2.25-2.4c0-1.442-1.18-2.406-2.261-2.4c.138-1.64-1.095-3.2-2.739-3.2c-1.438 0-2.619 1.178-2.74 2.679c-1.268.129-2.26 1.268-2.26 2.654"
+              color="currentColor"
+            />
+          </svg>
+        </div>
+      )}
+      <div className="flex-1 not-mobile:ml-2 mobile-only:ml-1">{children}</div>
     </blockquote>
   );
 };

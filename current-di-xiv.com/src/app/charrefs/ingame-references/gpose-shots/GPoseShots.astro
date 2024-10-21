@@ -1,0 +1,76 @@
+---
+import A from "@/components/text/SimpleInlineAnchor";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+import GPoseGalleryWrapper from "./GPoseGalleryWrapper.astro";
+import { Image } from "astro:assets";
+import yogaIcon from "/public/icons/content/charrefs/yoga-svgrepo-com.svg";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedGPoseShots: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  localizedGPoseShots,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+
+const localizedDownloadText = {
+  en: "Download the Mare `.mcdf` files for the in-game shots 🔞",
+  ja: "すべてのゲーム内ショット Mare .mcdf ファイルをダウンロードする 🔞",
+  pt: "Baixe os arquivos .mcdf do Mare para todas as capturas de tela do jogo 🔞",
+  es: "Descarga los archivos .mcdf de Mare para todas las capturas in-game 🔞",
+};
+---
+
+<details
+  id="gpose-shots"
+  class="mobile-only:p-2 rounded-md shadowless-glassbox p-3"
+  title={localizedGPoseShots}
+>
+  <summary class="flex items-center">
+    <div class="relative">
+      <Image
+        loading="eager"
+        src={yogaIcon}
+        class="h-11 mobile-only:h-6 w-auto mr-4"
+        alt={`${localizedGPoseShots} icon`}
+      />
+    </div>
+    <h3
+      class="text-large w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedGPoseShots}
+      title={localizedGPoseShots}
+    >
+      {localizedGPoseShots} 🔞
+    </h3>
+  </summary>
+  <div class="ultrawide-only:w-[70%] not-ultrawide:w-[90%] flex gap-x-1">
+    <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+      <div class="flex items-center">
+        <A id="download-all-references" className="flex items-center" h="">
+          <h3
+            class="light inline-block w-1150:text-sm mobile-only:text-xs"
+            aria-label={localizedDownloadText[locale]}
+            title={localizedDownloadText[locale]}
+          >
+            {localizedDownloadText[locale]}
+          </h3>
+        </A>
+      </div>
+    </StyledBlockquote>
+  </div>
+  <GPoseGalleryWrapper
+    localizedClickToZoom={localizedClickToZoom}
+    localizedDismiss={localizedDismiss}
+    localizedDownload={localizedDownload}
+  />
+</details>

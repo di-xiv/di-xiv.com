@@ -1,12 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import DrawerCloseButton from "@/components/layout/aside/components/DrawerCloseButton.astro";
-import GetCurrentSmallDate from "@/components/layout/aside/components/GetCurrentSmallDate.tsx";
 import DivisorLine from "@/components/navigation/DivisorLine.astro";
 import LanguageSelector from "@/components/logic/LanguageSelector.tsx";
 import SocialsIcons from "@/components/navigation/SocialsIcons.astro";
 //
 interface Props {
-  locale: string;
+  locale: "en" | "ja" | "pt" | "es";
   localizedCharRefs: string;
   localizedContact: string;
   localizedCommWorks: string;
@@ -15,6 +15,44 @@ interface Props {
   localizedInquiries: string;
   localizedAcknowledgements: string;
 }
+//
+const localizedDesignReferences = {
+  en: "Design References",
+  ja: "デザイン・リファレンス",
+  es: "Diseños de Referencia",
+  pt: "Referências de Design",
+};
+const localizedColorPallette = {
+  en: "Color Pallette",
+  ja: "カラーパレット",
+  es: "Paleta de Colores",
+  pt: "Paleta de Cores",
+};
+const localizedInGameReferences = {
+  en: "In-game references",
+  ja: "ゲーム内スクリーンショット",
+  es: "Capturas in-game",
+  pt: "Capturas de tela do jogo",
+};
+const localizedTermsOfUse = {
+  en: "Terms of Use",
+  ja: "利用規約",
+  es: "Términos de Uso",
+  pt: "Termos de Uso",
+};
+const localizedFriendlyTakedown = {
+  en: "Friendly Takedowns",
+  ja: "フレンドリーな削除 (🇬🇧)",
+  es: "Retiradas Amistosas (🇬🇧)",
+  pt: "Remoções Amigáveis (🇬🇧)",
+};
+const localizedLegalTakedown = {
+  en: "Legal Takedowns",
+  ja: "法的な削除 (🇬🇧)",
+  es: "Retiradas Legales (🇬🇧)",
+  pt: "Remoções Legais (🇬🇧)",
+};
+//
 const {
   locale,
   localizedCharRefs,
@@ -24,7 +62,7 @@ const {
   localizedFAQ,
   localizedInquiries,
   localizedAcknowledgements,
-} = Astro.props as Props;
+} = Astro.props;
 function getLocalizedRoute() {
   if (locale && locale !== "en") {
     return `/${locale}`;
@@ -32,7 +70,6 @@ function getLocalizedRoute() {
     return ``;
   }
 }
-
 function localizedHome() {
   if (locale !== "en") {
     return `/${locale}`;
@@ -60,30 +97,63 @@ const navItems = [
     label: localizedContact,
   },
   {
-    href: "/tou",
-    icon: "/icons/aside/teenyicons--contract-outline.svg",
-    key: "tou",
-    label: localizedToU,
-  },
-  {
-    href: "/faq",
-    icon: "/icons/aside/octicon--question-16.svg",
-    key: "faq",
-    label: localizedFAQ,
-  },
-  {
     href: "/inquiries",
     icon: "/icons/aside/mdi--faq.svg",
     key: "inquiries",
     label: localizedInquiries,
   },
-  {
-    href: "/acknowledgements",
-    icon: "/icons/aside/simple-line-icons--badge.svg",
-    key: "acknowledgements",
-    label: localizedAcknowledgements,
-  },
 ];
+const subNavItems = new Map([
+  [
+    "charrefs",
+    [
+      {
+        href: `/character-references?page=design-references`,
+        label: `${localizedDesignReferences[locale]}`,
+      },
+      {
+        href: `/character-references?page=color-pallette`,
+        label: `${localizedColorPallette[locale]}`,
+      },
+      {
+        href: `/character-references?page=ingame-references`,
+        label: `${localizedInGameReferences[locale]}`,
+      },
+      {
+        href: `/character-references?page=wcif`,
+        label: "WCIF",
+      },
+    ],
+  ],
+  [
+    "commworks",
+    [
+      {
+        href: `/commissioned-works/?ratings=1`,
+        label: "SFW",
+      },
+      {
+        href: `/commissioned-works/?ratings=1,2`,
+        label: "NSFW",
+      },
+    ],
+  ],
+  [
+    "inquiries",
+    [
+      { href: `/inquiries#tou`, label: `${localizedTermsOfUse[locale]}` },
+      { href: `/inquiries#faq`, label: "FAQ" },
+      {
+        href: `/inquiries#friendly-takedown`,
+        label: `${localizedFriendlyTakedown[locale]}`,
+      },
+      {
+        href: `/inquiries#legal-takedown`,
+        label: `${localizedLegalTakedown[locale]}`,
+      },
+    ],
+  ],
+]);
 ---
 
 <aside
@@ -105,8 +175,11 @@ const navItems = [
         id="wingspan-wrapper"
         class="flex justify-center"
       >
-        <img
+        <Image
+          loading="eager"
           src="/favicon.ico"
+          width={128}
+          height={128}
           class="ultrawide-only:w-32 w-28 w-1560:w-24 w-1150:w-20 mobile-only:w-16 h-auto"
           alt="Di-XIV Brand Icon"
         />
@@ -117,21 +190,46 @@ const navItems = [
       <nav class="ml-[10%] grid grid-cols-1 gap-y-3">
         {
           navItems.map((item) => (
-            <a
-              id={`nav-${item.key}`}
-              aria-label={item.label}
-              href={`${getLocalizedRoute()}${item.href}`}
-              class="flex items-center"
-            >
-              <img
-                src={item.icon}
-                class="w-7 mobile-only:w-5 h-auto dark:invert not-mobile:relative not-mobile:-top-1 not-mobile:mr-[25px] mobile-only:mr-[15px]"
-                alt={`${item.label} icon`}
-              />
-              <p class="text-large mobile-only:text-base regular">
-                {item.label}
-              </p>
-            </a>
+            <div class="nav-item">
+              <a
+                id={`nav-${item.key}`}
+                aria-label={item.label}
+                href={`${getLocalizedRoute()}${item.href}`}
+                class="flex items-center"
+              >
+                <Image
+                  loading="eager"
+                  src={item.icon}
+                  width={28}
+                  height={28}
+                  class="w-7 mobile-only:w-5 h-auto dark:invert not-mobile:relative not-mobile:-top-1 not-mobile:mr-[25px] mobile-only:mr-[15px]"
+                  alt={`${item.label} icon`}
+                />
+                <p
+                  class="text-large mobile-only:text-base regular"
+                  title={item.label}
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </p>
+              </a>
+              {subNavItems.has(item.key) && subNavItems.get(item.key) && (
+                <div
+                  class="mt-2
+                  not-mobile:ml-[55px] mobile-only:ml-[45px]
+                "
+                >
+                  {subNavItems.get(item.key)!.map((subItem) => (
+                    <a
+                      href={`${getLocalizedRoute()}${subItem.href}`}
+                      class="block py-1 text-sm hover:underline"
+                    >
+                      <p class="light">❈ {subItem.label}</p>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           ))
         }
       </nav>
@@ -140,7 +238,7 @@ const navItems = [
       <div class="flex justify-center mt-[10%] mb-[10%]">
         <LanguageSelector client:load />
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center mb-[1%]">
         <SocialsIcons />
       </div>
       <DivisorLine />
@@ -149,18 +247,22 @@ const navItems = [
         class="mb-[10%] flex justify-center light mt-2 regular"
       >
         <div class="flex">
-          <img
+          <Image
+            loading="eager"
             src="/favicon.ico"
+            width={36}
+            height={36}
             class="w-9 h-auto relative -top-[6px]"
             alt="Di-XIV Brand Icon"
           />
         </div>
-        <p>Di-XIV&nbsp;❈</p>&nbsp;<p>v.</p><GetCurrentSmallDate />
+        <p>Di-XIV&nbsp;❈&nbsp;v.4.4.2</p>
       </div>
     </div>
   </div>
 </aside>
-<div id="drawer-shade" class="fixed top-0 left-0 w-full h-full z-[9998]"></div>
+<div id="drawer-shade" class="fixed top-0 left-0 w-full h-full z-[9998] hidden">
+</div>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     let drawerVisible = false;
@@ -178,8 +280,13 @@ const navItems = [
 
     const updateShadeVisibility = () => {
       const isMobile = window.innerWidth < 725;
-      elements.drawerShade.style.display =
-        isMobile && drawerVisible ? "block" : "none";
+      if (isMobile && drawerVisible) {
+        elements.drawerShade.classList.remove("hidden");
+        elements.drawerShade.classList.add("flex");
+      } else {
+        elements.drawerShade.classList.remove("flex");
+        elements.drawerShade.classList.add("hidden");
+      }
     };
 
     const toggleDrawer = (show: boolean) => {

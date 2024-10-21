@@ -20,7 +20,7 @@ const GetCurrentSmallDate: React.FC<Props> = ({ c }) => {
     const month = date.getMonth() + 1; // getMonth() returns 0-11
     const day = date.getDate();
 
-    return `${year}.${month}.${day}`;
+    return `${year}`;
   };
 
   const formattedDate = formatDate(currentDate);
@@ -28,8 +28,8 @@ const GetCurrentSmallDate: React.FC<Props> = ({ c }) => {
   return (
     <p
       data-timestamp={currentDate.getTime()}
-      title={`Version: ${formattedDate}`}
-      className={`${c} select-none cursor-help contents`}
+      title={`${formattedDate}`}
+      className={`${c}`}
     >
       {formattedDate}
     </p>

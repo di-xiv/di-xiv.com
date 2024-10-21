@@ -1,0 +1,16 @@
+---
+import BuiltWith from "@/components/layout/footer/badges/BuiltWith.astro";
+import HostedOn from "@/components/layout/footer/badges/HostedOn.astro";
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { locale } = Astro.props;
+---
+
+<div
+  class="not-mobile:flex not-mobile:gap-3 mobile-only:grid not-mobile:my-[1.5%] mobile-only:my-[3%] select-none mobile-only:gap-y-2"
+>
+  <BuiltWith locale={locale} />
+  <HostedOn locale={locale} />
+</div>

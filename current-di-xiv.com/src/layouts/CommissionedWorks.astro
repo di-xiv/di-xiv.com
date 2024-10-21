@@ -9,7 +9,7 @@ import StyledBlockquote, {
 //
 interface Props {
   // From Master
-  locale: string;
+  locale: "en" | "ja" | "pt" | "es";
   /// Meta
   metaDescription: string;
   metaKeywords: string;
@@ -29,13 +29,7 @@ interface Props {
   localizedToU: string;
   headerContent: string;
   // Commissioned Works
-  localizedAllGalleriesToast: string;
-  localizedGalleryRating: string;
   localizedLoading: string;
-  localizedNowViewing: string;
-  localizedRatingSelector: string;
-  localizedTagSelector: string;
-  localizedTagRating: string;
   localizedLoadingError: string;
   localizedDismissZoom: string;
   localizedZoom: string;
@@ -58,17 +52,25 @@ const {
   metaImageHeight,
   metaImageWidth,
   metaImageAlt,
-  localizedAllGalleriesToast,
-  localizedGalleryRating,
   localizedLoading,
-  localizedNowViewing,
-  localizedRatingSelector,
-  localizedTagSelector,
-  localizedTagRating,
   localizedLoadingError,
   localizedDismissZoom,
   localizedZoom,
-} = Astro.props as Props;
+} = Astro.props;
+
+const localeStrings = {
+  es: "Etiquetas, calificaciones y descripciones solo disponibles en inglés",
+  pt: "Tags, classificações e descrições disponíveis apenas em inglês",
+  ja: "ラベル、評価、説明は英語のみで提供されています",
+} as const;
+
+type ValidLocale = keyof typeof localeStrings;
+
+function isValidLocale(locale: string): locale is ValidLocale {
+  return locale in localeStrings;
+}
+
+const localizedString = isValidLocale(locale) ? localeStrings[locale] : "";
 ---
 
 <Master
@@ -93,14 +95,14 @@ const {
   localizedCopiedGlamourerString=""
 >
   {
-    locale !== "en" && (
-      <div class="flex items-center justify-start">
+    locale !== "en" && localizedString && (
+      <div
+        class="flex items-center justify-start"
+        title={localizedString}
+        aria-label={localizedString}
+      >
         <StyledBlockquote blockquoteType={BlockquoteType.Language}>
-          <p class="text-base mobile-only:text-sm regular">
-            {locale === "es" && <>Sólo disponible en 🇬🇧</>}
-            {locale === "pt" && <>Disponível apenas em 🇬🇧</>}
-            {locale === "ja" && <>🇬🇧でのみ利用可能</>}
-          </p>
+          <p class="text-base mobile-only:text-sm regular">{localizedString}</p>
         </StyledBlockquote>
       </div>
     )
@@ -108,8 +110,8 @@ const {
   <div id="commworks-container" class="">
     <CWGalleryEngine
       locale={locale}
-      localizedDismiss=""
-      localizedZoom=""
+      localizedDismiss={localizedDismissZoom}
+      localizedZoom={localizedZoom}
       client:only="react"
       localizedLoading={localizedLoading}
       localizedLoadingError={localizedLoadingError}

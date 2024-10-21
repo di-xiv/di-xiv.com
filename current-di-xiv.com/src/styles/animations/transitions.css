@@ -37,6 +37,3 @@ details summary {
 details[open] > summary {
   text-decoration: none;
 }
-details > summary:hover {
-  text-decoration: underline;
-}

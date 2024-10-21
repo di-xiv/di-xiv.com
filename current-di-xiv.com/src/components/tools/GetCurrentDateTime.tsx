@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 interface Props {
-  lang?: string;
+  locale?: string;
 }
 
-const CurrentDateTime: React.FC<Props> = ({ lang }) => {
+const CurrentDateTime: React.FC<Props> = ({ locale }) => {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   useEffect(() => {
@@ -17,14 +17,14 @@ const CurrentDateTime: React.FC<Props> = ({ lang }) => {
 
   const unixTimestamp = currentDateTime.getTime();
 
-  const fullDate = currentDateTime.toLocaleDateString(lang, {
+  const fullDate = currentDateTime.toLocaleDateString(locale, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  const time = currentDateTime.toLocaleTimeString(lang, {
+  const time = currentDateTime.toLocaleTimeString(locale, {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",

@@ -1,0 +1,100 @@
+---
+import { Image } from "astro:assets";
+import A from "@/components/text/SimpleInlineAnchor";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedDownloadBodyRefs: string;
+  localizedDesignReferences: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+}
+
+const {
+  locale,
+  localizedDesignReferences,
+  localizedDownloadBodyRefs,
+  localizedClickToZoom,
+  localizedDismiss,
+} = Astro.props;
+import BodyReferences from "./BodyReferences.astro";
+---
+
+<style>
+  p {
+    font-size: clamp(1rem, 1vw + 0.5rem, 1.618rem); /* Mimics h3 */
+  }
+</style>
+<details
+  id="design-references"
+  class="mobile-only:p-2 rounded-lg shadowless-glassbox p-3"
+  title={localizedDesignReferences}
+>
+  <div class="flex justify-center">
+    <div class="ultrawide-only:w-[75%] not-ultrawide:w-[90%] flex gap-x-1">
+      <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+        <div class="flex items-center">
+          <A
+            id="download-all-references"
+            className="flex items-center"
+            h="https://drive.proton.me/urls/X9B6E6CSN0#8fmJZcjhr1wm"
+          >
+            <p
+              class="light inline-block w-1150:text-sm mobile-only:text-xs"
+              aria-label={localizedDownloadBodyRefs}
+              title={localizedDownloadBodyRefs}
+            >
+              {localizedDownloadBodyRefs} 🔞
+            </p>
+          </A>
+        </div>
+      </StyledBlockquote>
+      <StyledBlockquote blockquoteType={BlockquoteType.Artist}>
+        <A
+          id="ronjou-website"
+          className="flex items-center"
+          h="https://ronjou-art.carrd.co/"
+        >
+          <div class="flex">
+            <p
+              class="light w-1150:text-sm mobile-only:text-xs"
+              aria-label="Artist: ronjou"
+              title="ronjou"
+            >
+              ronjou ↗
+            </p>
+          </div>
+        </A>
+      </StyledBlockquote>
+    </div>
+  </div>
+  <summary class="flex items-center">
+    <div>
+      <Image
+        loading="eager"
+        width={48}
+        height={48}
+        src="/icons/content/charrefs/sketchbook-sketch-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-4"
+        alt=`${localizedDesignReferences} icon`
+      />
+    </div>
+    <h2
+      class="text-extra w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedDesignReferences}
+      title={localizedDesignReferences}
+    >
+      {localizedDesignReferences} 🔞
+    </h2>
+  </summary>
+  <div class="p-2">
+    <BodyReferences
+      locale={locale}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+    />
+  </div>
+</details>

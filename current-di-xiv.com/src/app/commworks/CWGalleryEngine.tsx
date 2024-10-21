@@ -1,64 +1,29 @@
+import type {
+  Tag,
+  Artist,
+  Rating,
+  Artwork,
+  Gallery,
+  ArtworkGalleryProps,
+} from "@/app/commworks/Types";
 import React, { useState, useEffect, useCallback } from "react";
-interface ArtworkGalleryProps {
-  locale: string;
-  localizedZoom: string;
-  localizedDismiss: string;
-  localizedLoading: string;
-  localizedLoadingError: string;
-}
-// Selector
+import { useUrlSearchParams } from "@/app/commworks/hooks/UseURLSearchParams";
 import SelectorsContainer from "@/app/commworks/cwgallery-components/SelectorsContainer";
-/// Tags
 import TagContainer from "@/app/commworks/cwgallery-components/tags/TagContainer";
-// Notices
-/// Loading gallery
 import LoadingGalleryNotice from "@/app/commworks/cwgallery-components/notices/Loading";
-/// Toast
 import ToastNotification from "@/app/commworks/cwgallery-components/notices/ToastDiv";
 import useToast from "@/app/commworks/hooks/UseToast";
-/// Rating
 import RatingContainer from "@/app/commworks/cwgallery-components/ratings/RatingContainer";
 import RatingButton, {
   ratingOptions,
 } from "@/app/commworks/cwgallery-components/ratings/RatingButton";
-/// Tags
 import TagButton from "@/app/commworks/cwgallery-components/tags/TagButton";
-/// Gallery
 import GDetailsContainer from "@/app/commworks/cwgallery-components/galleries/GalleryDetailsContainer";
 import GalleryName from "@/app/commworks/cwgallery-components/galleries/GalleryName";
 import GalleryLength from "@/app/commworks/cwgallery-components/galleries/GalleryLength";
 import GalleryInfo from "@/app/commworks/cwgallery-components/galleries/GalleryInfo";
-
-interface Tag {
-  tag_id: number;
-  tag_name: string;
-}
-
-interface Artist {
-  artist_id: number;
-  artist_name: string;
-  website: string | null;
-}
-
-interface Rating {
-  rating_id: number;
-  rating_name: string;
-}
-
-interface Artwork {
-  artwork_id: number;
-  artwork_url: string;
-  artist: Artist;
-  ratings: Rating[];
-  tags: { tag_id: number; tag_name: string; rating_id: number | null }[];
-}
-
-interface Gallery {
-  gallery_id: number;
-  gallery_name: string;
-  artworks: Artwork[];
-  rating: Rating | null;
-}
+import ArtworkItem from "@/app/commworks/cwgallery-components/galleries/artwork-items/ArtworkItem";
+import ZoomedModal from "@/app/commworks/cwgallery-components/galleries/zoom/ZoomedModal";
 
 const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
   locale,
@@ -67,6 +32,8 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
   localizedLoading,
   localizedLoadingError,
 }) => {
+  const { selectedTagId, selectedRatings: initialSelectedRatings } =
+    useUrlSearchParams();
   const [tags, setTags] = useState<Tag[]>([]);
   const [galleries, setGalleries] = useState<Gallery[]>([]);
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
@@ -74,25 +41,27 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const [zoomedArtwork, setZoomedArtwork] = useState<Artwork | null>(null);
 
   const { toastRef, showToast, getLocalizedMessage } = useToast({ locale });
 
-  const showInitialRatingsToast = useCallback(() => {
-    const allRatingsMessage = getLocalizedMessage("allRatings");
-    showToast("ratingChanged", allRatingsMessage);
-  }, [getLocalizedMessage, showToast]);
+  const updateUrl = useCallback((tag: number | null, ratings: number[]) => {
+    const searchParams = new URLSearchParams();
+    if (tag) searchParams.set("tag", tag.toString());
+    if (ratings.length > 0) searchParams.set("ratings", ratings.join(","));
 
-  const fetchTags = useCallback(async () => {
-    try {
-      const response = await fetch("https://api.di-xiv.com/tags");
-      if (!response.ok) throw new Error("Failed to fetch tags");
-      const data = await response.json();
-      setTags(data);
-    } catch (err) {
-      setError("Error fetching tags");
-      console.error(err);
-    }
+    const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+    window.history.pushState({ path: newUrl }, "", newUrl);
   }, []);
+
+  function isTag(obj: any): obj is Tag {
+    return (
+      typeof obj === "object" &&
+      obj !== null &&
+      typeof obj.tag_id === "number" &&
+      typeof obj.tag_name === "string"
+    );
+  }
 
   function shuffleArray<T>(array: T[]): T[] {
     const newArray = [...array];
@@ -102,6 +71,33 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     }
     return newArray;
   }
+
+  const fetchTags = useCallback(async () => {
+    try {
+      const response = await fetch("https://api.di-xiv.com/tags");
+      if (!response.ok) throw new Error("Failed to fetch tags");
+      const data = await response.json();
+
+      if (Array.isArray(data) && data.every(isTag)) {
+        const shuffledTags = shuffleArray(data);
+        setTags(shuffledTags);
+
+        if (selectedTagId) {
+          const selectedTag = shuffledTags.find(
+            (tag) => tag.tag_id === selectedTagId,
+          );
+          if (selectedTag) {
+            setSelectedTag(selectedTag);
+          }
+        }
+      } else {
+        throw new Error("Invalid data format received from API");
+      }
+    } catch (err) {
+      setError("Error fetching tags");
+      console.error(err);
+    }
+  }, [selectedTagId]);
 
   useEffect(() => {
     fetchTags();
@@ -120,12 +116,10 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
         const filteredGalleries = data
           .map((gallery: Gallery) => ({
             ...gallery,
-            artworks: gallery.artworks.filter(
-              (artwork: Artwork) =>
-                selectedRatings.length === 0 ||
-                artwork.ratings.some((rating: Rating) =>
-                  selectedRatings.includes(rating.rating_id),
-                ),
+            artworks: gallery.artworks.filter((artwork: Artwork) =>
+              artwork.ratings.some((rating: Rating) =>
+                selectedRatings.includes(rating.rating_id),
+              ),
             ),
           }))
           .filter((gallery: Gallery) => gallery.artworks.length > 0);
@@ -152,27 +146,55 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     }
   };
 
-  const handleTagClick = (tag: Tag) => {
-    setSelectedTag(tag);
-    fetchGalleriesForTag(tag.tag_id);
+  const handleTagClick = useCallback(
+    (tag: Tag) => {
+      setSelectedTag(tag);
+      updateUrl(tag.tag_id, selectedRatings);
+      scrollToTop();
+    },
+    [selectedRatings, updateUrl],
+  );
+
+  const handleArtworkTagClick = (tag: Tag) => {
+    handleTagClick({
+      tag_id: tag.tag_id,
+      tag_name: tag.tag_name,
+    });
     scrollToTop();
-
-    const selectedRatingAlts = [
-      { id: 1, alt: "SFW" },
-      { id: 2, alt: "NSFW" },
-      { id: 3, alt: "NSFW++" },
-    ]
-      .filter((rating) => selectedRatings.includes(rating.id))
-      .map((rating) => rating.alt);
-
-    const ratingMessage =
-      selectedRatingAlts.length > 0
-        ? selectedRatingAlts.join(", ")
-        : getLocalizedMessage("allRatings");
-
-    const combinedMessage = `${tag.tag_name} (${ratingMessage})`;
-    showToast("nowViewing", combinedMessage);
   };
+
+  useEffect(() => {
+    if (tags.length > 0 && selectedTagId) {
+      const tag = tags.find((t) => t.tag_id === selectedTagId);
+      if (tag) {
+        setSelectedTag(tag);
+      }
+    }
+  }, [tags, selectedTagId]);
+
+  useEffect(() => {
+    if (initialSelectedRatings.length > 0) {
+      setSelectedRatings(initialSelectedRatings);
+    }
+  }, [initialSelectedRatings]);
+
+  useEffect(() => {
+    if (selectedTag) {
+      if (selectedRatings.length === 0) {
+        showToast("noRatingSelectedTag", selectedTag.tag_name);
+      } else {
+        fetchGalleriesForTag(selectedTag.tag_id);
+
+        const selectedRatingAlts = ratingOptions
+          .filter((rating) => selectedRatings.includes(rating.id))
+          .map((rating) => rating.alt);
+
+        const ratingMessage = selectedRatingAlts.join(", ");
+        const combinedMessage = `${selectedTag.tag_name} (${ratingMessage})`;
+        showToast("nowViewing", combinedMessage);
+      }
+    }
+  }, [selectedTag, selectedRatings, fetchGalleriesForTag, showToast]);
 
   const handleRatingClick = (ratingId: number, ratingAlt: string) => {
     setSelectedRatings((prev) => {
@@ -180,24 +202,24 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
         ? prev.filter((id) => id !== ratingId)
         : [...prev, ratingId];
 
-      const selectedRatingAlts = [
-        { id: 1, alt: "SFW" },
-        { id: 2, alt: "NSFW" },
-        { id: 3, alt: "NSFW++" },
-      ]
+      updateUrl(selectedTag?.tag_id || null, newRatings);
+
+      const selectedRatingAlts = ratingOptions
         .filter((rating) => newRatings.includes(rating.id))
         .map((rating) => rating.alt);
 
-      const ratingMessage =
-        selectedRatingAlts.length > 0
-          ? selectedRatingAlts.join(", ")
-          : getLocalizedMessage("allRatings");
+      let ratingMessage;
+      if (selectedRatingAlts.length === 0) {
+        ratingMessage = getLocalizedMessage("noRatingsSelected");
+      } else {
+        ratingMessage = selectedRatingAlts.join(", ");
+      }
 
       const combinedMessage = selectedTag
         ? `${ratingMessage} (${selectedTag.tag_name})`
         : ratingMessage;
 
-      showToast("ratingChanged", combinedMessage);
+      showToast("ratingChanged", combinedMessage, newRatings.length > 0);
 
       return newRatings;
     });
@@ -205,25 +227,14 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
   };
 
   useEffect(() => {
-    if (selectedTag) {
-      fetchGalleriesForTag(selectedTag.tag_id);
-    } else {
-      showInitialRatingsToast();
-    }
-  }, [
-    selectedTag,
-    selectedRatings,
-    fetchGalleriesForTag,
-    showInitialRatingsToast,
-  ]);
+    showToast("initialMessage", "");
+  }, [showToast]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      showInitialRatingsToast();
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [showInitialRatingsToast]);
+    if (selectedTag) {
+      fetchGalleriesForTag(selectedTag.tag_id);
+    }
+  }, [selectedTag, selectedRatings, fetchGalleriesForTag]);
 
   return (
     <div id="cw-gallery-container" ref={containerRef}>
@@ -278,47 +289,13 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
                   </GDetailsContainer>
                   <div className="flex overflow-x-auto space-x-4 py-4">
                     {gallery.artworks.map((artwork) => (
-                      <div key={artwork.artwork_id} className="flex-none">
-                        <div className="relative">
-                          {artwork.artwork_url
-                            .toLowerCase()
-                            .endsWith(".mp4") ? (
-                            <video
-                              src={artwork.artwork_url}
-                              className="h-[85vh] w-auto object-contain rounded"
-                              controls
-                              loop
-                              muted
-                            >
-                              Your browser does not support the video tag.
-                            </video>
-                          ) : (
-                            <img
-                              src={artwork.artwork_url}
-                              alt="Artwork"
-                              className="h-[80vh] w-auto object-contain rounded"
-                              loading="eager"
-                            />
-                          )}
-                        </div>
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {artwork.tags.map((tag) => (
-                            <button
-                              key={tag.tag_id}
-                              onClick={() => {
-                                handleTagClick({
-                                  tag_id: tag.tag_id,
-                                  tag_name: tag.tag_name,
-                                });
-                                scrollToTop();
-                              }}
-                              className="px-2 py-1 rounded text-sm font-medium transition-colors duration-200 light bg-[#bfbfbf] hover:bg-[#efefef] text-[#181a1b]"
-                            >
-                              {tag.tag_name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                      <ArtworkItem
+                        key={artwork.artwork_id}
+                        artwork={artwork}
+                        onZoom={setZoomedArtwork}
+                        onTagClick={handleArtworkTagClick}
+                        localizedZoom={localizedZoom}
+                      />
                     ))}
                   </div>
                 </div>
@@ -327,6 +304,13 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
           </article>
         </div>
       )}
+      <ZoomedModal
+        isOpen={!!zoomedArtwork}
+        onClose={() => setZoomedArtwork(null)}
+        imageUrl={zoomedArtwork?.artwork_url || ""}
+        altText={`Artwork ${zoomedArtwork?.artwork_id}`}
+        localizedDismiss={localizedDismiss}
+      />
     </div>
   );
 };

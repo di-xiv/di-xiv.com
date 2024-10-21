@@ -1,55 +1,61 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 interface ScrollToTopButtonProps {
-  targetScrollableElementID: string;
+  locale: "en" | "ja" | "pt" | "es";
 }
 
-const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
-  targetScrollableElementID,
-}) => {
+const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({ locale }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  const i18n = {
+    en: {
+      ariaLabel: "Go To Top Button",
+      title: "Scroll to top",
+    },
+    ja: {
+      ariaLabel: "トップに戻るボタン",
+      title: "トップにスクロール",
+    },
+    es: {
+      ariaLabel: "Botón Ir Arriba",
+      title: "Desplazarse hacia arriba",
+    },
+    pt: {
+      ariaLabel: "Botão Voltar ao Topo",
+      title: "Rolar para o topo",
+    },
+  };
+
+  const localeTexts = i18n[locale] || i18n.en;
 
   useEffect(() => {
-    scrollContainerRef.current = document.getElementById(
-      targetScrollableElementID,
-    );
-
     const handleScroll = () => {
-      if (scrollContainerRef.current) {
-        const shouldShowButton = scrollContainerRef.current.scrollTop > 200;
-        if (shouldShowButton !== isVisible) {
-          setIsVisible(shouldShowButton);
-        }
+      const shouldShowButton = window.scrollY > 200;
+      if (shouldShowButton !== isVisible) {
+        setIsVisible(shouldShowButton);
       }
     };
 
-    const currentScrollContainer = scrollContainerRef.current;
-    if (currentScrollContainer) {
-      currentScrollContainer.addEventListener("scroll", handleScroll);
-    }
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      if (currentScrollContainer) {
-        currentScrollContainer.removeEventListener("scroll", handleScroll);
-      }
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [isVisible, targetScrollableElementID]);
+  }, [isVisible]);
 
   const scrollToTop = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
     <button
       id="scrollToTopBtn"
       role="button"
-      aria-label="Go To Top Button"
+      aria-label={localeTexts.ariaLabel}
+      title={localeTexts.title}
       className={`border-black dark:border-white fixed bottom-[33%] right-[-5px] mobile-only:right-[-2px] z-50 p-4 mobile-only:p-1 rounded-tl-[50%] rounded-bl-[50%] transition-opacity duration-500 glassbox select-none ${
         isVisible ? "slide-in-right" : "slide-out-right"
       }`}

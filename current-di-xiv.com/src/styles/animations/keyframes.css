@@ -15,12 +15,13 @@
     opacity: 0;
   }
 }
-
+/* 
 .toast {
   animation:
     fade-in 0.5s,
-    fade-out 0.5s 2.5s; /* Adjust timing as needed */
+    fade-out 0.5s 2.5s;
 }
+*/
 
 @keyframes slideInRight {
   from {

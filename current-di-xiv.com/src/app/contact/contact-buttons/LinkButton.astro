@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { linkButtonID, linkButtonHref, linkButtonText, localizedTitleLink } =
-  Astro.props as Props;
+  Astro.props;
 ---
 
 <a
@@ -22,10 +22,14 @@ const { linkButtonID, linkButtonHref, linkButtonText, localizedTitleLink } =
 >
   <div class="flex items-center">
     <div class="inline-block">
-      <slot name="inline-svg" />
+      <slot />
     </div>
     <div class="inline-block">
-      <p class="light ml-1 text-xl mobile-only:text-lg">
+      <p
+        class="light ml-1 text-xl mobile-only:text-lg"
+        aria-label={linkButtonText}
+        title={linkButtonText}
+      >
         {linkButtonText}
       </p>
     </div>

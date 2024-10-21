@@ -8,11 +8,12 @@ import Main from "@/components/layout/main/Main.astro";
 import Footer from "@/components/layout/footer/Footer.astro";
 // Styles
 import "@/styles/global.css";
-/// Colors
+/// Decorations
 import "@/styles/decorations/buttons.css";
 import "@/styles/decorations/color.css";
 import "@/styles/decorations/dark-mode.css";
 import "@/styles/decorations/polkadot-bg.css";
+import "@/styles/decorations/scrollbar.css";
 /// Typography
 import "@/styles/fonts/size.css";
 import "@/styles/fonts/decorations.css";
@@ -21,12 +22,11 @@ import "@/styles/fonts/weight-style.css";
 /// Animations
 import "@/styles/animations/keyframes.css";
 import "@/styles/animations/transitions.css";
-// Navigations
-
-///
+// Notices
+import BraveBanner from "@/components/logic/BraveNotice/BraveBanner.astro";
 interface Props {
   // Base
-  locale: string;
+  locale: "en" | "ja" | "pt" | "es";
   currentPage: string;
   // Meta
   metaDescription: string;
@@ -74,7 +74,7 @@ const {
   localizedCopiedCustomizeString,
   localizedCopiedGlamourerString,
   currentPage,
-} = Astro.props as Props;
+} = Astro.props;
 ---
 
 <!--
@@ -93,7 +93,7 @@ const {
 |   ,.'       |  ,   /             ;   |/   \  ' | '---'          '---"
 '---'          ---`-'              `---'     `--`
 ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
-❈ Fancy meeting you here!
+❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈   Fancy meeting you here!   ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
 ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
  _____                                   _____             _
 /  ___|                                 /  __ \           | |
@@ -144,7 +144,7 @@ const {
   </head>
   <body
     id="body"
-    class="flex flex-col h-[100dvh] overflow-hidden bg-[#efefef] text-[#181a1b] dark:bg-[#181a1b] dark:text-[#efefef]"
+    class="flex flex-col min-h-[100dvh] bg-[#efefef] text-[#181a1b] dark:bg-[#181a1b] dark:text-[#efefef]"
   >
     <Aside
       locale={locale}
@@ -156,10 +156,11 @@ const {
       localizedInquiries={localizedInquiries}
       localizedToU={localizedToU}
     />
-    <div class="flex flex-col flex-grow overflow-hidden z-[1]">
+    <div class="flex flex-col flex-grow z-[1]">
       <Header locale={locale} headerContent={headerContent} />
-      <div class="flex-grow overflow-hidden">
+      <div class="flex-grow overflow-auto">
         <Main
+          locale={locale}
           currentPage={currentPage}
           localizedCopiedCustomizeString={localizedCopiedCustomizeString}
           localizedCopiedGlamourerString={localizedCopiedGlamourerString}
@@ -167,8 +168,9 @@ const {
           <slot />
         </Main>
       </div>
+      <Footer locale={locale} />
     </div>
-    <Footer />
+    <BraveBanner locale={locale} />
   </body>
 </html>
 <script>
@@ -266,4 +268,11 @@ const {
     .addEventListener("change", (e) => {
       location.reload();
     });
+  function isFirefox() {
+    return navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+  }
+
+  if (!isFirefox()) {
+    document.documentElement.classList.add("custom-scrollbar");
+  }
 </script>

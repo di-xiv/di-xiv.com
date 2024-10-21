@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import CopyButton from "@/app/contact/contact-buttons/CopyButton.astro";
 import LinkButton from "@/app/contact/contact-buttons/LinkButton.astro";
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
   localizedLinkTo: string;
 }
 
-const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
+const { localizedClickToCopy, localizedLinkTo } = Astro.props;
 ---
 
 <div id="buttons-container" class="flex justify-center mt-[2%]">
@@ -18,11 +19,13 @@ const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
       copyButtonToastID="email-toast"
       localizedTitleCopy={localizedClickToCopy}
     >
-      <img
-        slot="inline-svg"
+      <Image
+        loading="eager"
         src="/icons/content/contact/email-mail-svgrepo-com.svg"
         class="mobile-only:h-6 h-12 mr-1"
         alt="Email icon"
+        width={48}
+        height={48}
       />
     </CopyButton>
     <LinkButton
@@ -31,11 +34,13 @@ const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
       linkButtonText="Twitter"
       localizedTitleLink={localizedLinkTo}
     >
-      <img
-        slot="inline-svg"
+      <Image
+        loading="eager"
         src="/icons/content/contact/twitter-color-svgrepo-com.svg"
         class="mobile-only:h-6 h-12 mr-1"
         alt="Twitter birb"
+        width={48}
+        height={48}
       />
     </LinkButton>
     <CopyButton
@@ -45,11 +50,13 @@ const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
       copyButtonToastID="discord-toast"
       localizedTitleCopy={localizedClickToCopy}
     >
-      <img
-        slot="inline-svg"
+      <Image
+        loading="eager"
         src="/icons/content/contact/discord-icon-svgrepo-com.svg"
         class="mobile-only:h-6 h-12 mr-1"
         alt="Discord icon"
+        width={48}
+        height={48}
       />
     </CopyButton>
     <LinkButton
@@ -58,24 +65,28 @@ const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
       linkButtonText="Tellonym"
       localizedTitleLink={localizedLinkTo}
     >
-      <img
-        slot="inline-svg"
+      <Image
+        loading="eager"
         src="/icons/content/contact/icons8-tellonym.svg"
         class="mobile-only:h-6 h-12 mr-1"
         alt="Tellonym"
+        width={48}
+        height={48}
       />
     </LinkButton>
     <LinkButton
-      linkButtonHref="https://www.pixiv.net/en/users/98072277"
-      linkButtonID="pixiv-button"
-      linkButtonText="pixiv"
+      linkButtonHref="https://bsky.app/profile/di-xiv.bsky.social"
+      linkButtonID="bsky-button"
+      linkButtonText="Bluesky"
       localizedTitleLink={localizedLinkTo}
     >
-      <img
-        slot="inline-svg"
-        src="/icons/content/contact/fa6-brands--pixiv.svg"
+      <Image
+        loading="eager"
+        src="/icons/content/contact/logos--bluesky.svg"
         class="mobile-only:h-6 h-12 mr-1"
-        alt="Pixiv"
+        alt="Bluesky"
+        width={48}
+        height={48}
       />
     </LinkButton>
     <LinkButton
@@ -84,11 +95,13 @@ const { localizedClickToCopy, localizedLinkTo } = Astro.props as Props;
       linkButtonText="Aethy"
       localizedTitleLink={localizedLinkTo}
     >
-      <img
-        slot="inline-svg"
+      <Image
+        loading="eager"
         src="/icons/content/contact/mastodon-icon-svgrepo-com.svg"
         class="mobile-only:h-6 h-12 mr-1"
         alt="Mastodon icon"
+        width={48}
+        height={48}
       />
     </LinkButton>
   </div>

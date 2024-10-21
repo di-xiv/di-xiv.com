@@ -10,9 +10,13 @@ const SelectorsContainer: React.FC<Props> = ({ children }) => {
         <img
           src="/icons/content/inquiries/fluent--text-description-16-filled.svg"
           className="h-7 w-auto"
+          alt="Description icon"
         />
       </div>
-      <h2 className="inline-block regular text-large mobile-only:text-base">
+      <h2
+        className="inline-block regular text-large mobile-only:text-base"
+        aria-label="Gallery Name"
+      >
         {children}
       </h2>
     </div>

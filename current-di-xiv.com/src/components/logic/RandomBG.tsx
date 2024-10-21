@@ -11,7 +11,6 @@ const imageUrlsBodyRefBG = [
   "/backgrounds/8.webp",
   "/backgrounds/9.webp",
   "/backgrounds/10.webp",
-  "/backgrounds/11.webp",
 ];
 
 interface RandomMainBGProps {

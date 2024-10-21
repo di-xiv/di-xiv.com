@@ -1,0 +1,58 @@
+---
+import BasicReferenceGalleryEngine from "@/app/charrefs/gallery-engines/BasicReferenceGalleryEngine.astro";
+import BasicHorizontalGalleryEngine from "@/app/charrefs/gallery-engines/BasicHorizontalGalleryEngine.astro";
+//
+interface Props {
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedAttireArtworks: string;
+  localizedDownload: string;
+}
+const {
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedAttireArtworks,
+  localizedDownload,
+} = Astro.props;
+
+const AttireGalleryURL = [
+  { apiURL: "Attire%20One", attireName: "One" },
+  { apiURL: "Attire%20Three", attireName: "Three" },
+] as const;
+---
+
+<div class="my-4">
+  <div class="grid not-mobile:grid-cols-2 mobile-only:grid-cols-1 gap-2">
+    {
+      AttireGalleryURL.map((item) => (
+        <details
+          id={item.attireName}
+          class="mobile-only:p-1 rounded shadowless-glassbox  p-2"
+          open={true}
+          title={item.attireName}
+        >
+          <summary class="light text-lg" aria-label={item.attireName}>
+            ❈ 👘 {item.attireName}
+          </summary>
+          <BasicReferenceGalleryEngine
+            localizedClickToZoom={localizedClickToZoom}
+            localizedDismiss={localizedDismiss}
+            localizedDownload={localizedDownload}
+            apiURL={`https://api.di-xiv.com/references?include_reference_gallery_name=${item.apiURL}`}
+          />
+        </details>
+      ))
+    }
+  </div>
+  <details class="mobile-only:p-1 rounded shadowless-glassbox p-2 mt-[1%]">
+    <summary class="light text-lg" aria-label={localizedAttireArtworks}>
+      ❈ 👘 {localizedAttireArtworks} 🔞
+    </summary>
+    <BasicHorizontalGalleryEngine
+      apiURL="https://api.di-xiv.com/gallery?include_tag_id=24"
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+  </details>
+</div>

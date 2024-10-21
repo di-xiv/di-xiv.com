@@ -1,0 +1,79 @@
+---
+interface Props {
+  locale: "en" | "es" | "ja" | "pt";
+}
+
+const { locale } = Astro.props;
+
+const messages = {
+  en: "You're using Brave browser. Some styles might not render properly.",
+  es: "Estás usando el navegador Brave. Algunos estilos podrían no renderizarse correctamente.",
+  ja: "Braveブラウザをご使用中です。一部のスタイルが正しく表示されない可能性があります。",
+  pt: "Você está usando o navegador Brave. Alguns estilos podem não ser renderizados corretamente.",
+};
+
+const closeText = {
+  en: "Close",
+  es: "Cerrar",
+  ja: "閉じる",
+  pt: "Fechar",
+};
+---
+
+<div
+  id="brave-banner"
+  class="hidden fixed bottom-0 left-0 right-0 bg-yellow-200 text-black p-4 text-center z-50"
+>
+  <p class="inline-block mr-4 regular">
+    {messages[locale]}
+  </p>
+  <button
+    id="close-brave-banner"
+    class="absolute right-4 top-1/2 transform -translate-y-1/2 underline light"
+  >
+    {closeText[locale]}
+  </button>
+</div>
+
+<script>
+  function handleBraveBanner() {
+    const banner = document.getElementById("brave-banner");
+    const closeButton = document.getElementById("close-brave-banner");
+
+    function isBrave() {
+      // @ts-ignore
+      return navigator.brave && typeof navigator.brave.isBrave === "function";
+    }
+
+    function shouldShowBanner() {
+      if (!isBrave()) return false;
+      return sessionStorage.getItem("braveBannerClosed") !== "true";
+    }
+
+    function showBanner() {
+      if (banner) {
+        banner.classList.remove("hidden");
+      }
+    }
+
+    function hideBanner() {
+      if (banner) {
+        banner.classList.add("hidden");
+        sessionStorage.setItem("braveBannerClosed", "true");
+      }
+    }
+
+    if (banner && closeButton) {
+      closeButton.addEventListener("click", hideBanner);
+
+      if (shouldShowBanner()) {
+        showBanner();
+      }
+    } else {
+      console.error("Brave banner elements not found");
+    }
+  }
+
+  // Run the script after the page has loaded
+  window.addEventListener("load", handleBraveBanner);
+</script>

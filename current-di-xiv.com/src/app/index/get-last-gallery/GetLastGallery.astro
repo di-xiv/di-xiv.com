@@ -1,0 +1,32 @@
+---
+import LastGallery from "@/app/index/get-last-gallery/GetLastGallery";
+interface Props {
+  localizedLatestComm: string;
+}
+const { localizedLatestComm } = Astro.props;
+---
+
+<details class="glassbox p-2 rounded-md w-full">
+  <summary class="flex items-center justify-center">
+    <div class="dark:invert mr-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-9 h-auto dark:invert"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M13.5 8H12v5l4.28 2.54l.72-1.21l-3.5-2.08zM13 3a9 9 0 0 0-9 9H1l3.96 4.03L9 12H6a7 7 0 0 1 7-7a7 7 0 0 1 7 7a7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.9 8.9 0 0 0 13 21a9 9 0 0 0 9-9a9 9 0 0 0-9-9"
+        ></path>
+      </svg>
+    </div>
+    <p
+      class="regular text-large mobile-only:text-base"
+      title={localizedLatestComm}
+      aria-label={localizedLatestComm}
+    >
+      {localizedLatestComm}
+    </p>
+  </summary>
+  <LastGallery client:load />
+</details>

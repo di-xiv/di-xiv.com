@@ -33,7 +33,9 @@ export default defineConfig({
       ],
     }),
   ],
-
+  image: {
+    domains: ["refs.di-xiv.com", "assets.di-xiv.com"],
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es", "ja", "pt"],
