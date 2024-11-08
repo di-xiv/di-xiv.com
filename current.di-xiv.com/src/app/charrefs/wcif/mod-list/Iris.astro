@@ -1,0 +1,40 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedIris = {
+  en: "Iris",
+  ja: "虹彩",
+  es: "Iris",
+  pt: "Íris",
+};
+const iris: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://ko-fi.com/s/a85d72cb4d",
+    title: "nyiam: Purrfect Eyesight💲",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }],
+  },
+];
+---
+
+<div id="iris">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/game-icons--ice-iris.svg"
+    title={localizedIris[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={iris} locale={locale} />
+  </ModSectionWrapper>
+</div>

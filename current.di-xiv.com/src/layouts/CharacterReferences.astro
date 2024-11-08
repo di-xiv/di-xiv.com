@@ -1,0 +1,155 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import ArtworksForArtists from "@/app/charrefs/artist-notice/ArtworksForArtists";
+//
+import DesignReferences from "@/app/charrefs/design-references/DesignReferences.astro";
+import ColorPallette from "@/app/charrefs/color-pallette/ColorPallette.astro";
+import WCIF from "@/app/charrefs/wcif/WCIFContent.astro";
+import InGameReferences from "@/app/charrefs/ingame-references/InGameReferences.astro";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedInquiries: string;
+  headerContent: string;
+  // Character References
+  localizedDesignReferences: string;
+  localizedAttireArtworks: string;
+  localizedAttires: string;
+  localizedGPoseShots: string;
+  localizedInGameShots: string;
+  localizedHairstyles: string;
+  localizedCharacterSheetArtworks: string;
+  localizedColorPallete: string;
+  localizedWCIF: string;
+  localizedDownloadBodyRefs: string;
+  localizedLoading: string;
+  localizedSpecialReferenceSummary: string;
+  localizedDismiss: string;
+  localizedClickToZoom: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  localizedInquiries,
+  localizedContact,
+  localizedCommWorks,
+  localizedCharRefs,
+  headerContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedDesignReferences,
+  localizedAttires,
+  localizedGPoseShots,
+  localizedInGameShots,
+  localizedHairstyles,
+  localizedAttireArtworks,
+  localizedColorPallete,
+  localizedWCIF,
+  localizedDownloadBodyRefs,
+  localizedLoading,
+  localizedSpecialReferenceSummary,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+---
+
+<Master
+  locale={locale}
+  currentPage="character-references"
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedInquiries={localizedInquiries}
+  headerContent={`${headerContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  <div class="grid grid-cols-1 gap-y-4 mobile-only:my-[5%] px-1">
+    <ArtworksForArtists
+      client:load
+      localizedLoading={localizedLoading}
+      localizedSpecialReferenceSummary={localizedSpecialReferenceSummary}
+    />
+    <DesignReferences
+      locale={locale}
+      localizedDesignReferences={localizedDesignReferences}
+      localizedDownloadBodyRefs={localizedDownloadBodyRefs}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+    />
+    <ColorPallette
+      locale={locale}
+      localizedColorPallete={localizedColorPallete}
+    />
+    <InGameReferences
+      locale={locale}
+      localizedAttires={localizedAttires}
+      localizedGPoseShots={localizedGPoseShots}
+      localizedInGameShots={localizedInGameShots}
+      localizedAttireArtworks={localizedAttireArtworks}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+      localizedHairstyles={localizedHairstyles}
+    />
+    <WCIF locale={locale} localizedWCIF={localizedWCIF} />
+  </div>
+</Master>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const openSections = urlParams.get("page")?.split("&") || [];
+
+    openSections.forEach((sectionId) => {
+      const detailsElement = document.getElementById(sectionId);
+      if (detailsElement instanceof HTMLDetailsElement) {
+        detailsElement.open = true;
+      }
+    });
+
+    if (openSections.length > 0) {
+      const firstSection = document.getElementById(openSections[0]);
+      if (firstSection) {
+        firstSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    const artworksContainer = document.getElementById(
+      "artworks-for-reference-container",
+    );
+    if (artworksContainer instanceof HTMLDetailsElement) {
+      const reference = urlParams.get("reference");
+      if (reference && reference.length > 0) {
+        artworksContainer.open = true;
+        artworksContainer.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+</script>

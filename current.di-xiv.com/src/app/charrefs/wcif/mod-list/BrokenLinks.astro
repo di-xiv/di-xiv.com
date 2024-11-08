@@ -1,0 +1,31 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import { TitleWithLeadingIcon } from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedBrokenLinks = {
+  en: "Broken Links",
+  ja: "リンク切れ",
+  es: "Enlaces Rotos",
+  pt: "Links Quebrados",
+};
+const localizedBrokenLinksContent = {
+  en: "Feel free to contact me so I can fix them or, if warranted, provide the original file.",
+  ja: "遠慮なくご連絡いただければ、修正するか、保証があれば元のファイルを提供します。",
+  es: "No dudes en contactar conmigo para que los pueda arreglar o, si procede, facilitarte el archivo original.",
+  pt: "Sinta-se à vontade para entrar em contato comigo para que eu possa corrigi-los ou, se necessário, fornecer o arquivo original.",
+};
+---
+
+<div id="broken-links">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/uil--link-broken.svg"
+    title={localizedBrokenLinks[locale]}
+  />
+  <ModSectionWrapper>
+    <p>{localizedBrokenLinksContent[locale]}</p>
+  </ModSectionWrapper>
+</div>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  localizedTitle: string;
+  id: string;
+}
+
+const { localizedTitle, id } = Astro.props;
+---
+
+<div
+  id={id}
+  class="gap-2 border-l border-solid dark:border-[#efefef] border-[#181a1b] p-2"
+  title={localizedTitle}
+  aria-label={localizedTitle}
+>
+  <slot />
+</div>

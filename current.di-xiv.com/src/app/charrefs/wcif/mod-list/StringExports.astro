@@ -1,0 +1,43 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import { TitleWithLeadingIcon } from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedStringExports = {
+  en: "String Exports",
+  ja: "文字列の輸出",
+  es: "Strings Exportados",
+  pt: "Exportação de Strings",
+};
+---
+
+<div id="string-exports">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/ri--text-snippet.svg"
+    title={localizedStringExports[locale]}
+  />
+
+  <ModSectionWrapper>
+    <div class="flex items-center">
+      <p>❈&nbsp;</p>
+      <a
+        id="customize-string"
+        role="button"
+        class="cursor-pointer"
+        title="Customize+ String"><p>Customize+ String (Ebyssia) ⎘</p></a
+      >
+    </div>
+    <div class="flex items-center">
+      <p>❈&nbsp;</p>
+      <a
+        id="glamourer-string"
+        role="button"
+        class="cursor-pointer"
+        title="Glamourer String"><p>Glamourer String ⎘</p></a
+      >
+    </div>
+  </ModSectionWrapper>
+</div>

@@ -1,0 +1,47 @@
+---
+import {
+  SimpleInlineAnchor as A,
+  ManualUpdate as ManUpd,
+  Priority as Prio,
+  Compatible as Compat,
+  Incompatible as Incompat,
+  IVCSSkelomae as IVCSSke,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+
+interface Props {
+  items: Array<{
+    href: string;
+    title: string;
+    tags: Tag[];
+  }>;
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { items, locale } = Astro.props;
+---
+
+{
+  items.map((item) => (
+    <div class="flex flex-wrap items-center select-none">
+      <p>❈&nbsp;</p>
+      <A id={item.title} h={item.href}>
+        <p>{item.title}</p>
+      </A>
+      {item.tags.map((tag) => {
+        if (tag.type === "ManUpd") {
+          return <ManUpd lang={locale} client:load />;
+        } else if (tag.type === "Prio") {
+          return <Prio lang={locale} pr={tag.pr} client:load />;
+        } else if (tag.type === "Compat") {
+          return <Compat lang={locale} client:load />;
+        } else if (tag.type === "Incompat") {
+          return <Incompat lang={locale} client:load />;
+        } else if (tag.type === "IVCSSke") {
+          return <IVCSSke lang={locale} client:load />;
+        }
+        return null;
+      })}
+    </div>
+  ))
+}

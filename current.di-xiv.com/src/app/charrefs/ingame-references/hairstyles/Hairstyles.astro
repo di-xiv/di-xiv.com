@@ -1,0 +1,80 @@
+---
+import A from "@/components/text/SimpleInlineAnchor";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+import HairstylesGalleriesWrapper from "./HairstylesGalleriesWrapper.astro";
+import { Image } from "astro:assets";
+import hairstyleIcon from "/public/icons/content/charrefs/woman-hair-hairstyle-svgrepo-com.svg";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedHairstyles: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  localizedHairstyles,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+
+const downloadText = {
+  en: "Download the Mare .mcdf files for all hairstyles 🔞",
+  ja: "すべての髪型用の Mare .mcdf ファイルをダウンロードする 🔞",
+  pt: "Baixe os arquivos .mcdf do Mare para todos os penteados 🔞",
+  es: "Descarga los archivos .mcdf de Mare para todos los peinados 🔞",
+};
+---
+
+<details
+  id="hairstyles"
+  class="mobile-only:p-2 rounded-md shadowless-glassbox p-3"
+  title={localizedHairstyles}
+>
+  <summary class="flex items-center">
+    <div class="relative">
+      <Image
+        loading="eager"
+        src={hairstyleIcon}
+        class="h-11 mobile-only:h-6 w-auto mr-4"
+        alt={`${localizedHairstyles} icon`}
+      />
+    </div>
+    <h3
+      class="text-large w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedHairstyles}
+      title={localizedHairstyles}
+    >
+      {localizedHairstyles}
+    </h3>
+  </summary>
+  <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+    <div class="flex items-center">
+      <A
+        id="download-all-references"
+        className="flex items-center"
+        h="https://drive.proton.me/urls/AKXXDWQ8JR#XL6N2PpV3LGx"
+      >
+        <h3
+          class="light inline-block w-1150:text-sm mobile-only:text-xs"
+          aria-label={downloadText[locale]}
+          title={downloadText[locale]}
+        >
+          {locale === "en" ? <>{downloadText[locale]}</> : downloadText[locale]}
+        </h3>
+      </A>
+    </div>
+  </StyledBlockquote>
+  <div class="grid grid-cols-1 gap-y-2">
+    <HairstylesGalleriesWrapper
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+  </div>
+</details>

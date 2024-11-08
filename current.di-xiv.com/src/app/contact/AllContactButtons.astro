@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import CopyButton from "@/app/contact/contact-buttons/CopyButton.astro";
+import LinkButton from "@/app/contact/contact-buttons/LinkButton.astro";
+interface Props {
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+}
+
+const { localizedClickToCopy, localizedLinkTo } = Astro.props;
+---
+
+<div id="buttons-container" class="flex justify-center mt-[2%]">
+  <div class="grid grid-cols-3 mobile-only:grid-cols-2 gap-2">
+    <CopyButton
+      copyButtonContent="hello@di-xiv.com"
+      copyButtonID="email-button"
+      copyButtonText="Email"
+      copyButtonToastID="email-toast"
+      localizedTitleCopy={localizedClickToCopy}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/email-mail-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Email icon"
+        width={48}
+        height={48}
+      />
+    </CopyButton>
+    <LinkButton
+      linkButtonHref="https://x.com/xiv_di"
+      linkButtonID="twitter-button"
+      linkButtonText="Twitter"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/twitter-color-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Twitter birb"
+        width={48}
+        height={48}
+      />
+    </LinkButton>
+    <CopyButton
+      copyButtonContent="di_xiv"
+      copyButtonID="discord-button"
+      copyButtonText="Discord"
+      copyButtonToastID="discord-toast"
+      localizedTitleCopy={localizedClickToCopy}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/discord-icon-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Discord icon"
+        width={48}
+        height={48}
+      />
+    </CopyButton>
+    <LinkButton
+      linkButtonHref="https://tellonym.me/di_xiv"
+      linkButtonID="tellonym-button"
+      linkButtonText="Tellonym"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/icons8-tellonym.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Tellonym"
+        width={48}
+        height={48}
+      />
+    </LinkButton>
+    <LinkButton
+      linkButtonHref="https://bsky.app/profile/di-xiv.com"
+      linkButtonID="bsky-button"
+      linkButtonText="Bluesky"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/logos--bluesky.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Bluesky"
+        width={48}
+        height={48}
+      />
+    </LinkButton>
+    <LinkButton
+      linkButtonHref="https://aethy.com/@di_xiv"
+      linkButtonID="aethy-button"
+      linkButtonText="Aethy"
+      localizedTitleLink={localizedLinkTo}
+    >
+      <Image
+        loading="eager"
+        src="/icons/content/contact/mastodon-icon-svgrepo-com.svg"
+        class="mobile-only:h-6 h-12 mr-1"
+        alt="Mastodon icon"
+        width={48}
+        height={48}
+      />
+    </LinkButton>
+  </div>
+</div>

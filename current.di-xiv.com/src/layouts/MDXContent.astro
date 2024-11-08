@@ -1,0 +1,200 @@
+---
+import { Image } from "astro:assets";
+import Master from "@/layouts/Master.astro";
+//
+import DivisorLine from "@/components/navigation/DivisorLine.astro";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote.tsx";
+// Contact
+import AllContactButtons from "@/app/contact/AllContactButtons.astro";
+import SimpleTopRightToast from "@/app/contact/contact-buttons/SimpleTopRightToast.astro";
+// MDX
+import ScrollToAnchor from "@/components/text/mdx/ScrollToAnchor";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedInquiries: string;
+  // Header
+  localizedHeaderContent: string;
+  // MDX Content
+  currentMDXPage: string;
+  localizedErrorMessage: string;
+  /// Contact Buttons
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+  localizedDiscordToast: string;
+  localizedEmailToast: string;
+}
+const {
+  locale,
+  localizedInquiries,
+  localizedContact,
+  localizedCommWorks,
+  localizedCharRefs,
+  localizedHeaderContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  currentMDXPage,
+  localizedErrorMessage,
+  localizedClickToCopy,
+  localizedLinkTo,
+  localizedDiscordToast,
+  localizedEmailToast,
+} = Astro.props;
+
+let LocalizedMDXContent;
+try {
+  LocalizedMDXContent = await import(
+    `../prose/${currentMDXPage}/${currentMDXPage}.${locale}.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<style is:global>
+  body .mdx h2,
+  h3 {
+    font-family: "regular", serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+  body .mdx p,
+  ul {
+    font-family: "light", serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+  body .mdx a {
+    text-decoration: underline;
+  }
+  body .mdx a:hover {
+    color: #1e7cff;
+  }
+</style>
+<Master
+  locale={locale}
+  currentPage="mdx-content"
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedInquiries={localizedInquiries}
+  headerContent={`${localizedHeaderContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  {
+    currentMDXPage === "Contact" && (
+      <div
+        id="toasts-container"
+        class="fixed mobile-only:top-[2%] right-[5%] mobile-only:right-[2%] z-20 flex flex-col items-end gap-2"
+      >
+        <SimpleTopRightToast
+          localizedToast={localizedDiscordToast}
+          toastID="discord-toast"
+        >
+          <Image
+            loading="eager"
+            height={36}
+            width={36}
+            src="/icons/content/contact/discord-icon-svgrepo-com.svg"
+            class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+            alt={`${localizedDiscordToast} icon`}
+          />
+        </SimpleTopRightToast>
+        <SimpleTopRightToast
+          localizedToast={localizedEmailToast}
+          toastID="email-toast"
+        >
+          <Image
+            loading="eager"
+            height={36}
+            width={36}
+            src="/icons/content/contact/email-mail-svgrepo-com.svg"
+            class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+            alt={`${localizedEmailToast} icon`}
+          />
+        </SimpleTopRightToast>
+      </div>
+    )
+  }
+  {
+    currentMDXPage === "Inquiries" && (
+      <>
+        {locale !== "en" && (
+          <StyledBlockquote blockquoteType={BlockquoteType.Language}>
+            <p class="light">
+              {locale === "es" && (
+                <>Los avisos legales están disponibles solo en inglés.</>
+              )}
+              {locale === "ja" && <>法的通知は英語でのみ利用可能です。</>}
+              {locale === "pt" && (
+                <>Os avisos legais estão disponíveis apenas em inglês.</>
+              )}
+            </p>
+          </StyledBlockquote>
+        )}
+      </>
+    )
+  }
+
+  <div class="shadowless-glassbox rounded-lg not-mobile:p-1">
+    {
+      currentMDXPage === "Contact" && (
+        <>
+          <div class="light py-3">
+            <AllContactButtons
+              localizedClickToCopy={localizedClickToCopy}
+              localizedLinkTo={localizedLinkTo}
+            />
+          </div>
+          <DivisorLine />
+        </>
+      )
+    }
+    <div class="flex justify-center items-center">
+      <div class="w-[75%] mobile-only:w-[95%] mobile-only:my-[5%]">
+        {
+          LocalizedMDXContent ? (
+            <div class="flex justify-center flex-grow">
+              <div class="flex-1 mdx p-[2%]">
+                <LocalizedMDXContent.default />
+              </div>
+            </div>
+          ) : (
+            <div class="flex justify-center">
+              <p class="regular text-large">{localizedErrorMessage}</p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <ScrollToAnchor client:load />
+</Master>

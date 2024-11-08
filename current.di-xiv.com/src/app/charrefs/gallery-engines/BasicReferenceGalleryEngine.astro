@@ -1,0 +1,136 @@
+---
+interface Props {
+  apiURL: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string; // Add this prop
+}
+
+interface Image {
+  referenceimage_id: number;
+  reference_imageurl: string;
+}
+
+interface Gallery {
+  reference_gallery_name: string;
+  reference_images: Image[];
+}
+
+const { apiURL, localizedClickToZoom, localizedDismiss, localizedDownload } =
+  Astro.props;
+
+let referenceGallery: Gallery | null = null;
+let loading: boolean = true;
+let error: string | null = null;
+
+async function fetchReferenceGallery(): Promise<void> {
+  try {
+    const response = await fetch(apiURL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const galleries: Gallery[] = await response.json();
+    referenceGallery = galleries.length > 0 ? galleries[0] : null;
+  } catch (err) {
+    console.error("Failed to fetch reference gallery data:", err);
+    error = err instanceof Error ? err.message : "Unknown error";
+  } finally {
+    loading = false;
+  }
+}
+
+await fetchReferenceGallery();
+---
+
+<article class="flex overflow-x-auto p-1 h-[95%] mb-3 overflow-hidden">
+  {
+    referenceGallery && (referenceGallery as Gallery).reference_images ? (
+      (referenceGallery as Gallery).reference_images.map((image: Image) => {
+        const randomSuffix = Math.random().toString(36).substr(2, 9);
+        const modalId = `${image.referenceimage_id}-modal-${randomSuffix}`;
+        const zoomId = `${image.referenceimage_id}-modal-zoom-${randomSuffix}`;
+
+        return (
+          <div
+            id={image.referenceimage_id.toString()}
+            class="relative group flex-shrink-0 mr-1 h-[85vh] flex items-center justify-center"
+            style={{ width: "auto", height: "75vh" }}
+          >
+            <img
+              src={image.reference_imageurl.toString()}
+              loading="lazy"
+              class="rounded-md"
+              alt={`Reference ${referenceGallery?.reference_gallery_name ?? ""}`}
+              style={{ maxHeight: "100%", width: "auto", objectFit: "contain" }}
+            />
+            <div>
+              <div
+                id={zoomId}
+                title={localizedClickToZoom}
+                class="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 hover:text-[#1e7cff] cursor-pointer button-glassbox"
+                onclick={`document.getElementById('${modalId}').classList.toggle('hidden')`}
+              >
+                <div class="dark:invert">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            {/* Add download button */}
+            <div class="glassbox absolute top-2 left-2 p-2 rounded-sm cursor-pointer button-glassbox items-center justify-center z-40 hover:text-[#1e7cff]">
+              <a
+                href={image.reference_imageurl}
+                download={`reference-${image.referenceimage_id}`}
+                title={`${localizedDownload} ➤ Reference ${referenceGallery?.reference_gallery_name ?? ""}`}
+              >
+                <div class="dark:invert">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
+                    viewBox="0 0 24 24"
+                  >
+                    <g fill="none">
+                      <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                      <path
+                        fill="currentColor"
+                        d="M8 5v2H5v13h14V7h-3V5h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm4-3a1 1 0 0 1 1 1v10.828L14.828 12a1 1 0 1 1 1.415 1.414l-3.36 3.359a1.25 1.25 0 0 1-1.767 0l-3.359-3.359A1 1 0 1 1 9.172 12L11 13.828V3a1 1 0 0 1 1-1"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div
+              id={modalId}
+              title={localizedDismiss}
+              class="hidden fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-50"
+              onclick="this.classList.add('hidden')"
+            >
+              <img
+                src={image.reference_imageurl}
+                class="rounded-md cursor-pointer"
+                loading="lazy"
+                alt={`Reference ${referenceGallery?.reference_gallery_name ?? ""}`}
+                style={{ maxHeight: "90vh", width: "auto" }}
+              />
+            </div>
+          </div>
+        );
+      })
+    ) : (
+      <p class="flex justify-center">No data available.</p>
+    )
+  }
+</article>
+
+{loading && <p class="flex justify-center">Loading...</p>}
+
+{error && <p class="flex justify-center">Error loading data: {error}</p>}

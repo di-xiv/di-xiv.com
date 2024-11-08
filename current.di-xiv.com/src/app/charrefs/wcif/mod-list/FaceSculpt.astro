@@ -1,0 +1,40 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedFaceSculpt = {
+  en: "Face Sculpt",
+  ja: "顔の造形",
+  es: "Esculpido Facial",
+  pt: "Esculpir Rosto",
+};
+const facesculpt: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://payhip.com/b/pPixC",
+    title: "Vivi: Emi💲",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }],
+  },
+];
+---
+
+<div id="face-sculpt">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/moai-2-svgrepo-com.svg"
+    title={localizedFaceSculpt[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={facesculpt} locale={locale} />
+  </ModSectionWrapper>
+</div>

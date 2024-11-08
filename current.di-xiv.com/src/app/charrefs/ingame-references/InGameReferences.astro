@@ -1,0 +1,153 @@
+---
+import { Image } from "astro:assets";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote.tsx";
+import A from "@/components/text/SimpleInlineAnchor";
+import Attires from "@/app/charrefs/ingame-references/attires/Attires.astro";
+import GPoseShots from "@/app/charrefs/ingame-references/gpose-shots/GPoseShots.astro";
+import Hairstyles from "@/app/charrefs/ingame-references/hairstyles/Hairstyles.astro";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedInGameShots: string;
+  localizedAttires: string;
+  localizedGPoseShots: string;
+  localizedHairstyles: string;
+  localizedAttireArtworks: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  localizedInGameShots,
+  localizedGPoseShots,
+  localizedAttires,
+  localizedAttireArtworks,
+  localizedHairstyles,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+
+const localeStrings = {
+  en: {
+    downloadReferences: "Download the ingame references",
+    lastUpdated: "In-game screenshots were last updated in september 2023",
+    mcdfExplanation:
+      ".mcdf exports are some missing essential mods. Last updated in November 2024",
+  },
+  ja: {
+    downloadReferences:
+      "ゲーム内のスクリーンショットは2023年9月に最後に更新されました",
+    lastUpdated: "最終更新日: 2023 年 9 月",
+    mcdfExplanation:
+      ".mcdfエクスポートにはいくつかの重要なモッドが欠けています。最終更新は2024年11月です",
+  },
+  pt: {
+    downloadReferences: "Faça o download das referências no jogo",
+    lastUpdated:
+      "As capturas de tela do jogo foram atualizadas pela última vez em setembro de 2023",
+    mcdfExplanation:
+      "As exportações .mcdf estão sem alguns mods essenciais. Última atualização em novembro de 2024",
+  },
+  es: {
+    downloadReferences: "Descarga las referencias del juego",
+    lastUpdated:
+      "Las capturas de pantalla del juego se actualizaron por última vez en septiembre de 2023",
+    mcdfExplanation:
+      "A los archivos exportados .mdcf les falta algunos mods esenciales. Última actualización en noviembre de 2024",
+  },
+};
+
+const strings = localeStrings[locale];
+---
+
+<details
+  id="ingame-references"
+  class="mobile-only:p-2 rounded-lg shadowless-glassbox p-3"
+  title={localizedInGameShots}
+>
+  <summary class="flex items-center">
+    <div class="">
+      <Image
+        loading="eager"
+        width={48}
+        height={48}
+        src="/icons/content/charrefs/game-icons--floating-crystal.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-4"
+        alt=`${localizedInGameShots} icon`
+      />
+    </div>
+    <h2
+      class="text-extra w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedInGameShots}
+      title={localizedInGameShots}
+    >
+      {localizedInGameShots}
+    </h2>
+  </summary>
+  <div class="flex items-center">
+    <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+      <A
+        id="download-all-references"
+        className="flex items-center"
+        h="https://drive.proton.me/urls/0JBDR7ANEG#RQ1jVCyoLt4m"
+      >
+        <h3
+          class="light inline-block w-1150:text-sm mobile-only:text-xs"
+          aria-label={strings.downloadReferences}
+          title={strings.downloadReferences}
+        >
+          {strings.downloadReferences}
+        </h3>
+      </A>
+    </StyledBlockquote>
+  </div>
+  <div class="flex items-center">
+    <StyledBlockquote blockquoteType={BlockquoteType.Danger}>
+      <p
+        class="light mobile-only:text-sm"
+        aria-label={strings.lastUpdated}
+        title={strings.lastUpdated}
+      >
+        {strings.lastUpdated}
+      </p>
+    </StyledBlockquote>
+    <StyledBlockquote blockquoteType={BlockquoteType.Important}>
+      <p
+        class="light mobile-only:text-sm"
+        aria-label={strings.mcdfExplanation}
+        title={strings.mcdfExplanation}
+      >
+        {strings.mcdfExplanation}
+      </p>
+    </StyledBlockquote>
+  </div>
+  <div class="grid grid-cols-1 gap-y-2 mt-[2%]">
+    <GPoseShots
+      locale={locale}
+      localizedGPoseShots={localizedGPoseShots}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+    <Hairstyles
+      locale={locale}
+      localizedHairstyles={localizedHairstyles}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+    <Attires
+      locale={locale}
+      localizedAttires={localizedAttires}
+      localizedAttireArtworks={localizedAttireArtworks}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+  </div>
+</details>

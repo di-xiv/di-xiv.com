@@ -1,0 +1,61 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedHairstyles = {
+  en: "Hairstyles",
+  ja: "髪型",
+  es: "Peinados",
+  pt: "Penteados",
+};
+const localizedAny = {
+  en: "Any",
+  ja: "誰でも",
+  es: "Cualquiera",
+  pt: "Qualquer",
+};
+const hairstyles: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://www.xivmodarchive.com/modid/34957",
+    title: "Miette: Twinkle Twinkle",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/35779",
+    title: "Miette: Thorns",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/87668",
+    title: "Imeris: Ebyssia",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+  },
+  {
+    href: "https://discord.gg/josukimods",
+    title: "Josuki: Fifteen",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+  },
+];
+---
+
+<div id="hairstyles">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/chinese-woman-hairstyle-svgrepo-com.svg"
+    title={localizedHairstyles[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={hairstyles} locale={locale} />
+  </ModSectionWrapper>
+</div>

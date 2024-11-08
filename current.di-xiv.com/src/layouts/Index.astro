@@ -1,0 +1,66 @@
+---
+import Master from "@/layouts/Master.astro";
+// Index content
+import GetLastGallery from "@/app/index/get-last-gallery/GetLastGallery.astro";
+import HelloThere from "@/app/index/messages/HelloThere.astro";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedInquiries: string;
+  // Index
+  localizedLatestComm: string;
+}
+const {
+  locale,
+  localizedInquiries,
+  localizedContact,
+  localizedCommWorks,
+  localizedCharRefs,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedLatestComm,
+} = Astro.props;
+---
+
+<Master
+  locale={locale}
+  currentPage="index"
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedInquiries={localizedInquiries}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerContent="Di-XIV"
+>
+  <div id="index" class="flex justify-center w-full">
+    <div class="grid grid-cols-1 gap-y-4 w-full px-4">
+      <HelloThere locale={locale} />
+      <GetLastGallery localizedLatestComm={localizedLatestComm} />
+    </div>
+  </div>
+</Master>

@@ -1,0 +1,59 @@
+---
+import CopyStringToast from "@/app/charrefs/wcif/CopyStringToast.astro";
+import { Image } from "astro:assets";
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { locale } = Astro.props;
+const localizedCopiedCustomizeString = {
+  en: "Customize+ String copied to clipboard",
+  ja: "Customize+ クリップボードにコピーされた文字列",
+  es: "String de Customize+ copiado al portapapeles",
+  pt: "Customize+ String copiado para a área de transferência",
+};
+const localizedCopiedGlamourerString = {
+  en: "Glamourer String copied to clipboard",
+  ja: "Glamourer 文字列がクリップボードにコピーされました",
+  es: "String de Glamourer copiado al portapapeles",
+  pt: "Glamourer String copiado para a área de transferência",
+};
+---
+
+<div
+  id="toasts-container"
+  class="fixed top-[5%] right-[5%] z-20 grid grid-cols-1 gap-2"
+>
+  <CopyStringToast
+    localizedToast={localizedCopiedCustomizeString[locale]}
+    toastID="customize-toast"
+    stringToCopy="H4sIAAAAAAAACs2ZW2+bMBTHX/ZBKl5XIt+4Pu7y0IdN09Zp3V4sA07jkhoNSNWqynefjQElWZJ2k7DJC7ZyDD/+5/jYPrx59j6ze+6lXiHoo3i48C8+Zk9NI5h36b2vOWtFJT+wVlsggIgPoQ/wNQIpiFKMFwREIQLhWwBTANSQT1UhloIXx4ckKYgXSRRjgPA45LsUvzf8qlDmS17gIAehT7Kc+CSOc5/FPFOtIsIAA84CrkZcNT9q0fIvddXyvOVq5JKtG67+kHl1K0Vb7dxL2b+rJG+89Nm7o2XVCN26rpls1t3b6e6Nl4IFuPR+9tdf3XV76X2t2peNvuVsLeTtaJOYX2859pQ9XMAk2Kohd7ThWUWZUxYADQprBGV0PTGLel4cDhwx7hkQSHYhavcQxeRKDH4IyUDSm+5R1I4pNgW3EBWvo6hn4BFuT4tzENakOO2PzLUSBsKpEpKuStZanB+dpUpfAECMhgSuOzDe5bErikZAKIbjimJ6xkutvRkTHI8TRVC7JVipzYjFLErCsxi1Y4xyDlqUs1Bi02zmoIXBcK2GZCWbgRo9hms1qqc5iGEo6jkkLnv7DXKWwpoYJxOXcyXKOeigk5Z7JQyFYy26lOWcQucK5w4xEI6V4I90BSAMaalPKNnk1Qz1qH4j3rVMiQmGfYiye0GXVvwypm/dMoIk4TFJpq54qdcP0CCJbhlJArQnyfRlpjDuIXSjYwi7c5p4oDm938jpTybqNDac0YbTWZz0CGW1uWXSRsmvRyBokAHsI7yggv8qhtHK/ycKSTmrz25yEBzvD4bABij6m8THi+AABcHXOaXXo8pXQurl1V5YhHCofyJyQJFbo1C11yFjwAOIwhoEREMpmBxCLCfPnpGu53QYmERjDse7EXpioupgQ2Yl6kLUvMSJECUL85jO0nge4f8KUfVlx5JfAqBmlQZV3ypUiG63fwBDzXqysBoAAA=="
+    triggerButtonID="customize-string"
+  >
+    <div>
+      <Image
+        loading="eager"
+        width={44}
+        height={44}
+        src="/icons/content/wcif/customize-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+        alt={`${localizedCopiedCustomizeString} icon`}
+      />
+    </div>
+  </CopyStringToast>
+  <CopyStringToast
+    localizedToast={localizedCopiedGlamourerString[locale]}
+    toastID="glamourer-toast"
+    stringToCopy="Bh+LCAAAAAAAAAq8WFtz8jYQ/S9+bchIsnzjLSEhSQfSFGi+h286HcUsRBNjU0tOhmby37uywfgCHqYT+maks+fszWuJT2soI3iGVMkktvrswnqYQ6zlQkJq9S13EYTeC7g9T9iix4nt9wKP8J7rh/PA5ZR53ot1YQ1SEBoJboQGtGKE8R6lPWLPKO07rM+DS0Yc1+H8F0L7hKDJSCh9O5e6AWd9m/cpvwwcn3vMLuGPYmWY9fXgr9sV/r4BFaZybURxGReGSRrCfALzVHxY/YWIFFxYE1Cgr+bvIsa9mw2ocmeQRElaWP6eyfAN+eQSqXSa4e5MLBH6888L60cqNTyliYZQw3y3f/t3JtcrzJPV/7TGQsb3IsbNT+tBw+oBn6jteU6eF6VLzav1OtrsKPIfU422tZW6xXafbJ8YPn5dWL8tFt+tV6wclrsHUdcixGbfpRXwuth1Mt80xexzBYZJVE0x/m1VY7QuN4JlS+1sPTIE0E0x92yh3Yq0FhrzXHq20B4hfKuKBSxg59LC119p1VDj51KbDGW8NHO3Jne2RI7+X7l7kXfk9DX5qNkWPxDwLFVSeKNmyXIZmXnb9sFUBcTazP3jZPkkibO8cneRUMqM/s9izcTpc84ZD7gbkID6vGU8yJROVvIfyAd8MofIWGFAExHma88iyvBhb5k7ipZ3EM+LnG4htOm9GXGzzRq6MPcgl6+6gnBIEzKIRFwB+M394TFPdxJCpkpvopof5q1twNCRyDijqjjWkpu+yXj7Ud3DvJbq7QZy1KQRH6eH/GsS2se9a0LZgXxIEQ3xoJKlQCtI0onE5j0RaZ+M5CcjnZOR7slIrwuJHykRbmZC6yTpwhWI0wr+kiYfqqs0u6YYwaK7JxA4fRW1V6fVsNOViKIHnNvd/fqYKOgK8FdzjDz+go6TTL92deZIrpXGg2W3F4hq57CVn3GmwgjGOMaqOHKgKDJq5qfl2DWOtul2sh2nMtPjCWd3tR7MPYqawDteIczA7mzCAtyM2GvPdx1DLdj6Z6CYtQh8EineCzRKG2wp8Mf7OIu0XEf5JWYf5iVpjeuKDR6r8bZQjeAAvijFLInz/D0BXjpiLZZH2E1Dj+TqRUQPsYZYSb1pmh0SyYfjf7AzM/hGLhZZ0dp4GTI4G08slHqY5bsUwHyXL5nnc5viu3q9DZRxjzi+z1qUZgq3KV2HBD7hFcZyZcdYLhwgLKd2hdJHF11edbJc2VGWCweyjJOhQhYw6ri+a1fZmO3kR7cdmwnXduzDyf8+uu3QLXt+S0nxxsYcHlSLwjxukrbnpEaC0v3UKCOW60N1Rj6CJSwZSV54F0fkjnG/chWtX0Uue6RQNxCKqOk29tyevUJb4TMH5KLdmm/rGP8dSPE7ZF7WfISa25e5ZI9k/Facz2CRpMhoFq8WiDaPX1//AgAA//8="
+    triggerButtonID="glamourer-string"
+  >
+    <Image
+      loading="eager"
+      width={44}
+      height={44}
+      src="/icons/content/wcif/elegante-makeup-svgrepo-com.svg"
+      class="h-11 mobile-only:h-6 w-auto mr-1"
+      alt={`${localizedCopiedGlamourerString}icon`}
+    />
+  </CopyStringToast>
+</div>

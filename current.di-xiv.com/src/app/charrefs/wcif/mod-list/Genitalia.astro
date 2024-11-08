@@ -1,0 +1,40 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedGenitalia = {
+  en: "Genitalia",
+  ja: "生殖器",
+  es: "Genitales",
+  pt: "Genitália",
+};
+const genitalia: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://trello.com/c/r94ckRoU",
+    title: "Cultist: Neighsayer 2.0 🔞",
+    tags: [{ type: "Incompat" }, { type: "Prio", pr: "4" }],
+  },
+];
+---
+
+<div id="genitalia">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/penis-svgrepo-com.svg"
+    title={localizedGenitalia[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={genitalia} locale={locale} />
+  </ModSectionWrapper>
+</div>

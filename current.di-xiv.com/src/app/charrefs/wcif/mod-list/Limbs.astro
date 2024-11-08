@@ -1,0 +1,55 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedLimbs = {
+  en: "Limbs",
+  ja: "手足",
+  es: "Extremidades",
+  pt: "Membros",
+};
+const limbs: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://www.xivmodarchive.com/modid/121502",
+    title: "cordybrush: False Nails",
+    tags: [{ type: "Compat" }, { type: "IVCSSke" }, { type: "Prio", pr: "4" }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/90154",
+    title: "Blade: Viera Nails",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: "1" }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/120942",
+    title: "Yaelle Cry: AB Grippers",
+    tags: [{ type: "Compat" }, { type: "IVCSSke" }, { type: "Prio", pr: "1" }],
+  },
+  {
+    href: "https://ko-fi.com/s/3e6912090d",
+    title: "Lynn: Shai💲",
+    tags: [{ type: "Compat" }, { type: "IVCSSke" }, { type: "Prio", pr: "0" }],
+  },
+];
+---
+
+<div id="limbs">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/fingers-finger-svgrepo-com.svg"
+    title={localizedLimbs[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={limbs} locale={locale} />
+  </ModSectionWrapper>
+</div>

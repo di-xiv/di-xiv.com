@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+// Mod sections
+import StringExports from "./mod-list/StringExports.astro";
+import Hairstyles from "./mod-list/Hairstyles.astro";
+import BrokenLinks from "./mod-list/BrokenLinks.astro";
+import FaceSculpt from "./mod-list/FaceSculpt.astro";
+import Gen3BodyStack from "./mod-list/Gen3BodyStack.astro";
+import Genitalia from "./mod-list/Genitalia.astro";
+import Iris from "./mod-list/Iris.astro";
+import Limbs from "./mod-list/Limbs.astro";
+import Skin from "./mod-list/Skin.astro";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+
+  localizedWCIF: string;
+}
+const { locale, localizedWCIF } = Astro.props;
+const localizedUpdated = {
+  en: "Last updated: november 2024",
+  ja: "最終更新: 2024年11月",
+  es: "Última actualización: noviembre de 2024",
+  pt: "Última atualização: novembro de 2024",
+};
+---
+
+<style is:global>
+  body .mdx h3 {
+    font-size: clamp(1.318rem, 1vw + 0.5rem, 2.318rem);
+  }
+  body .mdx h3 {
+    font-family: "regular", serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+  body .mdx span {
+    font-size: clamp(0.9rem, 1vw + 0.2rem, 1.118rem);
+  }
+  body .mdx p,
+  body .mdx ul {
+    font-family: "light", serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 2rem;
+    font-size: clamp(1rem, 1vw + 0.2rem, 1.618rem);
+  }
+  body .mdx a {
+    text-decoration: underline;
+  }
+</style>
+
+<details id="wcif" class="shadowless-glassbox mobile-only:p-2 p-3 rounded-lg">
+  <summary class="flex items-center">
+    <Image
+      loading="eager"
+      src="/icons/content/charrefs/modeling-svgrepo-com.svg"
+      class="h-11 mobile-only:h-6 w-auto mr-4"
+      alt={`${localizedWCIF} icon`}
+      width={44}
+      height={44}
+    />
+    <h2
+      class="text-extra w-1150:text-large mobile-only:text-base regular"
+      aria-label={localizedWCIF}
+      title={localizedWCIF}
+    >
+      {localizedWCIF}
+    </h2>
+  </summary>
+  <div>
+    <StyledBlockquote blockquoteType={BlockquoteType.Updated}>
+      <p class="light">{localizedUpdated[locale]}</p>
+    </StyledBlockquote>
+    <div class="flex justify-center">
+      <div class="mdx mb-5">
+        <Hairstyles locale={locale} />
+        <FaceSculpt locale={locale} />
+        <Iris locale={locale} />
+        <Skin locale={locale} />
+        <Gen3BodyStack locale={locale} />
+        <Limbs locale={locale} />
+        <Genitalia locale={locale} />
+        <StringExports locale={locale} />
+        <BrokenLinks locale={locale} />
+      </div>
+    </div>
+  </div>
+</details>

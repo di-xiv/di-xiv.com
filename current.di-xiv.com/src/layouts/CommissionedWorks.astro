@@ -1,0 +1,109 @@
+---
+import Master from "@/layouts/Master.astro";
+// Commissioned Works
+import CWGalleryEngine from "@/app/commworks/CWGalleryEngine.tsx";
+// English-only notice
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedInquiries: string;
+  headerContent: string;
+  // Commissioned Works
+  localizedLoading: string;
+  localizedLoadingError: string;
+  localizedDismissZoom: string;
+  localizedZoom: string;
+}
+
+const {
+  locale,
+  localizedCharRefs,
+  localizedCommWorks,
+  localizedContact,
+  localizedInquiries,
+  headerContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedLoading,
+  localizedLoadingError,
+  localizedDismissZoom,
+  localizedZoom,
+} = Astro.props;
+
+const localeLangNotices = {
+  es: "Etiquetas, calificaciones y descripciones solo disponibles en inglés",
+  pt: "Tags, classificações e descrições disponíveis apenas em inglês",
+  ja: "ラベル、評価、説明は英語のみで提供されています",
+} as const;
+
+type ValidLocale = keyof typeof localeLangNotices;
+
+function isValidLocale(locale: string): locale is ValidLocale {
+  return locale in localeLangNotices;
+}
+
+const langNotices = isValidLocale(locale) ? localeLangNotices[locale] : "";
+---
+
+<Master
+  locale={locale}
+  currentPage="commissioned-works"
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedInquiries={localizedInquiries}
+  headerContent={`${headerContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  {
+    locale !== "en" && langNotices && (
+      <div
+        class="flex items-center justify-start"
+        title={langNotices}
+        aria-label={langNotices}
+      >
+        <StyledBlockquote blockquoteType={BlockquoteType.Language}>
+          <p class="text-base mobile-only:text-sm regular">{langNotices}</p>
+        </StyledBlockquote>
+      </div>
+    )
+  }
+  <div id="commworks-container" class="">
+    <CWGalleryEngine
+      locale={locale}
+      localizedDismiss={localizedDismissZoom}
+      localizedZoom={localizedZoom}
+      client:only="react"
+      localizedLoading={localizedLoading}
+      localizedLoadingError={localizedLoadingError}
+    />
+  </div>
+</Master>

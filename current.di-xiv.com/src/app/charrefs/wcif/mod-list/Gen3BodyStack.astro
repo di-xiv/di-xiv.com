@@ -1,0 +1,68 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedBodyStack = {
+  en: "Gen3 Body Stack",
+  ja: "Gen3体型セット",
+  es: "Conjunto de Cuerpos Gen3",
+  pt: "Conjunto Corporal Gen3",
+};
+
+const localizedEXQBScalingMod = {
+  en: "Breasts Size Scaling mod for EXQB",
+  ja: "EXQB用バストサイズスケールMOD",
+  es: "Mod de Escala de tamaño de Pechos para EXQB",
+  pt: "Modificação da escala de tamanho do seios para EXQB",
+};
+
+const gen3body: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+}> = [
+  {
+    href: "https://www.xivmodarchive.com/modid/15799",
+    title: "Nyaughty: Eve 🔞",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "-1" }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/101701",
+    title: "Yaelle Cry: AB Body 🔞",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }],
+  },
+  {
+    href: "https://heliosphere.app/mod/jnc7kmqaz94zfcd89832nwggrg",
+    title: "Saenomae: Skelomae",
+    tags: [{ type: "Compat" }, { type: "IVCSSke" }, { type: "Prio", pr: "0" }],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/74619",
+    title: "Quartz: Expansive Body Quartz Boobs 🔞",
+    tags: [{ type: "Compat" }, { type: "IVCSSke" }, { type: "Prio", pr: "2" }],
+  },
+  {
+    href: "/downloads/wcif/DiXIV_EXQB_Booba.pmp",
+    title: `Di-XIV: ${localizedEXQBScalingMod[locale]}`,
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "2" }],
+  },
+];
+---
+
+<div id="gen3-body">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/female-gesture-svgrepo-com.svg"
+    title={localizedBodyStack[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={gen3body} locale={locale} />
+  </ModSectionWrapper>
+</div>
