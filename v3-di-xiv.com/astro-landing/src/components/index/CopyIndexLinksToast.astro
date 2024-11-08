@@ -1,0 +1,57 @@
+---
+interface Props {
+  localizedToast: string;
+  toastID: string;
+  targetURLID: string;
+  triggerButtonID: string;
+}
+
+const { localizedToast, toastID, targetURLID, triggerButtonID } =
+  Astro.props as Props;
+---
+
+<div
+  id={toastID}
+  class="hidden select-none w-auto rounded-lg p-3 mobile-only:p-1 toast-glassbox toast z-20 whitespace-nowrap"
+>
+  <div class="flex items-center">
+    <div class="inline-block glassbox p-2 rounded-md mobile-only:p-1">
+      <slot name="inline-svg" />
+    </div>
+    <p
+      class="regular text-lg mobile-only:text-sm inline-block text-wrap ml-2 mobile-only:mr-2"
+    >
+      {localizedToast}
+    </p>
+  </div>
+</div>
+<script
+  define:vars={{
+    toastID,
+    localizedToast,
+    targetURLID,
+    triggerButtonID,
+  }}
+>
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .getElementById(triggerButtonID)
+      .addEventListener("click", function () {
+        const touLink = document.getElementById(targetURLID).href;
+        navigator.clipboard
+          .writeText(touLink)
+          .then(function () {
+            const toast = document.getElementById(toastID);
+            toast.classList.remove("hidden");
+            toast.classList.add("flex");
+            setTimeout(function () {
+              toast.classList.remove("flex");
+              toast.classList.add("hidden");
+            }, 3000);
+          })
+          .catch(function (err) {
+            console.error("Could not copy text: ", err);
+          });
+      });
+  });
+</script>

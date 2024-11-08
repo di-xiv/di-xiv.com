@@ -1,0 +1,28 @@
+name = "di-xiv-gallery-api"
+main = "src/index.js"
+compatibility_date = "2024-08-15"
+workers_dev = true
+compatibility_flags = ["nodejs_compat"]
+route = { pattern = "api.di-xiv.com/*", zone_name = "di-xiv.com" }
+
+[placement]
+mode = "smart"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "Di-XIV-gallery"
+database_id = "783496cd-6a17-4f47-aa87-9a57823743c3"
+
+# # Development Environment
+
+# [env.dev]
+# name = "Di-XIV-gallery-api-dev"
+# main = "src/index.js"
+# workers_dev = true
+# compatibility_flags = ["nodejs_compat"]
+# route = { pattern = "dev.api.di-xiv.com/*", zone_name = "di-xiv.com" }
+
+# [[env.dev.d1_databases]]
+# binding = "DB"
+# database_name = "Di-XIV-gallery"
+# database_id = "783496cd-6a17-4f47-aa87-9a57823743c3"

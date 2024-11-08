@@ -1,0 +1,81 @@
+---
+import CopyStringToast from "@/app/charrefs/wcif/CopyStringToast.astro";
+import ScrollToTopButton from "@/components/navigation/ScrollToTop";
+import { Image } from "astro:assets";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  currentPage: string;
+  localizedCopiedCustomizeString: string;
+  localizedCopiedGlamourerString: string;
+}
+
+const {
+  locale,
+  currentPage,
+  localizedCopiedCustomizeString,
+  localizedCopiedGlamourerString,
+} = Astro.props;
+---
+
+<!-- From Charrefs - WCIF -->{
+  currentPage === "character-references" && (
+    <div
+      id="toasts-container"
+      class="fixed top-[5%] right-[5%] z-20 grid grid-cols-1 gap-2"
+    >
+      <CopyStringToast
+        localizedToast={localizedCopiedCustomizeString}
+        toastID="customize-toast"
+        stringToCopy="H4sIAAAAAAAACs2YTY+bMBCGL/0lvjYg24ATOO72sodWVbv9vFgGzMZLAlrjSFut8t9rYydipWzaCza5MFZm8MM79vjj3Qv4xPYcFIA/P5VUlRVYge9cDqLvQJGuwK3kTOnGB6aMF4Y4jSCJML6HqECkgOsYYUKy9xAXEOrgj30tGsHriwE4KWASozXaTCK+deLpwO9qA9HUJMsbFqWckyitcRaVFSujJktSWDe8SepcR9wNP6RQ/LPsFa8U15EN2w1c/9FV/UMnVD95l/a/6Ts+gOIFPNK2H4Sx7iXrht34aab5ExQwhivwyz1/j8/jCnzp1b+dvlZsJ7qHs09uf87z3NL+KEZ5dtQhj3TgZU9ZUBaILAobBGV0NzMLcj4oTlz/eJ1OAWQ4gP2h47MLAON15pwyS2CMCYAMCGBSUHuQwA5Akp4GpHPNpxQyMMWh5h7mw/9RyAVkxMfUcBTXILxJ8XY+ytBKWIigSnR02zLlc72AEKIEnxYt00CbKYlfOQwCxht0XkVty+ZH+Zsr2eURoglkWIKt3oB5rJ8puYohA2O0S9CiXYQSh+GwBC0sRmg1OtayBajhMEKr0f9ZghiWQi6hcPnbaaRXKbyJ8WbhCq5EuwQdTNEKr4SlCKzFWLKCU5haETwhFiKwEvyZbiFChLbmbFLOfizQXbmN+GjZazVE3BBle0EbL3k5l29jWUFyckmSuW/59Odn+CSJsawkGX4lyfzXa2TjIIwxMpDxnKYvO5kuor7u93QeTv3DSfe+zquvuz8e/wLfJ2rwZBcAAA=="
+        triggerButtonID="customize-string"
+      >
+        <div>
+          <Image
+            loading="eager"
+            width={44}
+            height={44}
+            src="/icons/content/wcif/customize-svgrepo-com.svg"
+            class="h-11 mobile-only:h-6 w-auto mr-1"
+            alt={`${localizedCopiedCustomizeString} icon`}
+          />
+        </div>
+      </CopyStringToast>
+      <CopyStringToast
+        localizedToast={localizedCopiedGlamourerString}
+        toastID="glamourer-toast"
+        stringToCopy="Bh+LCAAAAAAAAAq8V11z6jYQ/S9+bchI8rff8sVNOpCmQHMfOn1Q7DVoImzXlm+Gm8l/78oG4w9gmCktT0Y+Ont2VzqSP42xkPAKeSHSxAjolfEUQaJELCA3AuMtJtabR/yRH0b2yOJeNPKoE44ck1EvfotCO7aNK+MuB66Q4J4rwFmMMGtEnBFjC0ICmwTUv7b1lF8ICwjBCRNeqIdIqC6Y0sA2A+JcO4RR5u3hz3ytedXtHf65hyLMRabj4RgOjNM8hGgGUc4/jCDmsgCUlMo0r9//XorwHWeJJU5QeYlvF3xZGMGff10Z33Oh4CVPFYQKot37h79Lka2xEEbwaUy5SB55gi8/jScF6yd8oqbr2lfGXOE7IyBVCQrVRL/JMrnZkVV/tsjWSHvG15XxWxz/d0H0CMZ4BN4NQIjJmgC+9e8j3KbRph/BvGgKWKOiHwGFb+cxeoFWTGA5CHHZZo8BVD+Cc9kkHnjeScJn/mUasQvwDOF7LwC7aADcmoXq5OA5F85hNhbJUjtdJ43L9nryP8R45NVymq/Sjw6s2TavokhrCcUiXS6ltrphOF104Jk21uNkCLorC5WuxU+o7DGNQOqsMJEZD6uxVy5LfLCamTuh3yCJ6lpsIbQvQDvIYpPBKcwjiOVKtRA26UPuJE9aAK//fnxMaeMzIi/URnZ0UHsAQyFSiylauIGY+btItgfSnsxx+7CHDVSoWS87bT5DdX1C87i2PtQ9UA3B5RhP8TIHeiqVDpKdjTTPRlpnI+2zkc7ZSPcUEs8FHm4WXKk0PYWrEYOGu9aBhr/l6Ud77bBji2IC8ek1gcD5inc2zgAzX3Mpn9BX27rYYHM8pwWcSvBXfdE6vj2naalWp1bmRGSFwkvZaRWIGtZwUJ9pWYQSprzo5EQONEXIfn2G5oPGNt/62nEq7R0v6MjtfjDnKGoGP/B+rR335CKswf2MB7TfQSXQSbbr47XTIvCF53htVhhaY5sAf/yYllKJTFY3/H2a13tNzS1lPwdvp0V9ZdllcABft2KRJlX9XgCv5YniyyPs2hTvRRyX9VrD+7tmdaofGtS3HECfjteOTXyP4N653QZ2LJfYnmcdZJxnEJaS5y1KZrfY9J8dkX7uUWhjPSCKUhejtmhs5luUensu07NMvK+bBxkPiHIZtR3PsdqJ7lLfcdousy2fHFbZuPuFdGp/QQtpS/Qd4npWR6LnMNdqldDaReyxVUfY5ei27txsji0lxUx0idr91YS4YPactKlBP2ORDVttViVHl2kYiZ7tOi2V+5Ebma14vZS2i7QX4x5CLgeyiWc5NsMeNEH2Q43sZqQJ4mlp1O+XR+88/PDO8RTTW70yYP2NpD9vJyJ5r/b/LcRpjsR68CZGtH78+voHAAD//w=="
+        triggerButtonID="glamourer-string"
+      >
+        <Image
+          loading="eager"
+          width={44}
+          height={44}
+          src="/icons/content/wcif/elegante-makeup-svgrepo-com.svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+          alt={`${localizedCopiedGlamourerString}icon`}
+        />
+      </CopyStringToast>
+    </div>
+  )
+}
+<main
+  id="main"
+  class="grid min-h-full
+    ultrawide-only:grid-cols-[1fr_55vw_1fr]
+    grid-cols-[1fr_70vw_1fr]
+    w-1150:grid-cols-[1fr_80vw_1fr]
+    mobile-only:grid-cols-[1fr_95vw_1fr]
+    pb-1 pt-1
+    bg-cover panning"
+>
+  <div id="main-left"></div>
+  <div id="main-center" class="py-[2.5%] bg-cover">
+    <div class="main rounded-lg pt-[2.5%] pb-[2.5%] mobile-only:py-[1%]">
+      <slot />
+    </div>
+  </div>
+  <div id="main-right"></div>
+</main>
+
+<ScrollToTopButton client:load locale={locale} />

@@ -1,0 +1,93 @@
+@media (prefers-color-scheme: light) {
+    .glassbox-50{
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 1);
+    }
+    
+    .glassbox-25{
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-glassbox-25{
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5)
+    }
+    
+    .glassbox-10{
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .header-glassbox-10{
+        background: rgba(255, 255, 255, 0.09);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5)   
+    }
+  }
+
+
+  @media (prefers-color-scheme: dark) {
+    .glassbox-50{
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgb(255, 255, 255);
+    }
+    
+    .glassbox-25{
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-glassbox-25{
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5)
+    }
+    
+    .glassbox-10{
+        background: rgba(255, 255, 255, 0.09);
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .header-glassbox-10{
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5)   
+    } 
+}
+
+.sitemap-glassbox{
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(14.2px);
+    -webkit-backdrop-filter: blur(14.2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}

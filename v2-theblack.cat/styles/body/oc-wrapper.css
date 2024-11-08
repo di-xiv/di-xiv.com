@@ -1,0 +1,9 @@
+#oc-wrapper{
+    margin-left: 16%;
+}
+
+@media (max-width: 521px) {
+    #oc-wrapper{
+        margin-left: 0%;
+    }
+}

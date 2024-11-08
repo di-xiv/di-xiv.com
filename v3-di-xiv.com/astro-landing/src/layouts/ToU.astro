@@ -1,0 +1,168 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import HomeButton from "@/components/header/nav-buttons/Home-Button.astro";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedRealState: string;
+  localizedBackToHome: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+  localizedCheckingYourBrowser: string | { __html: string };
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedRealState,
+  localizedBackToHome,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+  localizedCheckingYourBrowser,
+} = Astro.props as Props;
+// ToU
+let LocalizedGrantOfLicense;
+try {
+  LocalizedGrantOfLicense = await import(
+    `../components/tou/${footerLocale}/GrantOfLicense.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+let LocalizedOwnership;
+try {
+  LocalizedOwnership = await import(
+    `../components/tou/${footerLocale}/Ownership.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+let LocalizedUsageRestrictions;
+try {
+  LocalizedUsageRestrictions = await import(
+    `../components/tou/${footerLocale}/UsageRestrictions.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+let LocalizedCompensation;
+try {
+  LocalizedCompensation = await import(
+    `../components/tou/${footerLocale}/Compensation.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+>
+  <div
+    id="mdx-wrapper"
+    class="mdx-container grid grid-cols-1 gap-3 rounded-lg mt-[2%]"
+  >
+    <article class="glassbox p-3 rounded-lg">
+      {
+        LocalizedGrantOfLicense ? (
+          <LocalizedGrantOfLicense.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </article>
+    <article class="glassbox p-3 rounded-lg">
+      {
+        LocalizedOwnership ? (
+          <LocalizedOwnership.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </article>
+    <article class="glassbox p-3 rounded-lg">
+      {
+        LocalizedUsageRestrictions ? (
+          <LocalizedUsageRestrictions.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </article>
+    <article class="glassbox p-3 rounded-lg">
+      {
+        LocalizedCompensation ? (
+          <LocalizedCompensation.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </article>
+    <article class="flex justify-center">
+      <p class="regular">
+        {localizedRealState}
+      </p>
+    </article>
+  </div>
+  <HomeButton localizedText={localizedBackToHome} homeURL={headerHref} />
+</Master>

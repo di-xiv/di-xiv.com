@@ -1,0 +1,75 @@
+---
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props as Props;
+let LocalizedMDX;
+try {
+  LocalizedMDX = await import(`./${lang}/Acknowledgements.mdx`);
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<dialog
+  id="acknowledgements-dialog"
+  class="overflow-auto p-10 border-2 border-solid rounded-lg select-none glassbox"
+>
+  <div class="dark:text-white mdx-container">
+    {
+      LocalizedMDX ? (
+        <LocalizedMDX.default />
+      ) : (
+        <div>Error loading component</div>
+      )
+    }
+  </div>
+  <div>
+    <div class="flex justify-end">
+      <span class="dark:text-white ultralight">
+        {
+          lang == "jp" && (
+            <>
+              どこかをクリックするか、<kbd>ESC</kbd> で閉じる。
+            </>
+          )
+        }
+        {
+          lang == "es" && (
+            <>
+              Pulsa en cualquier sitio o <kbd>ESC</kbd> para cerrar.
+            </>
+          )
+        }
+        {
+          lang == "en" && (
+            <>
+              Press anywhere or <kbd>ESC</kbd> to dismiss.
+            </>
+          )
+        }
+        {
+          lang == "pt" && (
+            <>
+              Pressione em qualquer lugar ou <kbd>ESC</kbd> para dispensar.
+            </>
+          )
+        }
+      </span>
+    </div>
+  </div>
+</dialog>
+<script>
+  const dialog = document.getElementById("acknowledgements-dialog");
+  const openDialogButton = document.getElementById("acknowledgements-button");
+
+  openDialogButton.addEventListener("click", () => {
+    dialog.showModal();
+  });
+
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

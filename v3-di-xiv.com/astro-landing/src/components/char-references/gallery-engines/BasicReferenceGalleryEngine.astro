@@ -1,0 +1,108 @@
+---
+interface Props {
+  apiURL: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+}
+
+interface Image {
+  referenceimage_id: number;
+  reference_imageurl: string;
+}
+
+interface Gallery {
+  reference_gallery_name: string;
+  reference_images: Image[];
+}
+
+const { apiURL, localizedClickToZoom, localizedDismiss } = Astro.props as Props;
+
+let referenceGallery: Gallery | null = null;
+let loading: boolean = true;
+let error: string | null = null;
+
+async function fetchReferenceGallery(): Promise<void> {
+  try {
+    const response = await fetch(apiURL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const galleries: Gallery[] = await response.json();
+    referenceGallery = galleries.length > 0 ? galleries[0] : null;
+  } catch (err) {
+    console.error("Failed to fetch reference gallery data:", err);
+    error = err instanceof Error ? err.message : "Unknown error";
+  } finally {
+    loading = false;
+  }
+}
+
+await fetchReferenceGallery();
+---
+
+<article class="flex overflow-x-auto p-1 h-[95%] mb-3 overflow-hidden">
+  {
+    referenceGallery && referenceGallery.reference_images ? (
+      referenceGallery.reference_images.map((image) => {
+        const randomSuffix = Math.random().toString(36).substr(2, 9);
+        const modalId = `${image.referenceimage_id}-modal-${randomSuffix}`;
+        const zoomId = `${image.referenceimage_id}-modal-zoom-${randomSuffix}`;
+
+        return (
+          <div
+            key={image.referenceimage_id}
+            class="relative group flex-shrink-0 mr-1 h-[85vh] flex items-center justify-center"
+            style={{ width: "auto", height: "75vh" }}
+          >
+            <img
+              src={image.reference_imageurl}
+              class="rounded-md"
+              alt={`Reference ${referenceGallery.reference_gallery_name}`}
+              style={{ maxHeight: "100%", width: "auto", objectFit: "contain" }}
+            />
+            <div>
+              <div
+                id={zoomId}
+                title={localizedClickToZoom}
+                class="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 hover:text-[#1e7cff] cursor-pointer button-glassbox"
+                onclick={`document.getElementById('${modalId}').classList.toggle('hidden')`}
+              >
+                <div class="dark:invert">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              id={modalId}
+              title={localizedDismiss}
+              class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+              onclick="this.classList.add('hidden')"
+            >
+              <img
+                src={image.reference_imageurl}
+                class="rounded-md cursor-pointer"
+                alt={`Reference ${referenceGallery.reference_gallery_name}`}
+                style={{ maxHeight: "90vh", width: "auto" }}
+              />
+            </div>
+          </div>
+        );
+      })
+    ) : (
+      <p class="flex justify-center">No data available.</p>
+    )
+  }
+</article>
+
+{loading && <p class="flex justify-center">Loading...</p>}
+
+{error && <p class="flex justify-center">Error loading data: {error}</p>}

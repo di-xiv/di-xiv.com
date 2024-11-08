@@ -1,0 +1,54 @@
+---
+import HeaderButtonMenu from "@/components/layout/header/components/HeaderButtonMenu.astro";
+import { Image } from "astro:assets";
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  headerContent: string;
+}
+const { locale, headerContent } = Astro.props;
+
+function getLocalizedRoute() {
+  if (locale && locale !== "en") {
+    return `/${locale}`;
+  } else {
+    return `/`;
+  }
+}
+---
+
+<header
+  id="header"
+  class="grid
+  ultrawide-only:grid-cols-[1fr_55vw_1fr]
+  grid-cols-[1fr_70vw_1fr]
+  w-1150:grid-cols-[1fr_80vw_1fr]
+  mobile-only:grid-cols-[1fr_90vw_1fr]
+  glassbox"
+>
+  <div id="header-left"></div>
+  <div id="header-center" class="relative">
+    <div class="flex justify-center p-1">
+      <a href={getLocalizedRoute()} class="flex justify-center items-center">
+        <Image
+          loading="eager"
+          width={40}
+          height={40}
+          src="/favicon.ico"
+          class="w-10 mobile-only:w-8 h-auto"
+          alt="Di-XIV Brand Icon"
+        />
+        <h1
+          class="regular text-base mobile-only:text-sm"
+          aria-label={headerContent}
+          title={headerContent}
+        >
+          {headerContent}
+        </h1>
+      </a>
+    </div>
+    <slot />
+  </div>
+  <div id="header-right"></div>
+</header>
+
+<HeaderButtonMenu locale={locale} />

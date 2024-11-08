@@ -1,0 +1,80 @@
+---
+import SimpleTurnstileWidget from "../reusables/SimpleTurnstileWidget.astro";
+interface Props {
+  lang: string;
+  localizedCheckingYourBrowser: string;
+}
+const { lang, localizedCheckingYourBrowser } = Astro.props as Props;
+let LocalizedMDX;
+try {
+  LocalizedMDX = await import(`./${lang}/DMCA.mdx`);
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<dialog
+  id="dmca-dialog"
+  class="overflow-auto p-10 border-2 border-solid rounded-lg glassbox"
+>
+  <SimpleTurnstileWidget
+    localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+    turnstileID="dmca-turnstile"
+    protectedElementID="dmca-container"
+  />
+  <div id="dmca-container" class="hidden dark:text-white mdx-container">
+    {
+      LocalizedMDX ? (
+        <LocalizedMDX.default />
+      ) : (
+        <div>Error loading component</div>
+      )
+    }
+    <div class="flex justify-end">
+      <span class="dark:text-white ultralight">
+        {
+          lang == "jp" && (
+            <>
+              どこかをクリックするか、<kbd>ESC</kbd> で閉じる。
+            </>
+          )
+        }
+        {
+          lang == "es" && (
+            <>
+              Pulsa en cualquier sitio o <kbd>ESC</kbd> para cerrar.
+            </>
+          )
+        }
+        {
+          lang == "en" && (
+            <>
+              Press anywhere or <kbd>ESC</kbd> to dismiss.
+            </>
+          )
+        }
+        {
+          lang == "pt" && (
+            <>
+              Pressione em qualquer lugar ou <kbd>ESC</kbd> para dispensar.
+            </>
+          )
+        }
+      </span>
+    </div>
+  </div>
+</dialog>
+<script>
+  const dialog = document.getElementById("dmca-dialog");
+  const openDialogButton = document.getElementById("dmca-button");
+
+  openDialogButton.addEventListener("click", () => {
+    dialog.showModal();
+  });
+
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

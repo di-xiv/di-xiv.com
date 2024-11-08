@@ -1,0 +1,112 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import HomeButton from "@/components/header/nav-buttons/Home-Button.astro";
+//
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/reusables/StyledBlockquote.tsx";
+import CurrentDateTime from "@/components/reusables/CurrentDateTime";
+export const lang = "en";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedBackToHome: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+  localizedCheckingYourBrowser: string | { __html: string };
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedBackToHome,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+  localizedCheckingYourBrowser,
+} = Astro.props as Props;
+
+let ButWhy;
+try {
+  ButWhy = await import(`../components/but-why/${footerLocale}/ButWhy.mdx`);
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+>
+  <div id="mdx-wrapper" class="grid grid-cols-1 gap-3">
+    <article class="mdx-container glassbox glassbox p-5 rounded-lg mt-[2%]">
+      {ButWhy ? <ButWhy.default /> : <div>Error loading component</div>}
+    </article>
+    <article class="flex justify-end">
+      <StyledBlockquote blockquoteType={BlockquoteType.Updated}>
+        <div class="regular flex ml-2">
+          <CurrentDateTime lang={locale} />
+        </div>
+      </StyledBlockquote>
+    </article>
+  </div>
+  <HomeButton localizedText={localizedBackToHome} homeURL={headerHref} />
+</Master>

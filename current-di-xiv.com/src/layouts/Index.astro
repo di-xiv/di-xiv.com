@@ -1,0 +1,77 @@
+---
+import Master from "@/layouts/Master.astro";
+// Index content
+import GetLastGallery from "@/app/index/get-last-gallery/GetLastGallery.astro";
+import HelloThere from "@/app/index/messages/HelloThere.astro";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  /// Aside
+  localizedAcknowledgements: string;
+  localizedCharRefs: string;
+  localizedCommWorks: string;
+  localizedContact: string;
+  localizedFAQ: string;
+  localizedInquiries: string;
+  localizedToU: string;
+  // Index
+  localizedLatestComm: string;
+}
+const {
+  locale,
+  localizedAcknowledgements,
+  localizedToU,
+  localizedInquiries,
+  localizedFAQ,
+  localizedContact,
+  localizedCommWorks,
+  localizedCharRefs,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedLatestComm,
+} = Astro.props;
+---
+
+<Master
+  locale={locale}
+  currentPage="index"
+  localizedAcknowledgements={localizedAcknowledgements}
+  localizedCharRefs={localizedCharRefs}
+  localizedCommWorks={localizedCommWorks}
+  localizedContact={localizedContact}
+  localizedFAQ={localizedFAQ}
+  localizedInquiries={localizedInquiries}
+  localizedToU={localizedToU}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerContent="Di-XIV"
+  localizedCopiedCustomizeString=""
+  localizedCopiedGlamourerString=""
+>
+  <div id="index" class="flex justify-center w-full">
+    <div class="grid grid-cols-1 gap-y-4 w-full px-4">
+      <HelloThere locale={locale} />
+      <GetLastGallery localizedLatestComm={localizedLatestComm} />
+    </div>
+  </div>
+</Master>

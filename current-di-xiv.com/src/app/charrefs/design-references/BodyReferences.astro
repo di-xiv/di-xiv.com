@@ -1,0 +1,152 @@
+---
+import { Image } from "astro:assets";
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+}
+
+const { locale, localizedClickToZoom, localizedDismiss } = Astro.props;
+
+let LocalizedBodyReferences;
+if (locale === "es") {
+  LocalizedBodyReferences = await import(
+    "@/app/charrefs/design-references/BodyReferences.es.json"
+  );
+} else if (locale === "en") {
+  LocalizedBodyReferences = await import(
+    "@/app/charrefs/design-references/BodyReferences.en.json"
+  );
+} else if (locale === "ja") {
+  LocalizedBodyReferences = await import(
+    "@/app/charrefs/design-references/BodyReferences.ja.json"
+  );
+} else if (locale === "pt") {
+  LocalizedBodyReferences = await import(
+    "@/app/charrefs/design-references/BodyReferences.pt.json"
+  );
+} else {
+  LocalizedBodyReferences = await import(
+    "@/app/charrefs/design-references/BodyReferences.en.json"
+  );
+}
+const bodyReference = LocalizedBodyReferences.default;
+
+type BodyReferencesData = {
+  [key: string]: {
+    alt: string;
+    description: string;
+  };
+};
+
+const typedBodyReferencesData: BodyReferencesData = bodyReference;
+
+const referencePics = [
+  { bodyPart: "breasts" },
+  { bodyPart: "side" },
+  { bodyPart: "genitalia" },
+  { bodyPart: "back" },
+] as const;
+
+const mergedReferencePics = referencePics.map((item) => ({
+  ...item,
+  alt: typedBodyReferencesData[item.bodyPart].alt,
+  description: typedBodyReferencesData[item.bodyPart].description,
+}));
+---
+
+<div class="grid grid-cols-1 gap-y-2">
+  {
+    mergedReferencePics.map((item) => {
+      const randomSuffix = Math.random().toString(36).substr(2, 9);
+      const modalId = `${item.bodyPart}-modal-${randomSuffix}`;
+      const zoomId = `${item.bodyPart}-modal-zoom-${randomSuffix}`;
+
+      return (
+        <details
+          id={item.bodyPart}
+          class="grid grid-cols-1 gap-y-2 shadowless-glassbox  p-1 rounded-md"
+          open={false}
+          title={item.description}
+        >
+          <summary class="flex items-center">
+            <div class="inline-block">
+              <h3
+                class="regular mobile-only:text-base"
+                aria-label={item.alt}
+                title={item.alt}
+              >
+                {item.alt}
+              </h3>
+            </div>
+          </summary>
+          <div class="flex justify-center">
+            <div class="not-mobile:w-[90%]">
+              <StyledBlockquote blockquoteType={BlockquoteType.Quote}>
+                <p
+                  class="light inline-block mobile-only:text-sm"
+                  aria-label={item.description}
+                  title={item.description}
+                >
+                  {item.description}
+                </p>
+              </StyledBlockquote>
+            </div>
+          </div>
+          <div class="flex justify-center relative">
+            <div class="w-[85%]">
+              <Image
+                loading="eager"
+                src={`https://assets.di-xiv.com/hq-references/di-xiv_character-reference-${item.bodyPart}.png`}
+                alt={item.alt}
+                width={3000}
+                height={4000}
+                class="h-auto w-full object-contain rounded inline-block"
+              />
+              <div
+                id={zoomId}
+                title={localizedClickToZoom}
+                class="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 hover:text-[#1e7cff] cursor-pointer button-glassbox"
+                onclick={`document.getElementById('${modalId}').classList.toggle('hidden')`}
+              >
+                <div class="dark:invert">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div
+                id={modalId}
+                title={localizedDismiss}
+                class="hidden fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-50"
+                onclick="this.classList.add('hidden')"
+              >
+                <div class="w-full h-full p-4 flex items-center justify-center">
+                  <Image
+                    loading="lazy"
+                    src={`https://assets.di-xiv.com/hq-references/di-xiv_character-reference-${item.bodyPart}.png`}
+                    class="rounded-md cursor-pointer w-full h-auto object-contain"
+                    alt={item.alt}
+                    width={3000}
+                    height={4000}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      );
+    })
+  }
+</div>

@@ -1,0 +1,30 @@
+.floating-gototop-button{
+    position: fixed;
+    top: 0;
+    right:-2px;
+    margin-top: 50vh;
+    border-radius: 16px 0px 0px 16px;
+}
+
+
+.floating-gototop-icon{
+    width: 100px;
+    height: auto;
+    vertical-align: -4px;
+}
+
+@media (max-width: 436px) {
+    .floating-gototop-button{
+        top: 0;
+        right:-2px;
+        margin-top: 50vh;
+        border-radius: 16px 0px 0px 16px;
+    }
+
+
+    .floating-gototop-icon{
+        width: 46px;
+        height: auto;
+        vertical-align: -4px;
+    }
+}

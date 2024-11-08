@@ -1,0 +1,28 @@
+/*
+  Editorial New
+*/
+
+@font-face {
+  font-family: "regular";
+  src: url("/fonts/ppe-regular.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "bold";
+  src: url("/fonts/ppe-ultrabold.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "light";
+  src: url("/fonts/ppe-ultralight.otf") format("opentype");
+  font-display: swap;
+}
+/*
+  Dank Mono
+*/
+
+@font-face {
+  font-family: "dm-italic";
+  src: url("/fonts/dm-italic.otf") format("opentype");
+  font-display: swap;
+}

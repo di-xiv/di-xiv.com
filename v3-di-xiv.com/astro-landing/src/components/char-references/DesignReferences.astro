@@ -1,0 +1,504 @@
+---
+import ReferenceContainer from "../reusables/charrefs-reusables/ReferenceContainer.astro";
+import SelectorButton from "@/components/reusables/charrefs-reusables/SelectorButton.astro";
+import SelectorButtonSmall from "@/components/reusables/charrefs-reusables/SelectorButtonSmall.astro";
+import PartsSelectorWrapper from "../reusables/charrefs-reusables/PartsSelectorWrapper.astro";
+import GalleryWrapper from "../reusables/charrefs-reusables/GalleryWrapper.astro";
+import DownloadButton from "@/components/reusables/DownloadButton.astro";
+import BasicReferenceGalleryEngine from "@/components/char-references/gallery-engines/BasicReferenceGalleryEngine.astro";
+
+interface Props {
+  localizedDesignReferences: string;
+  localizedAttireShots: string;
+  localizedBodyReferences: string;
+  localizedHairstyles: string;
+  localizedFullbodyFreckles: string;
+  localizedGenitalia: string;
+  localizedDownloadBodyRefs: string;
+  localizedDownloadHairstyles: string;
+  localizedDownloadAttires: string;
+  localizedDownloadThis: string;
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+}
+const {
+  localizedDesignReferences,
+  localizedBodyReferences,
+  localizedAttireShots,
+  localizedHairstyles,
+  localizedFullbodyFreckles,
+  localizedGenitalia,
+  localizedDownloadBodyRefs,
+  localizedDownloadHairstyles,
+  localizedDownloadAttires,
+  localizedDownloadThis,
+  localizedClickToZoom,
+  localizedDismiss,
+} = Astro.props as Props;
+---
+
+<details
+  id="design-references"
+  class="glassbox p-3 mobile-only:p-2 rounded-lg"
+  title={localizedDesignReferences}
+>
+  <summary
+    id={localizedDesignReferences}
+    class="mb-[1%] mt-[1%] flex items-center"
+  >
+    <div class="inline-block mr-2">
+      <img
+        slot="inline-svg"
+        src="/icons/cards/charrefs/sketchbook-sketch-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </div>
+    <span class="regular text-2xl inline-block"
+      >{localizedDesignReferences}</span
+    >
+  </summary>
+  <PartsSelectorWrapper wrapperID="references-selector-wrapper">
+    <SelectorButton
+      buttonID="body-references-selector"
+      buttonText={localizedBodyReferences}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/charrefs/woman-female-svgrepo-com.svg"
+        class="h-12 w-12 w1366:h-10 w1366:w-10 mobile-only:h-8 mobile-only:w-8 object-contain"
+      />
+    </SelectorButton>
+    <SelectorButton
+      buttonID="hairstyle-collection-selector"
+      buttonText={localizedHairstyles}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/charrefs/woman-hair-hairstyle-svgrepo-com.svg"
+        class="h-12 w1366:h-10 mobile-only:h-8"
+      />
+    </SelectorButton>
+    <SelectorButton
+      buttonID="attire-collection-selector"
+      buttonText={localizedAttireShots}
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/charrefs/body-underwear-svgrepo-com.svg"
+        class="h-12 w1366:h-10 mobile-only:h-8"
+      />
+    </SelectorButton>
+    <SelectorButton
+      buttonID="download-all-collection"
+      buttonText={localizedDownloadBodyRefs}
+      buttonHref="https://drive.proton.me/urls/X9B6E6CSN0#8fmJZcjhr1wm"
+    >
+      <div class="dark:invert" slot="inline-svg">
+        <img
+          src="/icons/cards/charrefs/marketeq--download-alt-4.svg"
+          class="h-12 w1366:h-10 mobile-only:h-8"
+        />
+      </div>
+    </SelectorButton>
+  </PartsSelectorWrapper>
+  <ReferenceContainer containerID="bodyrefs-container">
+    <PartsSelectorWrapper wrapperID="body-references-selector-wrapper">
+      <SelectorButtonSmall
+        buttonID="fullbody-freckles-selector"
+        buttonText={localizedFullbodyFreckles}
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/mannequin-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="genitalia-selector"
+        buttonText={localizedGenitalia}
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/penis-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+    </PartsSelectorWrapper>
+    <div id="body-parts-galleries">
+      <GalleryWrapper wrapperID="fullbody-freckles-gallery">
+        <DownloadButton
+          downloadID="fullbody-freckles-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/5KMAFNJ7AR#A9jdhiUccjaf"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Fullbody%20without%20tattoos"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="genitalia-gallery">
+        <DownloadButton
+          downloadID="genitalia-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/AH8PYJ791W#t0mZdVKVzW1p"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Horsecock"
+        />
+      </GalleryWrapper>
+    </div>
+  </ReferenceContainer>
+  <ReferenceContainer containerID="hairstyles-container">
+    <PartsSelectorWrapper wrapperID="hairstyles-selector-wrapper">
+      <SelectorButtonSmall
+        buttonID="hairstyle-ebyssia-selector"
+        buttonText="Ebyssia"
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/one-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="hairstyle-fifthteen-selector"
+        buttonText="Fifthteen"
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/two-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="hairstyle-thorns-selector"
+        buttonText="Thorns"
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/three-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="hairstyle-twinklex2-selector"
+        buttonText="Twinklex2"
+      >
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/four-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="download-hairstyles"
+        buttonText={localizedDownloadHairstyles}
+        buttonHref="https://drive.proton.me/urls/YC6X5D5S00#jotwbWdlATeU"
+      >
+        <div class="dark:invert" slot="icon">
+          <img
+            src="/icons/cards/charrefs/marketeq--download-alt-4.svg"
+            class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+          />
+        </div>
+      </SelectorButtonSmall>
+    </PartsSelectorWrapper>
+    <div id="hairstyle-galleries">
+      <GalleryWrapper wrapperID="hairstyle-ebyssia-gallery">
+        <DownloadButton
+          downloadID="hairstyle-ebyssia-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/4RMZYQ97QG#FyYRJ88svPND"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Hairstyle:%20Ebyssia"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="hairstyle-fifthteen-gallery">
+        <DownloadButton
+          downloadID="hairstyle-fifthteen-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/GDJ83X4ZW4#TSDQqXRavyd4"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Hairstyle:%20Fifthteen"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="hairstyle-thorns-gallery">
+        <DownloadButton
+          downloadID="hairstyle-thorns-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/VBSDN4T4ZC#Nfr7FdTDSBup"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Hairstyle:%20Thorns"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="hairstyle-twinklex2-gallery">
+        <DownloadButton
+          downloadID="hairstyle-twinkle2-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/YFJKBBQHR8#T0ChOZQ9m6t6"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Hairstyle:%20Twinkle%20Twinkle"
+        />
+      </GalleryWrapper>
+    </div>
+  </ReferenceContainer>
+  <ReferenceContainer containerID="attires-container">
+    <PartsSelectorWrapper wrapperID="attires-selector-wrapper">
+      <SelectorButtonSmall buttonID="attire-one-selector" buttonText="One">
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/one-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall buttonID="attire-three-selector" buttonText="Three">
+        <img
+          slot="icon"
+          src="/icons/cards/charrefs/numbers/three-key-svgrepo-com.svg"
+          class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        />
+      </SelectorButtonSmall>
+      <SelectorButtonSmall
+        buttonID="download-all-attires"
+        buttonText={localizedDownloadAttires}
+        buttonHref="https://drive.proton.me/urls/6B6X3DP4B4#8h7CXf5kMlVJ"
+      >
+        <div class="dark:invert" slot="icon">
+          <img
+            src="/icons/cards/charrefs/marketeq--download-alt-4.svg"
+            class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+          />
+        </div>
+      </SelectorButtonSmall>
+    </PartsSelectorWrapper>
+    <div id="attire-galleries">
+      <GalleryWrapper wrapperID="attire-one-gallery">
+        <DownloadButton
+          downloadID="attire-one-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/CHBXW39KPG#4O6FUZ3BJhKL"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Attire%20One"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="attire-two-gallery">
+        <DownloadButton
+          downloadID="attire-two-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/6JGE8TXQG8#iGgMfE9Jt7jj"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Attire%20Two"
+        />
+      </GalleryWrapper>
+      <GalleryWrapper wrapperID="attire-three-gallery">
+        <DownloadButton
+          downloadID="attire-three-download"
+          localizedDownloadThis={localizedDownloadThis}
+          downloadLink="https://drive.proton.me/urls/WTX0F3FB1G#wCHIK3sPZyvH"
+        />
+        <BasicReferenceGalleryEngine
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          apiURL="https://api.di-xiv.com/references?include_reference_gallery_name=Attire%20Three"
+        />
+      </GalleryWrapper>
+    </div>
+  </ReferenceContainer>
+</details>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleClasses = (element, classToRemove, classToAdd) => {
+      if (element) {
+        element.classList.replace(classToRemove, classToAdd);
+      }
+    };
+
+    const hideAllGalleries = (galleries, exceptions = []) => {
+      galleries.forEach(({ container }) => {
+        if (!exceptions.includes(container)) {
+          toggleClasses(document.getElementById(container), "grid", "hidden");
+        }
+      });
+    };
+
+    const highlightButton = (buttonId) => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.classList.add("text-[#1e7cff]", "selected-glassbox");
+      }
+    };
+
+    const toggleVisibility = (buttonId, containerId, galleries) => {
+      const container = document.getElementById(containerId);
+      const button = document.getElementById(buttonId);
+
+      if (container && button) {
+        const mainContainers = [
+          "bodyrefs-container",
+          "hairstyles-container",
+          "attires-container",
+        ];
+        const exceptions = mainContainers.includes(containerId)
+          ? [containerId]
+          : mainContainers;
+
+        hideAllGalleries(galleries, exceptions);
+
+        galleries.forEach(({ button }) => {
+          const btn = document.getElementById(button);
+          if (btn) btn.classList.remove("text-[#1e7cff]", "selected-glassbox");
+        });
+
+        toggleClasses(container, "hidden", "grid");
+        highlightButton(buttonId);
+
+        if (!mainContainers.includes(containerId)) {
+          const parentMapping = {
+            "fullbody-freckles-gallery": "body-references-selector",
+            "genitalia-gallery": "body-references-selector",
+            "hairstyle-ebyssia-gallery": "hairstyle-collection-selector",
+            "hairstyle-fifthteen-gallery": "hairstyle-collection-selector",
+            "hairstyle-thorns-gallery": "hairstyle-collection-selector",
+            "hairstyle-twinklex2-gallery": "hairstyle-collection-selector",
+            "attire-one-gallery": "attire-collection-selector",
+            "attire-three-gallery": "attire-collection-selector",
+          };
+          highlightButton(parentMapping[containerId]);
+        }
+      } else {
+        console.error(
+          `Element with ID "${containerId}" or Button with ID "${buttonId}" not found.`,
+        );
+      }
+    };
+
+    const addToggleEventListener = (buttonId, containerId, galleries) => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        const toggle = () => toggleVisibility(buttonId, containerId, galleries);
+        button.addEventListener("click", toggle);
+        button.addEventListener("keydown", (event) => {
+          if (["Enter", " "].includes(event.key)) {
+            event.preventDefault();
+            toggle();
+          }
+        });
+      } else {
+        console.error(`Button with ID "${buttonId}" not found.`);
+      }
+    };
+
+    const togglePairs = [
+      { button: "body-references-selector", container: "bodyrefs-container" },
+      {
+        button: "hairstyle-collection-selector",
+        container: "hairstyles-container",
+      },
+      { button: "attire-collection-selector", container: "attires-container" },
+      {
+        button: "fullbody-freckles-selector",
+        container: "fullbody-freckles-gallery",
+      },
+      { button: "genitalia-selector", container: "genitalia-gallery" },
+      {
+        button: "hairstyle-ebyssia-selector",
+        container: "hairstyle-ebyssia-gallery",
+      },
+      {
+        button: "hairstyle-fifthteen-selector",
+        container: "hairstyle-fifthteen-gallery",
+      },
+      {
+        button: "hairstyle-thorns-selector",
+        container: "hairstyle-thorns-gallery",
+      },
+      {
+        button: "hairstyle-twinklex2-selector",
+        container: "hairstyle-twinklex2-gallery",
+      },
+      { button: "attire-one-selector", container: "attire-one-gallery" },
+      { button: "attire-three-selector", container: "attire-three-gallery" },
+    ];
+
+    togglePairs.forEach(({ button, container }) =>
+      addToggleEventListener(button, container, togglePairs),
+    );
+
+    const getUrlParameter = (name) => {
+      const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
+      const results = regex.exec(location.search);
+      return results ? decodeURIComponent(results[1].replace(/\+/g, " ")) : "";
+    };
+
+    const showElement = (elementId) => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.classList.remove("hidden");
+        element.classList.add("grid");
+      }
+    };
+
+    const openParentContainers = (galleryId) => {
+      showElement(galleryId);
+
+      const parentMapping = {
+        "fullbody-freckles-gallery": "body-references-selector",
+        "genitalia-gallery": "body-references-selector",
+        "hairstyle-ebyssia-gallery": "hairstyle-collection-selector",
+        "hairstyle-fifthteen-gallery": "hairstyle-collection-selector",
+        "hairstyle-thorns-gallery": "hairstyle-collection-selector",
+        "hairstyle-twinklex2-gallery": "hairstyle-collection-selector",
+        "attire-one-gallery": "attire-collection-selector",
+        "attire-three-gallery": "attire-collection-selector",
+      };
+
+      const parentButtonId = parentMapping[galleryId];
+      if (parentButtonId) {
+        highlightButton(parentButtonId);
+      }
+
+      const childButton = togglePairs.find(
+        (pair) => pair.container === galleryId,
+      )?.button;
+      if (childButton) {
+        highlightButton(childButton);
+      }
+
+      if (galleryId.includes("attire")) {
+        showElement("attires-container");
+      } else if (galleryId.includes("hairstyle")) {
+        showElement("hairstyles-container");
+      } else if (galleryId.includes("fullbody") || galleryId.includes("body")) {
+        showElement("bodyrefs-container");
+      }
+    };
+
+    const page = getUrlParameter("page");
+    if (page) {
+      page.split(/[|,&]/).forEach((galleryId) => {
+        openParentContainers(galleryId);
+      });
+    }
+  });
+</script>

@@ -1,0 +1,35 @@
+.light {
+  font-family: "light", serif;
+  font-weight: light;
+  font-style: normal;
+}
+
+.italic-light {
+  font-family: "light", serif;
+  font-weight: light;
+  font-style: italic;
+}
+
+.regular {
+  font-family: "regular", serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.italic-regular {
+  font-family: "regular", serif;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.bold {
+  font-family: "bold", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.italic-bold {
+  font-family: "bold", serif;
+  font-weight: bold;
+  font-style: italic;
+}

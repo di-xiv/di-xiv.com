@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "regular";
+  src: url("/fonts/ppe-regular.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ultrabold";
+  src: url("/fonts/ppe-ultrabold.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ultralight";
+  src: url("/fonts/ppe-ultralight.otf") format("opentype");
+  font-display: swap;
+}
+/*
+
+*/
+.regular {
+  font-family: "regular", serif;
+}
+
+.ultrabold {
+  font-family: "ultrabold", serif;
+}
+
+.ultralight {
+  font-family: "ultralight", serif;
+}

@@ -1,0 +1,35 @@
+.back-button{
+  margin-bottom: 3vh;
+  padding: 1%;
+  transition: transform 0.5s;
+  width: 20%;
+  margin-left: 40%;
+  text-align: center;
+}
+.back-button:hover {
+  transform: scale(1.2);
+  z-index: 1;
+}
+
+.back-button:not(:hover) {
+  transform: scale(1);
+}
+
+.back-button-icon{
+  width: 32px;
+  height: 32px;
+  vertical-align: -5px;
+}
+
+@media (max-width: 800px) {
+  .back-button{
+    width: 45%;
+    margin-left: 27.5%;
+    vertical-align: -4.2px;
+  }
+  .back-button-icon{
+    width: 16px;
+    height: 16px;
+    vertical-align: -3px;
+  }
+}

@@ -1,0 +1,39 @@
+a {
+  transition: color 0.1s ease-in-out;
+}
+
+a > svg {
+  transition: color 0.1s ease-in-out;
+}
+
+svg {
+  transition: color 0.1s ease-in-out;
+}
+
+summary {
+  transition: color 0.1s ease-in-out;
+}
+a:hover {
+  transition: color 0.1s ease-in-out;
+}
+
+button {
+  text-decoration-line: none;
+  transition: text-decoration-line 0.1s ease-in-out;
+}
+
+button:hover {
+  transition: text-decoration-line 0.1s ease-in-out;
+}
+
+button {
+  transition: border-color 0.1s ease-in-out;
+}
+
+details summary {
+  cursor: pointer;
+  user-select: none;
+}
+details[open] > summary {
+  text-decoration: none;
+}

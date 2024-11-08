@@ -1,0 +1,19 @@
+.width-15vw{
+    width: 15vw;
+}
+
+.width-25vw{
+    width: 25vw;
+}
+
+.width-33vw{
+    width: 33vw;
+}
+
+.width-50vw{
+    width: 50vw;
+}
+
+.boxsize-borderbox{
+    box-sizing: border-box;
+}

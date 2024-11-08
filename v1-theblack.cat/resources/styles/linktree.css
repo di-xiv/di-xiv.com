@@ -1,0 +1,87 @@
+.linktree-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72vh;
+    width: 63vw;
+    margin-top: 15vh;
+    margin-left: 18.5%;
+  }
+  
+  .linktree-button {
+    overflow: hidden;
+    display: inline-block;
+    transition: transform 0.5s;
+    width: 50vw;
+    height: 60vh;
+  }
+
+  /* --- */
+  
+  .linktree-button-left{
+    margin-right: 8%;
+    margin-left: 2%;
+  }
+
+  .linktree-button-right{
+    margin-left: 6%;
+    margin-right: 2%;
+  }
+
+  /* --- */
+    
+  .linktree-button:hover {
+    transform: scale(1.06);
+    z-index: 1;
+  }
+  
+  .linktree-button:not(:hover) {
+    transform: scale(1);
+  }
+
+  .pfp-chaosringen-sketch-background {
+    background-image: url('https://cdn.theblack.cat/resources/background/vertical/chaosringen-color-vertical.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+
+  .freepik-capybara {
+    background-image: url('https://cdn.theblack.cat/resources/background/vertical/freepik-capybara-vertical.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* --- */
+
+  @media (max-width: 1400px) {
+    .linktree-container {
+      width: 72vw;
+      height: 68vh;
+      margin-left: 13%;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .linktree-button-left{
+      margin-bottom: 3vh;
+    }
+
+    .linktree-button {
+      display: inline-block;
+      transition: transform 0.5s;
+      width: 50vw;
+      height: 40vh;
+      margin-left: 12vw;
+    }
+    
+    .pfp-chaosringen-sketch-background {
+      background-image: url('https://cdn.theblack.cat/resources/background/horizontal/chaosringen-color-horizontal.png');
+    }
+
+    .freepik-capybara {
+      background-image: url('https://cdn.theblack.cat/resources/background/vertical/freepik-capybara-vertical.avif');
+    }
+  
+  }

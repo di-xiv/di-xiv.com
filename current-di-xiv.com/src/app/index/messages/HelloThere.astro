@@ -1,0 +1,18 @@
+---
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { locale } = Astro.props;
+
+const helloThereMessage = {
+  en: "Hello there 🐈‍⬛",
+  ja: "やあ🐈‍⬛",
+  es: "Hey 🐈‍⬛",
+  pt: "Olá 🐈‍⬛",
+};
+---
+
+<div class="text-center">
+  <p class="light">{helloThereMessage[locale]}</p>
+</div>

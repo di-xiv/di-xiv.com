@@ -1,0 +1,154 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import HomeButton from "@/components/header/nav-buttons/Home-Button.astro";
+//
+import AllContactButtons from "@/components/contact/AllContactButtons.astro";
+import SimpleTopRightToast from "@/components/contact/contact-buttons/SimpleTopRightToast.astro";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedDiscordToast: string;
+  localizedEmailToast: string;
+  localizedBackToHome: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+  localizedCheckingYourBrowser: string | { __html: string };
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedDiscordToast,
+  localizedEmailToast,
+  localizedBackToHome,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedClickToCopy,
+  localizedLinkTo,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+  localizedCheckingYourBrowser,
+} = Astro.props as Props;
+//
+let LocalizedContactContent;
+try {
+  LocalizedContactContent = await import(
+    `../components/contact/${footerLocale}/Contact.mdx`
+  );
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+>
+  <div
+    id="toasts-container"
+    class="fixed top-[5%] mobile-only:top-[2%] right-[5%] mobile-only:right-[2%] z-20 flex flex-col items-end gap-2"
+  >
+    <SimpleTopRightToast
+      localizedToast={localizedDiscordToast}
+      toastID="discord-toast"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/contact/discord-icon-svgrepo-com.svg"
+        class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+      />
+    </SimpleTopRightToast>
+    <SimpleTopRightToast
+      localizedToast={localizedEmailToast}
+      toastID="email-toast"
+    >
+      <img
+        slot="inline-svg"
+        src="/icons/cards/contact/email-mail-svgrepo-com.svg"
+        class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+      />
+    </SimpleTopRightToast>
+  </div>
+  <div class="mt-[2%] mobile-only:mt-[5%]">
+    <div id="contact-buttons-wrapper">
+      <AllContactButtons
+        localizedClickToCopy={localizedClickToCopy}
+        localizedLinkTo={localizedLinkTo}
+      />
+    </div>
+  </div>
+  <div
+    id="mdx-wrapper"
+    class="mdx-container grid grid-cols-1 gap-3 glassbox p-5 rounded-lg mt-[2%]"
+  >
+    <div class="ultrawide-only:ml-[10%]">
+      {
+        LocalizedContactContent ? (
+          <LocalizedContactContent.default />
+        ) : (
+          <div>Error loading component</div>
+        )
+      }
+    </div>
+  </div>
+  <HomeButton localizedText={localizedBackToHome} homeURL={headerHref} />
+</Master>

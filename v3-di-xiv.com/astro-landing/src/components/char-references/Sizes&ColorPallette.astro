@@ -1,0 +1,91 @@
+---
+import BasicHorizontalGalleryEngine from "@/components/char-references/gallery-engines/BasicHorizontalGalleryEngine.astro";
+interface Props {
+  lang: string;
+  localizedSizesColorPallete: string;
+  localizedAttireArtworks: string;
+  localizedCharacterSheetArtworks: string;
+  localizedDismiss: string;
+  localizedClickToZoom: string;
+  localizedDownload: string;
+}
+
+const {
+  lang,
+  localizedSizesColorPallete,
+  localizedAttireArtworks,
+  localizedCharacterSheetArtworks,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props as Props;
+
+let LocalizedMDX;
+try {
+  LocalizedMDX = await import(`./${lang}/SizesNdColorPallete.mdx`);
+} catch (e) {
+  console.error("Error loading localized component:", e);
+}
+---
+
+<details
+  id="sizes-and-color-pallete"
+  class="glassbox p-3 mobile-only:p-2 rounded-md"
+  title={localizedSizesColorPallete}
+>
+  <summary class="mb-[1%] mt-[1%] flex items-center">
+    <div class="inline-block mr-2 dark:invert">
+      <img
+        slot="inline-svg"
+        src="/icons/cards/charrefs/colors-svgrepo-com.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-1"
+      />
+    </div>
+    <span class="regular text-2xl inline-block">
+      {localizedSizesColorPallete}
+    </span>
+  </summary>
+
+  <div class="mdx-container p-2 mb-[1%] mt-[1%]">
+    {
+      LocalizedMDX ? (
+        <LocalizedMDX.default />
+      ) : (
+        <div>Error loading component</div>
+      )
+    }
+
+    <article class="grid grid-cols-1 gap-2 mt-[3%] mb-[2%]">
+      <details
+        id="character-sheet-artworks"
+        class="glassbox p-2 rounded-md"
+        title={localizedCharacterSheetArtworks}
+      >
+        <summary class="ultralight text-lg">
+          ❈ 🖼️ {localizedCharacterSheetArtworks} 🔞
+        </summary>
+        <BasicHorizontalGalleryEngine
+          apiURL="https://api.di-xiv.com/gallery?include_tag_id=25"
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          localizedDownload={localizedDownload}
+        />
+      </details>
+      <details
+        id="character-attire-artworks"
+        class="glassbox p-2 rounded-md"
+        title={localizedAttireArtworks}
+      >
+        <summary class="ultralight text-lg">
+          ❈ 👘 {localizedAttireArtworks} 🔞
+        </summary>
+        <BasicHorizontalGalleryEngine
+          apiURL="https://api.di-xiv.com/gallery?include_tag_id=24"
+          localizedClickToZoom={localizedClickToZoom}
+          localizedDismiss={localizedDismiss}
+          localizedDownload={localizedDownload}
+        />
+      </details>
+    </article>
+  </div>
+</details>

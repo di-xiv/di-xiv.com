@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+import SimpleTooltip from "@/components/text/SimpleTooltip";
+import A from "@/components/text/SimpleInlineAnchor";
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedHostedOn = {
+  en: "Hosted on",
+  ja: "ホスティング先",
+  es: "Alojado en",
+  pt: "Hospedado em",
+};
+---
+
+<div
+  id="hosted-on"
+  class="gap-2 border-l border-solid border-[efefef] p-2"
+  title={localizedHostedOn[locale]}
+  aria-label={localizedHostedOn[locale]}
+>
+  <SimpleTooltip client:load content={localizedHostedOn[locale]}>
+    <p class="cursor-help regular mb-2">
+      🏠&nbsp;{localizedHostedOn[locale]}
+    </p>
+    <div class="flex items-center gap-x-2">
+      <SimpleTooltip client:load content="GitHub">
+        <A
+          id="github-badge"
+          className="flex items-center"
+          h="https://github.com/"
+        >
+          <img
+            class="w-7 mobile-only:w-5 h-auto dark:invert"
+            src="/icons/content/ack/mdi--github.svg"
+            alt="GitHub Icon"
+          />
+        </A>
+      </SimpleTooltip>
+      <SimpleTooltip client:load content="Cloudflare Pages">
+        <A
+          id="cloudflare-pages-badge"
+          className="flex items-center"
+          h="https://pages.cloudflare.com/"
+        >
+          <Image
+            width={28}
+            height={28}
+            src="/icons/content/ack/simple-icons--cloudflarepages.svg"
+            alt="Cloudflare Pages Icon"
+            class="w-8 mobile-only:w-5 h-auto"
+          />
+        </A>
+      </SimpleTooltip>
+    </div>
+  </SimpleTooltip>
+</div>

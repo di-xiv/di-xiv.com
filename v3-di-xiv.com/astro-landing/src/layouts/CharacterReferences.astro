@@ -1,0 +1,172 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import HomeButton from "@/components/header/nav-buttons/Home-Button.astro";
+//
+import ArtworksForArtists from "@/components/char-references/ArtworksForArtists.astro";
+//
+import WCIF from "@/components/char-references/WCIF.astro";
+import SizesColorPallette from "@/components/char-references/Sizes&ColorPallette.astro";
+import DesignReferences from "@/components/char-references/DesignReferences.astro";
+import "@/styles/mdx.css";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedDesignReferences: string;
+  localizedAttireArtworks: string;
+  localizedAttireShots: string;
+  localizedBodyReferences: string;
+  localizedHairstyles: string;
+  localizedFullbodyFreckles: string;
+  localizedGenitalia: string;
+  localizedCharacterSheetArtworks: string;
+  localizedSizesColorPallete: string;
+  localizedWCIF: string;
+  localizedCopiedCustomizeString: string;
+  localizedCopiedGlamourerString: string;
+  localizedBackToHome: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedDownloadAttires: string;
+  localizedDownloadBodyRefs: string;
+  localizedDownloadHairstyles: string;
+  localizedLoading: string;
+  localizedSpecialReferenceSummary: string;
+  localizedDownloadThis: string;
+  localizedDismiss: string;
+  localizedClickToZoom: string;
+  localizedDownload: string;
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+  localizedCheckingYourBrowser: string | { __html: string };
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedDesignReferences,
+  localizedBodyReferences,
+  localizedAttireShots,
+  localizedHairstyles,
+  localizedFullbodyFreckles,
+  localizedGenitalia,
+  localizedAttireArtworks,
+  localizedCharacterSheetArtworks,
+  localizedSizesColorPallete,
+  localizedWCIF,
+  localizedCopiedCustomizeString,
+  localizedCopiedGlamourerString,
+  localizedBackToHome,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedDownloadAttires,
+  localizedDownloadBodyRefs,
+  localizedDownloadHairstyles,
+  localizedLoading,
+  localizedSpecialReferenceSummary,
+  localizedDownloadThis,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+  localizedCheckingYourBrowser,
+} = Astro.props as Props;
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCheckingYourBrowser}
+>
+  <div class="grid grid-cols-1 gap-4 mt-[2%] mobile-only:mt-[5%]">
+    <ArtworksForArtists
+      localizedLoading={localizedLoading}
+      localizedSpecialReferenceSummary={localizedSpecialReferenceSummary}
+    />
+    <DesignReferences
+      localizedDesignReferences={localizedDesignReferences}
+      localizedAttireShots={localizedAttireShots}
+      localizedBodyReferences={localizedBodyReferences}
+      localizedFullbodyFreckles={localizedFullbodyFreckles}
+      localizedHairstyles={localizedHairstyles}
+      localizedGenitalia={localizedGenitalia}
+      localizedDownloadAttires={localizedDownloadAttires}
+      localizedDownloadBodyRefs={localizedDownloadBodyRefs}
+      localizedDownloadHairstyles={localizedDownloadHairstyles}
+      localizedDownloadThis={localizedDownloadThis}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+    />
+    <SizesColorPallette
+      lang={footerLocale}
+      localizedSizesColorPallete={localizedSizesColorPallete}
+      localizedAttireArtworks={localizedAttireArtworks}
+      localizedCharacterSheetArtworks={localizedCharacterSheetArtworks}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+    />
+    <WCIF
+      lang={footerLocale}
+      trueLocale={locale}
+      localizedWCIF={localizedWCIF}
+      localizedCopiedCustomizeString={localizedCopiedCustomizeString}
+      localizedCopiedGlamourerString={localizedCopiedGlamourerString}
+    />
+  </div>
+  <HomeButton localizedText={localizedBackToHome} homeURL={headerHref} />
+</Master>

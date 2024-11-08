@@ -1,0 +1,20 @@
+a:hover {
+  color: #ff781e;
+}
+details[open] > summary {
+  color: #ff781e;
+}
+
+summary:hover {
+  color: #ff781e;
+}
+/* @media (prefers-color-scheme: dark) {
+  a:hover {
+    color: #000000;
+  }
+}
+@media (prefers-color-scheme: light) {
+  a:hover {
+    color: #ffffff;
+  }
+} */

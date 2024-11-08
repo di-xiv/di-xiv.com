@@ -1,0 +1,139 @@
+/* Smartbox */
+
+.contact-smartbox{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+@media (max-width: 1439px) {
+    .contact-smartbox{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+@media (max-width: 900px) {
+    .contact-smartbox{
+        margin-left:5%;
+        margin-right: 5%;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .contact-smartbox{
+        margin-left: 10%;
+        margin-right: 10%;
+    }    
+}
+
+/* Contact Content */
+
+.contact-box-info{
+    min-height: 1vh;
+}
+
+@media (max-width: 700px) {
+    .contact-box-info{
+        min-height: 3vh;
+    }
+} 
+
+/* Inline Icons */
+
+.contact-inline-icon{
+    margin-left: 0.32vw;
+    margin-right: 0.25vw;
+    width: 28px;
+    height: 28px;
+    vertical-align: -0.5vh;
+}
+
+@media (max-width: 700px) {
+    .contact-inline-icon{
+        margin-left: 1vw;
+        margin-right: 1vw;
+        width: 18px;
+        height: 18px;
+        vertical-align: -0.5vh;
+    }
+} 
+
+/* Copy Buttons */
+
+.contact-copy-button{
+    display: inline-block;
+    width: 23px;
+    height: 23px; 
+    vertical-align: 0.5vh;
+    transition: transform 0.5s;
+}
+
+.contact-copy-button:hover {
+    transform: scale(1.2);
+    z-index: 1;
+  }
+  
+.contact-copy-button:not(:hover) {
+    transform: scale(1);
+  }
+
+@media (max-width: 700px) {
+    .contact-copy-button{
+        width: 12px;
+        height: 12px; 
+        vertical-align: 0.2vh;
+    }
+}
+
+/* New Page Link Icon */
+
+.new-window-icon{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-left: 0.2vw;
+    vertical-align: 0.6vh;
+}
+
+@media (max-width: 700px) {
+    .new-window-icon{
+        width: 9px;
+        height: 9px;
+        margin-left: 0.8vw;
+        vertical-align: 0.6vh;
+    }
+    .contact-copy-button:hover {
+        transform: scale(1.4);
+    }
+    .icon-verticalalign-2vh{
+        vertical-align: -2vh;
+    }
+}
+.icon-verticalalign-2vh{
+    vertical-align: -1vh;
+}
+
+/* Buttons */
+
+.contact-options-buttons{
+    min-height: 35px;
+    justify-content: center;
+    align-items: center;
+}
+
+.hovered{
+    background-color: rgb(24, 124, 255) !important;
+}
+
+.contact-options-buttons:hover{
+    background-color: rgb(57, 140, 248);
+}
+
+@media (max-width: 700px) {
+    .contact-options-buttons:hover{
+        min-height: 45px;
+    }
+}
+
+

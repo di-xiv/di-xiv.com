@@ -1,0 +1,64 @@
+---
+interface Props {
+  copyButtonID: string;
+  copyButtonContent: string;
+  copyButtonText: string;
+  copyButtonToastID: string;
+  localizedTitleCopy: string;
+}
+
+const {
+  copyButtonID,
+  copyButtonContent,
+  copyButtonText,
+  copyButtonToastID,
+  localizedTitleCopy,
+} = Astro.props as Props;
+---
+
+<a
+  id={copyButtonID}
+  role="button"
+  tabindex="0"
+  class="border-transparent border-b p-2 w-auto h-auto select-none
+  hover:border-b hover:border-solid text-nowrap button-glassbox rounded-md
+  mobile-only:w-[95%]"
+  title={`${localizedTitleCopy}: ${copyButtonText}`}
+>
+  <div class="flex items-center">
+    <div class="inline-block">
+      <slot name="inline-svg" />
+    </div>
+    <div class="inline-block">
+      <span class="ultralight ml-1 text-xl mobile-only:text-lg">
+        {copyButtonText} ⎘
+      </span>
+    </div>
+  </div>
+</a>
+
+<script define:vars={{ copyButtonID, copyButtonContent, copyButtonToastID }}>
+  document
+    .getElementById(copyButtonID)
+    .addEventListener("mousedown", function (event) {
+      if (event.button === 0 || event.button === 1 || event.button === 2) {
+        navigator.clipboard
+          .writeText(copyButtonContent)
+          .then(function () {
+            const toast = document.getElementById(copyButtonToastID);
+            toast.classList.remove("hidden");
+            toast.classList.add("flex");
+            setTimeout(function () {
+              toast.classList.remove("flex");
+              toast.classList.add("hidden");
+            }, 3000);
+          })
+          .catch(function (err) {
+            console.error("Could not copy text: ", err);
+          });
+        if (event.button === 2) {
+          event.preventDefault();
+        }
+      }
+    });
+</script>

@@ -1,0 +1,49 @@
+.mdx-container h2,
+h3 {
+  font-family: regular, serif;
+  user-select: none;
+}
+.mdx-container h2 {
+  font-size: clamp(1.3rem, 1vw + 0.5rem, 2rem);
+  display: inline-block;
+}
+.mdx-container h3 {
+  font-size: clamp(1.2rem, 1vw + 0.5rem, 1.8rem);
+  line-height: 2;
+  margin-left: 4%;
+}
+.mdx-container p {
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.4rem);
+  line-height: 2;
+  margin-left: 4%;
+}
+.mdx-container {
+  font-family: ultralight, serif;
+}
+
+.mdx-container a {
+  color: #1e7cff;
+}
+
+.mdx-container a:hover {
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+  transition: underline 0.2s ease-in-out;
+}
+
+.mdx-container ul {
+  list-style: none;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.4rem);
+  margin-left: 4%;
+}
+.mdx-container ol {
+  list-style: decimal;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.4rem);
+  margin-left: 4%;
+}
+
+.mdx-container ul li::before {
+  content: "❈";
+  left: 0;
+  margin-right: 0.25rem;
+}

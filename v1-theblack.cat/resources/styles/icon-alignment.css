@@ -1,0 +1,38 @@
+.back-button-icon{
+    width: 32px;
+    height: 32px;
+    vertical-align: -5px;
+  }
+
+.goToTop-placement{
+  margin-left: 50vw;
+  margin-bottom: 2vh;
+}
+
+.goToTop-icon{
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 800px) {
+    .back-button-icon{
+      width: 20px;
+      height: 20px;
+      vertical-align: -4.3px;
+    }
+    .site-map-icon{
+      vertical-align: 3.8px;
+    }
+    .goToTop-icon{
+      width: 24px;
+      height: 24px;
+    }
+    .goToTop-placement{
+      margin-left: 45vw;
+      margin-bottom: 2vh;
+    }
+  }
+
+  .site-map-icon{
+    vertical-align: -5.4px;
+  }

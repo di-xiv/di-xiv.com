@@ -1,0 +1,50 @@
+#wcif-page{
+    padding: 3vw;
+    margin-top: 10%;
+    margin-left:22.5vw;
+    margin-right:22.5vw;
+    padding:3vw;
+}
+
+#wcif-revert{
+    border: 2px solid transparent;
+    padding: 3px;
+    cursor: pointer;
+    width: 23vw;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+    margin-left:37vw;
+    transition: transform ease 0.3s;
+}
+
+#wcif-revert:hover{
+    transform: scale(1.1);
+}
+
+#wcif-revert:hover span, img{
+    color:rgb(24, 124, 255);
+}
+
+#wcif-revert-icon{
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 819px) {
+    #wcif-page{
+        margin-top: 18%;
+        padding: 3px;
+        margin-bottom:4vh;
+        width: 90%;
+        margin-left:2%;
+        padding:3vw;
+    }
+    #wcif-revert{
+        margin-bottom: 2vh;
+    }
+}

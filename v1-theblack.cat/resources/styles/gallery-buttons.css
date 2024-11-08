@@ -1,0 +1,94 @@
+.galleries-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    height: 68vh;
+    margin-left: 12.5%;
+  }
+  
+  .galleries-button {
+    overflow: hidden;
+    display: inline-block;
+    width: 75%;
+    height: 75%;
+  }
+
+  .galleries-button-left{
+    margin-left: 3vh;
+    margin-right: 3vh;
+  }
+
+  .galleries-button-right{
+    margin-left: 3vh;
+    margin-right: 3vh;
+  }
+
+  @media (min-width: 1600px) {
+  }
+
+  @media (max-width: 1200px) {
+    .galleries-container {
+      width: 100%;
+      height: 76vh;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left:0;
+      margin-bottom: 3vh;
+    }
+
+    .galleries-button {
+      display: inline-block;
+      transition: transform 0.5s;
+      width:55%;
+      height: 40vh;
+      margin-left: 22%;
+    }
+
+    .galleries-button-left{
+      margin-bottom: 3vh;
+    }
+
+    .galleries-button-right{
+      margin-top: 3vh;
+    }
+  }
+
+  /* --- */
+
+  .galleries-button {
+    transition: transform 0.3s;
+  }
+  
+  .galleries-button:hover {
+    transform: scale(1.06);
+    z-index: 1;
+  }
+  
+  .galleries-button:not(:hover) {
+    transform: scale(1);
+  }
+
+/* --- */
+
+ #body-reference-gallery {
+    background-image: url('https://cdn.theblack.cat/resources/background/horizontal/vitruvian-man.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  #skeb-reference-gallery {
+    background-image: url('https://cdn.theblack.cat/resources/background/horizontal/brucelyon-bodyprop.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #gdrive-gallery-folder{
+    background-image: url('https://cdn.theblack.cat/resources/thank-you-flaticons/colordrive.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  

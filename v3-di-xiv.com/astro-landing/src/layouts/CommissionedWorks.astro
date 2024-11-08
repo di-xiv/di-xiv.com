@@ -1,0 +1,130 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import SimpleTurnstileWidget from "@/components/reusables/SimpleTurnstileWidget.astro";
+//
+import HomeButton from "@/components/header/nav-buttons/Home-Button.astro";
+// Commissioned Works
+import CWGalleryEngine from "@/components/commworks/CWGalleryEngine.astro";
+//
+interface Props {
+  locale: string;
+  footerLocale: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageWidth: string;
+  metaImageHeight: string;
+  metaImageAlt: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+  headerCurrentPage: string;
+  localizedCaptchaNotice: string | { __html: string };
+  localizedRatingSelector: string;
+  localizedTagSelector: string;
+  localizedLoading: string;
+  localizedAllGalleriesToast: string;
+  localizedNowViewing: string;
+  localizedGalleryRating: string;
+  localizedTagRating: string;
+  localizedBackToHome: string;
+  localizedOtherLinks: string;
+  localizedWhy: string;
+  localizedSiteMap: string;
+  localizedAcknoledgements: string;
+  localizedCopyrightNotice: string | { __html: string };
+  localizedLoadingError: string;
+  localizedDismissZoom: string;
+  localizedZoom: string;
+  localizedTakedown: string;
+  localizedInquiries: string;
+  localizedDMCA: string;
+}
+
+const {
+  locale,
+  footerLocale,
+  metaTitle,
+  metaDescription,
+  metaKeywords,
+  metaImageURL,
+  metaImageFormat,
+  metaImageWidth,
+  metaImageHeight,
+  metaImageAlt,
+  headerTitle,
+  headerMobileTitle,
+  headerHref,
+  headerCurrentPage,
+  localizedCaptchaNotice,
+  localizedRatingSelector,
+  localizedTagSelector,
+  localizedLoading,
+  localizedAllGalleriesToast,
+  localizedNowViewing,
+  localizedGalleryRating,
+  localizedTagRating,
+  localizedBackToHome,
+  localizedOtherLinks,
+  localizedWhy,
+  localizedSiteMap,
+  localizedAcknoledgements,
+  localizedCopyrightNotice,
+  localizedLoadingError,
+  localizedDismissZoom,
+  localizedZoom,
+  localizedTakedown,
+  localizedInquiries,
+  localizedDMCA,
+} = Astro.props as Props;
+---
+
+<Master
+  locale={locale}
+  footerLocale={footerLocale}
+  metaTitle={metaTitle}
+  metaKeywords={metaKeywords}
+  metaDescription={metaDescription}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+  headerTitle={headerTitle}
+  headerMobileTitle={headerMobileTitle}
+  headerHref={headerHref}
+  headerCurrentPage={headerCurrentPage}
+  localizedOtherLinks={localizedOtherLinks}
+  localizedWhy={localizedWhy}
+  localizedSiteMap={localizedSiteMap}
+  localizedAcknoledgements={localizedAcknoledgements}
+  localizedCopyrightNotice={localizedCopyrightNotice}
+  localizedDMCA={localizedDMCA}
+  localizedInquiries={localizedInquiries}
+  localizedTakedown={localizedTakedown}
+  localizedCheckingYourBrowser={localizedCaptchaNotice}
+>
+  <SimpleTurnstileWidget
+    localizedCheckingYourBrowser={localizedCaptchaNotice}
+    turnstileID="commworks-turnstile"
+    protectedElementID="commworks-container"
+  />
+  <div id="commworks-container" class="hidden mt-[2%] mobile-only:mt-[5%]">
+    <CWGalleryEngine
+      localizedAllGalleries={localizedAllGalleriesToast}
+      localizedGalleryRating={localizedGalleryRating}
+      localizedLoading={localizedLoading}
+      localizedNowViewing={localizedNowViewing}
+      localizedPerRating={localizedRatingSelector}
+      localizedPerTag={localizedTagSelector}
+      localizedTagRating={localizedTagRating}
+      localizedLoadingError={localizedLoadingError}
+      localizedZoom={localizedZoom}
+      localizedDismiss={localizedDismissZoom}
+    />
+  </div>
+  <HomeButton localizedText={localizedBackToHome} homeURL={headerHref} />
+</Master>

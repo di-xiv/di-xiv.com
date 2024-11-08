@@ -1,0 +1,161 @@
+---
+interface Props {
+  blockquoteType: "info" | "tip" | "warning" | "danger" | "important";
+}
+
+const { blockquoteType } = Astro.props as Props;
+---
+
+<style>
+  blockquote {
+    border-left: 2px solid black;
+  }
+
+  blockquote.info {
+    border-color: blue;
+  }
+
+  blockquote.tip {
+    border-color: green;
+  }
+
+  blockquote.warning {
+    border-color: yellow;
+  }
+
+  blockquote.danger {
+    border-color: red;
+  }
+
+  blockquote.important {
+    border-color: purple;
+  }
+</style>
+
+<blockquote class={blockquoteType}>
+  {
+    blockquoteType === "info" && (
+      <div class="dark:invert inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-auto dark:invert"
+          viewBox="0 0 48 48"
+        >
+          <g fill="none">
+            <path
+              stroke="currentColor"
+              stroke-linejoin="round"
+              stroke-width="4"
+              d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
+            />
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M24 11a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5"
+              clip-rule="evenodd"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="4"
+              d="M24.5 34V20h-2M21 34h7"
+            />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    blockquoteType === "tip" && (
+      <div class="dark:invert inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-auto dark:invert"
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            color="currentColor"
+          >
+            <path d="M5.143 14A7.8 7.8 0 0 1 4 9.919C4 5.545 7.582 2 12 2s8 3.545 8 7.919A7.8 7.8 0 0 1 18.857 14" />
+            <path d="M14 10c-.613.643-1.289 1-2 1s-1.387-.357-2-1m-2.617 7.098c-.092-.276-.138-.415-.133-.527a.6.6 0 0 1 .382-.53c.104-.041.25-.041.54-.041h7.656c.291 0 .436 0 .54.04a.6.6 0 0 1 .382.531c.005.112-.041.25-.133.527c-.17.511-.255.767-.386.974a2 2 0 0 1-1.2.869c-.238.059-.506.059-1.043.059h-3.976c-.537 0-.806 0-1.043-.06a2 2 0 0 1-1.2-.868c-.131-.207-.216-.463-.386-.974M15 19l-.13.647c-.14.707-.211 1.06-.37 1.34a2 2 0 0 1-1.113.912C13.082 22 12.72 22 12 22s-1.082 0-1.387-.1a2 2 0 0 1-1.113-.913c-.159-.28-.23-.633-.37-1.34L9 19m3-3.5V11" />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    blockquoteType === "warning" && (
+      <div class="dark:invert inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-auto dark:invert"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M1 21L12 2l11 19zm3.45-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m-1-3h2v-5h-2zm1-2.5"
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    blockquoteType === "danger" && (
+      <div class="dark:invert inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-auto dark:invert"
+          viewBox="0 0 24 24"
+        >
+          <g fill="none">
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              d="M12 7v6"
+            />
+            <circle cx="12" cy="16" r="1" fill="currentColor" />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    blockquoteType === "important" && (
+      <div class="dark:invert inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-auto dark:invert"
+          viewBox="0 0 16 16"
+          version="1.1"
+        >
+          <path
+            stroke="currentColor"
+            d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  <div class="inline-block">
+    <slot name="blockquote-content" />
+  </div>
+</blockquote>

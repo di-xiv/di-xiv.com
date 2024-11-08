@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "setup-database": "npx wrangler d1 delete di-xiv-gallery --y && npx wrangler d1 create di-xiv-gallery && npx wrangler d1 execute di-xiv-gallery --remote --file=master.sql --y"
+  },
+  "dependencies": {
+    "wrangler": "^3.75.0"
+  }
+}

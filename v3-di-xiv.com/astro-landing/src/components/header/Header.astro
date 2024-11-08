@@ -1,0 +1,54 @@
+---
+interface Props {
+  currentPage: string;
+  headerTitle: string;
+  headerMobileTitle: string;
+  headerHref: string;
+}
+
+const { currentPage, headerTitle, headerMobileTitle, headerHref } =
+  Astro.props as Props;
+---
+
+<header class="items-center justify-evenly inline-block" slot="header-title">
+  <a
+    data-astro-prefetch="hover"
+    href={headerHref}
+    id="header-wrapper"
+    class="flex items-center mobile-only:mb-2 mobile-only:mt-2"
+    title={headerTitle}
+  >
+    {
+      currentPage === "index" && (
+        <div id="wingspan-icon-wrapper-index" class="inline-block">
+          <img
+            src="/icons/favicon.ico"
+            alt="Di-XIV brand icon"
+            class="h-24 w1366:h-20 w905:h-16 mobile-only:h-12 w-auto relative -top-1"
+          />
+        </div>
+      )
+    }
+    {
+      currentPage !== "index" && (
+        <div class="flex items-center">
+          <div id="wingspan-icon-wrapper" class="inline-block">
+            <img
+              src="/icons/favicon.ico"
+              alt="Di-XIV brand icon"
+              class="h-12 mobile-only:h-8 w-auto relative -top-1"
+            />
+          </div>
+          <div id="header-text" class="inline-block">
+            <h1 class="regular text-3xl select-none block mobile-only:hidden w1366:text-2xl">
+              {headerTitle}
+            </h1>
+            <h1 class="regular text-lg select-none hidden mobile-only:block">
+              {headerMobileTitle}
+            </h1>
+          </div>
+        </div>
+      )
+    }
+  </a>
+</header>

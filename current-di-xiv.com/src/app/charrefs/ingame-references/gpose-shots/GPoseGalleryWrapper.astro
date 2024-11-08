@@ -1,0 +1,44 @@
+---
+import BasicReferenceGalleryEngine from "@/app/charrefs/gallery-engines/BasicReferenceGalleryEngine.astro";
+//
+interface Props {
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+const { localizedClickToZoom, localizedDismiss, localizedDownload } =
+  Astro.props;
+
+const InGameShotsGallery = [
+  { apiURL: "Fullbody%20without%20tattoos", title: "🍑" },
+  { apiURL: "Horsecock", title: "🍆" },
+] as const;
+---
+
+<div class="my-4">
+  <div class="grid not-mobile:grid-cols-2 mobile-only:grid-cols-1 gap-2">
+    {
+      InGameShotsGallery.map((item) => (
+        <details
+          id={item.title}
+          class="mobile-only:p-1 rounded shadowless-glassbox  p-2"
+          open={false}
+        >
+          <summary
+            class="text-large"
+            aria-label={item.title}
+            title={item.title}
+          >
+            {item.title}
+          </summary>
+          <BasicReferenceGalleryEngine
+            localizedClickToZoom={localizedClickToZoom}
+            localizedDismiss={localizedDismiss}
+            localizedDownload={localizedDownload}
+            apiURL={`https://api.di-xiv.com/references?include_reference_gallery_name=${item.apiURL}`}
+          />
+        </details>
+      ))
+    }
+  </div>
+</div>

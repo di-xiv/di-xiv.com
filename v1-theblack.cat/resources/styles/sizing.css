@@ -1,0 +1,29 @@
+.width-15vw{
+    width: 15vw;
+}
+
+.width-25vw{
+    width: 25vw;
+}
+
+.width-33vw{
+    width: 20vw;
+}
+
+.width-50vw{
+    width: 50vw;
+}
+
+.width-2em{
+    width: 32px;
+}
+
+.image-width-33vw{
+    width: 20vw;
+}
+
+@media (max-width: 800px) {
+    .image-width-33vw{
+        width: 100%;
+    }
+}

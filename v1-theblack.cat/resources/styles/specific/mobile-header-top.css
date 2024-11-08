@@ -1,0 +1,27 @@
+.mobile-header{
+    position: fixed;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 3vh;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    top: 1vh;
+}
+
+.special-margin-top{
+    margin-top: 10vh;
+}
+
+.special-margin-top-contact{
+    margin-top: 10vh;
+}
+
+@media (max-width: 800px) {
+    .special-margin-top{
+        margin-top: 13vh;
+    }
+    .special-margin-top-contact{
+        margin-top: 9vh;
+    }
+}

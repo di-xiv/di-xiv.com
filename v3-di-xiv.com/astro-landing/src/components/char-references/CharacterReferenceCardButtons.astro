@@ -1,0 +1,82 @@
+---
+import "@/styles/dark-mode.css";
+
+interface Props {
+  localizedCharacterSheet: string;
+  localizedFFXIVWCIF: string;
+  localizedGeneralData: string;
+  localizedRoute: string;
+}
+
+const {
+  localizedCharacterSheet,
+  localizedFFXIVWCIF,
+  localizedGeneralData,
+  localizedRoute,
+} = Astro.props as Props;
+
+function getLocalizedPath(page: string) {
+  return localizedRoute
+    ? `/${localizedRoute}/character-references?page=${page}`
+    : `/character-references?page=${page}`;
+}
+---
+
+<div id="char-refs-button-container" class="mt-[2.5%] flex justify-center">
+  <div class="grid grid-cols-3 mobile-only:grid-cols-1 gap-3 select-none">
+    <a
+      id="charsheet-directlink"
+      data-astro-prefetch="hover"
+      href={getLocalizedPath("design-references")}
+      title={localizedCharacterSheet}
+    >
+      <div class="flex items-center button-glassbox p-2 rounded-md">
+        <img
+          slot="inline-svg"
+          src="/icons/cards/charrefs/sketchbook-sketch-svgrepo-com.svg"
+          class="h-11 mobile-only:h-6 w-auto mr-1"
+        />
+        <span class="ultralight cursor-pointer underline-offset-2 text-xl">
+          {localizedCharacterSheet}
+        </span>
+      </div>
+    </a>
+    <a
+      data-astro-prefetch="hover"
+      id="sizes-and-colors-directlink"
+      href={getLocalizedPath("sizes-and-color-pallete")}
+      title={localizedGeneralData}
+    >
+      <div class="flex items-center button-glassbox p-2 rounded-md">
+        <div class="dark:invert">
+          <img
+            slot="inline-svg"
+            src="/icons/cards/charrefs/colors-svgrepo-com.svg"
+            class="h-11 mobile-only:h-6 w-auto mr-1"
+          />
+        </div>
+        <span class="ultralight cursor-pointer underline-offset-2 text-xl">
+          {localizedGeneralData}
+        </span>
+      </div>
+    </a>
+    <a
+      data-astro-prefetch="hover"
+      id="wcif-directlink"
+      href={getLocalizedPath("ffxiv-wcif")}
+      title={localizedFFXIVWCIF}
+    >
+      <div class="flex items-center button-glassbox p-2 rounded-md">
+        <div class="" slot="inline-svg">
+          <img
+            src="/icons/cards/charrefs/modeling-svgrepo-com.svg"
+            class="h-11 mobile-only:h-6 w-auto mr-1"
+          />
+        </div>
+        <span class="ultralight cursor-pointer underline-offset-2 text-xl">
+          {localizedFFXIVWCIF}
+        </span>
+      </div>
+    </a>
+  </div>
+</div>

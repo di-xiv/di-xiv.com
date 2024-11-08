@@ -1,0 +1,49 @@
+---
+import BasicReferenceGalleryEngine from "@/app/charrefs/gallery-engines/BasicReferenceGalleryEngine.astro";
+
+//
+interface Props {
+  localizedClickToZoom: string;
+  localizedDismiss: string;
+  localizedDownload: string;
+}
+const { localizedClickToZoom, localizedDismiss, localizedDownload } =
+  Astro.props;
+
+const AttireGalleryURL = [
+  { apiURL: "Hairstyle:%20Fifthteen", attireName: "Fifthteen" },
+  { apiURL: "Hairstyle:%20Ebyssia", attireName: "Ebyssia" },
+  { apiURL: "Hairstyle:%20Thorns", attireName: "Ebyssia" },
+  { apiURL: "Hairstyle:%20Twinkle%20Twinkle", attireName: "TwinkleTwinkle" },
+] as const;
+---
+
+<div class="my-4">
+  <div class="grid not-mobile:grid-cols-2 mobile-only:grid-cols-1 gap-2">
+    {
+      AttireGalleryURL.map((item) => (
+        <details
+          id={item.attireName}
+          class="mobile-only:p-1 rounded shadowless-glassbox  p-2"
+          open={true}
+          title={item.attireName}
+        >
+          <summary
+            class="light text-lg"
+            title={item.attireName}
+            aria-label={item.attireName}
+          >
+            {" "}
+            ❈ 💇 {item.attireName}{" "}
+          </summary>
+          <BasicReferenceGalleryEngine
+            localizedClickToZoom={localizedClickToZoom}
+            localizedDismiss={localizedDismiss}
+            localizedDownload={localizedDownload}
+            apiURL={`https://api.di-xiv.com/references?include_reference_gallery_name=${item.apiURL}`}
+          />
+        </details>
+      ))
+    }
+  </div>
+</div>
