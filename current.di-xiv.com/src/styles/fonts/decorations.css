@@ -1,8 +1,31 @@
 a:hover {
   text-decoration: underline;
 }
+
+/* lists have a custom dot */
 ul li::before {
   content: "❈";
   left: 0;
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+/* gecko dropdown list */
+@-moz-document url-prefix() {
+  select.regular {
+    font-family:
+      "regular",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-weight: 500;
+  }
+
+  select.regular option {
+    font-family:
+      "regular",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-weight: 500;
+  }
 }

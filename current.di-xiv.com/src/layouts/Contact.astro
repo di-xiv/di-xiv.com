@@ -1,0 +1,168 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import { Image } from "astro:assets";
+import SimpleTopRightToast from "@/app/contact/contact-buttons/SimpleTopRightToast.astro";
+import AllContactButtons from "@/app/contact/AllContactButtons.astro";
+import CentralEuropeTime from "@/components/tools/GetCentralEuropeTime";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  // Header
+  localizedHeaderContent: string;
+  /// Contact Buttons
+  localizedClickToCopy: string;
+  localizedLinkTo: string;
+  localizedDiscordToast: string;
+  localizedEmailToast: string;
+}
+const {
+  locale,
+  localizedHeaderContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedClickToCopy,
+  localizedLinkTo,
+  localizedDiscordToast,
+} = Astro.props;
+//
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote.tsx";
+import TextContent from "@/components/wrappers/TextContent.tsx";
+import LocalizedContactText from "@/prose/Contact/Contact.json";
+
+const LocalizedContactTextTitle = {
+  en: "Contact Methods",
+  ja: "連絡方法",
+  es: "Métodos de Contacto",
+  pt: "Métodos de Contato",
+};
+---
+
+<style>
+  @media (prefers-color-scheme: dark) {
+    #contact-buttons-wrapper a:active,
+    a:hover {
+      color: #181a1b;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    #contact-buttons-wrapper a:active,
+    a:hover {
+      color: #efefef;
+    }
+  }
+</style>
+<Master
+  locale={locale}
+  currentPage="inquiries"
+  headerContent={`${localizedHeaderContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  <div
+    id="toasts-container"
+    class="fixed mobile-only:top-[2%] right-[5%] mobile-only:right-[2%] z-20 flex flex-col items-end gap-2"
+  >
+    <SimpleTopRightToast
+      localizedToast={localizedDiscordToast}
+      toastID="discord-toast"
+    >
+      <Image
+        loading="eager"
+        height={36}
+        width={36}
+        src="/icons/content/contact/discord-icon-svgrepo-com.svg"
+        class="h-9 w1366:h-10 w1112:h-8 mobile-only:h-6"
+        alt={`${localizedDiscordToast} icon`}
+      />
+    </SimpleTopRightToast>
+  </div>
+  <div class="flex justify-center">
+    <div class="grid">
+      <div class="flex items-center mb-2">
+        <Image
+          loading="eager"
+          src="/icons/aside/hugeicons--contact-01.svg"
+          class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+          alt={`${LocalizedContactTextTitle[locale]} icon`}
+          width={44}
+          height={44}
+        />
+        <h2
+          id="contact"
+          class="bold"
+          aria-label={LocalizedContactTextTitle[locale]}
+          title={LocalizedContactTextTitle[locale]}
+        >
+          {LocalizedContactTextTitle[locale]}
+        </h2>
+      </div>
+      <TextContent>
+        <div class="grid">
+          <div id="contact-buttons-wrapper" class="flex justify-center mb-[2%]">
+            <AllContactButtons
+              localizedClickToCopy={localizedClickToCopy}
+              localizedLinkTo={localizedLinkTo}
+            />
+          </div>
+          <div class="grid gap-y-4">
+            <ul>
+              {
+                LocalizedContactText.availableSocials[locale]
+                  .split("\n")
+                  .map((item: string) => <li>{item}</li>)
+              }
+            </ul>
+            <ul>
+              {
+                LocalizedContactText.availableLocales[locale]
+                  .split("\n")
+                  .map((item: string) => <li>{item}</li>)
+              }
+            </ul>
+            <div class="flex items-center">
+              <ul>
+                {
+                  LocalizedContactText.timezone[locale]
+                    .split("\n")
+                    .map((item: string) => <li>{item}</li>)
+                }
+              </ul>
+              <div class="ml-1">
+                <CentralEuropeTime client:only="react" />
+              </div>
+            </div>
+            <StyledBlockquote blockquoteType={BlockquoteType.Info}>
+              <p class="regular">{LocalizedContactText.mtNotice[locale]}</p>
+            </StyledBlockquote>
+            <StyledBlockquote blockquoteType={BlockquoteType.Tip}>
+              <p class="regular">{LocalizedContactText.fediverse[locale]}</p>
+            </StyledBlockquote>
+          </div>
+        </div>
+      </TextContent>
+    </div>
+  </div>
+</Master>

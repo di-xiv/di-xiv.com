@@ -1,0 +1,35 @@
+---
+
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const openSections = urlParams.get("page")?.split("&") || [];
+
+    openSections.forEach((sectionId) => {
+      const detailsElement = document.getElementById(sectionId);
+      if (detailsElement instanceof HTMLDetailsElement) {
+        detailsElement.open = true;
+      }
+    });
+
+    if (openSections.length > 0) {
+      const firstSection = document.getElementById(openSections[0]);
+      if (firstSection) {
+        firstSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    const artworksContainer = document.getElementById(
+      "artworks-for-reference-container",
+    );
+    if (artworksContainer instanceof HTMLDetailsElement) {
+      const reference = urlParams.get("reference");
+      if (reference && reference.length > 0) {
+        artworksContainer.open = true;
+        artworksContainer.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+</script>

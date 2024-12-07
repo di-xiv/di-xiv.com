@@ -29,12 +29,11 @@ const AttireGalleryURL = [
           title={item.attireName}
         >
           <summary
-            class="light text-lg"
+            class="light flex items-center"
             title={item.attireName}
             aria-label={item.attireName}
           >
-            {" "}
-            ❈ 💇 {item.attireName}{" "}
+            <h3>💇 {item.attireName}</h3>
           </summary>
           <BasicReferenceGalleryEngine
             localizedClickToZoom={localizedClickToZoom}

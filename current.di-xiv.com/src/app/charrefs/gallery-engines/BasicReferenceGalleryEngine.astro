@@ -67,45 +67,25 @@ await fetchReferenceGallery();
               <div
                 id={zoomId}
                 title={localizedClickToZoom}
-                class="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 hover:text-[#1e7cff] cursor-pointer button-glassbox"
+                class="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 cursor-pointer button-glassbox"
                 onclick={`document.getElementById('${modalId}').classList.toggle('hidden')`}
               >
-                <div class="dark:invert">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"
-                    />
-                  </svg>
-                </div>
+                <img
+                  src="/icons/content/charrefs/lucide--zoom-in.svg"
+                  class="h-10 mobile-only:h-8 w-auto dark:invert"
+                />
               </div>
             </div>
-            {/* Add download button */}
-            <div class="glassbox absolute top-2 left-2 p-2 rounded-sm cursor-pointer button-glassbox items-center justify-center z-40 hover:text-[#1e7cff]">
+            <div class="glassbox absolute top-2 left-2 p-2 rounded-sm cursor-pointer button-glassbox items-center justify-center z-40">
               <a
                 href={image.reference_imageurl}
                 download={`reference-${image.referenceimage_id}`}
                 title={`${localizedDownload} ➤ Reference ${referenceGallery?.reference_gallery_name ?? ""}`}
               >
-                <div class="dark:invert">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
-                    viewBox="0 0 24 24"
-                  >
-                    <g fill="none">
-                      <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                      <path
-                        fill="currentColor"
-                        d="M8 5v2H5v13h14V7h-3V5h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm4-3a1 1 0 0 1 1 1v10.828L14.828 12a1 1 0 1 1 1.415 1.414l-3.36 3.359a1.25 1.25 0 0 1-1.767 0l-3.359-3.359A1 1 0 1 1 9.172 12L11 13.828V3a1 1 0 0 1 1-1"
-                      />
-                    </g>
-                  </svg>
-                </div>
+                <img
+                  src="/icons/content/charrefs/iconoir--download.svg"
+                  class="h-10 mobile-only:h-8 w-auto dark:invert"
+                />
               </a>
             </div>
             <div

@@ -38,13 +38,15 @@ const RatingButton: React.FC<RatingButtonProps> = ({
   return (
     <button
       onClick={() => onClick(rating.id, rating.alt)}
-      className={`p-2 rounded transition-colors duration-200 regular
-        ${isSelected ? "bg-green-500" : "glassbox button-glassbox"}`}
+      className={`p-2 rounded-lg transition-colors duration-200 regular
+        focus:ring-2  focus:ring-blue-500 dark:focus:ring-[#ed701d]
+        ${isSelected ? "selected-glassbox" : "shadowless-glassbox button-glassbox"}
+        flex-shrink-0`}
     >
       <img
         src={rating.imageSrc}
         alt={rating.alt}
-        className="h-6 w-6 object-contain dark:invert"
+        className="h-[clamp(1.638rem,1vw_+_0.5rem,2.618rem)] w-auto object-contain dark:invert"
       />
     </button>
   );

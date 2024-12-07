@@ -1,0 +1,35 @@
+{
+  "tou": {
+    "append": "#tou",
+    "icon": "/icons/content/tou/tabler--license.svg",
+    "title": {
+      "default": "Terms of Use",
+      "en": "Terms of Use",
+      "ja": "利用規約",
+      "es": "Términos de Uso",
+      "pt": "Termos de Uso"
+    }
+  },
+  "faq": {
+    "append": "#faq",
+    "icon": "/icons/content/faq/mingcute--question-line.svg",
+    "title": {
+      "default": "Frequently (?) Asked Questions",
+      "en": "Frequently (?) Asked Questions",
+      "ja": "よくある(?)質問",
+      "es": "Preguntas Frecuentes (?)",
+      "pt": "Perguntas Frequentes (?)"
+    }
+  },
+  "takedowns": {
+    "append": "#takedowns",
+    "icon": "/icons/content/tou/fluent--document-person-16-filled.svg",
+    "title": {
+      "default": "Content Takedowns",
+      "en": "Content Takedowns",
+      "ja": "コンテンツ撤回",
+      "es": "Retiradas de Contenido",
+      "pt": "Retiradas de Conteúdo"
+    }
+  }
+}

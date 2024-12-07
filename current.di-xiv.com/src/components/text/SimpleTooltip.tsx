@@ -23,10 +23,12 @@ const SimpleTooltip: React.FC<SimpleTooltipProps> = ({
   };
 
   const arrowClasses: Record<TooltipPosition, string> = {
-    top: "top-full left-1/2 -translate-x-1/2 border-t-[#ff781e]",
-    right: "top-1/2 right-full -translate-y-1/2 border-r-[#ff781e]",
-    bottom: "bottom-full left-1/2 -translate-x-1/2 border-b-[#ff781e]",
-    left: "top-1/2 left-full -translate-y-1/2 border-l-[#ff781e]",
+    top: "top-full left-1/2 -translate-x-1/2 border-t-[#1e7cff] dark:border-t-[#ed701d]",
+    right:
+      "top-1/2 right-full -translate-y-1/2 border-r-[#1e7cff] dark:border-r-[#ed701d]",
+    bottom:
+      "bottom-full left-1/2 -translate-x-1/2 border-b-[#1e7cff] dark:border-b-[#ed701d]",
+    left: "top-1/2 left-full -translate-y-1/2 border-l-[#1e7cff] dark:border-l-[#ed701d]",
   };
 
   useEffect(() => {
@@ -59,10 +61,9 @@ const SimpleTooltip: React.FC<SimpleTooltipProps> = ({
     >
       {children}
       <div
-        className={`absolute geist z-10 transition-opacity duration-300 bg-[#ff781e] text-[#efefef] text-sm rounded py-1 px-2 ${positionClasses[position]} ${isVisible ? "opacity-100" : "invisible opacity-0"}`}
-        style={{ fontFamily: '"dm-italic"' }}
+        className={`absolute z-10 regular transition-opacity duration-300 bg-[#1e7cff] dark:bg-[#ed701d] text-[#efefef] dark:text-[#181a1b] text-sm rounded py-1 px-2 ${positionClasses[position]} ${isVisible ? "opacity-100" : "invisible opacity-0"}`}
       >
-        <p className="mobile-only:text-sm">{content}</p>
+        <span className="mobile-only:text-sm">{content}</span>
         <div
           className={`absolute w-0 h-0 border-4 border-transparent ${arrowClasses[position]}`}
         />

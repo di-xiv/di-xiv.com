@@ -1,0 +1,9 @@
+---
+import { preloadAssetList } from "@/components/tools/preload/PreloadAssets";
+---
+
+{
+  preloadAssetList.map((asset) => (
+    <link rel="preload" href={asset.href} as={asset.type} />
+  ))
+}

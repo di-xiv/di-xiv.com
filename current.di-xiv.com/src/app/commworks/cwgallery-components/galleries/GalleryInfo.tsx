@@ -21,14 +21,14 @@ const ArtistInfo: React.FC<Props> = ({ artistName, artistWebsite }) => {
               <div className="inline-block dark:invert">
                 <img
                   src="/icons/content/commworks/typcn--brush.svg"
-                  className="h-8 w-auto"
+                  className="h-8 w-1150:w-6 w-auto"
                   alt="Artist name and website"
                 />
               </div>
               <h3
-                className="regular text-large mobile-only:text-base"
+                className="regular w-1150:text-sm"
                 aria-label={artistName}
-                title={artistName}
+                title={`${artistName}: ${artistWebsite}`}
               >
                 {artistName}↗
               </h3>

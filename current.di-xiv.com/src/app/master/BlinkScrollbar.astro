@@ -1,0 +1,24 @@
+---
+
+---
+
+<script>
+  function isBlink() {
+    const ua = navigator.userAgent.toLowerCase();
+    // Check if NOT Firefox and NOT Safari/WebKit
+    return (
+      !(
+        ua.indexOf("firefox") > -1 ||
+        ua.indexOf("safari") > -1 ||
+        ua.indexOf("webkit") > -1
+      ) &&
+      (ua.indexOf("chrome") > -1 ||
+        ua.indexOf("edge") > -1 ||
+        ua.indexOf("opera") > -1)
+    );
+  }
+
+  if (isBlink()) {
+    document.documentElement.classList.add("custom-scrollbar");
+  }
+</script>

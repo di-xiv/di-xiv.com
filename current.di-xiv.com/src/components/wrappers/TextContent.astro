@@ -1,0 +1,42 @@
+---
+
+---
+
+<style is:global>
+  @media (prefers-color-scheme: light) {
+    .text-container a {
+      color: #1e7cff;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .text-container a {
+      color: #ed701d;
+    }
+  }
+  h1,
+  h2 {
+    font-family: "bold";
+  }
+  h3,
+  h4 {
+    font-family: "regular";
+  }
+  p,
+  li {
+    font-family: "light";
+  }
+
+  ul {
+    display: grid;
+    row-gap: 1rem;
+  }
+</style>
+<div
+  class="shadowless-glassbox text-wrapper not-mobile:p-5 mobile-only:p-3 noise-bg-animation rounded-lg"
+>
+  <div
+    class="text-container not-mobile:p-10 mobile-only:py-4 mobile-only:px-4 rounded-md glassbox text-balance"
+  >
+    <slot />
+  </div>
+</div>

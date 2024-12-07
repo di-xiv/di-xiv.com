@@ -1,0 +1,37 @@
+{
+  "availableSocials": {
+    "default": "You can contact me via any of the methods listed above.",
+    "en": "You can contact me via any of the methods listed above.",
+    "es": "Puedes contactar conmigo a través de cualquiera de los métodos listados arriba.",
+    "ja": "上記のいずれかの方法でご連絡いただけます。",
+    "pt": "Você pode entrar em contato comigo através de qualquer um dos métodos listados acima."
+  },
+  "availableLocales": {
+    "default": "I can read, write and understand spanish and english fluently, so feel free to use any of those languages.",
+    "en": "I can read, write and understand spanish and english fluently, so feel free to use any of those languages.",
+    "es": "Puedo leer, escribir y entender inglés y español con fluidez, por lo que siéntete libre de usar cualquiera.",
+    "ja": "英語とスペイン語を流暢に読み書きし、理解することができるので、どちらでも自由に使ってください。",
+    "pt": "Posso ler, escrever e entender inglês e espanhol com fluência, então sinta-se à vontade para usar qualquer um."
+  },
+  "mtNotice": {
+    "default": "For other languages, machine translation will be used. Apologies!",
+    "en": "For other languages, machine translation will be used. Apologies!",
+    "es": "Para cualquier otro idioma, un traductor será usado. Disculpas!",
+    "ja": "その他の言語については、日本語を含め、翻訳者が対応します。お詫び",
+    "pt": "Para qualquer outro idioma, será utilizado um tradutor. Desculpas!"
+  },
+  "timezone": {
+    "default": "My timezone is Central European Time, which means my current time is",
+    "en": "My timezone is Central European Time, which means my current time is",
+    "es": "Mi zona horaria es la de Europa Central, lo que significa que mi hora actual es",
+    "ja": "私のタイムゾーンは中央ヨーロッパ時間である",
+    "pt": "Meu fuso horário é o horário da Europa Central, o que significa que meu horário atual é"
+  },
+  "fediverse": {
+    "default": "Misskey.io/Baraag.net users: you can interact with me at my Burggit.moe account, as they are both in the Fediverse.",
+    "en": "Misskey.io/Baraag.net users: you can interact with me at my Burggit.moe account, as they are both in the Fediverse.",
+    "es": "Usuarios de Misskey.io: puedes interactuar conmigo a través de mi cuenta de Burggit.moe, ya que las dos son parte del Fediverso.",
+    "ja": "Misskey.io/Baraag.Burggit.moeアカウントを通して私と交流することができます。どちらもFediverseの一部だからです。",
+    "pt": "Usuários do Misskey.io/Baraag.net: vocês podem interagir comigo por meio da minha conta em Burggit.moe, pois ambos fazem parte do Fediverse."
+  }
+}

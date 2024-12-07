@@ -36,9 +36,24 @@ const Incompat: React.FC<Props> = ({ lang }) => {
 
   return (
     <SimpleTooltip content={getTooltipContent()}>
-      <span className="p-[2px] text-white text-nowrap text-sm rounded px-1.5 ml-1.5 select-none whitespace-nowrap cursor-help border-2 border-[#f45a5a] bg-[#f71616]">
-        {getTitle()}
-      </span>
+      <div className="p-[2px] text-white text-nowrap text-sm rounded px-1.5 ml-1.5 select-none whitespace-nowrap cursor-help border-2 border-[#f45a5a] bg-[#f71616]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto"
+          viewBox="0 0 16 16"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          >
+            <path d="m10.25 5.75l-4.5 4.5m0-4.5l4.5 4.5" />
+            <circle cx="8" cy="8" r="6.25" />
+          </g>
+        </svg>
+      </div>
     </SimpleTooltip>
   );
 };

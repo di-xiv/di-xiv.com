@@ -1,5 +1,4 @@
 ---
-import HeaderButtonMenu from "@/components/layout/header/components/HeaderButtonMenu.astro";
 import { Image } from "astro:assets";
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
@@ -50,5 +49,3 @@ function getLocalizedRoute() {
   </div>
   <div id="header-right"></div>
 </header>
-
-<HeaderButtonMenu locale={locale} />

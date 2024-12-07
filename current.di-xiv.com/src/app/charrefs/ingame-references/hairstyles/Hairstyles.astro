@@ -46,7 +46,7 @@ const downloadText = {
       />
     </div>
     <h3
-      class="text-large w-1150:text-large mobile-only:text-base regular"
+      class="regular"
       aria-label={localizedHairstyles}
       title={localizedHairstyles}
     >
@@ -60,13 +60,13 @@ const downloadText = {
         className="flex items-center"
         h="https://drive.proton.me/urls/AKXXDWQ8JR#XL6N2PpV3LGx"
       >
-        <h3
-          class="light inline-block w-1150:text-sm mobile-only:text-xs"
+        <h4
+          class="light inline-block"
           aria-label={downloadText[locale]}
           title={downloadText[locale]}
         >
           {locale === "en" ? <>{downloadText[locale]}</> : downloadText[locale]}
-        </h3>
+        </h4>
       </A>
     </div>
   </StyledBlockquote>

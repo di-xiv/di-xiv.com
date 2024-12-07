@@ -1,0 +1,63 @@
+---
+import Master from "@/layouts/Master.astro";
+// Text Content
+import ScrollToAnchor from "@/components/text/mdx/ScrollToAnchor";
+//
+import JumpToSection from "@/app/inquiries/JumpToSection.astro";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  // Header
+  localizedHeaderContent: string;
+}
+const {
+  locale,
+  localizedHeaderContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+} = Astro.props;
+import ToU from "@/prose/Inquiries/tou/ToU.astro";
+import FAQ from "@/prose/Inquiries/faq/FAQ.astro";
+import Takedowns from "@/prose/Inquiries/takedowns/Takedowns.astro";
+---
+
+<style>
+  ul {
+    white-space: pre-line;
+  }
+</style>
+<Master
+  locale={locale}
+  currentPage="inquiries"
+  headerContent={`${localizedHeaderContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  <div class="grid gap-y-2">
+    <JumpToSection locale={locale} />
+    <ToU locale={locale} />
+    <FAQ locale={locale} />
+    <Takedowns locale={locale} />
+  </div>
+  <ScrollToAnchor client:only="react" />
+</Master>

@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+type LocaleKey = "en" | "ja" | "pt" | "es";
+
+interface Section {
+  id: "but-why" | "since-when" | "until-when" | "who-is-this-for";
+  icon: string;
+  textMap: Map<LocaleKey, string>;
+  getTitle: (locale: LocaleKey) => string;
+}
+
+const { locale } = Astro.props;
+import TitleWithLeadingIcon from "@/components/text/TitleWithLeadingIcon.tsx";
+import LocalizedFAQ from "@/prose/Inquiries/faq/FAQ.json";
+
+const sections: Section[] = [
+  {
+    id: "but-why",
+    icon: "/icons/content/faq/mingcute--question-line.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedFAQ["but-why"].en],
+      ["es", LocalizedFAQ["but-why"].es],
+      ["ja", LocalizedFAQ["but-why"].ja],
+      ["pt", LocalizedFAQ["but-why"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedFAQ["but-why"].title[locale] ||
+      LocalizedFAQ["but-why"].title.default,
+  },
+  {
+    id: "since-when",
+    icon: "/icons/content/faq/fontisto--date.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedFAQ["since-when"].en],
+      ["es", LocalizedFAQ["since-when"].es],
+      ["ja", LocalizedFAQ["since-when"].ja],
+      ["pt", LocalizedFAQ["since-when"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedFAQ["since-when"].title[locale] ||
+      LocalizedFAQ["since-when"].title.default,
+  },
+  {
+    id: "until-when",
+    icon: "/icons/content/faq/pajamas--expire.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedFAQ["until-when"].en],
+      ["es", LocalizedFAQ["until-when"].es],
+      ["ja", LocalizedFAQ["until-when"].ja],
+      ["pt", LocalizedFAQ["until-when"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedFAQ["until-when"].title[locale] ||
+      LocalizedFAQ["until-when"].title.default,
+  },
+  {
+    id: "who-is-this-for",
+    icon: "/icons/content/faq/mdi--person-question-outline.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedFAQ["who-is-this-for"].en],
+      ["es", LocalizedFAQ["who-is-this-for"].es],
+      ["ja", LocalizedFAQ["who-is-this-for"].ja],
+      ["pt", LocalizedFAQ["who-is-this-for"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedFAQ["who-is-this-for"].title[locale] ||
+      LocalizedFAQ["who-is-this-for"].title.default,
+  },
+];
+
+const localizedFAQTitle: Record<LocaleKey, string> = {
+  en: "Frequently (?) Asked Questions",
+  ja: "よくある(?)質問",
+  es: "Preguntas Frecuentes (?)",
+  pt: "Perguntas Frequentes (?)",
+};
+---
+
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    src="/icons/content/faq/mingcute--question-line.svg"
+    class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+    alt={`${localizedFAQTitle[locale]} icon`}
+    width={44}
+    height={44}
+  />
+  <h2
+    id="faq"
+    class="bold"
+    aria-label={localizedFAQTitle[locale]}
+    title={localizedFAQTitle[locale]}
+  >
+    {localizedFAQTitle[locale]}
+  </h2>
+</div>
+{
+  sections.map((section) => (
+    <TextContent>
+      <div class="glassbox p-2 rounded my-2">
+        <TitleWithLeadingIcon
+          imageURL={section.icon}
+          title={section.getTitle(locale)}
+        />
+      </div>
+      <div class="flex justify-center">
+        <ul class="w-[90%]">
+          {(section.textMap.get(locale) ?? LocalizedFAQ[section.id].default)
+            .split("\n")
+            .map((item: string) => (
+              <li>{item}</li>
+            ))}
+        </ul>
+      </div>
+    </TextContent>
+  ))
+}

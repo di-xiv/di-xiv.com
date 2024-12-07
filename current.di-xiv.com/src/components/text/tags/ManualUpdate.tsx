@@ -36,9 +36,24 @@ const ManUpd: React.FC<Props> = ({ lang }) => {
 
   return (
     <SimpleTooltip content={getTooltipContent()}>
-      <span className="p-[2px] text-white text-nowrap text-sm rounded px-1.5 ml-1.5 select-none whitespace-nowrap cursor-help border-2 border-[#d1d95f] bg-[#cca600]">
-        {getTitle()}
-      </span>
+      <div className="p-[2px] text-white text-nowrap text-sm rounded px-1.5 ml-1.5 select-none whitespace-nowrap cursor-help border-2 border-[#41c0c4] bg-[#1a978b]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto"
+          viewBox="0 0 48 48"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="4"
+          >
+            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20" />
+            <path d="M33.542 27c-1.274 4.057-5.064 7-9.542 7s-8.268-2.943-9.542-7v6m19.084-18v6c-1.274-4.057-5.064-7-9.542-7s-8.268 2.943-9.542 7" />
+          </g>
+        </svg>
+      </div>
     </SimpleTooltip>
   );
 };

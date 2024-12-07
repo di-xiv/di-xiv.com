@@ -1,178 +1,54 @@
 ---
+import SlideAnimationLogic from "@/components/layout/aside/components/SlideAnimationLogic.astro";
 import { Image } from "astro:assets";
-import DateTimeTooltip from "@/components/layout/aside/components/DateTimeAsTooltip";
 import WingspanBrandIcon from "/favicon.ico";
 import DrawerCloseButton from "@/components/layout/aside/components/DrawerCloseButton.astro";
 import DivisorLine from "@/components/navigation/DivisorLine.astro";
 import LanguageSelector from "@/components/logic/LanguageSelector.tsx";
 import SocialsIcons from "@/components/navigation/SocialsIcons.astro";
 //
-import HeaderButtonMenu from "../header/components/HeaderButtonMenu.astro";
+import DrawerOpenButton from "@/components/layout/aside/components/DrawerOpenButton.astro";
+//
+import DrawerFooterPadding from "@/components/tools/mobile-browser-fixes/DrawerFooterPadding.astro";
+import VersionDisplay from "@/components/tools/VersionDisplay.tsx";
 //
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
-  localizedCharRefs: string;
-  localizedContact: string;
-  localizedCommWorks: string;
-  localizedInquiries: string;
 }
 //
-const buildTime = new Date();
+const { locale } = Astro.props;
 //
-const localizedDesignReferences = {
-  en: "Design References",
-  ja: "デザイン・リファレンス",
-  es: "Diseños de Referencia",
-  pt: "Referências de Design",
-};
-const localizedColorPallette = {
-  en: "Color Pallette",
-  ja: "カラーパレット",
-  es: "Paleta de Colores",
-  pt: "Paleta de Cores",
-};
-const localizedInGameReferences = {
-  en: "In-game references",
-  ja: "ゲーム内スクリーンショット",
-  es: "Capturas in-game",
-  pt: "Capturas de tela do jogo",
-};
-const localizedTermsOfUse = {
-  en: "Terms of Use",
-  ja: "利用規約",
-  es: "Términos de Uso",
-  pt: "Termos de Uso",
-};
-const localizedFriendlyTakedown = {
-  en: "Friendly Takedowns",
-  ja: "フレンドリーな削除 (🇬🇧)",
-  es: "Retiradas Amistosas (🇬🇧)",
-  pt: "Remoções Amigáveis (🇬🇧)",
-};
-const localizedLegalTakedown = {
-  en: "Legal Takedowns",
-  ja: "法的な削除 (🇬🇧)",
-  es: "Retiradas Legales (🇬🇧)",
-  pt: "Remoções Legais (🇬🇧)",
-};
+import {
+  createNavItems,
+  createSubNavItems,
+} from "@/components/layout/aside/components/nav-items/navItems.ts";
+import NavigationMenu from "@/components/layout/aside/components/nav-items/NavigationMenu.astro";
 //
-const {
-  locale,
-  localizedCharRefs,
-  localizedContact,
-  localizedCommWorks,
-  localizedInquiries,
-} = Astro.props;
-function getLocalizedRoute() {
-  if (locale && locale !== "en") {
-    return `/${locale}`;
-  } else {
-    return ``;
-  }
-}
-function localizedHome() {
-  if (locale !== "en") {
-    return `/${locale}`;
-  } else {
-    return `/`;
-  }
-}
-const navItems = [
-  {
-    href: "/character-references",
-    icon: "/icons/aside/clarity--design-line.svg",
-    key: "charrefs",
-    label: localizedCharRefs,
-  },
-  {
-    href: "/commissioned-works",
-    icon: "/icons/aside/material-symbols--wall-art-outline.svg",
-    key: "commworks",
-    label: localizedCommWorks,
-  },
-  {
-    href: "/contact",
-    icon: "/icons/aside/hugeicons--contact-01.svg",
-    key: "contact",
-    label: localizedContact,
-  },
-  {
-    href: "/inquiries",
-    icon: "/icons/aside/mdi--faq.svg",
-    key: "inquiries",
-    label: localizedInquiries,
-  },
-];
-const subNavItems = new Map([
-  [
-    "charrefs",
-    [
-      {
-        href: `/character-references?page=design-references`,
-        label: `${localizedDesignReferences[locale]}`,
-      },
-      {
-        href: `/character-references?page=color-pallette`,
-        label: `${localizedColorPallette[locale]}`,
-      },
-      {
-        href: `/character-references?page=ingame-references`,
-        label: `${localizedInGameReferences[locale]}`,
-      },
-      {
-        href: `/character-references?page=wcif`,
-        label: "WCIF",
-      },
-    ],
-  ],
-  [
-    "commworks",
-    [
-      {
-        href: `/commissioned-works/?ratings=1`,
-        label: "SFW",
-      },
-      {
-        href: `/commissioned-works/?ratings=1,2`,
-        label: "NSFW",
-      },
-    ],
-  ],
-  [
-    "inquiries",
-    [
-      { href: `/inquiries#tou`, label: `${localizedTermsOfUse[locale]}` },
-      { href: `/inquiries#faq`, label: "FAQ" },
-      {
-        href: `/inquiries#friendly-takedown`,
-        label: `${localizedFriendlyTakedown[locale]}`,
-      },
-      {
-        href: `/inquiries#legal-takedown`,
-        label: `${localizedLegalTakedown[locale]}`,
-      },
-    ],
-  ],
-]);
+const currentPath = Astro.url.pathname + Astro.url.search + Astro.url.hash;
+//
+import { localizedHome } from "@/components/layout/aside/components/nav-items/utils";
+//
+const navItems = createNavItems(locale);
+const subNavItems = createSubNavItems(locale);
 ---
 
-<HeaderButtonMenu locale={locale} />
+<DrawerOpenButton locale={locale} />
 <aside
   id="drawer-menu-wrapper"
-  class="fixed top-0 left-0 flex flex-col h-screen
-  ultrawide-only:w-[18%]
-  w-[23%]
-  w-1560:w-[30%]
-  w-1150:w-[43%]
-  mobile-only:w-[70%]
-  bg-[rgba(255,255,255,1)] glassbox text-[#181a1b] dark:text-[#efefef] z-[9999] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)]
+  class="fixed top-0 left-0 h-screen
+  z-[9999]
+  shadow-[2px_0_5px_2px_rgba(0,0,0,0.5)]
   rounded-tr-lg rounded-br-lg select-none"
 >
-  <DrawerCloseButton />
-  <div id="drawer-menu-container" class="flex flex-col h-full">
+  <DrawerCloseButton locale={locale} />
+  <div
+    class="h-full flex flex-col
+    px-5 w-1560:px-[35px] ultrawide-only:px-10
+    bg-[#efefef] text-[#181a1b] dark:bg-[#181a1b] dark:text-[#efefef]"
+  >
     <div id="drawer-header" class="mt-[5%]">
       <a
-        href={localizedHome()}
+        href={localizedHome(locale)}
         id="wingspan-wrapper"
         class="flex justify-center"
       >
@@ -187,55 +63,17 @@ const subNavItems = new Map([
       </a>
     </div>
     <DivisorLine />
-    <div id="drawer-nav" class="flex-grow overflow-y-auto mt-[10%]">
-      <nav class="ml-[10%] grid grid-cols-1 gap-y-3">
-        {
-          navItems.map((item) => (
-            <div class="nav-item">
-              <a
-                id={`nav-${item.key}`}
-                aria-label={item.label}
-                href={`${getLocalizedRoute()}${item.href}`}
-                class="flex items-center"
-              >
-                <Image
-                  loading="eager"
-                  src={item.icon}
-                  width={28}
-                  height={28}
-                  class="w-7 mobile-only:w-5 h-auto dark:invert not-mobile:relative not-mobile:-top-1 not-mobile:mr-[25px] mobile-only:mr-[15px]"
-                  alt={`${item.label} icon`}
-                />
-                <p
-                  class="text-large mobile-only:text-base regular"
-                  title={item.label}
-                  aria-label={item.label}
-                >
-                  {item.label}
-                </p>
-              </a>
-              {subNavItems.has(item.key) && subNavItems.get(item.key) && (
-                <div
-                  class="mt-2
-                  not-mobile:ml-[55px] mobile-only:ml-[45px]
-                "
-                >
-                  {subNavItems.get(item.key)!.map((subItem) => (
-                    <a
-                      href={`${getLocalizedRoute()}${subItem.href}`}
-                      class="block py-1 text-sm hover:underline"
-                    >
-                      <p class="light">❈ {subItem.label}</p>
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))
-        }
-      </nav>
+    <div id="drawer-menu-container" class="flex flex-col overflow-y-auto">
+      <div id="drawer-nav" class="flex pt-5">
+        <NavigationMenu
+          navItems={navItems}
+          subNavItems={subNavItems}
+          currentPath={currentPath}
+          locale={locale}
+        />
+      </div>
     </div>
-    <div id="drawer-footer" class="mt-auto mobile-only:pb-[25%]">
+    <div id="drawer-footer" class="">
       <div class="flex justify-center mt-[10%] mb-[10%]">
         <LanguageSelector client:load />
       </div>
@@ -253,102 +91,16 @@ const subNavItems = new Map([
             src={WingspanBrandIcon}
             width={36}
             height={36}
-            class="w-9 h-auto relative -top-[6px]"
+            class="w-9 h-auto relative mobile-only:-top-[6px] not-mobile:-top-[2px] left-[1px]"
             alt="Di-XIV Brand Icon"
           />
         </div>
-        <DateTimeTooltip
-          locale={locale}
-          position="right"
-          buildTime={buildTime}
-          client:load
-        >
-          <p class="cursor-help">❈&nbsp;&nbsp;v.4.6.5</p>
-        </DateTimeTooltip>
+        <VersionDisplay />
       </div>
     </div>
   </div>
 </aside>
 <div id="drawer-shade" class="fixed top-0 left-0 w-full h-full z-[9998] hidden">
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    let drawerVisible = false;
-    let initialLoad = true;
-
-    const elements = {
-      drawerButton: document.getElementById(
-        "drawer-close-button",
-      ) as HTMLElement,
-      drawerMenu: document.getElementById("drawer-menu-wrapper") as HTMLElement,
-      headerButton: document.getElementById(
-        "header-aside-toggle",
-      ) as HTMLElement,
-      drawerShade: document.getElementById("drawer-shade") as HTMLElement,
-    };
-
-    const updateShadeVisibility = () => {
-      const isMobile = window.innerWidth < 725;
-      if (isMobile && drawerVisible) {
-        elements.drawerShade.classList.remove("hidden");
-        elements.drawerShade.classList.add("flex");
-      } else {
-        elements.drawerShade.classList.remove("flex");
-        elements.drawerShade.classList.add("hidden");
-      }
-    };
-
-    const toggleDrawer = (show: boolean, animate: boolean = true) => {
-      elements.headerButton.classList.toggle("hidden", show);
-      elements.headerButton.classList.toggle("block", !show);
-
-      if (animate) {
-        elements.drawerMenu.classList.toggle("slide-in-left", show);
-        elements.drawerMenu.classList.toggle("slide-out-left", !show);
-      } else {
-        elements.drawerMenu.classList.remove("slide-in-left", "slide-out-left");
-        elements.drawerMenu.style.transform = show
-          ? "translateX(0)"
-          : "translateX(-100%)";
-      }
-
-      drawerVisible = show;
-      updateShadeVisibility();
-    };
-
-    const showDrawer = (animate: boolean = true) => toggleDrawer(true, animate);
-    const hideDrawer = (animate: boolean = true) =>
-      toggleDrawer(false, animate);
-
-    const checkViewportWidth = () => {
-      const shouldShowDrawer = window.innerWidth > 1250;
-      if (shouldShowDrawer !== drawerVisible || initialLoad) {
-        toggleDrawer(shouldShowDrawer, !initialLoad);
-        initialLoad = false;
-      }
-      updateShadeVisibility();
-    };
-
-    elements.drawerButton.addEventListener("click", () => hideDrawer(true));
-    elements.drawerShade.addEventListener("click", () => hideDrawer(true));
-
-    elements.headerButton.addEventListener("click", () => {
-      drawerVisible ? hideDrawer(true) : showDrawer(true);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && drawerVisible) {
-        hideDrawer(true);
-      }
-    });
-
-    // Initial setup
-    checkViewportWidth();
-    window.addEventListener("resize", checkViewportWidth);
-
-    // Ensure the drawer is hidden on small viewports on initial load
-    if (window.innerWidth <= 1150) {
-      hideDrawer(false);
-    }
-  });
-</script>
+<SlideAnimationLogic />
+<DrawerFooterPadding />

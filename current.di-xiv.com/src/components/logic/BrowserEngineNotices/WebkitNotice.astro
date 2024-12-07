@@ -1,0 +1,152 @@
+---
+interface Props {
+  locale: "en" | "es" | "ja" | "pt";
+}
+
+const { locale } = Astro.props;
+
+const messages = {
+  webkit: {
+    en: "You're using a Safari-based browser.\nSome styles might not render properly.",
+    es: "Estás usando un navegador basado en Safari.\nAlgunos estilos podrían no renderizarse correctamente.",
+    ja: "お使いのブラウザはSafariです。\nスタイルによっては正しく表示されない場合があります。",
+    pt: "Você está usando um navegador baseado no Safari.\nAlguns estilos podem não ser renderizados corretamente.",
+  },
+  chrome: {
+    en: "You're using Chrome.\nSome styles might not render properly.",
+    es: "Estás usando Chrome.\nAlgunos estilos podrían no renderizarse correctamente.",
+    ja: "お使いのブラウザはChromeです。\nスタイルによっては正しく表示されない場合があります。",
+    pt: "Você está usando Chrome.\nAlguns estilos podem não ser renderizados corretamente.",
+  },
+};
+
+const closeText = {
+  en: "Close",
+  es: "Cerrar",
+  ja: "閉じる",
+  pt: "Fechar",
+};
+---
+
+<style>
+  p {
+    white-space: pre-line;
+  }
+</style>
+<div
+  id="browser-banner"
+  class="hidden fixed top-0 left-0 right-0 py-3 shadowless-glassbox z-50"
+>
+  <div class="flex items-center justify-around">
+    <p class="regular" id="banner-message"></p>
+    <button id="close-browser-banner" class="p-1 light underline">
+      {closeText[locale]}
+    </button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ messages, locale }}>
+  function handleBrowserBanner() {
+    const banner = document.getElementById("browser-banner");
+    const bannerMessage = document.getElementById("banner-message");
+    const closeButton = document.getElementById("close-browser-banner");
+    const STORAGE_KEY = "browserBannerExpiration";
+
+    function isMobileViewport() {
+      return window.innerWidth <= 725; // Matching your mobile-only breakpoint
+    }
+
+    function getBrowserType() {
+      const ua = navigator.userAgent.toLowerCase();
+
+      // Only proceed if it's a mobile viewport
+      if (!isMobileViewport()) return null;
+
+      // Detect if it's running on iOS/iPadOS
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+
+      // Detect various browsers
+      const isChrome = /crios|chrome/.test(ua) && !/edg|opt|opr/.test(ua);
+      const isFirefox = /fxios|firefox/.test(ua);
+      const isEdge = /edg/.test(ua);
+      const isBrave = /brave/.test(ua);
+      const isOpera = /opt|opr/.test(ua);
+      const isArc = /arc/.test(ua);
+      const isInAppBrowser = /fbios|instagram|line|twitter|wv|wb/.test(ua);
+
+      // Check for Safari on iOS
+      const isSafari =
+        isIOS &&
+        !isChrome &&
+        !isFirefox &&
+        !isEdge &&
+        !isBrave &&
+        !isOpera &&
+        /safari/.test(ua);
+
+      if (isChrome) return "chrome";
+      if (isSafari || isArc || isInAppBrowser) return "webkit";
+      return null;
+    }
+
+    function isStorageExpired() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) return true;
+
+      const expirationDate = new Date(stored);
+      const now = new Date();
+      return now > expirationDate;
+    }
+
+    function shouldShowBanner() {
+      const browserType = getBrowserType();
+      if (!browserType) return false;
+      return isStorageExpired();
+    }
+
+    function setExpirationDate() {
+      const expirationDate = new Date();
+      expirationDate.setMonth(expirationDate.getMonth() + 1);
+      localStorage.setItem(STORAGE_KEY, expirationDate.toISOString());
+    }
+
+    function showBanner() {
+      if (banner && bannerMessage) {
+        const browserType = getBrowserType();
+        if (browserType && messages[browserType]) {
+          bannerMessage.textContent = messages[browserType][locale];
+          banner.classList.remove("hidden");
+        }
+      }
+    }
+
+    function hideBanner() {
+      if (banner) {
+        banner.classList.add("hidden");
+        setExpirationDate();
+      }
+    }
+
+    function handleResize() {
+      if (!isMobileViewport()) {
+        banner?.classList.add("hidden");
+      } else if (shouldShowBanner()) {
+        showBanner();
+      }
+    }
+
+    if (banner && closeButton) {
+      closeButton.addEventListener("click", hideBanner);
+      window.addEventListener("resize", handleResize);
+
+      if (shouldShowBanner()) {
+        showBanner();
+      }
+    } else {
+      console.error("Browser banner elements not found");
+    }
+  }
+
+  // Run the script after the page has loaded
+  window.addEventListener("load", handleBrowserBanner);
+</script>

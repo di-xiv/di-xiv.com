@@ -1,0 +1,78 @@
+---
+
+---
+
+<script>
+  class Gallery {
+    private currentIndex: number = 0;
+    private items: HTMLElement[];
+    private titles: HTMLElement[];
+    private descriptions: HTMLElement[];
+    private thumbs: HTMLElement[];
+
+    constructor() {
+      this.items = Array.from(
+        document.querySelectorAll("[data-gallery-image]"),
+      );
+      this.titles = Array.from(
+        document.querySelectorAll("[data-gallery-title]"),
+      );
+      this.descriptions = Array.from(
+        document.querySelectorAll("[data-gallery-description]"),
+      );
+      this.thumbs = Array.from(
+        document.querySelectorAll("[data-gallery-thumb]"),
+      );
+
+      this.initializeControls();
+      this.showSlide(0);
+    }
+
+    private initializeControls(): void {
+      document
+        .querySelector("[data-gallery-prev]")
+        ?.addEventListener("click", () => {
+          this.showSlide(this.currentIndex - 1);
+        });
+
+      document
+        .querySelector("[data-gallery-next]")
+        ?.addEventListener("click", () => {
+          this.showSlide(this.currentIndex + 1);
+        });
+
+      this.thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => this.showSlide(index));
+      });
+    }
+
+    private showSlide(index: number): void {
+      const totalSlides = this.items.length;
+      this.currentIndex = (index + totalSlides) % totalSlides;
+
+      this.items.forEach((item, i) => {
+        item.style.opacity = i === this.currentIndex ? "1" : "0";
+        item.style.display = i === this.currentIndex ? "block" : "none";
+      });
+
+      this.titles.forEach((title, i) => {
+        title.style.opacity = i === this.currentIndex ? "1" : "0";
+        title.style.display = i === this.currentIndex ? "block" : "none";
+      });
+
+      this.descriptions.forEach((description, i) => {
+        description.style.opacity = i === this.currentIndex ? "1" : "0";
+        description.style.display = i === this.currentIndex ? "block" : "none";
+      });
+
+      this.thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle("ring-2", i === this.currentIndex);
+        thumb.classList.toggle("ring-blue-500", i === this.currentIndex);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    new Gallery();
+  });
+</script>

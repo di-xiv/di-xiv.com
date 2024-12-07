@@ -1,0 +1,61 @@
+{
+  "localizedParentNavItems": {
+    "localizedArtrefs": {
+      "en": "Art References",
+      "ja": "参考文献",
+      "es": "Referencias Artísticas",
+      "pt": "Referências Artísticas"
+    },
+    "localizedIngamerefs": {
+      "en": "In-game References",
+      "ja": "ゲーム内での言及",
+      "es": "Referencias in-game",
+      "pt": "Referências in-game"
+    },
+    "localizedContact": {
+      "en": "Contact",
+      "es": "Contacto",
+      "ja": "連絡方法",
+      "pt": "Contato"
+    },
+    "localizedCommworks": {
+      "en": "Commissioned Works",
+      "es": "Arte Encargado",
+      "ja": "アートワークリクエスト",
+      "pt": "Arte Encomendado"
+    },
+    "localizedInquiries": {
+      "en": "Inquiries",
+      "es": "Consultas",
+      "ja": "コンサルテーション",
+      "pt": "Consultas"
+    }
+  },
+  "navItems": [
+    {
+      "href": "/art-references",
+      "icon": "/icons/aside/clarity--design-line.svg",
+      "key": "artrefs"
+    },
+    {
+      "href": "/ingame-references",
+      "icon": "/icons/aside/wpf--camera.svg",
+      "key": "ingamerefs"
+    },
+    {
+      "href": "/commissioned-works",
+      "icon": "/icons/aside/material-symbols--wall-art-outline.svg",
+      "key": "commworks"
+    },
+    {
+      "href": "/contact",
+      "icon": "/icons/aside/hugeicons--contact-01.svg",
+      "key": "contact"
+    },
+    {
+      "href": "/inquiries",
+      "icon": "/icons/aside/mdi--faq.svg",
+      "key": "inquiries"
+    }
+  ]
+}

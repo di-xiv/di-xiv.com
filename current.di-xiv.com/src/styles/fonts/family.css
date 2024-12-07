@@ -3,26 +3,62 @@
 */
 
 @font-face {
+  font-family: "regular-serif";
+  src: url("/fonts/serif/ppe-regular.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "bold-serif";
+  src: url("/fonts/serif/ppe-ultrabold.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "light-serif";
+  src: url("/fonts/serif/ppe-ultralight.otf") format("opentype");
+  font-display: swap;
+}
+
+/*
+  IBM Plex Mono
+*/
+
+@font-face {
+  font-family: "ibm-plex-mono-light";
+  src: url("/fonts/monospace/IBMPlexMono-Light.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ibm-plex-mono-italic";
+  src: url("/fonts/monospace/IBMPlexMono-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ibm-plex-mono-medium";
+  src: url("/fonts/monospace/IBMPlexMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "ibm-plex-mono-medium-italic";
+  src: url("/fonts/monospace/IBMPlexMono-MediumItalic.woff2") format("woff2");
+  font-display: swap;
+}
+
+/*
+  Geist Sans
+*/
+
+@font-face {
   font-family: "regular";
-  src: url("/fonts/ppe-regular.otf") format("opentype");
+  src: url("/fonts/sans-serif/Geist-Medium.woff2") format("woff2");
   font-display: swap;
 }
 @font-face {
   font-family: "bold";
-  src: url("/fonts/ppe-ultrabold.otf") format("opentype");
+  src: url("/fonts/sans-serif/Geist-Bold.woff2") format("woff2");
   font-display: swap;
 }
 @font-face {
   font-family: "light";
-  src: url("/fonts/ppe-ultralight.otf") format("opentype");
-  font-display: swap;
-}
-/*
-  Dank Mono
-*/
-
-@font-face {
-  font-family: "dm-italic";
-  src: url("/fonts/dm-italic.otf") format("opentype");
+  src: url("/fonts/sans-serif/Geist-Light.woff2") format("woff2");
   font-display: swap;
 }

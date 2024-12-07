@@ -17,7 +17,7 @@ const translations = {
     PP: "Genitalia",
     Skin: "Skin",
     Eyes: "Eyes",
-    Ear: "Ear",
+    Ear: "Ears",
     Hair: "Hair",
     copied: "Copied!",
   },
@@ -25,7 +25,7 @@ const translations = {
     PP: "Genitales",
     Skin: "Piel",
     Eyes: "Ojos",
-    Ear: "Oreja",
+    Ear: "Orejas",
     Hair: "Pelo",
     copied: "¡Copiado!",
   },
@@ -33,7 +33,7 @@ const translations = {
     PP: "Genitália",
     Skin: "Pele",
     Eyes: "Olhos",
-    Ear: "Orelha",
+    Ear: "Orelhas",
     Hair: "Cabelo",
     copied: "Copiado!",
   },
@@ -156,21 +156,21 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ label, colors, locale }) => {
             <div className="text-sm space-y-1 ml-[1px]">
               <div className="flex justify-between items-center">
                 <div>
-                  ❈&nbsp;<span className="regular">HEX:</span>{" "}
+                  ❈&nbsp;<span className="regular">HEX: </span>
                   <span>#{color.hex}</span>
                 </div>
                 <CopyButton text={`#${color.hex}`} locale={safeLocale} />
               </div>
               <div className="flex justify-between items-center">
                 <div>
-                  ❈&nbsp;<span className="regular">RGB:</span>{" "}
+                  ❈&nbsp;<span className="regular">RGB: </span>
                   <span>{color.rgb}</span>
                 </div>
                 <CopyButton text={color.rgb} locale={safeLocale} />
               </div>
               <div className="flex justify-between items-center">
                 <div>
-                  ❈&nbsp;<span className="regular">HSL:</span>{" "}
+                  ❈&nbsp;<span className="regular">HSL: </span>
                   <span>{color.hsl}</span>
                 </div>
                 <CopyButton text={color.hsl} locale={safeLocale} />

@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 interface Props {
   locale?: string;
-  buildTime: Date;
+  buildTime: string; // Change to string instead of Date
 }
 
 const CurrentDateTime: React.FC<Props> = ({ locale, buildTime }) => {
-  const unixTimestamp = buildTime.getTime();
+  // Parse the ISO string once
+  const date = new Date(buildTime);
 
-  const fullDate = buildTime.toLocaleDateString(locale, {
+  const fullDate = date.toLocaleDateString(locale, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  const time = buildTime.toLocaleTimeString(locale, {
+  const time = date.toLocaleTimeString(locale, {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -24,22 +25,22 @@ const CurrentDateTime: React.FC<Props> = ({ locale, buildTime }) => {
   const getTitle = () => {
     switch (locale) {
       case "en":
-        return "Last updated";
+        return "Last updated (CEST)";
       case "es":
-        return "Última actualización";
+        return "Última actualización (CEST)";
       case "ja":
-        return "最終更新";
+        return "最終更新 (CEST)";
       case "pt":
-        return "Última atualização";
+        return "Última atualização (CEST)";
       default:
-        return "Last updated";
+        return "Last updated (CEST)";
     }
   };
 
   return (
-    <p data-timestamp={unixTimestamp} className="select-none cursor-help">
+    <span data-timestamp={buildTime} className="select-none cursor-help">
       {getTitle()}: {fullDate}, {time}
-    </p>
+    </span>
   );
 };
 

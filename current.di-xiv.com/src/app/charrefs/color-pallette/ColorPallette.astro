@@ -1,43 +1,48 @@
 ---
 import { Image } from "astro:assets";
 import ColorSwatch from "@/app/charrefs/color-pallette/ColorSwatch";
-
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
-  localizedColorPallete: string;
 }
 
-const { locale, localizedColorPallete } = Astro.props;
+const { locale } = Astro.props;
+const localizedColorPallete = {
+  en: "Color Pallete",
+  ja: "カラー・パレット",
+  es: "Paleta de Colores",
+  pt: "Paleta de Cores",
+};
 ---
 
-<details
-  id="color-pallette"
-  class="rounded-lg shadowless-glassbox p-3 mobile-only:p-2"
-  title={localizedColorPallete}
->
-  <summary class="flex items-center cursor-pointer">
-    <Image
-      loading="eager"
-      width={48}
-      height={48}
-      src="/icons/content/charrefs/colors-svgrepo-com.svg"
-      class="h-11 w-auto mr-4 mobile-only:h-6"
-      alt={`${localizedColorPallete} icon`}
-      loading="lazy"
-    />
-    <h2
-      class="text-extra w-1150:text-large mobile-only:text-base regular"
-      aria-label={localizedColorPallete}
-      title={localizedColorPallete}
-    >
-      {localizedColorPallete}
-    </h2>
-  </summary>
-  <div class="grid grid-cols-1 gap-y-1 coil">
-    <ColorSwatch client:load locale={locale} />
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    width={48}
+    height={48}
+    src="/icons/content/charrefs/bxs--color-fill.svg"
+    class="h-11 w-auto mr-4 mobile-only:h-6 dark:invert"
+    alt={`${localizedColorPallete[locale]} icon`}
+    loading="lazy"
+  />
+  <h3
+    id="color-pallette"
+    class="regular"
+    aria-label={localizedColorPallete[locale]}
+    title={localizedColorPallete[locale]}
+  >
+    {localizedColorPallete[locale]}
+  </h3>
+</div>
+<TextContent>
+  <div class="mobile-only:p-2" title={localizedColorPallete[locale]}>
+    <div class="grid grid-cols-1 gap-y-1 coil">
+      <ColorSwatch client:load locale={locale} />
+    </div>
   </div>
-</details>
-
+</TextContent>
 <style>
   .coil {
     font-family: "light";

@@ -1,0 +1,69 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+
+// Define the Option interface
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedFaceSculpt = {
+  en: "Head",
+  ja: "頭",
+  es: "Cabeza",
+  pt: "Cabeça",
+};
+
+const facesculpt: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+  options?: Option[];
+}> = [
+  {
+    href: "https://payhip.com/b/pPixC",
+    title: "Vivi: Emi",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }, { type: "Paid" }],
+    options: [
+      {
+        optionTitle: "Face 4/104",
+        options: ["Make-Up 3"],
+      },
+    ],
+  },
+  {
+    href: "https://ko-fi.com/s/a85d72cb4d",
+    title: "nyiam: Purrfect Eyesight",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }, { type: "Paid" }],
+    options: [
+      {
+        optionTitle: "1",
+        options: ["YouEyeColor +"],
+      },
+    ],
+  },
+  {
+    href: "https://www.garlandtools.org/db/#item/27617",
+    title: "Base FFXIV©: Immaculate Ear Cuffs",
+    tags: [{ type: "Prio", pr: "Always Glamoured" }],
+  },
+];
+---
+
+<div id="face-sculpt" class="mb-2">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/moai-2-svgrepo-com.svg"
+    title={localizedFaceSculpt[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={facesculpt} locale={locale} />
+  </ModSectionWrapper>
+</div>

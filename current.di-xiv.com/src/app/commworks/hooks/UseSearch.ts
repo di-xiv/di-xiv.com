@@ -1,5 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import type { Gallery, Artwork, Rating } from "@/app/commworks/Types";
+import type {
+  Gallery,
+  Artwork,
+  Rating,
+  SortOrder,
+} from "@/app/commworks/Types";
 
 // Constant for "all" keywords, localized
 const ALL_KEYWORDS = ["all", "todo", "すべて", "tudo"];
@@ -11,6 +16,8 @@ interface UseSearchProps {
   setError: (error: string | null) => void;
   setGalleries: (galleries: Gallery[]) => void;
   shuffleArray: <T>(array: T[]) => T[];
+  sortOrder: SortOrder; // Add this
+  sortGalleries: (galleries: Gallery[], order: SortOrder) => Gallery[]; // Add this
 }
 
 export const useSearch = ({
@@ -20,6 +27,8 @@ export const useSearch = ({
   setError,
   setGalleries,
   shuffleArray,
+  sortOrder,
+  sortGalleries,
 }: UseSearchProps) => {
   const [searchText, setSearchText] = useState<string>(initialSearchText);
   const [hasSearched, setHasSearched] = useState<boolean>(!!initialSearchText);
@@ -109,8 +118,9 @@ export const useSearch = ({
           }))
           .filter((gallery: Gallery) => gallery.artworks.length > 0);
 
-        const shuffledGalleries = shuffleArray(filteredGalleries);
-        setGalleries(shuffledGalleries);
+        // Apply sorting instead of shuffling
+        const sortedGalleries = sortGalleries(filteredGalleries, sortOrder);
+        setGalleries(sortedGalleries);
         setHasSearched(true);
       } catch (err) {
         console.error("Search error:", err);
@@ -120,7 +130,14 @@ export const useSearch = ({
         setLoading(false);
       }
     },
-    [selectedRatings, setLoading, setError, setGalleries, shuffleArray],
+    [
+      selectedRatings,
+      setLoading,
+      setError,
+      setGalleries,
+      sortOrder,
+      sortGalleries,
+    ],
   );
 
   return {

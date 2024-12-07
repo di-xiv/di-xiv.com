@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+type LocaleKey = "en" | "ja" | "pt" | "es";
+
+interface Section {
+  id:
+    | "contact-information"
+    | "material-description"
+    | "material-location"
+    | "good-faith-statement";
+  icon: string;
+  textMap: Map<LocaleKey, string>;
+  getTitle: (locale: LocaleKey) => string;
+}
+
+const { locale } = Astro.props;
+import TitleWithLeadingIcon from "@/components/text/TitleWithLeadingIcon.tsx";
+import LocalizedTakedowns from "@/prose/Inquiries/takedowns/Takedowns.json";
+
+const sections: Section[] = [
+  {
+    id: "contact-information",
+    icon: "/icons/content/inquiries/bxs--contact.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedTakedowns["contact-information"].en],
+      ["es", LocalizedTakedowns["contact-information"].es],
+      ["ja", LocalizedTakedowns["contact-information"].ja],
+      ["pt", LocalizedTakedowns["contact-information"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedTakedowns["contact-information"].title[locale] ||
+      LocalizedTakedowns["contact-information"].title.default,
+  },
+  {
+    id: "material-description",
+    icon: "/icons/content/inquiries/fluent--text-description-16-filled.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedTakedowns["material-description"].en],
+      ["es", LocalizedTakedowns["material-description"].es],
+      ["ja", LocalizedTakedowns["material-description"].ja],
+      ["pt", LocalizedTakedowns["material-description"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedTakedowns["material-description"].title[locale] ||
+      LocalizedTakedowns["material-description"].title.default,
+  },
+  {
+    id: "material-location",
+    icon: "/icons/content/inquiries/mingcute--location-line.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedTakedowns["material-location"].en],
+      ["es", LocalizedTakedowns["material-location"].es],
+      ["ja", LocalizedTakedowns["material-location"].ja],
+      ["pt", LocalizedTakedowns["material-location"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedTakedowns["material-location"].title[locale] ||
+      LocalizedTakedowns["material-location"].title.default,
+  },
+  {
+    id: "good-faith-statement",
+    icon: "/icons/content/inquiries/clarity--contract-line.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedTakedowns["good-faith-statement"].en],
+      ["es", LocalizedTakedowns["good-faith-statement"].es],
+      ["ja", LocalizedTakedowns["good-faith-statement"].ja],
+      ["pt", LocalizedTakedowns["good-faith-statement"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedTakedowns["good-faith-statement"].title[locale] ||
+      LocalizedTakedowns["good-faith-statement"].title.default,
+  },
+];
+
+const LocalizedTakedownsTitle: Record<LocaleKey, string> = {
+  en: "Content Takedowns",
+  ja: "コンテンツ撤回",
+  es: "Retiradas de Contenido",
+  pt: "Retiradas de Conteúdo",
+};
+const LocalizedTakedownsIntro: Record<LocaleKey, string> = {
+  en: "If you believe that any content on this site infringes your copyright, terms of use or service or intellectual property, please let us know.",
+  ja: "このサイトのコンテンツが著作権、利用規約、または知的財産権を侵害していると思われる場合は、お知らせください。",
+  es: "Si crees que algún contenido en este sitio infringe tus derechos de autor, términos de uso o propiedad intelectual, por favor háznoslo saber.",
+  pt: "Se você acredita que qualquer conteúdo deste site infringe seus direitos autorais, termos de uso ou propriedade intelectual, por favor, nos informe.",
+};
+const LocalizedSentTo: Record<LocaleKey, string> = {
+  en: "Please, send the request to:",
+  ja: "リクエストを以下に送信してください：",
+  es: "Por favor, envía la solicitud a:",
+  pt: "Por favor, envie a solicitação para:",
+};
+---
+
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    src="/icons/content/tou/fluent--document-person-16-filled.svg"
+    class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+    alt={`${LocalizedTakedownsTitle[locale]} icon`}
+    width={44}
+    height={44}
+  />
+  <h2
+    id="takedowns"
+    class="bold"
+    aria-label={LocalizedTakedownsTitle[locale]}
+    title={LocalizedTakedownsTitle[locale]}
+  >
+    {LocalizedTakedownsTitle[locale]}
+  </h2>
+</div>
+<TextContent>
+  <p>{LocalizedTakedownsIntro[locale]}</p>
+  <div class="flex regular items-center">
+    {LocalizedSentTo[locale]}&nbsp;
+    <a href="mailto:inquiries@di-xiv.com" title="Inquiries email"
+      >inquiries@di-xiv.com</a
+    >
+  </div>
+</TextContent>
+{
+  sections.map((section) => (
+    <TextContent>
+      <div class="glassbox p-2 rounded my-2">
+        <TitleWithLeadingIcon
+          imageURL={section.icon}
+          title={section.getTitle(locale)}
+        />
+      </div>
+      <div class="flex justify-center">
+        <ul class="w-[90%]">
+          {(
+            section.textMap.get(locale) ??
+            LocalizedTakedowns[section.id].default
+          )
+            .split("\n")
+            .map((item: string) => (
+              <li class="">{item}</li>
+            ))}
+        </ul>
+      </div>
+    </TextContent>
+  ))
+}

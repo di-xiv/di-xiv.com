@@ -15,10 +15,10 @@ const TagButton: React.FC<TagButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-200 regular
-        ${isSelected ? "bg-blue-500 text-white" : "glassbox button-glassbox"}`}
+      className={`px-3 py-2 mobile-only:px-2 mobile-only:py-1 rounded-lg text-sm font-medium transition-colors duration-200 regular
+        ${isSelected ? "text-[#efefef] dark:text-[#181a1b] selected-glassbox" : "shadowless-glassbox button-glassbox"}`}
     >
-      {tagName}
+      <p>{tagName}</p>
     </button>
   );
 };

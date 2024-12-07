@@ -1,0 +1,30 @@
+{
+  "jumpTo": {
+    "default": "Jump to",
+    "en": "Jump to",
+    "es": "Ir a",
+    "ja": "移動",
+    "pt": "Ir para"
+  },
+  "tou": {
+    "default": "Jump to",
+    "en": "Jump to",
+    "es": "Ir a",
+    "ja": "移動",
+    "pt": "Ir para"
+  },
+  "faq": {
+    "default": "Jump to",
+    "en": "Jump to",
+    "es": "Ir a",
+    "ja": "移動",
+    "pt": "Ir para"
+  },
+  "takedowns": {
+    "default": "Jump to",
+    "en": "Jump to",
+    "es": "Ir a",
+    "ja": "移動",
+    "pt": "Ir para"
+  }
+}

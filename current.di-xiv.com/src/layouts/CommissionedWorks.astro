@@ -1,6 +1,7 @@
 ---
 import Master from "@/layouts/Master.astro";
 // Commissioned Works
+import { Image } from "astro:assets";
 import CWGalleryEngine from "@/app/commworks/CWGalleryEngine.tsx";
 // English-only notice
 import StyledBlockquote, {
@@ -19,11 +20,6 @@ interface Props {
   metaImageHeight: string;
   metaImageWidth: string;
   metaImageAlt: string;
-  /// Aside
-  localizedCharRefs: string;
-  localizedCommWorks: string;
-  localizedContact: string;
-  localizedInquiries: string;
   headerContent: string;
   // Commissioned Works
   localizedLoading: string;
@@ -34,10 +30,6 @@ interface Props {
 
 const {
   locale,
-  localizedCharRefs,
-  localizedCommWorks,
-  localizedContact,
-  localizedInquiries,
   headerContent,
   metaImageURL,
   metaDescription,
@@ -70,10 +62,6 @@ const langNotices = isValidLocale(locale) ? localeLangNotices[locale] : "";
 <Master
   locale={locale}
   currentPage="commissioned-works"
-  localizedCharRefs={localizedCharRefs}
-  localizedCommWorks={localizedCommWorks}
-  localizedContact={localizedContact}
-  localizedInquiries={localizedInquiries}
   headerContent={`${headerContent} - Di-XIV`}
   metaDescription={metaDescription}
   metaKeywords={metaKeywords}
@@ -96,6 +84,19 @@ const langNotices = isValidLocale(locale) ? localeLangNotices[locale] : "";
       </div>
     )
   }
+  <div class="flex items-center">
+    <Image
+      loading="eager"
+      src="/icons/aside/material-symbols--wall-art-outline.svg"
+      class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+      alt={`${headerContent} icon`}
+      width={44}
+      height={44}
+    />
+    <h2 class="bold" aria-label={headerContent} title={headerContent}>
+      {headerContent}
+    </h2>
+  </div>
   <div id="commworks-container" class="">
     <CWGalleryEngine
       locale={locale}

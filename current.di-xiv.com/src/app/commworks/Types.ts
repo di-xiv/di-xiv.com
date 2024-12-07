@@ -36,3 +36,5 @@ export interface ArtworkGalleryProps {
   localizedLoading: string;
   localizedLoadingError: string;
 }
+
+export type SortOrder = "random" | "newest" | "oldest";

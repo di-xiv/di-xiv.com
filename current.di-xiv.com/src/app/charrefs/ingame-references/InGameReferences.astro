@@ -7,7 +7,9 @@ import A from "@/components/text/SimpleInlineAnchor";
 import Attires from "@/app/charrefs/ingame-references/attires/Attires.astro";
 import GPoseShots from "@/app/charrefs/ingame-references/gpose-shots/GPoseShots.astro";
 import Hairstyles from "@/app/charrefs/ingame-references/hairstyles/Hairstyles.astro";
-
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
   localizedInGameShots: string;
@@ -35,9 +37,9 @@ const {
 const localeStrings = {
   en: {
     downloadReferences: "Download the ingame references",
-    lastUpdated: "In-game screenshots were last updated in september 2023",
+    lastUpdated: "In-game screenshots were last updated in September of 2023",
     mcdfExplanation:
-      ".mcdf exports are some missing essential mods. Last updated in November 2024",
+      ".mcdf exports are some missing essential mods. Last updated in November of 2024",
   },
   ja: {
     downloadReferences:
@@ -65,89 +67,88 @@ const localeStrings = {
 const strings = localeStrings[locale];
 ---
 
-<details
-  id="ingame-references"
-  class="mobile-only:p-2 rounded-lg shadowless-glassbox p-3"
-  title={localizedInGameShots}
->
-  <summary class="flex items-center">
-    <div class="">
-      <Image
-        loading="eager"
-        width={48}
-        height={48}
-        src="/icons/content/charrefs/game-icons--floating-crystal.svg"
-        class="h-11 mobile-only:h-6 w-auto mr-4"
-        alt=`${localizedInGameShots} icon`
+<div class="flex items-center">
+  <div class="">
+    <Image
+      loading="eager"
+      width={48}
+      height={48}
+      src="/icons/content/ack/FFXIVMeteo.svg"
+      class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+      alt=`${localizedInGameShots} icon`
+    />
+  </div>
+  <h3
+    id="ingame-captures"
+    class="regular"
+    aria-label={localizedInGameShots}
+    title={localizedInGameShots}
+  >
+    {localizedInGameShots}
+  </h3>
+</div>
+<TextContent>
+  <div class="mobile-only:p-2" title={localizedInGameShots}>
+    <div class="flex justify-center">
+      <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+        <A
+          id="download-all-references"
+          className="flex items-center"
+          h="https://drive.proton.me/urls/0JBDR7ANEG#RQ1jVCyoLt4m"
+        >
+          <h3
+            class="light inline-block w-1150:text-sm mobile-only:text-xs"
+            aria-label={strings.downloadReferences}
+            title={strings.downloadReferences}
+          >
+            {strings.downloadReferences}
+          </h3>
+        </A>
+      </StyledBlockquote>
+    </div>
+    <div class="flex justify-center not-mobile:gap-x-10 mobile-only:gap-x-1">
+      <StyledBlockquote blockquoteType={BlockquoteType.Danger}>
+        <p
+          class="light mobile-only:text-sm"
+          aria-label={strings.lastUpdated}
+          title={strings.lastUpdated}
+        >
+          {strings.lastUpdated}
+        </p>
+      </StyledBlockquote>
+      <StyledBlockquote blockquoteType={BlockquoteType.Important}>
+        <p
+          class="light mobile-only:text-sm"
+          aria-label={strings.mcdfExplanation}
+          title={strings.mcdfExplanation}
+        >
+          {strings.mcdfExplanation}
+        </p>
+      </StyledBlockquote>
+    </div>
+    <div class="grid grid-cols-1 gap-y-2 mt-[2%]">
+      <GPoseShots
+        locale={locale}
+        localizedGPoseShots={localizedGPoseShots}
+        localizedClickToZoom={localizedClickToZoom}
+        localizedDismiss={localizedDismiss}
+        localizedDownload={localizedDownload}
+      />
+      <Hairstyles
+        locale={locale}
+        localizedHairstyles={localizedHairstyles}
+        localizedClickToZoom={localizedClickToZoom}
+        localizedDismiss={localizedDismiss}
+        localizedDownload={localizedDownload}
+      />
+      <Attires
+        locale={locale}
+        localizedAttires={localizedAttires}
+        localizedAttireArtworks={localizedAttireArtworks}
+        localizedClickToZoom={localizedClickToZoom}
+        localizedDismiss={localizedDismiss}
+        localizedDownload={localizedDownload}
       />
     </div>
-    <h2
-      class="text-extra w-1150:text-large mobile-only:text-base regular"
-      aria-label={localizedInGameShots}
-      title={localizedInGameShots}
-    >
-      {localizedInGameShots}
-    </h2>
-  </summary>
-  <div class="flex items-center">
-    <StyledBlockquote blockquoteType={BlockquoteType.Download}>
-      <A
-        id="download-all-references"
-        className="flex items-center"
-        h="https://drive.proton.me/urls/0JBDR7ANEG#RQ1jVCyoLt4m"
-      >
-        <h3
-          class="light inline-block w-1150:text-sm mobile-only:text-xs"
-          aria-label={strings.downloadReferences}
-          title={strings.downloadReferences}
-        >
-          {strings.downloadReferences}
-        </h3>
-      </A>
-    </StyledBlockquote>
   </div>
-  <div class="flex items-center">
-    <StyledBlockquote blockquoteType={BlockquoteType.Danger}>
-      <p
-        class="light mobile-only:text-sm"
-        aria-label={strings.lastUpdated}
-        title={strings.lastUpdated}
-      >
-        {strings.lastUpdated}
-      </p>
-    </StyledBlockquote>
-    <StyledBlockquote blockquoteType={BlockquoteType.Important}>
-      <p
-        class="light mobile-only:text-sm"
-        aria-label={strings.mcdfExplanation}
-        title={strings.mcdfExplanation}
-      >
-        {strings.mcdfExplanation}
-      </p>
-    </StyledBlockquote>
-  </div>
-  <div class="grid grid-cols-1 gap-y-2 mt-[2%]">
-    <GPoseShots
-      locale={locale}
-      localizedGPoseShots={localizedGPoseShots}
-      localizedClickToZoom={localizedClickToZoom}
-      localizedDismiss={localizedDismiss}
-      localizedDownload={localizedDownload}
-    />
-    <Hairstyles
-      locale={locale}
-      localizedHairstyles={localizedHairstyles}
-      localizedClickToZoom={localizedClickToZoom}
-      localizedDismiss={localizedDismiss}
-      localizedDownload={localizedDownload}
-    />
-    <Attires
-      locale={locale}
-      localizedAttires={localizedAttires}
-      localizedAttireArtworks={localizedAttireArtworks}
-      localizedClickToZoom={localizedClickToZoom}
-      localizedDismiss={localizedDismiss}
-      localizedDownload={localizedDownload}
-    />
-  </div>
-</details>
+</TextContent>

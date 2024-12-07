@@ -107,14 +107,10 @@ const LanguageSelector: React.FC = () => {
         id="language-selector"
         value={lang}
         onChange={handleLanguageChange}
-        className="ml-1 select-language light p-2 mobile-only:p-1 glassbox"
+        className="regular ml-1 select-language p-2 rounded-lg mobile-only:p-1 glassbox"
       >
         {languages.map((language) => (
-          <option
-            key={language.code}
-            value={language.code}
-            className="light bg-[#181a1b] text-[#efefef]"
-          >
+          <option key={language.code} value={language.code}>
             {language.name}
           </option>
         ))}

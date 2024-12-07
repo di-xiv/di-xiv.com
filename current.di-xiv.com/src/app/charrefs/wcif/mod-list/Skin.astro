@@ -9,6 +9,10 @@ import {
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
 }
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
 const { locale } = Astro.props;
 const localizedSkin = {
   en: "Skin",
@@ -16,48 +20,32 @@ const localizedSkin = {
   es: "Piel",
   pt: "Pele",
 };
-const localizedFaceFreckles = {
-  en: "Face Freckles",
-  ja: "顔のほくろ",
-  es: "Lunares Faciales",
-  pt: "Sardas no Rosto",
-};
-const localizedBodyFreckles = {
-  en: "Body Freckles",
-  ja: "体のほくろ",
-  es: "Lunares Corporales",
-  pt: "Sardas no Corpo",
-};
-const localizedPubes = {
-  en: "Pubic Hair",
-  ja: "陰毛",
-  es: "Vello púbico",
-  pt: "Pelos Pubianos",
-};
 const skin: Array<{
   href: string;
   title: string;
   tags: Tag[];
+  options?: Option[];
 }> = [
   {
     href: "https://www.glamourdresser.com/mods/saoirses-freckles",
     title: "Crystia: Saoirse's Freckles",
-    tags: [{ type: "ManUpd" }, { type: "Prio", pr: "0" }],
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: "0" }, { type: "Free" }],
   },
   {
-    href: "https://xivmodarchive.com/modid/34338",
-    title: "Almaden: All Gen Body Freckles 🔞",
-    tags: [{ type: "Incompat" }, { type: "Prio", pr: "4" }],
-  },
-  {
-    href: "https://www.xivmodarchive.com/modid/120942",
+    href: "https://www.xivmodarchive.com/modid/75292",
     title: "Korbo: Better Pubes Framework 🔞",
-    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }],
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "1" }, { type: "Free" }],
+    options: [
+      {
+        optionTitle: "Hairstyle (Midlander/Elezen/Miqo'te)",
+        options: ["Light Bush Classic"],
+      },
+    ],
   },
 ];
 ---
 
-<div id="skin">
+<div id="skin" class="mb-2">
   <TitleWithLeadingIcon
     imageURL="/icons/content/wcif/leather-svgrepo-com.svg"
     title={localizedSkin[locale]}

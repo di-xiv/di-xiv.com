@@ -1,12 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import TechAck from "@/components/layout/footer/badges/TechAck.astro";
-import GetCurrentSmallDate from "@/components/layout/aside/components/GetCurrentSmallDate";
+import FFCopyrightNotice from "@/components/layout/footer/badges/FFCopyrightNotice.astro";
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
+  currentPage: string;
 }
 
-const { locale } = Astro.props;
+const { locale, currentPage } = Astro.props;
 
 function localizedHome() {
   if (locale !== "en") {
@@ -17,29 +18,42 @@ function localizedHome() {
 }
 ---
 
+<div class="mobile-only:mt-[10%] w-1150:mt-[5%] mt-[2.5%]"></div>
 <footer
   id="footer"
-  class="grid h-max glassbox mt-auto
-  ultrawide-only:grid-cols-[1fr_55vw_1fr]
-  grid-cols-[1fr_70vw_1fr]
-  w-1150:grid-cols-[1fr_80vw_1fr]
-  mobile-only:grid-cols-[1fr_90vw_1fr]"
+  class={`grid h-max
+  bg-[#efefef] text-[#181a1b] dark:bg-[#181a1b] dark:text-[#efefef]
+  shadow-[0_-2px_15px_12px_rgba(0,0,0,0.5)]
+  mt-auto
+  ultrawide-only:grid-cols-[1fr_75vw_0.2fr]
+    grid-cols-[1fr_70vw_1fr]
+    ${
+      currentPage === "commissioned-works"
+        ? "mobile-only:grid-cols-[1fr_98vw_1fr]"
+        : "mobile-only:grid-cols-[1fr_90vw_1fr]"
+    }
+  noise-bg-animation`}
 >
   <div id="footer-left"></div>
-  <div id="footer-center" class="flex justify-evenly my-[1%] items-center">
-    <a href={localizedHome()} class="flex items-center select-none">
-      <span class="regular">Di-XIV</span>
-      <Image
-        loading="eager"
-        src="/favicon.ico"
-        width={36}
-        height={36}
-        class="w-9 h-auto relative -top-[3px]"
-        alt="Di-XIV Brand Icon"
-      />
-      <GetCurrentSmallDate c="regular" client:load />
-    </a>
-    <TechAck locale={locale} />
+  <div id="footer-center">
+    <div class="flex justify-evenly my-[1%] items-center">
+      <a href={localizedHome()} class="flex items-center select-none">
+        <p class="regular">Di-XIV</p>
+        <Image
+          loading="eager"
+          src="/favicon.ico"
+          width={36}
+          height={36}
+          class="w-9 h-auto"
+          alt="Di-XIV Brand Icon"
+        />
+        <p class="regular">2024</p>
+      </a>
+      <TechAck locale={locale} />
+    </div>
+    <div class="flex justify-center">
+      <FFCopyrightNotice locale={locale} />
+    </div>
   </div>
+  <div id="footer-right"></div>
 </footer>
-<div id="footer-right"></div>

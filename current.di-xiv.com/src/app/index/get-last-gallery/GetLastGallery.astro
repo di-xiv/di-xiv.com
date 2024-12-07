@@ -6,7 +6,7 @@ interface Props {
 const { localizedLatestComm } = Astro.props;
 ---
 
-<details class="glassbox p-2 rounded-md w-full">
+<details class="w-full">
   <summary class="flex items-center justify-center">
     <div class="dark:invert mr-2">
       <svg
@@ -20,13 +20,13 @@ const { localizedLatestComm } = Astro.props;
         ></path>
       </svg>
     </div>
-    <p
-      class="regular text-large mobile-only:text-base"
+    <h2
+      class="regular mobile-only:text-base"
       title={localizedLatestComm}
       aria-label={localizedLatestComm}
     >
       {localizedLatestComm}
-    </p>
+    </h2>
   </summary>
   <LastGallery client:load />
 </details>

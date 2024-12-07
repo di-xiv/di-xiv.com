@@ -1,35 +1,91 @@
+/*
+  Geist Sans
+*/
 .light {
-  font-family: "light", serif;
+  font-family: "light", sans-serif;
   font-weight: light;
   font-style: normal;
 }
 
 .italic-light {
-  font-family: "light", serif;
+  font-family: "light", sans-serif;
   font-weight: light;
   font-style: italic;
 }
 
 .regular {
-  font-family: "regular", serif;
+  font-family: "regular", sans-serif;
   font-weight: normal;
   font-style: normal;
 }
 
 .italic-regular {
-  font-family: "regular", serif;
+  font-family: "regular", sans-serif;
   font-weight: normal;
   font-style: italic;
 }
 
 .bold {
-  font-family: "bold", serif;
+  font-family: "bold", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .italic-bold {
-  font-family: "bold", serif;
+  font-family: "bold", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+/*
+  IBM Plex Mono
+*/
+.mono-italic {
+  font-family: "ibm-plex-mono-italic", monospace;
+}
+
+.mono-medium {
+  font-family: "ibm-plex-mono-medium", monospace;
+}
+
+.mono-light {
+  font-family: "ibm-plex-mono-light", monospace;
+}
+
+/*
+  Editorial New
+*/
+.light-serif {
+  font-family: "light-serif", serif;
+  font-weight: light;
+  font-style: normal;
+}
+
+.italic-light-serif {
+  font-family: "light-serif", serif;
+  font-weight: light;
+  font-style: italic;
+}
+
+.regular-serif {
+  font-family: "regular-serif", serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.italic-regular-serif {
+  font-family: "regular-serif", serif;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.bold-serif {
+  font-family: "bold-serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.italic-bold-serif {
+  font-family: "bold-serif", serif;
   font-weight: bold;
   font-style: italic;
 }

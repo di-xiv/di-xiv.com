@@ -1,5 +1,6 @@
 ---
 import Master from "@/layouts/Master.astro";
+import TextContent from "@/components/wrappers/TextContent.tsx";
 // Index content
 import GetLastGallery from "@/app/index/get-last-gallery/GetLastGallery.astro";
 import HelloThere from "@/app/index/messages/HelloThere.astro";
@@ -16,20 +17,11 @@ interface Props {
   metaImageHeight: string;
   metaImageWidth: string;
   metaImageAlt: string;
-  /// Aside
-  localizedCharRefs: string;
-  localizedCommWorks: string;
-  localizedContact: string;
-  localizedInquiries: string;
   // Index
   localizedLatestComm: string;
 }
 const {
   locale,
-  localizedInquiries,
-  localizedContact,
-  localizedCommWorks,
-  localizedCharRefs,
   metaImageURL,
   metaDescription,
   metaKeywords,
@@ -44,10 +36,6 @@ const {
 <Master
   locale={locale}
   currentPage="index"
-  localizedCharRefs={localizedCharRefs}
-  localizedCommWorks={localizedCommWorks}
-  localizedContact={localizedContact}
-  localizedInquiries={localizedInquiries}
   metaDescription={metaDescription}
   metaKeywords={metaKeywords}
   metaImageURL={metaImageURL}
@@ -60,7 +48,9 @@ const {
   <div id="index" class="flex justify-center w-full">
     <div class="grid grid-cols-1 gap-y-4 w-full px-4">
       <HelloThere locale={locale} />
-      <GetLastGallery localizedLatestComm={localizedLatestComm} />
+      <TextContent>
+        <GetLastGallery localizedLatestComm={localizedLatestComm} />
+      </TextContent>
     </div>
   </div>
 </Master>

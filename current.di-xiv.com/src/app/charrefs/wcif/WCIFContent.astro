@@ -7,12 +7,13 @@ import StyledBlockquote, {
 import StringExports from "./mod-list/StringExports.astro";
 import Hairstyles from "./mod-list/Hairstyles.astro";
 import BrokenLinks from "./mod-list/BrokenLinks.astro";
-import FaceSculpt from "./mod-list/FaceSculpt.astro";
-import Gen3BodyStack from "./mod-list/Gen3BodyStack.astro";
-import Genitalia from "./mod-list/Genitalia.astro";
-import Iris from "./mod-list/Iris.astro";
-import Limbs from "./mod-list/Limbs.astro";
+import Head from "./mod-list/Head.astro";
+import UpperBody from "./mod-list/UpperBody.astro";
+import LowerBody from "./mod-list/LowerBody.astro";
 import Skin from "./mod-list/Skin.astro";
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
 // Props
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
@@ -26,67 +27,85 @@ const localizedUpdated = {
   es: "Última actualización: noviembre de 2024",
   pt: "Última atualização: novembro de 2024",
 };
+const localizedSeamNotice = {
+  en: "The upper body uses Gen3 textures (for EXQB), while the lower body uses Bibo+ textures (for Neighsayer).\nA faint skin color seam will appear near the navel, due to slight differences in texture.",
+  ja: "上半身にはGen3テクスチャ（EXQB用）が、下半身にはBibo+テクスチャ（Neighsayer用）が使用されています。\n肌の色にわずかな差があるため、へその近くにシームが現れます。",
+  es: "La parte superior del cuerpo usa texturas Gen3 (para EXQB), mientras que la parte inferior usa texturas Bibo+ (para Neighsayer).\nDebido a ligeras diferencias en las texturas, aparecerá una tenue línea de color de piel cerca del ombligo.",
+  pt: "A parte superior do corpo usa texturas Gen3 (para EXQB), enquanto a parte inferior usa texturas Bibo+ (para Neighsayer).\nDevido a pequenas diferenças nas texturas, uma leve linha de cor da pele aparecerá próxima ao umbigo.",
+};
+const localizedTemplatesExplanation = {
+  en: "Each hairstyle has an unique earring placement, which may cause clipping with other Customize+ settings",
+  ja: "それぞれのヘアスタイルにはイヤリングの位置があり、他のCustomize+の設定でクリッピングを引き起こす可能性があります。",
+  es: "Cada peinado tiene una posición única para los pendientes, lo que puede causar recortes con otros ajustes de Customize+.",
+  pt: "Cada penteado tem uma posição exclusiva para os brincos, o que pode causar recortes com outras configurações do Customize+.",
+};
 ---
 
 <style is:global>
   body .mdx h3 {
-    font-size: clamp(1.318rem, 1vw + 0.5rem, 2.318rem);
+    font-family: "regular", sans-serif;
   }
-  body .mdx h3 {
-    font-family: "regular", serif;
-    font-weight: normal;
-    font-style: normal;
-  }
-  body .mdx span {
-    font-size: clamp(0.9rem, 1vw + 0.2rem, 1.118rem);
-  }
-  body .mdx p,
-  body .mdx ul {
-    font-family: "light", serif;
-    font-weight: normal;
-    font-style: normal;
-    line-height: 2rem;
-    font-size: clamp(1rem, 1vw + 0.2rem, 1.618rem);
-  }
-  body .mdx a {
-    text-decoration: underline;
+  .mdx notice {
+    white-space: pre-line;
   }
 </style>
-
-<details id="wcif" class="shadowless-glassbox mobile-only:p-2 p-3 rounded-lg">
-  <summary class="flex items-center">
-    <Image
-      loading="eager"
-      src="/icons/content/charrefs/modeling-svgrepo-com.svg"
-      class="h-11 mobile-only:h-6 w-auto mr-4"
-      alt={`${localizedWCIF} icon`}
-      width={44}
-      height={44}
-    />
-    <h2
-      class="text-extra w-1150:text-large mobile-only:text-base regular"
-      aria-label={localizedWCIF}
-      title={localizedWCIF}
-    >
-      {localizedWCIF}
-    </h2>
-  </summary>
-  <div>
-    <StyledBlockquote blockquoteType={BlockquoteType.Updated}>
-      <p class="light">{localizedUpdated[locale]}</p>
-    </StyledBlockquote>
-    <div class="flex justify-center">
-      <div class="mdx mb-5">
-        <Hairstyles locale={locale} />
-        <FaceSculpt locale={locale} />
-        <Iris locale={locale} />
-        <Skin locale={locale} />
-        <Gen3BodyStack locale={locale} />
-        <Limbs locale={locale} />
-        <Genitalia locale={locale} />
-        <StringExports locale={locale} />
-        <BrokenLinks locale={locale} />
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    src="/icons/content/charrefs/ItemCategory_Crystal.svg"
+    class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+    alt={`${localizedWCIF} icon`}
+    width={44}
+    height={44}
+  />
+  <h3
+    id="wcif-list"
+    class="regular"
+    aria-label={localizedWCIF}
+    title={localizedWCIF}
+  >
+    {localizedWCIF}
+  </h3>
+</div>
+<TextContent>
+  <div id="wcif" class="mobile-only:p-2">
+    <div>
+      <div
+        class="mobile-only:flex not-mobile:absolute not-mobile:top-10 not-mobile:right-10 justify-end"
+      >
+        <StyledBlockquote blockquoteType={BlockquoteType.Updated}>
+          <notice class="light">{localizedUpdated[locale]}</notice>
+        </StyledBlockquote>
+      </div>
+      <div class="flex justify-center">
+        <div class="mdx mb-5">
+          <Hairstyles locale={locale} />
+          <Head locale={locale} />
+          <Skin locale={locale} />
+          <UpperBody locale={locale} />
+          <LowerBody locale={locale} />
+          <div class="my-[2%]">
+            <StyledBlockquote blockquoteType={BlockquoteType.Info}>
+              <div class="grid">
+                <notice class="light">
+                  {localizedSeamNotice[locale]}
+                </notice>
+              </div>
+            </StyledBlockquote>
+          </div>
+          <StringExports locale={locale} />
+          <div class="my-[2%]">
+            <StyledBlockquote blockquoteType={BlockquoteType.Info}>
+              <div class="grid">
+                <notice class="light">
+                  {localizedTemplatesExplanation[locale]}
+                </notice>
+              </div>
+            </StyledBlockquote>
+          </div>
+          <BrokenLinks locale={locale} />
+        </div>
       </div>
     </div>
   </div>
-</details>
+</TextContent>

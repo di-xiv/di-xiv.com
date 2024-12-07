@@ -1,0 +1,112 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import { Image } from "astro:assets";
+//
+import InGameReferencesContent from "@/app/charrefs/ingame-references/InGameReferences.astro";
+import WCIFContent from "@/app/charrefs/wcif/WCIFContent.astro";
+//
+import URLParamsOpening from "@/app/charrefs/logic/URLParamsOpening.astro";
+import ScrollToAnchor from "@/components/text/mdx/ScrollToAnchor";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  headerContent: string;
+  // Character References
+  localizedAttireArtworks: string;
+  localizedAttires: string;
+  localizedGPoseShots: string;
+  localizedInGameShots: string;
+  localizedHairstyles: string;
+  localizedCharacterSheetArtworks: string;
+  localizedWCIF: string;
+  localizedDismiss: string;
+  localizedClickToZoom: string;
+  localizedDownload: string;
+}
+
+const {
+  locale,
+  headerContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+  localizedAttires,
+  localizedGPoseShots,
+  localizedInGameShots,
+  localizedHairstyles,
+  localizedAttireArtworks,
+  localizedWCIF,
+  localizedClickToZoom,
+  localizedDismiss,
+  localizedDownload,
+} = Astro.props;
+const localizedArtReferences = {
+  en: "In-game References",
+  ja: "ゲーム内での言及",
+  es: "Referencias in-game",
+  pt: "Referências in-game",
+};
+---
+
+<Master
+  locale={locale}
+  currentPage="character-references"
+  headerContent={`${headerContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  <div class="grid grid-cols-1 gap-y-4 mobile-only:my-[5%] px-1">
+    <div class="flex items-center">
+      <Image
+        loading="eager"
+        src="/icons/aside/wpf--camera.svg"
+        class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+        alt={`${localizedArtReferences[locale]} icon`}
+        width={44}
+        height={44}
+      />
+      <h2
+        id="faq"
+        class="bold"
+        aria-label={localizedArtReferences[locale]}
+        title={localizedArtReferences[locale]}
+      >
+        {localizedArtReferences[locale]}
+      </h2>
+    </div>
+    <InGameReferencesContent
+      locale={locale}
+      localizedAttires={localizedAttires}
+      localizedGPoseShots={localizedGPoseShots}
+      localizedInGameShots={localizedInGameShots}
+      localizedAttireArtworks={localizedAttireArtworks}
+      localizedClickToZoom={localizedClickToZoom}
+      localizedDismiss={localizedDismiss}
+      localizedDownload={localizedDownload}
+      localizedHairstyles={localizedHairstyles}
+    />
+    <WCIFContent locale={locale} localizedWCIF={localizedWCIF} />
+  </div>
+</Master>
+<ScrollToAnchor client:only="react" />
+<URLParamsOpening />

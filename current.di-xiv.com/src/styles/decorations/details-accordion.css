@@ -1,0 +1,41 @@
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: "❈";
+  display: inline-block;
+  margin-right: 0.5em;
+  transition:
+    transform 0.1s ease,
+    color 0.1s ease;
+  text-decoration: none;
+}
+
+details[open] > summary::before {
+  transform: rotate(45deg);
+  text-decoration: none;
+}
+
+/* */
+@media (prefers-color-scheme: light) {
+  details > summary::before {
+    color: #181a1b;
+  }
+  details[open] > summary::before {
+    color: #1e7cff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  details > summary::before {
+    color: #efefef;
+  }
+  details[open] > summary::before {
+    color: #ed701d;
+  }
+}

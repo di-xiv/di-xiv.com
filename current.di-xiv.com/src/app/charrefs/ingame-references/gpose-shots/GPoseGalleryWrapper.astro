@@ -22,13 +22,9 @@ const InGameShotsGallery = [
         <details
           id={item.title}
           class="mobile-only:p-1 rounded shadowless-glassbox  p-2"
-          open={false}
+          open={true}
         >
-          <summary
-            class="text-large"
-            aria-label={item.title}
-            title={item.title}
-          >
+          <summary aria-label={item.title} title={item.title}>
             {item.title}
           </summary>
           <BasicReferenceGalleryEngine

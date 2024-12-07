@@ -1,0 +1,26 @@
+---
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedHostedOn = {
+  en: "This site is not affiliated in any way with SQUARE ENIX CO., LTD.",
+  ja: "このサイトはSQUARE ENIX CO., LTDとは一切関係ありません。",
+  es: "Este sitio no está afiliado de ninguna manera con SQUARE ENIX CO., LTD.",
+  pt: "Este site não é afiliado de forma alguma à SQUARE ENIX CO., LTD.",
+};
+---
+
+<div
+  class="mb-2
+  not-mobile:flex not-mobile:gap-x-1
+  mobile-only:grid mobile-only:gap-y-1"
+>
+  <p class="text-xs">
+    The FINAL FANTASY XIV Meteor logo is a registered trademark of SQUARE ENIX
+    CO., LTD.
+  </p>
+  <p class="text-xs">
+    {localizedHostedOn[locale]}
+  </p>
+</div>

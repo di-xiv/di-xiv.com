@@ -1,0 +1,58 @@
+{
+  "but-why": {
+    "title": {
+      "default": "But Why?",
+      "en": "But Why?",
+      "es": "¿Por que?",
+      "ja": "でも、なぜ？",
+      "pt": "Mas por quê?"
+    },
+    "default": "Because I can.",
+    "en": "Because I can.",
+    "es": "Porque puedo.",
+    "ja": "私にはできる。",
+    "pt": "Porque eu posso."
+  },
+  "since-when": {
+    "title": {
+      "default": "Since when?",
+      "en": "Since when?",
+      "es": "¿Desde cuando?",
+      "ja": "いつから？",
+      "pt": "Desde quando?"
+    },
+    "default": "July, 2023.",
+    "en": "July, 2023.",
+    "es": "Julio de 2023.",
+    "ja": "2023年7月",
+    "pt": "Julho de 2023."
+  },
+  "until-when": {
+    "title": {
+      "default": "Until when?",
+      "en": "Until when?",
+      "es": "¿Hasta cuando?",
+      "ja": "いつまで？",
+      "pt": "Até quando?"
+    },
+    "default": "Until I go broke, my hornyness dies out (for any given cause) or both.",
+    "en": "Until I go broke, my hornyness dies out (for any given cause) or both.",
+    "es": "Hasta que me quede sin dinero, sin líbido (por cualquier razón) o los dos.",
+    "ja": "お金が尽きるまで、性欲が尽きるまで（理由はどうあれ）、あるいはその両方が尽きるまで。",
+    "pt": "Até que eu fique sem dinheiro, sem libido (por qualquer motivo) ou ambos."
+  },
+  "who-is-this-for": {
+    "title": {
+      "default": "Who is this for?",
+      "en": "Who is this for?",
+      "es": "¿Desde cuando?",
+      "ja": "いつから？",
+      "pt": "Desde quando?"
+    },
+    "default": "For anyone who would like to use this Original Character.\nFor any artist who might want to check for the OC references, here or elsewhere.\nFor any FFXIV© player who wants to check the mods used.\nBut most importantly, for **me**.",
+    "en": "For anyone who would like to use this Original Character.\nFor any artist who might want to check for the OC references, here or elsewhere.\nFor any FFXIV© player who wants to check the mods used.\nBut most importantly, for me.",
+    "es": "Para cualquiera que quiera usar este Personaje Original.\nPara cualquier artista que quiera usar las referencias de este Personaje Original, aquí o en otro sitio.\nPara cualquier jugador de FFXIV© que quiera revisar los mods usados.\nY sobretodo, para mi.",
+    "ja": "このオリジナル・キャラクターを使いたい人へ。\nこのオリジナル・キャラクターのリファレンスを、ここでも他の場所でも使いたいアーティストのために。\nFFXIV©のプレイヤーで、使用したMODを見直したい人のために。\nそして何よりも、私ののために。",
+    "pt": "Para quem quiser usar esse personagem original.\nPara qualquer artista que queira usar as referências desse personagem original, aqui ou em outro lugar.\nPara qualquer jogador de FFXIV© que queira revisar os mods usados.\nE, acima de tudo, para o meu."
+  }
+}

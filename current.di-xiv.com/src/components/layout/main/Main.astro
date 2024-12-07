@@ -1,6 +1,5 @@
 ---
 import ScrollToTopButton from "@/components/navigation/ScrollToTop";
-import WCIFToasts from "@/components/layout/main/context-props/WCIFToasts.astro";
 //
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
@@ -10,23 +9,25 @@ interface Props {
 const { locale, currentPage } = Astro.props;
 ---
 
-{currentPage === "character-references" && <WCIFToasts locale={locale} />}
 <main
   id="main"
-  class="grid min-h-full
-    ultrawide-only:grid-cols-[1fr_55vw_1fr]
+  class={`grid min-h-full
+    ultrawide-only:grid-cols-[1fr_75vw_0.2fr]
     grid-cols-[1fr_70vw_1fr]
-    w-1150:grid-cols-[1fr_80vw_1fr]
-    mobile-only:grid-cols-[1fr_95vw_1fr]
-    py-1"
+    ${
+      currentPage === "commissioned-works"
+        ? "mobile-only:grid-cols-[1fr_98vw_1fr]"
+        : "mobile-only:grid-cols-[1fr_90vw_1fr]"
+    }
+    py-1`}
 >
-  <div id="main-left"></div>
+  <div id="main-left" class="min-h-full min-w-full pointer-events-none"></div>
   <div id="main-center" class="">
     <div class="main rounded-lg py-[2.5%] mobile-only:py-[1%]">
       <slot />
     </div>
   </div>
-  <div id="main-right"></div>
+  <div id="main-right" class="min-h-full min-w-full pointer-events-auto"></div>
 </main>
 
 <ScrollToTopButton client:load locale={locale} />

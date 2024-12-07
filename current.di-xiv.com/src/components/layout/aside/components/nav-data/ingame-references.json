@@ -1,0 +1,28 @@
+{
+  "localizedStrings": {
+    "inGameReferences": {
+      "en": "In-game captures",
+      "ja": "ゲーム内スクリーンショット",
+      "es": "Capturas in-game",
+      "pt": "Capturas in-game"
+    },
+    "WCIF": {
+      "en": "Mod List",
+      "ja": "改造一覧",
+      "es": "Lista de Mods",
+      "pt": "Lista de Mods"
+    }
+  },
+  "subNavItems": [
+    {
+      "href": "/ingame-references#ingame-captures",
+      "key": "inGameReferences",
+      "subIcon": "/icons/content/ack/FFXIVMeteo.svg"
+    },
+    {
+      "href": "/ingame-references#wcif-list",
+      "label": "WCIF",
+      "subIcon": "/icons/content/charrefs/ItemCategory_Crystal.svg"
+    }
+  ]
+}

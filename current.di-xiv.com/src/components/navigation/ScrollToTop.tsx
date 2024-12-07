@@ -56,7 +56,7 @@ const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({ locale }) => {
       role="button"
       aria-label={localeTexts.ariaLabel}
       title={localeTexts.title}
-      className={`border-black dark:border-white fixed bottom-[33%] right-[-5px] mobile-only:right-[-2px] z-50 p-4 mobile-only:p-1 rounded-tl-[50%] rounded-bl-[50%] transition-opacity duration-500 glassbox select-none ${
+      className={`border-black dark:border-white fixed bottom-[33%] right-[-5px] mobile-only:right-[-2px] z-50 p-4 mobile-only:p-1 rounded-tl-[50%] rounded-bl-[50%] glassbox select-none ${
         isVisible ? "slide-in-right" : "slide-out-right"
       }`}
       onClick={scrollToTop}

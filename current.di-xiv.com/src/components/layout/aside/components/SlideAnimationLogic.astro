@@ -1,0 +1,99 @@
+---
+
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let drawerVisible = false;
+    let initialLoad = true;
+
+    const elements = {
+      drawerButton: document.getElementById(
+        "drawer-close-button",
+      ) as HTMLElement,
+      drawerMenu: document.getElementById("drawer-menu-wrapper") as HTMLElement,
+      headerButton: document.getElementById(
+        "header-aside-toggle",
+      ) as HTMLElement,
+      drawerShade: document.getElementById("drawer-shade") as HTMLElement,
+      mainRight: document.getElementById("main-right") as HTMLElement,
+      mainLeft: document.getElementById("main-left") as HTMLElement,
+    };
+
+    const updateShadeVisibility = () => {
+      const isMobile = window.innerWidth < 725;
+      if (isMobile && drawerVisible) {
+        elements.drawerShade.classList.remove("hidden");
+        elements.drawerShade.classList.add("flex");
+      } else {
+        elements.drawerShade.classList.remove("flex");
+        elements.drawerShade.classList.add("hidden");
+      }
+    };
+
+    const toggleDrawer = (show: boolean, animate: boolean = true) => {
+      elements.headerButton.classList.toggle("hidden", show);
+      elements.headerButton.classList.toggle("block", !show);
+
+      if (animate) {
+        elements.drawerMenu.classList.toggle("slide-in-left", show);
+        elements.drawerMenu.classList.toggle("slide-out-left", !show);
+      } else {
+        elements.drawerMenu.classList.remove("slide-in-left", "slide-out-left");
+        elements.drawerMenu.style.transform = show
+          ? "translateX(0)"
+          : "translateX(-100%)";
+      }
+
+      drawerVisible = show;
+      updateShadeVisibility();
+    };
+
+    const showDrawer = (animate: boolean = true) => toggleDrawer(true, animate);
+    const hideDrawer = (animate: boolean = true) =>
+      toggleDrawer(false, animate);
+
+    const checkViewportWidth = () => {
+      const shouldShowDrawer = window.innerWidth > 2010;
+      if (shouldShowDrawer !== drawerVisible || initialLoad) {
+        toggleDrawer(shouldShowDrawer, !initialLoad);
+        initialLoad = false;
+      }
+      updateShadeVisibility();
+    };
+
+    elements.drawerButton.addEventListener("click", () => hideDrawer(true));
+    elements.drawerShade.addEventListener("click", () => hideDrawer(true));
+
+    elements.headerButton.addEventListener("click", () => {
+      drawerVisible ? hideDrawer(true) : showDrawer(true);
+    });
+
+    elements.mainRight.addEventListener("click", (e) => {
+      if (drawerVisible) {
+        hideDrawer(true);
+      }
+    });
+
+    elements.mainLeft.addEventListener("click", (e) => {
+      if (drawerVisible) {
+        hideDrawer(true);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && drawerVisible) {
+        hideDrawer(true);
+      }
+    });
+
+    // Initial setup
+    checkViewportWidth();
+    window.addEventListener("resize", checkViewportWidth);
+
+    // Ensure the drawer is hidden on small viewports on initial load
+    if (window.innerWidth <= 1150) {
+      hideDrawer(false);
+    }
+  });
+</script>

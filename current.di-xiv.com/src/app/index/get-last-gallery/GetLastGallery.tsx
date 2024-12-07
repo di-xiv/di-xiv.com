@@ -118,18 +118,10 @@ const LastGallery: React.FC = () => {
                         className="glassbox p-2 rounded-sm z-30 absolute top-2 right-2 hover:text-[#1e7cff] cursor-pointer button-glassbox"
                         onClick={() => toggleModal(modalId)}
                       >
-                        <div className="dark:invert">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="group-hover:block h-10 mobile-only:h-8 w-auto dark:invert"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"
-                            />
-                          </svg>
-                        </div>
+                        <img
+                          src="/icons/content/charrefs/lucide--zoom-in.svg"
+                          className="h-10 mobile-only:h-8 w-auto dark:invert"
+                        />
                       </div>
                     </div>
                     <div
@@ -138,12 +130,14 @@ const LastGallery: React.FC = () => {
                       className="hidden fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-50"
                       onClick={() => toggleModal(modalId)}
                     >
-                      <img
-                        src={artwork.artwork_url}
-                        className="rounded-md cursor-pointer"
-                        alt={`Artwork ${artwork.artwork_id}`}
-                        style={{ maxHeight: "90vh", width: "auto" }}
-                      />
+                      <div className="flex justify-center mt-[5%]">
+                        <img
+                          src={artwork.artwork_url}
+                          className="rounded-md cursor-pointer"
+                          alt={`Artwork ${artwork.artwork_id}`}
+                          style={{ maxHeight: "90vh", width: "auto" }}
+                        />
+                      </div>
                     </div>
                   </div>
                 );

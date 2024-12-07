@@ -1,0 +1,57 @@
+---
+import Master from "@/layouts/Master.astro";
+//
+import ScrollToAnchor from "@/components/text/mdx/ScrollToAnchor";
+//
+import ArtReferencesGallery from "@/app/charrefs/art-references/ArtReferencesGallery.astro";
+import ColorPallette from "@/app/charrefs/color-pallette/ColorPallette.astro";
+//
+import URLParamsOpening from "@/app/charrefs/logic/URLParamsOpening.astro";
+//
+interface Props {
+  // From Master
+  locale: "en" | "ja" | "pt" | "es";
+  /// Meta
+  metaDescription: string;
+  metaKeywords: string;
+  /// OpenGraph/Rich Links
+  metaImageURL: string;
+  metaImageFormat: string;
+  metaImageHeight: string;
+  metaImageWidth: string;
+  metaImageAlt: string;
+  headerContent: string;
+}
+
+const {
+  locale,
+  headerContent,
+  metaImageURL,
+  metaDescription,
+  metaKeywords,
+  metaImageFormat,
+  metaImageHeight,
+  metaImageWidth,
+  metaImageAlt,
+} = Astro.props;
+---
+
+<Master
+  locale={locale}
+  currentPage="character-references"
+  headerContent={`${headerContent} - Di-XIV`}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImageURL={metaImageURL}
+  metaImageFormat={metaImageFormat}
+  metaImageWidth={metaImageWidth}
+  metaImageHeight={metaImageHeight}
+  metaImageAlt={metaImageAlt}
+>
+  <div class="grid grid-cols-1 gap-y-4 mobile-only:my-[5%] px-1">
+    <ArtReferencesGallery locale={locale} />
+    <ColorPallette locale={locale} />
+  </div>
+</Master>
+<ScrollToAnchor client:only="react" />
+<URLParamsOpening />

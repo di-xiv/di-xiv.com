@@ -1,0 +1,166 @@
+/* Shared animations */
+.selected-glassbox {
+  background-size: 200px 200px;
+  animation: noiseMove 30s linear infinite;
+}
+
+.selected-glassbox:active,
+.button-glassbox:active {
+  background-size: 200px 200px;
+  animation: noiseMove 15s linear infinite;
+}
+
+@keyframes noiseMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200px 200px;
+  }
+}
+
+/* Shared structural styles */
+.glassbox {
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+}
+
+.shadowless-glassbox {
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+}
+
+.selected-glassbox {
+  border: 2px solid;
+  transition: border 0.1s ease-in-out;
+  background-image: url("/backgrounds/button-noise/nnnoise.svg") !important;
+}
+
+.selected-glassbox:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-in-out;
+  background-image: url("/backgrounds/button-noise/nnnoise.svg") !important;
+}
+
+.button-glassbox {
+  box-shadow: none;
+  border: 2px solid transparent;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.button-glassbox:hover {
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  transition: border 0.1s ease-in-out;
+}
+
+.button-glassbox:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-in-out;
+  background-image: url("/backgrounds/button-noise/nnnoise.svg") !important;
+}
+
+/* Light mode specific colors */
+@media (prefers-color-scheme: light) {
+  .glassbox {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadowless-glassbox {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .selected-glassbox {
+    background: #1e7cff;
+    color: #efefef;
+    border-color: #181a1b;
+  }
+  .selected-glassbox:hover {
+    color: #efefef;
+  }
+
+  .selected-glassbox img {
+    filter: brightness(0) invert(1);
+  }
+
+  .button-glassbox:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #1e7cff;
+  }
+
+  .button-glassbox:hover img {
+    filter: invert(41%) sepia(98%) saturate(1650%) hue-rotate(199deg)
+      brightness(100%) contrast(101%);
+  }
+
+  .button-glassbox:active {
+    background: #1e7cff;
+    color: #efefef;
+    border-color: #181a1b;
+  }
+
+  .button-glassbox:active img {
+    filter: brightness(0) invert(1);
+  }
+
+  .toast-glassbox {
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+  }
+}
+
+/* Dark mode specific colors */
+@media (prefers-color-scheme: dark) {
+  .glassbox {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 40px rgba(255, 255, 255, 0.1);
+  }
+
+  .shadowless-glassbox {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .selected-glassbox {
+    background: #ed701d;
+    color: #181a1b;
+    border-color: #efefef;
+  }
+
+  .selected-glassbox:hover {
+    color: #181a1b;
+  }
+
+  .selected-glassbox img {
+    filter: invert(0);
+  }
+
+  .button-glassbox:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: #ed701d;
+  }
+
+  .button-glassbox:hover img {
+    filter: invert(56%) sepia(87%) saturate(1771%) hue-rotate(346deg)
+      brightness(102%) contrast(101%);
+  }
+
+  .button-glassbox:active {
+    background: #ed701d;
+    color: #181a1b;
+    border-color: #efefef;
+  }
+
+  .button-glassbox:active img {
+    filter: invert(0);
+  }
+
+  .toast-glassbox {
+    background: rgba(0, 0, 0, 0.45);
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+  }
+}

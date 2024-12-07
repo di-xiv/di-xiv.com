@@ -10,6 +10,11 @@ const { linkButtonID, linkButtonHref, linkButtonText, localizedTitleLink } =
   Astro.props;
 ---
 
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
 <a
   id={linkButtonID}
   href={linkButtonHref}
@@ -28,7 +33,6 @@ const { linkButtonID, linkButtonHref, linkButtonText, localizedTitleLink } =
       <p
         class="light ml-1 text-xl mobile-only:text-lg"
         aria-label={linkButtonText}
-        title={linkButtonText}
       >
         {linkButtonText}
       </p>

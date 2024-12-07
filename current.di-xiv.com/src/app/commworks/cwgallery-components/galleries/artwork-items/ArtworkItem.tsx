@@ -31,6 +31,7 @@ interface ArtworkItemProps {
   onZoom: (artwork: Artwork) => void;
   onTagClick: (tag: Tag) => void;
   localizedZoom: string;
+  imageIndex: number; // Add this prop
 }
 
 const ArtworkItem: React.FC<ArtworkItemProps> = ({
@@ -38,6 +39,7 @@ const ArtworkItem: React.FC<ArtworkItemProps> = ({
   onZoom,
   onTagClick,
   localizedZoom,
+  imageIndex,
 }) => {
   const isVideo = artwork.artwork_url.toLowerCase().endsWith(".mp4");
 
@@ -47,7 +49,7 @@ const ArtworkItem: React.FC<ArtworkItemProps> = ({
         {isVideo ? (
           <video
             src={artwork.artwork_url}
-            className="h-[85vh] w-auto object-contain rounded"
+            className="h-[85vh] w-auto object-contain rounded-lg"
             controls
             loop
             muted
@@ -59,7 +61,7 @@ const ArtworkItem: React.FC<ArtworkItemProps> = ({
             <img
               src={artwork.artwork_url}
               alt="Artwork"
-              className="h-[80vh] w-auto object-contain rounded"
+              className="h-[80vh] w-auto object-contain rounded-lg"
               loading="eager"
             />
             <ZoomButton
@@ -69,7 +71,11 @@ const ArtworkItem: React.FC<ArtworkItemProps> = ({
           </>
         )}
       </div>
-      <ArtworkTags tags={artwork.tags} onTagClick={onTagClick} />
+      <ArtworkTags
+        tags={artwork.tags}
+        onTagClick={onTagClick}
+        imageNumber={imageIndex + 1} // Add 1 because array indices start at 0
+      />
     </div>
   );
 };

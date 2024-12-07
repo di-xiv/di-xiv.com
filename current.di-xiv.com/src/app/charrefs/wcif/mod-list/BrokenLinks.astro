@@ -1,16 +1,18 @@
 ---
-import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
-import { TitleWithLeadingIcon } from "@/app/charrefs/wcif/components/WCIF";
+import {
+  StyledBlockquote,
+  BlockquoteType,
+} from "@/app/charrefs/wcif/components/WCIF";
 // Props
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
 }
 const { locale } = Astro.props;
 const localizedBrokenLinks = {
-  en: "Broken Links",
-  ja: "リンク切れ",
-  es: "Enlaces Rotos",
-  pt: "Links Quebrados",
+  en: "Broken Links?",
+  ja: "リンク切れ？",
+  es: "¿Enlaces Rotos?",
+  pt: "Links Quebrados?",
 };
 const localizedBrokenLinksContent = {
   en: "Feel free to contact me so I can fix them or, if warranted, provide the original file.",
@@ -20,12 +22,11 @@ const localizedBrokenLinksContent = {
 };
 ---
 
-<div id="broken-links">
-  <TitleWithLeadingIcon
-    imageURL="/icons/content/wcif/uil--link-broken.svg"
-    title={localizedBrokenLinks[locale]}
-  />
-  <ModSectionWrapper>
-    <p>{localizedBrokenLinksContent[locale]}</p>
-  </ModSectionWrapper>
+<div id="broken-links" class="mb-2">
+  <StyledBlockquote blockquoteType={BlockquoteType.Tip}>
+    <div>
+      <h3>{localizedBrokenLinks[locale]}</h3>
+      <notice class="light">{localizedBrokenLinksContent[locale]} </notice>
+    </div>
+  </StyledBlockquote>
 </div>

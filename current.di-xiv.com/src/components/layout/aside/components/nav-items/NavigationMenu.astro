@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+import { getLocalizedRoute, isActivePath, getGlassboxClass } from "./utils";
+
+interface Props {
+  navItems: any[];
+  subNavItems: Map<string, any[]>;
+  currentPath: string;
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { navItems, subNavItems, currentPath, locale } = Astro.props;
+---
+
+<nav class="grid grid-cols-1 gap-y-1 mt-2">
+  {
+    navItems.map((item) => (
+      <div class="nav-item">
+        <a
+          id={`nav-${item.key}`}
+          data-astro-prefetch="viewport"
+          aria-label={item.label}
+          href={`${getLocalizedRoute(locale)}${item.href}`}
+          class={`flex items-center text-nowrap
+            py-1 pl-2 pr-3
+            border border-solid border-transparent rounded-md hover:no-underline
+            ${getGlassboxClass(isActivePath(currentPath, item.href))}`}
+        >
+          <Image
+            loading="eager"
+            src={item.icon}
+            width={28}
+            height={28}
+            class="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto dark:invert not-mobile:mr-[10px] mobile-only:mr-[5px]"
+            alt={`${item.label} icon`}
+          />
+          <span
+            class="bold hover:no-underline text-[clamp(1rem,1vw_+_0.5rem,1.618rem)]"
+            title={item.label}
+            aria-label={item.label}
+          >
+            {item.label}
+          </span>
+        </a>
+        {subNavItems.has(item.key) && subNavItems.get(item.key) && (
+          <div class="mt-1 ml-2">
+            {subNavItems.get(item.key)!.map((subItem) => (
+              <a
+                href={`${getLocalizedRoute(locale)}${subItem.href}`}
+                data-astro-prefetch="viewport"
+                class={`text-sm hover:no-underline flex items-center text-nowrap
+                py-2 pl-2 pr-3
+                border border-solid border-transparent rounded-md
+                ${getGlassboxClass(isActivePath(currentPath, subItem.href))}`}
+              >
+                <Image
+                  loading="eager"
+                  src={subItem.subIcon}
+                  width={28}
+                  height={28}
+                  class="h-[clamp(1rem,1vw_+_0.5rem,1.414rem)] w-auto dark:invert not-mobile:mr-[10px] mobile-only:mr-[5px] inline-block"
+                  alt={`${subItem.label} icon`}
+                />
+                <span class="regular hover:no-underline text-[clamp(1rem,1vw_+_0.5rem,1.414rem)]">
+                  {subItem.label}
+                </span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    ))
+  }
+</nav>

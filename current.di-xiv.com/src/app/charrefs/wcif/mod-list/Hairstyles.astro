@@ -9,6 +9,10 @@ import {
 interface Props {
   locale: "en" | "ja" | "pt" | "es";
 }
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
 const { locale } = Astro.props;
 const localizedHairstyles = {
   en: "Hairstyles",
@@ -26,31 +30,95 @@ const hairstyles: Array<{
   href: string;
   title: string;
   tags: Tag[];
+  options?: Option[];
 }> = [
   {
-    href: "https://www.xivmodarchive.com/modid/34957",
-    title: "Miette: Twinkle Twinkle",
-    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+    href: "https://www.xivmodarchive.com/modid/87668",
+    title: "Imeris: Ebyssia (115)",
+    tags: [
+      { type: "ManUpd" },
+      { type: "Prio", pr: localizedAny[locale] },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Miqo'te Options",
+        options: ["Earless"],
+      },
+    ],
   },
   {
     href: "https://www.xivmodarchive.com/modid/35779",
-    title: "Miette: Thorns",
-    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
-  },
-  {
-    href: "https://www.xivmodarchive.com/modid/87668",
-    title: "Imeris: Ebyssia",
-    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+    title: "Miette: Thorns (152)",
+    tags: [
+      { type: "ManUpd" },
+      { type: "Prio", pr: localizedAny[locale] },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Miqo'te (Select ONE option!)",
+        options: ["Earless"],
+      },
+    ],
   },
   {
     href: "https://discord.gg/josukimods",
-    title: "Josuki: Fifteen",
-    tags: [{ type: "ManUpd" }, { type: "Prio", pr: localizedAny[locale] }],
+    title: "Josuki: Fifteen (115)",
+    tags: [
+      { type: "ManUpd" },
+      { type: "Prio", pr: localizedAny[locale] },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Version",
+        options: ["Earless"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/34957",
+    title: "Miette: Twinkle² (146)",
+    tags: [
+      { type: "ManUpd" },
+      { type: "Prio", pr: localizedAny[locale] },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Miqo'te (Select ONE option!)",
+        options: ["Earless"],
+      },
+    ],
+  },
+  {
+    href: "https://ko-fi.com/s/5e1a660d23",
+    title: "Lynn: Coco (152)",
+    tags: [
+      { type: "Compat" },
+      { type: "Prio", pr: localizedAny[locale] },
+      { type: "Paid" },
+    ],
+    options: [
+      {
+        optionTitle: "Highlights Option",
+        options: ["Ombre"],
+      },
+      {
+        optionTitle: "Miqo'te Options",
+        options: ["EARLESS"],
+      },
+      {
+        optionTitle: "Females",
+        options: ["Miqo'te F"],
+      },
+    ],
   },
 ];
 ---
 
-<div id="hairstyles">
+<div id="hairstyles" class="mb-2">
   <TitleWithLeadingIcon
     imageURL="/icons/content/wcif/chinese-woman-hairstyle-svgrepo-com.svg"
     title={localizedHairstyles[locale]}

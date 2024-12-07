@@ -4,6 +4,7 @@ import type {
   Artwork,
   Gallery,
   ArtworkGalleryProps,
+  SortOrder,
 } from "@/app/commworks/Types";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
@@ -41,6 +42,7 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     initialSelectedRatings,
   );
   const [tags, setTags] = useState<Tag[]>([]);
+  const tagContainerRef = useRef<HTMLDivElement>(null);
   const [galleries, setGalleries] = useState<Gallery[]>([]);
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
   const [loading, setLoading] = useState(false);
@@ -48,6 +50,7 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [zoomedArtwork, setZoomedArtwork] = useState<Artwork | null>(null);
   const isInitialLoad = useRef(true);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("random");
   const { toastRef, showToast, getLocalizedMessage } = useToast({ locale });
 
   useEffect(() => {
@@ -71,6 +74,17 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
       typeof obj.tag_name === "string"
     );
   }
+  const reorderTagsWithSelected = (
+    tags: Tag[],
+    selectedTagId: number | null,
+  ) => {
+    if (!selectedTagId) return tags;
+
+    return [
+      ...tags.filter((tag) => tag.tag_id === selectedTagId),
+      ...tags.filter((tag) => tag.tag_id !== selectedTagId),
+    ];
+  };
 
   function shuffleArray<T>(array: T[]): T[] {
     const newArray = [...array];
@@ -81,6 +95,39 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     return newArray;
   }
 
+  const sortGalleries = (galleries: Gallery[], order: SortOrder): Gallery[] => {
+    if (order === "random") {
+      return shuffleArray(galleries);
+    } else if (order === "newest") {
+      return [...galleries].sort((a, b) => b.gallery_id - a.gallery_id);
+    } else {
+      return [...galleries].sort((a, b) => a.gallery_id - b.gallery_id);
+    }
+  };
+  const handleSortClick = () => {
+    setSortOrder((current) => {
+      const nextOrder: Record<SortOrder, SortOrder> = {
+        random: "newest",
+        newest: "oldest",
+        oldest: "random",
+      };
+      const newOrder = nextOrder[current];
+
+      // Sort current galleries
+      setGalleries((currentGalleries) =>
+        sortGalleries([...currentGalleries], newOrder),
+      );
+
+      // Show toast notification with the corresponding message key
+      showToast(
+        `sortOrder${newOrder.charAt(0).toUpperCase() + newOrder.slice(1)}`,
+        "",
+      );
+
+      return newOrder;
+    });
+  };
+
   const fetchTags = useCallback(async () => {
     try {
       const response = await fetch("https://api.di-xiv.com/tags");
@@ -88,11 +135,17 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
       const data = await response.json();
 
       if (Array.isArray(data) && data.every(isTag)) {
-        const shuffledTags = shuffleArray(data);
-        setTags(shuffledTags);
+        // Sort tags alphabetically instead of random
+        const sortedTags = data.sort((a, b) =>
+          a.tag_name.localeCompare(b.tag_name),
+        );
+
+        // If there's a selectedTagId, reorder the tags accordingly
+        const orderedTags = reorderTagsWithSelected(sortedTags, selectedTagId);
+        setTags(orderedTags);
 
         if (selectedTagId) {
-          const selectedTag = shuffledTags.find(
+          const selectedTag = orderedTags.find(
             (tag) => tag.tag_id === selectedTagId,
           );
           if (selectedTag) {
@@ -139,9 +192,8 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
           }))
           .filter((gallery: Gallery) => gallery.artworks.length > 0);
 
-        const shuffledGalleries = shuffleArray(filteredGalleries);
-
-        setGalleries(shuffledGalleries);
+        const sortedGalleries = sortGalleries(filteredGalleries, sortOrder);
+        setGalleries(sortedGalleries);
       } catch (err) {
         setError("Error fetching galleries");
         console.error(err);
@@ -149,7 +201,7 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
         setLoading(false);
       }
     },
-    [selectedRatings],
+    [selectedRatings, sortOrder],
   );
 
   const { searchText, setSearchText, handleSearch, hasSearched } = useSearch({
@@ -159,6 +211,8 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     setError,
     setGalleries,
     shuffleArray,
+    sortOrder,
+    sortGalleries,
   });
 
   useEffect(() => {
@@ -231,10 +285,22 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
     (tag: Tag) => {
       setSelectedTag(tag);
       if (searchText) {
-        setSearchText(""); // Only clear if there's existing search text
+        setSearchText("");
       }
+      // Reorder tags to put selected tag first
+      setTags((currentTags) =>
+        reorderTagsWithSelected(currentTags, tag.tag_id),
+      );
       updateUrl(tag.tag_id, selectedRatings, "");
       scrollToTop();
+
+      // Scroll tag container to start
+      if (tagContainerRef.current) {
+        tagContainerRef.current.scrollTo({
+          left: 0,
+          behavior: "smooth",
+        });
+      }
     },
     [selectedRatings, searchText, setSearchText],
   );
@@ -343,9 +409,11 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
           selectedRatings={selectedRatings}
           onRatingClick={handleRatingClick}
           placeholder={getLocalizedMessage("searchPlaceholder")}
+          sortOrder={sortOrder}
+          onSortClick={handleSortClick}
         />
       </div>
-      <TagContainer>
+      <TagContainer ref={tagContainerRef}>
         {tags.map((tag) => (
           <TagButton
             key={tag.tag_id}
@@ -383,13 +451,14 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({
                     />
                   </GDetailsContainer>
                   <div className="flex overflow-x-auto space-x-4 py-4">
-                    {gallery.artworks.map((artwork) => (
+                    {gallery.artworks.map((artwork, index) => (
                       <ArtworkItem
                         key={artwork.artwork_id}
                         artwork={artwork}
                         onZoom={setZoomedArtwork}
                         onTagClick={handleArtworkTagClick}
                         localizedZoom={localizedZoom}
+                        imageIndex={index}
                       />
                     ))}
                   </div>

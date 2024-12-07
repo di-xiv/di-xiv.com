@@ -7,11 +7,59 @@ interface Props {
 }
 const { locale } = Astro.props;
 const localizedStringExports = {
-  en: "String Exports",
-  ja: "文字列の輸出",
-  es: "Strings Exportados",
-  pt: "Exportação de Strings",
+  en: "Exported String Templates",
+  ja: "エクスポートされた文字列テンプレート",
+  es: "Plantillas exportadas",
+  pt: "Modelos de cadeias de caracteres exportados",
 };
+const localizedNude = {
+  en: "nude",
+  ja: "全裸",
+  es: "desnuda",
+  pt: "nua",
+};
+const customizeStrings: Array<{
+  id: string;
+  name: string;
+  string: string;
+}> = [
+  {
+    id: "glamourer",
+    name: `Glamourer: (${localizedNude[locale]}) (151)`,
+    string:
+      "Bh+LCAAAAAAAAAq8WFtz8jYQ/S9+bchIsnzjLSEhSQfSFGi+h286HcUsRBNjU0tOhmby37uywfgCHqYT+maks+fszWuJT2soI3iGVMkktvrswnqYQ6zlQkJq9S13EYTeC7g9T9iix4nt9wKP8J7rh/PA5ZR53ot1YQ1SEBoJboQGtGKE8R6lPWLPKO07rM+DS0Yc1+H8F0L7hKDJSCh9O5e6AWd9m/cpvwwcn3vMLuGPYmWY9fXgr9sV/r4BFaZybURxGReGSRrCfALzVHxY/YWIFFxYE1Cgr+bvIsa9mw2ocmeQRElaWP6eyfAN+eQSqXSa4e5MLBH6888L60cqNTyliYZQw3y3f/t3JtcrzJPV/7TGQsb3IsbNT+tBw+oBn6jteU6eF6VLzav1OtrsKPIfU422tZW6xXafbJ8YPn5dWL8tFt+tV6wclrsHUdcixGbfpRXwuth1Mt80xexzBYZJVE0x/m1VY7QuN4JlS+1sPTIE0E0x92yh3Yq0FhrzXHq20B4hfKuKBSxg59LC119p1VDj51KbDGW8NHO3Jne2RI7+X7l7kXfk9DX5qNkWPxDwLFVSeKNmyXIZmXnb9sFUBcTazP3jZPkkibO8cneRUMqM/s9izcTpc84ZD7gbkID6vGU8yJROVvIfyAd8MofIWGFAExHma88iyvBhb5k7ipZ3EM+LnG4htOm9GXGzzRq6MPcgl6+6gnBIEzKIRFwB+M394TFPdxJCpkpvopof5q1twNCRyDijqjjWkpu+yXj7Ud3DvJbq7QZy1KQRH6eH/GsS2se9a0LZgXxIEQ3xoJKlQCtI0onE5j0RaZ+M5CcjnZOR7slIrwuJHykRbmZC6yTpwhWI0wr+kiYfqqs0u6YYwaK7JxA4fRW1V6fVsNOViKIHnNvd/fqYKOgK8FdzjDz+go6TTL92deZIrpXGg2W3F4hq57CVn3GmwgjGOMaqOHKgKDJq5qfl2DWOtul2sh2nMtPjCWd3tR7MPYqawDteIczA7mzCAtyM2GvPdx1DLdj6Z6CYtQh8EineCzRKG2wp8Mf7OIu0XEf5JWYf5iVpjeuKDR6r8bZQjeAAvijFLInz/D0BXjpiLZZH2E1Dj+TqRUQPsYZYSb1pmh0SyYfjf7AzM/hGLhZZ0dp4GTI4G08slHqY5bsUwHyXL5nnc5viu3q9DZRxjzi+z1qUZgq3KV2HBD7hFcZyZcdYLhwgLKd2hdJHF11edbJc2VGWCweyjJOhQhYw6ri+a1fZmO3kR7cdmwnXduzDyf8+uu3QLXt+S0nxxsYcHlSLwjxukrbnpEaC0v3UKCOW60N1Rj6CJSwZSV54F0fkjnG/chWtX0Uue6RQNxCKqOk29tyevUJb4TMH5KLdmm/rGP8dSPE7ZF7WfISa25e5ZI9k/Facz2CRpMhoFq8WiDaPX1//AgAA//8=",
+  },
+  {
+    id: "ebyssia-neighsayer",
+    name: `Customize+: Ebyssia (${localizedNude[locale]})`,
+    string:
+      "H4sIAAAAAAAACs2ZS4+bMBDHL/0kXHeJ/MIYjn0c9tBV1abq44IccBJvsqACqbpa5bvXYMhLgaUbMWkuGGWMf/w9Mx6bN8/OvXxUTuh8mD0VhZbRvdKLZSGfVO7cOu9yJUudpe9lWdkQRJiLsYvolKAQ+SGlE4Z8ThC/QThEyHT5mCV6rlVy2iWYYj/EQUjRRHDkCYFvELJdvqb610bdJcZ8rhLqxYi7bBYzlwkRu1KomWklPkUUKekp0+Ou+JbrUn3Ks1LFpTI953JdKPNHGmeLVJfZwbOM/dssVYUTPjsP0SordNWa5jIt1vXbVbffnRBN0K3zo7n+rK/bW+dzVr5s9CWWa50udjaB/TWWuztjjyc48Lamy0NUqFkWyauyIGxRZKEjGa1HZjHjCd5yCNowEBQcQuTXh0hGV6KdB85aksb0iCK/MsUmUQBeMYwi/w9mRMFp0QcBJkX3fMyurYSFuKoSabRcyRIwPmpLk74QwpS0Cby6weKQB1aUCoEQgXcrir2zs1SCRAzxz/uIGX2gFu7Z4d3WzH0lwNLUIcMT6GUQPse9EON7RSfB6h9EuGB8HrCe8UE8oRthU2xARPAZ7yUAkaETIpUrCSKD8FgvAYgMnRDZE5QKog8ASATRk5cG1xEXOiT1eiEAkmMXgUlOEMWUJ0jP+CCe0I1QpSYIEfzA7yWASY5dEHVqAoIQ2EKYeq2t2/aZASoog456wTIAxGQXgPoTLRHGPFpVm4zZ6AcSZqhmNuqWPSXCvPFN+aijOcguY7dqVy0rSMDPSTL2oZV5fc8mi6ZlJfHIkSTjnxRxu3bZRs3A662W/h3F0eMmHX8vXgfocaCKoEFYZZuFTCFO7RoERsRhttgjvKCCO4jBPUkrAynSSMm8t5ohNsyrx6LWsRHxz2QuOvFOUAgeNimNHlm81Gm1pMK5RbXrskeYhJ1QxGAU5vi0zRj4BCIBg8CkPc1lpxBzgAKvTViU+bscTg89tCNQK2cjbO+itM9F2YTsLe3ME/oqFzUfZ4DmxUMmqipQ87mhdtFdrQOwBTpX6Gy3fwFqf+6y9xoAAA==",
+  },
+  {
+    id: "fifteen-neighsayer",
+    name: `Customize+: Fifteen (${localizedNude[locale]})`,
+    string:
+      "H4sIAAAAAAAACs2YS4/TMBDHL3ySXNlEfsWxcwSEtAdWCBbxuERu4rbedh2RpIgV6nfHzqNqS+KtQHHpJU47U//yn7E9kxe/gjvxKIM0eKuWjZQ6u5Nqta7Fk6yCm+B1JUWjSv1GNNYGAURCCEPA72GSYpJiHnGIIcbxSwBTAIzLu7JQSyWLEReWEmxdMEYxYgePT1p938nbwlpDAhNAizBJFiwkAuQhg7AIFwtKlwAjzFluPG7rz5Vq5PuqbGTeSOO5FNtamh90Xq60asqj/zL2r0ot6yD9FTxkm7JWdnRfCV1v24ezt1+CFETgJvjaX7+11/1N8KFsnjf6mIut0quDDe8+veXhztjDCPJ4b1weslouykxclQXADkXUKhPZdmYWMx+jAwfDPQMC/Biiuj5EMbsSQxwoGUh60xOK6soUu0J6yIrLKKr/ICLSnxYuCG9STMdjcW0lOoirKqGz9UY0HtdHa2m2LwAgRsMGbm8gO+bxK4pFQIjBw4nS3XVR2pSXBykcBQoHs9CNFDM0nigtwvwhcs0v/EhAE+JAmF+C6fl39c5XHiQ8cULML4ObwFMuJIQ6ITzIMEWgxUb4ygYGEyfE/DK4CTxlA4uJE8KDDFMEa9OqedsbcDwOIX9mawAhzTa2qFjM3oCYqfqzsx11XSGk/QoVjypbeqkqDivUjjpBOB2TZO4m1Tx+3J2f/aiTJEYnkszfGVLWQ9hBy0Db0kr9yPLscafnr71NATWUVUNBxXiPsCl3K6F9dOk9AkGDDOAU4RkVwosYwrNVfSGFzqSonDsnwsMzgq69t9+xkX0jjsgZCaQRvCQmvRxlvlbaVpj+soLC4Y0FImcUuTcK87Zk2DDgGUThDQLaOLdSkHOI5fzlje3AWgxMksMWjo8TdGKd2mTrfMPTDOV/spDoyLIPPIjQX2So9BaWGMStFTIvF8nJIe+h6Jw64VsCX7W3XaIOCA8yTBGUT95K74Q7GXz0YQ4Ab4U3czH4qLsnAJqLS5l/U4Cjif7HAHgoccdm3+9/A+f6Pcj0GgAA",
+  },
+  {
+    id: "thorns-neighsayer",
+    name: `Customize+: Thorns (${localizedNude[locale]})`,
+    string:
+      "H4sIAAAAAAAACs2ZTXObMBCGL/0lXBs8+gIEx7aXHJrptOm0zYWRQbYJjjQF3Gkm4/9egYDa1BA3Hdb1BTFeoYd3VyutePXk3IgH6UTO7UYXqoxvZLbelOJRFs6V87aQosq0eieq2oQgwlyMXURvMY88L2J8gVnIPRq+RjhCyHR5r9Nslcl02CVsuvgRDRYoxJQTv+/yWWXfd/I6NebUS0K6TIUbyFXgMikT11hSl0qJwpTLIAy46XFdfimySn4odCWTSpqeK7EtpflDJXqtskofPMvYv9FKlk705NzHuS6zunVbCFVum7erb786EVqgK+dbe71rrvsr56Ounjf6lIhtpta9TWh/rWV/Z+zxAofe3nS5j0u51LG4KAvCFkWUWSzi7cwsZjzudxyctgwEhYcQxeUh0tmV6Pzgs46kNT2iKC5MsUslQFScR1H8Bx6RcFpMQYBJMe6P5aWVsBAXVULFm1xUgPOjsTTpCyFMSZfA6xvMD3lgRakRCOG4X1HsnfVSBTJjSHA6RszoZ2rhnhze7czcFwJszD4EJIEGPp4kAJFhFCKHEcEP2MT4IBKMI+zKHUwkMH+SACYSxiCUyAWIDNxjkwQgMoxC6EcoFfgUAJAIfCI1QewjAupNEsBMiTGI/C9E+DcEj5MJhPl3DePj16kJJBLCYJIAJhLGIJrUBATBcTCeGWBcgacAgDwxwiB/xhuEsR/ndZGxnP1AwgzV7qWblj0lwn4bm+Ihi1cgVUa/atctK0jon5Jk7kMr8/qeTRZty0rikSNJ5j8p8u3aZRsNg9+UWtmPOIkfdmr+WtwUVF2Z1RVYPGwRcr1bCwVxatciMNLJgI4RnlHBPYvBHczqMylULEUxuZshNpTqxyKv4yD+icRBF94AheDznNLqoZNNpur1FC4s6qrLHmESNqBIwCjM8WmXMfAAIgWDwKQ7zWVDiBXALrNLWJQFfQ6nhxE6MlHrYCPsd4haf5oW/ZOFLcjQkNAXRaj5NgPkFq+ddMR8bWgitN/qAFRAp/Y5+/0vxmc+b/UaAAA=",
+  },
+  {
+    id: "TwinkleTwinkle-neighsayer",
+    name: `Customize+: Twinkle² (${localizedNude[locale]})`,
+    string:
+      "H4sIAAAAAAAACs2ZS4/aMBDHL/0kuXaD/Mzr2Payh66qdqs+LpEhBrxhEzUJbVcV37127ERAiRetxFAuccQY//yf8dgeXv0J7sSjDLLg/peqyo10j/xOqtW6FU+yCW6Ct40Unaqrd6IzpgQRFmIcInqP04zHGaUzjpKIUPYa4Qwh3eV9XailksVxl9R0QSxjdEYTkiKExy6fK/VjK28LY57MuVjSOKQkTUNG5DKcF5SHhBOeymJOCkl1j9v2S6M6+aGpO7nopO65FJtW6i+qRb2qVFfv/Za2f1NXsg2yP8FDXtatMq37RlTtpp+def0aZGiGboJv7vm9f+5ugo9197zRp4XYqGo12qT24yzHN22PZzjlO93lIW/lvM7FVVkQtiiiVbnINxdm0eMl0cCRUMdAULoP0Vwfori4EoMfIjaQONMDiubKFNtCAkTFeRTNf+ARCaeFDwJMiml/zK+thIW4qhJVvi5FB7g+ekudvvTWScmQwM0LTvZ5YEUxCIQkeNxR7Jv1UgeyYkh8Okb06GdqEZ4cPhzMwhcCrPU5BCSBxhH2EoDIMAlRwogQxcwzPogE0wjbdgsTCSzyEsBEwhREJUoBIkPCmZcARIZJiPoJSoXEBwAkQuJJTRDniJhyLwHMkpiCKGFE4AnxjA8iwTSCSU0gkZDGXgKYSJiC6FMTEESCLYQ+r/2bGWBcMXFYsABAnphgkL/zNcI4yktzyZhfvCChh3Le6Fu2SoQjF5viUeVLkFvGuGublhUkjU5JcumilZ4+t8nCtawknBxIcvlKUWT3LtvoGaL+qqV+5ov8cVtd/i7eL9C9hWqqV6lDKOvtSlQQVTuHwMggAzpEeEaF8CyG8GhVn0lR5VI03tOMW13mZ93y0i3CPCQ4nmGLQvCMnuMUp0e9WOsqut5S4cLC3LpsCVNP6ZBiAUahy6dDxsBHEAUYBCZDNZcdQywBTplDwqIsHnM43Y/QiYXaxyUdhkB8jNDUE6HE7VkEvSg+9T8zQE7hbkJET7KPz/GgA3D/OXXK2e3+ApSGzBH7GgAA",
+  },
+  {
+    id: "coco-neighsayer",
+    name: `Customize+: Coco (${localizedNude[locale]})`,
+    string:
+      "H4sIAAAAAAAACs2YUW/bIBDHX/ZJ/Lo6AowxzuO6lz6smrZO2/qCiE0S6hQ025lWVfnuw8bO0sh2o0q5LIoUSI7w8/+OA+7dc3ArH1UwD65tZsWt0qt1JZ9UGVwF16WStbbmo6wbA4IIDTEOEb3D6RyReRTN4iQhNGLvEZ4j5IZ8srleapUfD0nbIc17FkeExfjfkG9G/9qqm9yZyzRXLOIqzPgShxS7kTzJ05BhmsUZxZwvMjfipvpe6lp9Lm2tslq5kUu5qZT7wWR2ZXRtD/7L2X+wRlXB/Dl4EIWtdNO6K6WpNu3TNd0fwRzN0FXws/u8bz93V8EXW79u9DWTG21We5vUvzrLfc/Z4xlO450b8iAqtbBCXpQFYY8iKy2k2JyZxc3HWc/Bo46BoPQQorw8RH52JXo/MNqTdKYvKMoLU2xzBRAVp1GU/4FHFJwWUxBgUoz7Y3FpJTzERZUwYl3IGnB9tJYufSGEI9In8KaD+SEPrCgNAiEc73cU3/NeqkFWDEmGY8TNfqIW4eD0YW8WvhFg7c4hIAk0YXiSAESGUYgCRgSW0In5QSQYRTCykCBJk+NkggDCDTye0gDIEaMQ9glKBT4FACQCn8gKENGYRPEkAUxeGoMoYESIOZmYH0SCcYRttYWJhNTnJXdAGCSAiYQxiC49w6zKsQzdZAYYV+ApACBPjDCoP2KNMGaiaM73i7PXAtxUXUi0LV+gwayLTfmoxRLkgL+/YTQtL0jKhiQ5d73IPX7sk0XX8pLE5IUk5y/SML93+UbLwNpbjv4tMvG4Nee/BrdZ4iBbNIWjtEMo7HYlDUTBrEOgpJcBvUR4RYXwJIbwaFWfSGGEkuXkaQb1ZUeEewrChzi8t0M8SzxH5L46xSOdGDZba9Psp3Ax0dx2fOmQ0COKDIzClS37dIGPIHIwCEz6Kio9hlgCHDH7bBXRZJ/Ao8PwHFmlTazjfhtqI/WEACXdhvXG+FRgTolR3FoR95D04KgFUo6g+9rQwGEPqhwxBLHb/QVaHxgc7hoAAA==",
+  },
+];
 ---
 
 <div id="string-exports">
@@ -21,23 +69,75 @@ const localizedStringExports = {
   />
 
   <ModSectionWrapper>
-    <div class="flex items-center">
-      <p>❈&nbsp;</p>
-      <a
-        id="customize-string"
-        role="button"
-        class="cursor-pointer"
-        title="Customize+ String"><p>Customize+ String (Ebyssia) ⎘</p></a
-      >
-    </div>
-    <div class="flex items-center">
-      <p>❈&nbsp;</p>
-      <a
-        id="glamourer-string"
-        role="button"
-        class="cursor-pointer"
-        title="Glamourer String"><p>Glamourer String ⎘</p></a
-      >
-    </div>
+    {
+      customizeStrings.map((item) => (
+        <div class="flex items-center gap-x-2 mobile-only:ml-5">
+          <button class="copy-button" data-string={item.string}>
+            <p>❈&nbsp;{item.name}</p>
+          </button>
+          <button class="copy-button" data-string={item.string}>
+            <img
+              src="/icons/content/charrefs/gravity-ui--copy.svg"
+              class="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto copy-icon relative not-mobile:-top-1 mobile-only:-top-[1px]"
+            />
+          </button>
+        </div>
+      ))
+    }
   </ModSectionWrapper>
 </div>
+<style>
+  .success-icon {
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg)
+      brightness(118%) contrast(119%);
+  }
+  @media (prefers-color-scheme: dark) {
+    .copy-icon {
+      filter: invert(56%) sepia(87%) saturate(1771%) hue-rotate(346deg)
+        brightness(102%) contrast(101%);
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    .copy-icon {
+      filter: invert(41%) sepia(98%) saturate(1650%) hue-rotate(199deg)
+        brightness(100%) contrast(101%);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".copy-button");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const string = button.getAttribute("data-string");
+        if (!string) return;
+
+        try {
+          await navigator.clipboard.writeText(string);
+
+          const iconElement = button.parentElement?.querySelector(
+            ".copy-icon",
+          ) as HTMLImageElement;
+          if (iconElement) {
+            const originalSrc = iconElement.src;
+            const originalClasses = iconElement.className;
+
+            iconElement.src =
+              "/icons/content/charrefs/fluent-emoji-high-contrast--check-mark.svg";
+            iconElement.classList.remove("copy-icon");
+            iconElement.classList.add("success-icon");
+
+            setTimeout(() => {
+              iconElement.src = originalSrc;
+              iconElement.className = originalClasses;
+            }, 2000); // Reset after 2 seconds
+          }
+        } catch (err) {
+          console.error("Failed to copy text: ", err);
+        }
+      });
+    });
+  });
+</script>

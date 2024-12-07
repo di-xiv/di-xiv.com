@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import TextContent from "@/components/wrappers/TextContent.tsx";
+import SubtitleWithLeadingIcon from "@/components/text/SubtitleWithLeadingIcon.tsx";
+//
+import LocalizedTitles from "@/app/inquiries/sections/LocalizedTitles.json";
+import LocalizedSections from "@/app/inquiries/sections/LocalizedSections.json";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+type LocaleKey = "en" | "ja" | "pt" | "es";
+const { locale } = Astro.props;
+//
+interface Titles {
+  id: "jumpTo" | "tou" | "faq" | "takedowns";
+  getTitle: (locale: LocaleKey) => string;
+}
+interface Sections {
+  id: "tou" | "faq" | "takedowns";
+  getSection: (locale: LocaleKey) => string;
+  append: string;
+  icon: string;
+}
+//
+const localizedJumpTo: Titles[] = [
+  {
+    id: "jumpTo",
+    getTitle: (locale: LocaleKey) =>
+      LocalizedTitles["jumpTo"][locale] || LocalizedTitles["jumpTo"].default,
+  },
+];
+const sections: Sections[] = Object.entries(LocalizedSections).map(
+  ([key, value]) => ({
+    id: key as "tou" | "faq" | "takedowns",
+    getSection: (locale: LocaleKey) =>
+      value.title[locale] || value.title.default,
+    append: value.append,
+    icon: value.icon,
+  }),
+);
+---
+
+<style>
+  .hover-transform {
+    transform: scale(1);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  .hover-transform:hover {
+    transform: scale(0.983);
+  }
+  @media (prefers-color-scheme: dark) {
+    .chevron {
+      filter: invert(56%) sepia(87%) saturate(1771%) hue-rotate(346deg)
+        brightness(102%) contrast(101%);
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    .chevron {
+      filter: invert(41%) sepia(98%) saturate(1650%) hue-rotate(199deg)
+        brightness(100%) contrast(101%);
+    }
+  }
+</style>
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    src="/icons/content/inquiries/lsicon--goto-outline.svg"
+    class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+    alt={`${localizedJumpTo[0].getTitle(locale)}: icon`}
+    width={44}
+    height={44}
+  />
+  <h2
+    class="bold"
+    aria-label={localizedJumpTo[0].getTitle(locale)}
+    :
+    title={localizedJumpTo[0].getTitle(locale)}
+    :
+  >
+    {localizedJumpTo[0].getTitle(locale)}:
+  </h2>
+</div>
+<TextContent>
+  <div class="grid gap-y-2">
+    {
+      sections.map((section) => (
+        <a
+          id={`section-${section.id}`}
+          href={section.append}
+          class="flex justify-between items-center
+          rounded glassbox p-3
+          hover:no-underline
+          hover-transform"
+        >
+          <div>
+            <SubtitleWithLeadingIcon
+              title={section.getSection(locale)}
+              imageURL={section.icon}
+            />
+          </div>
+          <Image
+            loading="eager"
+            src="/icons/content/inquiries/jam--chevron-circle-down.svg"
+            width={10}
+            height={10}
+            class="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto dark:invert chevron"
+            alt="Chevron down"
+          />
+        </a>
+      ))
+    }
+  </div>
+</TextContent>

@@ -1,0 +1,125 @@
+---
+import { Image } from "astro:assets";
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+//
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+type LocaleKey = "en" | "ja" | "pt" | "es";
+
+interface Section {
+  id: "grant-of-license" | "ownership" | "usage-restrictions" | "compensation";
+  icon: string;
+  textMap: Map<LocaleKey, string>;
+  getTitle: (locale: LocaleKey) => string;
+}
+
+const { locale } = Astro.props;
+import TitleWithLeadingIcon from "@/components/text/TitleWithLeadingIcon.tsx";
+import LocalizedToU from "@/prose/Inquiries/tou/ToU.json";
+
+// Create maps for each section content
+const sections: Section[] = [
+  {
+    id: "grant-of-license",
+    icon: "/icons/content/tou/tabler--license.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedToU["grant-of-license"].en],
+      ["es", LocalizedToU["grant-of-license"].es],
+      ["ja", LocalizedToU["grant-of-license"].ja],
+      ["pt", LocalizedToU["grant-of-license"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedToU["grant-of-license"].title[locale] ||
+      LocalizedToU["grant-of-license"].title.default,
+  },
+  {
+    id: "ownership",
+    icon: "/icons/content/tou/fluent--document-person-16-filled.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedToU["ownership"].en],
+      ["es", LocalizedToU["ownership"].es],
+      ["ja", LocalizedToU["ownership"].ja],
+      ["pt", LocalizedToU["ownership"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedToU["ownership"].title[locale] ||
+      LocalizedToU["ownership"].title.default,
+  },
+  {
+    id: "usage-restrictions",
+    icon: "/icons/content/tou/fluent--data-usage-16-regular.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedToU["usage-restrictions"].en],
+      ["es", LocalizedToU["usage-restrictions"].es],
+      ["ja", LocalizedToU["usage-restrictions"].ja],
+      ["pt", LocalizedToU["usage-restrictions"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedToU["usage-restrictions"].title[locale] ||
+      LocalizedToU["usage-restrictions"].title.default,
+  },
+  {
+    id: "compensation",
+    icon: "/icons/content/tou/solar--hand-money-linear.svg",
+    textMap: new Map<LocaleKey, string>([
+      ["en", LocalizedToU["compensation"].en],
+      ["es", LocalizedToU["compensation"].es],
+      ["ja", LocalizedToU["compensation"].ja],
+      ["pt", LocalizedToU["compensation"].pt],
+    ]),
+    getTitle: (locale: LocaleKey) =>
+      LocalizedToU["compensation"].title[locale] ||
+      LocalizedToU["compensation"].title.default,
+  },
+];
+
+const localizedToUTitle: Record<LocaleKey, string> = {
+  en: "Terms of Use",
+  ja: "利用規約",
+  es: "Términos de Uso",
+  pt: "Termos de Uso",
+};
+---
+
+<div class="flex items-center">
+  <Image
+    loading="eager"
+    src="/icons/content/tou/tabler--license.svg"
+    class="h-11 mobile-only:h-6 w-auto mr-4 dark:invert"
+    alt={`${localizedToUTitle[locale]} icon`}
+    width={44}
+    height={44}
+  />
+  <h2
+    id="tou"
+    class="bold"
+    aria-label={localizedToUTitle[locale]}
+    title={localizedToUTitle[locale]}
+  >
+    {localizedToUTitle[locale]}
+  </h2>
+</div>
+{
+  sections.map((section) => (
+    <TextContent>
+      <div class="glassbox p-2 rounded my-2">
+        <TitleWithLeadingIcon
+          imageURL={section.icon}
+          title={section.getTitle(locale)}
+        />
+      </div>
+      <div class="flex justify-center">
+        <ul class="w-[90%]">
+          {(section.textMap.get(locale) ?? LocalizedToU[section.id].default)
+            .split("\n")
+            .map((item: string) => (
+              <li>{item}</li>
+            ))}
+        </ul>
+      </div>
+    </TextContent>
+  ))
+}

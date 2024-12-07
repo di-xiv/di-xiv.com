@@ -1,0 +1,195 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
+const { locale } = Astro.props;
+const localizedBodyStack = {
+  en: "Upper Body Stack",
+  ja: "アッパーボディアッセンブリー",
+  es: "Conjunto de cuerpos superior",
+  pt: "Montagem da parte superior do corpo",
+};
+
+const localizedEXQBScalingMod = {
+  en: "Breasts Size Scaling mod for EXQB",
+  ja: "EXQB用バストサイズスケールMOD",
+  es: "Mod de Escala de tamaño de Pechos para EXQB",
+  pt: "Modificação da escala de tamanho do seios para EXQB",
+};
+
+const gen3body: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+  options?: Option[];
+}> = [
+  {
+    href: "https://www.xivmodarchive.com/modid/101701",
+    title: "Yaelle Cry: AB Body 🔞",
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "-1" }, { type: "Free" }],
+    options: [
+      {
+        optionTitle: "SmallClothes Body",
+        options: ["None"],
+      },
+      {
+        optionTitle: "Emperor's New Robe",
+        options: ["M - Inverted"],
+      },
+      {
+        optionTitle: "SmallClothes Legs",
+        options: ["None"],
+      },
+      {
+        optionTitle: "Emperor's New Breeches",
+        options: ["Freyja - Outie - BETTER PUBE FRAMEWORK"],
+      },
+      {
+        optionTitle: "Midlander Skin Specular",
+        options: ["DT_Default"],
+      },
+      {
+        optionTitle: "Midlander Skin Diffuse",
+        options: ["Light Areola - Vulva - Freckles"],
+      },
+      {
+        optionTitle: "Midlander Normal Map",
+        options: ["Soft - No Crease"],
+      },
+      {
+        optionTitle: "SFW Toggle",
+        options: ["SC Top - SFW M", "SC Bottom - SFW Tail"],
+      },
+      {
+        optionTitle: "Skin Shaders",
+        options: ["Default"],
+      },
+      {
+        optionTitle: "Patches",
+        options: ["DT_Gen2 Patch", "DT_Bibo+ Patch"],
+      },
+      {
+        optionTitle: "Smallclothes Colorset",
+        options: ["PBRCS_Gold Metal - Cloth Dyes"],
+      },
+      {
+        optionTitle: "Emperor's SFW Colorsets",
+        options: ["PBRCS_Gold Metal - Cloth Dyes"],
+      },
+      {
+        optionTitle: "Additional Patches",
+        options: ["Gen2 No Crease", "Bibo+ No Crease"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/74619",
+    title: "Quartz: Expansive Body Quartz Boobs 🔞",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "0" },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Oiled (Textures)",
+        options: ["None"],
+      },
+      {
+        optionTitle: "3D",
+        options: [
+          "SmallClothes Body",
+          "SmallClothes Body (NPC)",
+          "The Emperor's New Robe",
+        ],
+      },
+      {
+        optionTitle: "Vanilla Texture",
+        options: ["Base"],
+      },
+      {
+        optionTitle: "Gen3 Texture",
+        options: ["Base"],
+      },
+      {
+        optionTitle: "Oiled",
+        options: ["None"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/74619",
+    title: "Quartz: [IVCS2] Expansive Body Quartz Boobs 🔞",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "1" },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "[Gen3+IVCS2]",
+        options: ["SmallClothes Body", "The Emperor's New Robe"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/114169",
+    title: "Bwia: Full Set Bimbo+",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "1" },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Pick a colour!",
+        options: ["Black Sparkles"],
+      },
+      {
+        optionTitle: "Enable Nails",
+        options: ["Nails Check"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/90154",
+    title: "Blade: Viera Nails",
+    tags: [{ type: "ManUpd" }, { type: "Prio", pr: "1" }, { type: "Free" }],
+    options: [
+      {
+        optionTitle: "Model Options",
+        options: ["Emperor's New Gloves", "SmallClothes"],
+      },
+    ],
+  },
+  {
+    href: "/downloads/wcif/DiXIV_EXQB_ScalingMod.pmp",
+    title: `Di-XIV: ${localizedEXQBScalingMod[locale]}`,
+    tags: [{ type: "Compat" }, { type: "Prio", pr: "0" }, { type: "Free" }],
+  },
+];
+---
+
+<div id="gen3-body" class="mb-2">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/nude-chest-body-naked-nude-svgrepo-com.svg"
+    title={localizedBodyStack[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={gen3body} locale={locale} />
+  </ModSectionWrapper>
+</div>

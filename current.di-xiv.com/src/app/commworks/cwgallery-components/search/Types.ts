@@ -1,4 +1,4 @@
-import type { Gallery } from '@/app/commworks/Types';
+import type { Gallery } from "@/app/commworks/Types";
 
 export interface SearchResult {
   galleries: Gallery[];

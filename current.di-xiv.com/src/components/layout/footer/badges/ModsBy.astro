@@ -1,0 +1,62 @@
+---
+import SimpleTooltip from "@/components/text/SimpleTooltip";
+import A from "@/components/text/SimpleInlineAnchor";
+import BadgeWrapper from "@/components/layout/footer/badges/BadgeWrapper.astro";
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+const { locale } = Astro.props;
+const localizedModsBy = {
+  en: "Mods by",
+  ja: "改造担当",
+  es: "Mods por",
+  pt: "Mods by",
+};
+---
+
+<BadgeWrapper id="hosted-on" localizedTitle={localizedModsBy[locale]}>
+  <p class="cursor-help regular mb-2">
+    🧰&nbsp;{localizedModsBy[locale]}
+  </p>
+  <div class="flex items-center gap-x-2">
+    <SimpleTooltip client:load content="SeaOfStars Mods">
+      <A
+        id="xma-badge"
+        className="flex items-center"
+        h="https://github.com/Ottermandias/SeaOfStars"
+      >
+        <img
+          class="w-7 mobile-only:w-5 h-auto dark:invert"
+          src="/icons/content/ack/mdi--stars.svg"
+          alt="Sea of Stars Icon"
+        />
+      </A>
+    </SimpleTooltip>
+    <SimpleTooltip client:load content="XIVModArchive">
+      <A
+        id="xma-badge"
+        className="flex items-center"
+        h="https://www.xivmodarchive.com/"
+      >
+        <img
+          class="w-7 mobile-only:w-5 h-auto dark:invert"
+          src="/icons/content/ack/FFXIVMeteo.svg"
+          alt="XMA Icon"
+        />
+      </A>
+    </SimpleTooltip>
+    <SimpleTooltip client:load content="Heliosphere">
+      <A
+        id="xma-badge"
+        className="flex items-center"
+        h="https://heliosphere.app/"
+      >
+        <img
+          class="w-7 mobile-only:w-5 h-auto"
+          src="/icons/content/ack/heliosphere_app-favicon.svg"
+          alt="Heliosphere.app Icon"
+        />
+      </A>
+    </SimpleTooltip>
+  </div>
+</BadgeWrapper>

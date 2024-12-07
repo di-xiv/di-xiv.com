@@ -1,0 +1,27 @@
+{
+  "localizedStrings": {
+    "allGalleries": {
+      "en": "All Galleries",
+      "ja": "すべてのギャラリー (🇬🇧)",
+      "es": "Todas las Galerías (🇬🇧)",
+      "pt": "Todas as Galerias (🇬🇧)"
+    }
+  },
+  "subNavItems": [
+    {
+      "href": "/commissioned-works/?ratings=1",
+      "label": "SFW",
+      "subIcon": "/icons/content/commworks/tabler--rating-12-plus.svg"
+    },
+    {
+      "href": "/commissioned-works/?ratings=1,2",
+      "label": "NSFW",
+      "subIcon": "/icons/content/commworks/tabler--rating-18-plus.svg"
+    },
+    {
+      "href": "/commissioned-works/?ratings=1,2,3",
+      "key": "allGalleries",
+      "subIcon": "/icons/content/commworks/tabler--rating-21-plus.svg"
+    }
+  ]
+}

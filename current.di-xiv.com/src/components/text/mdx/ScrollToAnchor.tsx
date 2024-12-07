@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const ScrollToAnchor: React.FC = () => {
+function ScrollToAnchor() {
   useEffect(() => {
     const handleScroll = () => {
       const hash = window.location.hash.substring(1);
@@ -25,6 +25,6 @@ const ScrollToAnchor: React.FC = () => {
   }, []);
 
   return null;
-};
+}
 
 export default ScrollToAnchor;

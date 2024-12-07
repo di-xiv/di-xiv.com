@@ -1,20 +1,29 @@
 ---
 import {
-  SimpleInlineAnchor as A,
   ManualUpdate as ManUpd,
   Priority as Prio,
   Compatible as Compat,
   Incompatible as Incompat,
   IVCSSkelomae as IVCSSke,
+  Paid as Paid,
+  Free as Free,
   type Tag,
 } from "@/app/charrefs/wcif/components/WCIF";
 
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
+
+interface ModItem {
+  href: string;
+  title: string;
+  tags: Tag[];
+  options?: Option[];
+}
+
 interface Props {
-  items: Array<{
-    href: string;
-    title: string;
-    tags: Tag[];
-  }>;
+  items: ModItem[];
   locale: "en" | "ja" | "pt" | "es";
 }
 
@@ -23,25 +32,68 @@ const { items, locale } = Astro.props;
 
 {
   items.map((item) => (
-    <div class="flex flex-wrap items-center select-none">
-      <p>❈&nbsp;</p>
-      <A id={item.title} h={item.href}>
-        <p>{item.title}</p>
-      </A>
-      {item.tags.map((tag) => {
-        if (tag.type === "ManUpd") {
-          return <ManUpd lang={locale} client:load />;
-        } else if (tag.type === "Prio") {
-          return <Prio lang={locale} pr={tag.pr} client:load />;
-        } else if (tag.type === "Compat") {
-          return <Compat lang={locale} client:load />;
-        } else if (tag.type === "Incompat") {
-          return <Incompat lang={locale} client:load />;
-        } else if (tag.type === "IVCSSke") {
-          return <IVCSSke lang={locale} client:load />;
-        }
-        return null;
-      })}
+    <div class="flex flex-col mt-1 mod-list-container">
+      <details class="flex items-center shadowless-glassbox p-2 rounded-md">
+        <summary class="flex flex-wrap items-center select-none">
+          <p>&nbsp;</p>
+          <a
+            id={item.title}
+            href={item.href}
+            rel="noopener noreferer"
+            target="_blank"
+            title={item.href}
+          >
+            <h4 class="regular">{item.title}↗&nbsp;</h4>
+          </a>
+          {item.tags.map((tag) => {
+            if (tag.type === "ManUpd") {
+              return <ManUpd lang={locale} client:load />;
+            } else if (tag.type === "Prio") {
+              return <Prio lang={locale} pr={tag.pr} client:load />;
+            } else if (tag.type === "Compat") {
+              return <Compat lang={locale} client:load />;
+            } else if (tag.type === "Incompat") {
+              return <Incompat lang={locale} client:load />;
+            } else if (tag.type === "IVCSSke") {
+              return <IVCSSke lang={locale} client:load />;
+            } else if (tag.type === "Paid") {
+              return <Paid lang={locale} client:load />;
+            } else if (tag.type === "Free") {
+              return <Free lang={locale} client:load />;
+            }
+            return null;
+          })}
+        </summary>
+        {item.options && (
+          <div class="not-mobile:ml-6 mobile-only:ml-1 mt-1">
+            {item.options.map((optionGroup) => (
+              <div class="mb-1 shadowless-glassbox flex rounded p-1">
+                <p class="">❖ {optionGroup.optionTitle}</p>
+                <div class="ml-4">
+                  {optionGroup.options.map((option) => (
+                    <p class="">➮ {option}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </details>
     </div>
   ))
 }
+<script>
+  function updateDetailsState() {
+    const isMobile = window.matchMedia("(max-width: 725px)").matches;
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>(
+      ".mod-list-container details",
+    );
+
+    detailsElements.forEach((details) => {
+      details.open = !isMobile;
+    });
+  }
+  updateDetailsState();
+
+  window.addEventListener("resize", updateDetailsState);
+</script>

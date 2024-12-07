@@ -1,0 +1,51 @@
+---
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+const { locale } = Astro.props;
+
+const localizedLabels = {
+  en: "Toggle navigation menu",
+  es: "Alternar menú de navegación",
+  ja: "ナビゲーションメニューを切り替える",
+  pt: "Alternar menu de navegação",
+};
+
+const buttonLabel = localizedLabels[locale] || localizedLabels.en;
+---
+
+<button
+  id="header-aside-toggle"
+  class="hidden fixed
+  top-[45%] left-[5%]
+  w-1150:left-[2.5%]
+  mobile-only:top-auto
+  mobile-only:left-auto
+  mobile-only:bottom-[17.5%]
+  mobile-only:right-[5%]
+  glassbox button-glassbox
+  rounded-full p-2 z-[9999]
+  shadow-lg
+  transition-all duration-300 ease-in-out
+  border-2 hover:border-[#1e7cff] hover:dark:border-[#ed701d]
+  backdrop-blur-sm
+  hover:backdrop-blur-md"
+  aria-label={buttonLabel}
+  title={buttonLabel}
+>
+  <div class="flex flex-grow transition-colors duration-200">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-16 w-1150:w-14 mobile-only:w-8 h-auto"
+      viewBox="0 0 20 20"
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M3 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 5a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1"
+        clip-rule="evenodd"></path>
+    </svg>
+  </div>
+</button>

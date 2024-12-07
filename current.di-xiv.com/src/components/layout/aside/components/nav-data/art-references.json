@@ -1,0 +1,28 @@
+{
+  "localizedStrings": {
+    "designReferences": {
+      "en": "Design References",
+      "ja": "デザイン・リファレンス",
+      "es": "Diseños de Referencia",
+      "pt": "Referências de Design"
+    },
+    "colorPallette": {
+      "en": "Color Pallette",
+      "ja": "カラーパレット",
+      "es": "Paleta de Colores",
+      "pt": "Paleta de Cores"
+    }
+  },
+  "subNavItems": [
+    {
+      "href": "/art-references#design-references",
+      "key": "designReferences",
+      "subIcon": "/icons/content/charrefs/mdi--design.svg"
+    },
+    {
+      "href": "/art-references#color-pallette",
+      "key": "colorPallette",
+      "subIcon": "/icons/content/charrefs/bxs--color-fill.svg"
+    }
+  ]
+}

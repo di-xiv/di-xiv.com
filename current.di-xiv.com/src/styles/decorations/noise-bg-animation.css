@@ -1,0 +1,24 @@
+@keyframes bgNoiseMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.noise-bg-animation {
+  background-size: 800px 800px;
+  animation: bgNoiseMove 60s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .noise-bg-animation {
+    background-image: url("/backgrounds/button-noise/nnnoise.svg");
+  }
+}
+@media (prefers-color-scheme: light) {
+  .noise-bg-animation {
+    background-image: url("/backgrounds/button-noise/wnnoise.svg");
+  }
+}

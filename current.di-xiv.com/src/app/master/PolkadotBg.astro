@@ -1,0 +1,95 @@
+---
+
+---
+
+<script>
+  function setBackgroundColor(color: string) {
+    document.documentElement.style.setProperty("--bg-color", color);
+    document.body.style.backgroundColor = color;
+  }
+
+  function getRandomColor(colorArray: string[]): string {
+    return colorArray[Math.floor(Math.random() * colorArray.length)];
+  }
+
+  function applyBackgroundColor() {
+    if (window.matchMedia) {
+      const prefersDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const darkModeColors = [
+        "#1c1b22", // Dark Charcoal
+        "#3b3948", // Slate Gray
+        "#1f1f1f", // Almost Black
+        "#181818", // Deep Black
+        "#15202b", // Midnight Blue
+        "#313338", // Graphite Gray
+        "#36393f", // Gunmetal
+        "#2C2F33", // Dark Slate
+        "#23272A", // Dark Storm Gray
+        "#1D2A35", // Dark Teal
+        "#2B2E3A", // Deep Blue Gray
+        "#22303C", // Muted Ocean Blue
+        "#20232A", // Charcoal Black
+        "#171A21", // Deep Space Black
+      ];
+
+      const lightModeColors = [
+        "#CB99C9", // Lavender
+        "#AEC6CF", // Pastel Blue
+        "#CDEB83", // Light Green
+        "#8BC3B1", // Mint Green
+        "#99C7FF", // Pastel Sky Blue
+        "#EDE9AF", // Pale Yellow
+        "#E5D4EF", // Soft Lilac
+        "#D5E8D4", // Pale Mint
+        "#C4D9F2", // Light Periwinkle
+        "#D8E1E8", // Cool Gray
+      ];
+
+      const currentTime = new Date().getTime();
+      const storedData = JSON.parse(
+        localStorage.getItem("backgroundColorData") || "{}",
+      );
+      const twelveHoursInMs = 12 * 60 * 60 * 1000;
+
+      let newColor;
+
+      if (
+        !storedData.color ||
+        !storedData.timestamp ||
+        currentTime - storedData.timestamp > twelveHoursInMs ||
+        (prefersDarkMode && !darkModeColors.includes(storedData.color)) ||
+        (!prefersDarkMode && !lightModeColors.includes(storedData.color))
+      ) {
+        newColor = getRandomColor(
+          prefersDarkMode ? darkModeColors : lightModeColors,
+        );
+        localStorage.setItem(
+          "backgroundColorData",
+          JSON.stringify({
+            color: newColor,
+            timestamp: currentTime,
+          }),
+        );
+      } else {
+        newColor = storedData.color;
+      }
+
+      setBackgroundColor(newColor);
+    } else {
+      console.log("matchMedia not supported, unable to determine dark mode.");
+    }
+  }
+
+  setTimeout(() => {
+    applyBackgroundColor();
+    document.body.style.opacity = "1";
+  }, 50);
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      location.reload();
+    });
+</script>

@@ -75,6 +75,24 @@ const useToast = ({ duration = 3000, locale }: ToastOptions) => {
           ja: "タグ、アーティスト、ギャラリーを検索...",
           pt: "Pesquisar tags, artistas ou galerias...",
         },
+        sortOrderRandom: {
+          en: "Showing galleries in random order",
+          es: "Mostrando galerías en orden aleatorio",
+          ja: "ギャラリーをランダムな順序で表示",
+          pt: "Mostrando galerias em ordem aleatória",
+        },
+        sortOrderNewest: {
+          en: "Showing newest galleries first",
+          es: "Mostrando las galerías más nuevas primero",
+          ja: "最新のギャラリーを最初に表示",
+          pt: "Mostrando as galerias mais recentes primeiro",
+        },
+        sortOrderOldest: {
+          en: "Showing oldest galleries first",
+          es: "Mostrando las galerías más antiguas primero",
+          ja: "最も古いギャラリーを最初に表示",
+          pt: "Mostrando as galerias mais antigas primeiro",
+        },
       };
 
       return messages[messageKey][locale] || messages[messageKey]["en"];
@@ -116,6 +134,21 @@ const useToast = ({ duration = 3000, locale }: ToastOptions) => {
             <path
               fill="currentColor"
               d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        );
+      }
+
+      if (messageKey.startsWith("sortOrder")) {
+        icon = (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 mobile-only:h-5 w-auto flex-shrink-0"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"
             />
           </svg>
         );

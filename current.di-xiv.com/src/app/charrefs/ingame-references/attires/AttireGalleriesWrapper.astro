@@ -31,8 +31,8 @@ const AttireGalleryURL = [
           open={true}
           title={item.attireName}
         >
-          <summary class="light text-lg" aria-label={item.attireName}>
-            ❈ 👘 {item.attireName}
+          <summary class="light flex items-center" aria-label={item.attireName}>
+            <p>👘 {item.attireName}</p>
           </summary>
           <BasicReferenceGalleryEngine
             localizedClickToZoom={localizedClickToZoom}
@@ -44,9 +44,15 @@ const AttireGalleryURL = [
       ))
     }
   </div>
-  <details class="mobile-only:p-1 rounded shadowless-glassbox p-2 mt-[1%]">
-    <summary class="light text-lg" aria-label={localizedAttireArtworks}>
-      ❈ 👘 {localizedAttireArtworks} 🔞
+  <details
+    class="mobile-only:p-1 rounded shadowless-glassbox p-2 mt-[1%]"
+    open={true}
+  >
+    <summary
+      class="light flex items-center"
+      aria-label={localizedAttireArtworks}
+    >
+      <p>👘 {localizedAttireArtworks} 🔞</p>
     </summary>
     <BasicHorizontalGalleryEngine
       apiURL="https://api.di-xiv.com/gallery?include_tag_id=24"

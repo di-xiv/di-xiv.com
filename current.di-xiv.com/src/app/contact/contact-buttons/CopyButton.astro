@@ -16,6 +16,11 @@ const {
 } = Astro.props;
 ---
 
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
 <a
   id={copyButtonID}
   role="button"
@@ -33,7 +38,6 @@ const {
       <p
         class="light ml-1 text-xl mobile-only:text-lg"
         aria-label={copyButtonText}
-        title={copyButtonText}
       >
         {copyButtonText} ⎘
       </p>

@@ -1,0 +1,175 @@
+---
+import ModSectionWrapper from "@/app/charrefs/wcif/components/ModSectionWrapper.astro";
+import ModList from "@/app/charrefs/wcif/components/ModList.astro";
+import {
+  TitleWithLeadingIcon,
+  type Tag,
+} from "@/app/charrefs/wcif/components/WCIF";
+// Props
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+interface Option {
+  optionTitle: string;
+  options: string[];
+}
+const { locale } = Astro.props;
+const localizedLimbs = {
+  en: "Lower Body Stack",
+  ja: "ロアボディ・アッセンブリー",
+  es: "Conjunto de cuerpos inferior",
+  pt: "Montagem do corpo inferior",
+};
+const limbs: Array<{
+  href: string;
+  title: string;
+  tags: Tag[];
+  options?: Option[];
+}> = [
+  {
+    href: "https://heliosphere.app/mod/v302m8gtcd0rh05dsqvbt7m3wr",
+    title: "Aleks: Yet Another Body+ 🔞",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "0" },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "Skin Shader",
+        options: ["Off"],
+      },
+      {
+        optionTitle: "Seam Connectors",
+        options: ["Connectors - Body"],
+      },
+      {
+        optionTitle: "Yet Another Skeleton",
+        options: ["Off"],
+      },
+      {
+        optionTitle: "Physics",
+        options: ["Off"],
+      },
+      {
+        optionTitle: "Legs - Smallclothes",
+        options: ["Skull Crushers - A"],
+      },
+      {
+        optionTitle: "Legs - Emperor's",
+        options: ["Skull Crushers - A"],
+      },
+      {
+        optionTitle: "Pubes - Midlander/Elezen/Miqo'te",
+        options: ["Custom"],
+      },
+    ],
+  },
+  {
+    href: "https://www.xivmodarchive.com/modid/117730",
+    title: "Yvelise: Grippies+ 🔞",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "1" },
+      { type: "Free" },
+    ],
+    options: [
+      {
+        optionTitle: "SmallClothes Feet",
+        options: ["Poseable"],
+      },
+      {
+        optionTitle: "The Emperor's New Boots",
+        options: ["Poseable"],
+      },
+      {
+        optionTitle: "Shininess (for dyeable toenails)",
+        options: ["Gloss"],
+      },
+    ],
+  },
+  {
+    href: "https://ko-fi.com/s/3e6912090d",
+    title: "Lynn: Shai",
+    tags: [
+      { type: "Compat" },
+      { type: "IVCSSke" },
+      { type: "Prio", pr: "0" },
+      { type: "Paid" },
+    ],
+    options: [
+      {
+        optionTitle: "Ears Highlights Options",
+        options: ["Ombre"],
+      },
+      {
+        optionTitle: "Tail Highlights Options",
+        options: ["Full Highlights"],
+      },
+      {
+        optionTitle: "Accessoy Options",
+        options: ["None"],
+      },
+      {
+        optionTitle: "Accessoy Colorset",
+        options: ["Gold"],
+      },
+      {
+        optionTitle: "Miqo'te F",
+        options: ["Pointy"],
+      },
+      {
+        optionTitle: "Accessory Slot [All Races]",
+        options: ["Default"],
+      },
+      {
+        optionTitle: "Ear Flap Option [Inner Ear Skin]",
+        options: ["Ear Flaps"],
+      },
+    ],
+  },
+  {
+    href: "https://trello.com/c/r94ckRoU",
+    title: "Cultist: Neighsayer 2.0 🔞",
+    tags: [{ type: "Incompat" }, { type: "Prio", pr: "1" }, { type: "Free" }],
+    options: [
+      {
+        optionTitle: "Shaft Color",
+        options: ["Gradient"],
+      },
+      {
+        optionTitle: "Sheath Color",
+        options: ["Bibo default"],
+      },
+      {
+        optionTitle: "Sheath Normal Options",
+        options: ["Bibo default"],
+      },
+      {
+        optionTitle: "Models - Emperor's New Breeches",
+        options: ["Erect posable + Taint"],
+      },
+      {
+        optionTitle: "Models - Smallclothes Legs",
+        options: ["Erect posable + Taint"],
+      },
+      {
+        optionTitle: "Models - Smallclothes Legs NPC",
+        options: ["Erect posable + Taint"],
+      },
+    ],
+  },
+];
+---
+
+<div id="limbs" class="mb-2">
+  <TitleWithLeadingIcon
+    imageURL="/icons/content/wcif/penis-svgrepo-com.svg"
+    title={localizedLimbs[locale]}
+  />
+  <ModSectionWrapper>
+    <ModList items={limbs} locale={locale} />
+  </ModSectionWrapper>
+</div>

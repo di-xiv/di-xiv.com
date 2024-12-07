@@ -19,6 +19,10 @@ export default {
         extra: "2.618rem", // 41.89px
         "2extra": "4.236rem", // 67.89px
       },
+      padding: {
+        safe: "env(safe-area-inset-bottom, 0px)",
+        "safe-bottom": "max(env(safe-area-inset-bottom), 25px)",
+      },
     },
   },
 };

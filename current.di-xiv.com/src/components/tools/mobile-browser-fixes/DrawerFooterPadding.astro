@@ -1,0 +1,57 @@
+---
+// DrawerFooterBrowserClass.astro
+---
+
+<script>
+  function handleDrawerFooterClass() {
+    const drawerFooter = document.getElementById("drawer-footer");
+
+    function isMobileViewport() {
+      return window.innerWidth <= 725;
+    }
+
+    function isWebkitBrowser() {
+      const ua = navigator.userAgent.toLowerCase();
+
+      // Detect if it's running on iOS/iPadOS
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+
+      // Detect various browsers to exclude
+      const isChrome = /crios|chrome/.test(ua) && !/edg|opt|opr/.test(ua);
+      const isFirefox = /fxios|firefox/.test(ua);
+      const isEdge = /edg/.test(ua);
+      const isBrave = /brave/.test(ua);
+      const isOpera = /opt|opr/.test(ua);
+
+      // Check for Safari or Arc
+      const isArc = /arc/.test(ua);
+      const isSafari =
+        isIOS &&
+        !isChrome &&
+        !isFirefox &&
+        !isEdge &&
+        !isBrave &&
+        !isOpera &&
+        /safari/.test(ua);
+
+      return isSafari || isArc;
+    }
+
+    function applyClassBasedOnBrowser() {
+      if (!drawerFooter || !isMobileViewport()) return;
+
+      if (isWebkitBrowser()) {
+        drawerFooter.classList.add("mobile-only:pb-[6%]");
+      }
+    }
+
+    // Initial check
+    applyClassBasedOnBrowser();
+
+    // Check on resize
+    window.addEventListener("resize", applyClassBasedOnBrowser);
+  }
+
+  // Run after page load
+  window.addEventListener("load", handleDrawerFooterClass);
+</script>

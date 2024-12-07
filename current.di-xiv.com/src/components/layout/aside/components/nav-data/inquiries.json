@@ -1,0 +1,33 @@
+{
+  "localizedStrings": {
+    "termsOfUse": {
+      "en": "Terms of Use",
+      "ja": "利用規約",
+      "es": "Términos de Uso",
+      "pt": "Termos de Uso"
+    },
+    "takedowns": {
+      "en": "Content Takedowns",
+      "ja": "コンテンツ撤回",
+      "es": "Retiradas de Contenido",
+      "pt": "Retiradas de Conteúdo"
+    }
+  },
+  "subNavItems": [
+    {
+      "href": "/inquiries#tou",
+      "key": "termsOfUse",
+      "subIcon": "/icons/content/tou/tabler--license.svg"
+    },
+    {
+      "href": "/inquiries#faq",
+      "label": "FAQ",
+      "subIcon": "/icons/content/faq/mingcute--question-line.svg"
+    },
+    {
+      "href": "/inquiries#takedowns",
+      "key": "takedowns",
+      "subIcon": "/icons/content/tou/fluent--document-person-16-filled.svg"
+    }
+  ]
+}

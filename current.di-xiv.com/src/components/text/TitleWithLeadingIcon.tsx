@@ -7,13 +7,12 @@ interface Props {
 
 const TitleWithLeadingIcon: React.FC<Props> = ({ imageURL, title }) => {
   return (
-    <div id={title} className="flex items-center mt-[1%] select-none">
-      <div className="inline-block glassbox p-2 rounded-md">
+    <div id={title} className="flex items-center select-none">
+      <div className="inline-block glassbox p-2 rounded-[2px]">
         <div className="dark:invert">
           <img
             src={imageURL}
-            className="h-8 mobile-only:h-6 w-auto"
-            alt={`${title} icon`}
+            className="h-[clamp(1rem,1vw_+_0.5rem,1.618rem)] w-auto"
             title={title}
           />
         </div>

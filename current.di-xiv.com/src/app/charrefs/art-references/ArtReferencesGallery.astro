@@ -1,0 +1,239 @@
+---
+//
+import TextContent from "@/components/wrappers/TextContent.tsx";
+import ImageCarrouselLogic from "@/app/charrefs/art-references/ImageCarrouselLogic.astro";
+//
+import ArtworksForArtists from "@/app/charrefs/artist-notice/ArtworksForArtists";
+//
+import StyledBlockquote, {
+  BlockquoteType,
+} from "@/components/text/StyledBlockquote";
+// JSON Imports
+import Back from "@/app/charrefs/art-references/body-descriptions/Back.json";
+import Breasts from "@/app/charrefs/art-references/body-descriptions/Breasts.json";
+import Side from "@/app/charrefs/art-references/body-descriptions/Side.json";
+import Genitalia from "@/app/charrefs/art-references/body-descriptions/Genitalia.json";
+
+interface Props {
+  locale: "en" | "ja" | "pt" | "es";
+}
+
+interface GalleryItem {
+  alt: {
+    default: string;
+    en: string;
+    es: string;
+    ja: string;
+    pt: string;
+  };
+  description: {
+    default: string;
+    en: string;
+    es: string;
+    ja: string;
+    pt: string;
+  };
+  image: string;
+}
+
+import { Image } from "astro:assets";
+const { locale } = Astro.props;
+
+const galleryItems: GalleryItem[] = [Back, Side, Breasts, Genitalia];
+const localizedArtReferences = {
+  en: "Art References",
+  ja: "参考文献",
+  es: "Referencias Artísticas",
+  pt: "Referências Artísticas",
+};
+const localizedDesignReferences = {
+  en: "Design References",
+  ja: "デザイン・リファレンス",
+  es: "Referencias de Diseño",
+  pt: "Referências de Design",
+};
+const localizedDownloadText = {
+  en: "Skip this: download the art references here",
+  ja: "スキップ：アーティスティック・レファレンスのダウンロードはこちら",
+  es: "Mucho texto: descarga las referencias artísticas aquí",
+  pt: "Skip: faça o download das referências artísticas aqui",
+};
+const localizedLoading = {
+  en: "Loading",
+  ja: "コンテンツの読み込み",
+  es: "Cargando",
+  pt: "Carregando",
+};
+const localizedSpecificReferences = {
+  en: "Specific image References for ",
+  ja: "具体的な画像の参照先 ",
+  es: "Referencias específicas para ",
+  pt: "Referências de imagens específicas para ",
+};
+---
+
+<style>
+  p {
+    white-space: pre-line;
+  }
+</style>
+<div id="design-references" class="flex items-center mb-2">
+  <Image
+    loading="eager"
+    width={48}
+    height={48}
+    src="/icons/aside/clarity--design-line.svg"
+    class="h-11 w-auto mr-4 mobile-only:h-6 dark:invert"
+    alt={`${localizedArtReferences[locale]} icon`}
+    loading="lazy"
+  />
+  <h2
+    id="design-references"
+    class="bold"
+    aria-label={localizedArtReferences[locale]}
+    title={localizedArtReferences[locale]}
+  >
+    {localizedArtReferences[locale]}
+  </h2>
+</div>
+<TextContent>
+  <div class="flex justify-evenly">
+    <StyledBlockquote blockquoteType={BlockquoteType.Download}>
+      <a
+        href="https://drive.proton.me/urls/X9B6E6CSN0#8fmJZcjhr1wm"
+        id="download-art-references"
+        target="_blank"
+        rel="noopener noreferer"
+      >
+        <p>{localizedDownloadText[locale]} ↗</p>
+      </a>
+    </StyledBlockquote>
+    <StyledBlockquote blockquoteType={BlockquoteType.Artist}>
+      <a
+        href="https://ronjou-art.carrd.co/"
+        id="download-art-references"
+        target="_blank"
+        rel="noopener noreferer"
+      >
+        <p>ronjou ↗</p>
+      </a>
+    </StyledBlockquote>
+  </div>
+</TextContent>
+<ArtworksForArtists
+  client:only="react"
+  localizedLoading={localizedLoading[locale]}
+  localizedSpecialReferenceSummary={localizedSpecificReferences[locale]}
+/>
+<div class="flex items-center mb-2">
+  <Image
+    loading="eager"
+    width={48}
+    height={48}
+    src="/icons/content/charrefs/mdi--design.svg"
+    class="h-11 w-auto mr-4 mobile-only:h-6 dark:invert"
+    alt={`${localizedDesignReferences[locale]} icon`}
+    loading="lazy"
+  />
+  <h3
+    id="design-references"
+    class="regular"
+    aria-label={localizedDesignReferences[locale]}
+    title={localizedDesignReferences[locale]}
+  >
+    {localizedDesignReferences[locale]}
+  </h3>
+</div>
+<TextContent>
+  <!-- Thumbnails -->
+  <TextContent>
+    <div class="grid grid-cols-4 gap-2">
+      {
+        galleryItems.map((item, index) => (
+          <button
+            class="aspect-video rounded overflow-hidden focus:outline-none focus:ring-2 dark:focus:ring-[#ed701d] focus:ring-[#1e7cff]"
+            data-gallery-thumb
+            data-index={index}
+          >
+            <Image
+              src={item.image}
+              alt={item.alt[locale] || item.alt.default}
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              height={4000}
+              width={3000}
+            />
+            <div class="hover:bg-black/25 transition-colors" />
+          </button>
+        ))
+      }
+    </div>
+  </TextContent>
+  <!-- Main Gallery -->
+  <div id="illustration-references" class="relative h-[80vh] w-auto my-3">
+    <!-- Main Image Container -->
+    <div
+      class="relative w-full h-full flex justify-center items-center object-contain"
+    >
+      {
+        galleryItems.map((item, index) => (
+          <Image
+            src={item.image}
+            alt={`${item.alt[locale] || item.alt.default}: ${item.description[locale] || item.description.default}`}
+            class="w-full h-full transition-opacity duration-300 ease-in-out opacity-0 rounded-md absolute object-contain"
+            height={4000}
+            width={3000}
+            data-gallery-image
+            data-index={index}
+            loading="eager"
+          />
+        ))
+      }
+      <!-- Navigation Buttons -->
+      <div
+        class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-between p-4"
+      >
+        <button
+          class="p-2 mobile-only:p-1 rounded-full glassbox button-glassbox transition-colors"
+          data-gallery-prev
+        >
+          <img
+            src="/icons/content/commworks/entypo--chevron-small-left.svg"
+            alt="Previous"
+            class="w-auto h-8 dark:invert"
+          />
+        </button>
+        <button
+          class="p-2 mobile-only:p-1 rounded-full glassbox button-glassbox"
+          data-gallery-next
+        >
+          <img
+            src="/icons/content/commworks/entypo--chevron-small-right.svg"
+            alt="Next"
+            class="w-auto h-8 dark:invert"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Description -->
+  <TextContent>
+    <div class="min-h-[100px] flex justify-center">
+      {
+        galleryItems.map((item, index) => (
+          <div
+            class={`transition-opacity duration-300 ease-in-out ${index === 0 ? "opacity-100" : "opacity-0 hidden"}`}
+            data-gallery-description
+            data-index={index}
+          >
+            <StyledBlockquote blockquoteType={BlockquoteType.Quote}>
+              <p class="mt-2">
+                {item.description[locale] || item.description.default}
+              </p>
+            </StyledBlockquote>
+          </div>
+        ))
+      }
+    </div>
+  </TextContent>
+</TextContent>
+<ImageCarrouselLogic />
